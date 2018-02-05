@@ -32,13 +32,11 @@
         </v-list-tile-content>
       </v-list-tile>
 
-      <v-divider
-        v-if="user"
-      />
+      <v-divider/>
 
       <!-- Character Menu -->
       <v-list-tile
-        v-if="user"
+        v-if="user && character"
         v-for="(item, index) in characterMenu"
         :key="`character-menu-${index}`"
         :to="item.href"
@@ -48,8 +46,10 @@
           <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
         </v-list-tile-content>
       </v-list-tile>
+      <v-divider
+        v-if="user && character"
+      />
     </v-list>
-    <v-divider/>
   </v-navigation-drawer>
 </template>
 
@@ -57,9 +57,6 @@
 export default {
   // Name
   name: 'the-nav-drawer',
-
-  // Components
-  components: {},
 
   // Props
   props: {
@@ -165,6 +162,14 @@ export default {
       return this.user
         ? this.userMenu
         : this.defaultMenu
+    },
+
+    /**
+     * character
+     * the currently selected character
+     */
+    character () {
+      return this.$store.state.character
     },
 
     /**

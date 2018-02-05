@@ -8,6 +8,7 @@
       </v-flex>
 
       <v-flex v-else xs12>
+        <!-- No Characters Message -->
         <div class="no-characters-message" v-if="characters.length === 0">
           It looks like you don't have any characters yet.<br><br>
           To get started, tap the '+' in the bottom right
@@ -68,16 +69,23 @@
       <v-icon>add</v-icon>
     </v-btn>
 
+    <NewCharacter
+      :show-dialog="dialog"
+      @close="dialog = false"
+    />
   </v-layout>
 </template>
 
 <script>
+import NewCharacter from '../../components/new-character/NewCharacter'
 export default {
   // Name
   name: 'character-list',
 
   // Components
-  components: {},
+  components: {
+    NewCharacter
+  },
 
   // Props
   props: {},

@@ -9,7 +9,8 @@ export default new Vuex.Store({
    */
   state: {
     user: undefined,
-    gameData: {}
+    gameData: {},
+    character: undefined
   },
 
   /**
@@ -33,6 +34,15 @@ export default new Vuex.Store({
      */
     update_game_data (state, update) {
       Vue.set(state.gameData, update.field, update.data)
+    },
+
+    /**
+     * Select Character
+     * @param {Object} state
+     * @param {Object} character
+     */
+    selectCharacter (state, character) {
+      state.character = character
     }
   },
 
