@@ -4,18 +4,13 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 import firebase from './firebase'
-
-/**
- * Import Vuetify
- */
+import VeeValidate from 'vee-validate'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 
 Vue.config.productionTip = false
-console.dir(Vuetify)
 Vue.use(Vuetify)
-
-console.log(process.env.API_KEY)
+Vue.use(VeeValidate)
 Vue.use(firebase)
 
 new Vue({

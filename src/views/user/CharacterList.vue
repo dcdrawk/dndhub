@@ -8,6 +8,10 @@
       </v-flex>
 
       <v-flex v-else xs12>
+        <div class="no-characters-message" v-if="characters.length === 0">
+          It looks like you don't have any characters yet.
+        </div>
+
         <!-- Character List -->
         <v-list
           v-if="characters"
@@ -69,7 +73,7 @@
 <script>
 export default {
   // Name
-  name: 'testcomponent',
+  name: 'character-list',
 
   // Components
   components: {},
@@ -131,6 +135,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.no-characters-message {
+  margin: 20px 0 10px;
+  text-align: center;
+}
 .character-list {
   margin-bottom: 72px;
 }

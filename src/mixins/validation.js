@@ -7,8 +7,8 @@ export default {
      * @returns {array} Array with first error
      */
     getErrors (field) {
-      return this.errors.first('email')
-        ? [this.errors.first('email')]
+      return this.errors.first(field)
+        ? [this.errors.first(field)]
         : undefined
     },
 
@@ -25,7 +25,7 @@ export default {
           throw new Error('Validation failed')
         }
       } catch (error) {
-        console.warn(error)
+        throw new Error('Validation failed')
       }
     }
   }

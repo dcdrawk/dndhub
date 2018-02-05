@@ -5,6 +5,7 @@ import Router from 'vue-router'
  * Auth Views
  */
 import SignIn from './views/auth/SignIn'
+import CreateAccount from './views/auth/CreateAccount'
 
 /**
  * User Views
@@ -16,10 +17,18 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
+    /**
+     * Auth Routes
+     */
     {
       path: '/',
-      name: 'home',
+      name: 'Sign In',
       component: SignIn
+    },
+    {
+      path: '/create-account',
+      name: 'Create Account',
+      component: CreateAccount
     },
     {
       path: '/profile',

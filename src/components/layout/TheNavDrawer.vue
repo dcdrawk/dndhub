@@ -31,7 +31,10 @@
           <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
         </v-list-tile-content>
       </v-list-tile>
-      <v-divider/>
+
+      <v-divider
+        v-if="user"
+      />
 
       <!-- Character Menu -->
       <v-list-tile
@@ -46,7 +49,7 @@
         </v-list-tile-content>
       </v-list-tile>
     </v-list>
-    <v-divider></v-divider>
+    <v-divider/>
   </v-navigation-drawer>
 </template>
 
@@ -73,7 +76,7 @@ export default {
       defaultMenu: [{
         title: 'Sign In',
         icon: 'person',
-        href: '/sign-in',
+        href: '/',
         active: false
       }, {
         title: 'Create Account',

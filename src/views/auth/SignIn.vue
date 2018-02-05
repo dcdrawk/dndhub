@@ -54,6 +54,7 @@
           flat
           block
           color="primary"
+          to="create-account"
         >
           Create Account
         </v-btn>
