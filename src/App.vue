@@ -29,6 +29,7 @@
 import TheToolbar from './components/layout/TheToolbar'
 import TheNavDrawer from './components/layout/TheNavDrawer'
 import firebase from './mixins/firebase'
+import gameData from './mixins/gameData'
 
 export default {
   // Name
@@ -42,7 +43,8 @@ export default {
 
   // Mixins
   mixins: [
-    firebase
+    firebase,
+    gameData
   ],
 
   // Data
