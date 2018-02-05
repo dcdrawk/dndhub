@@ -1,6 +1,8 @@
 <template>
   <v-layout column justify-center>
     <transition appear name="slide-y-reverse-transition" mode="out-in">
+
+      <!-- Loading Spinner -->
       <v-flex v-if="!user || loading" class="loading" xs12  key="loading">
         <v-progress-circular indeterminate color="secondary"></v-progress-circular>
       </v-flex>
@@ -56,8 +58,11 @@
       fixed
       bottom
       right
-    ><v-icon>add</v-icon>
+      @click="dialog = true"
+    >
+      <v-icon>add</v-icon>
     </v-btn>
+
   </v-layout>
 </template>
 
@@ -76,7 +81,8 @@ export default {
   data () {
     return {
       characters: undefined,
-      loading: false
+      loading: false,
+      dialog: false
     }
   },
 

@@ -10,6 +10,7 @@ import SignIn from './views/auth/SignIn'
  * User Views
  */
 import Profile from './views/user/Profile'
+import CharacterList from './views/user/CharacterList'
 
 Vue.use(Router)
 
@@ -24,6 +25,11 @@ export default new Router({
       path: '/profile',
       name: 'Profile',
       component: Profile
+    },
+    {
+      path: '/character-list',
+      name: 'CharacterList',
+      component: CharacterList
     }
   ]
 })
