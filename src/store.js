@@ -8,7 +8,8 @@ export default new Vuex.Store({
    * State
    */
   state: {
-    user: undefined
+    user: undefined,
+    gameData: {}
   },
 
   /**
@@ -16,8 +17,22 @@ export default new Vuex.Store({
    * methods used to update the state
    */
   mutations: {
+    /**
+     * Update user
+     * @param {Object} state
+     * @param {Object} user
+     */
     update_user (state, user) {
       state.user = user
+    },
+
+    /**
+     * Update Game Data
+     * @param {Object} state
+     * @param {Object} update
+     */
+    update_game_data (state, update) {
+      Vue.set(state.gameData, update.field, update.data)
     }
   },
 

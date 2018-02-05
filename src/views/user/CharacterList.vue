@@ -9,7 +9,8 @@
 
       <v-flex v-else xs12>
         <div class="no-characters-message" v-if="characters.length === 0">
-          It looks like you don't have any characters yet.
+          It looks like you don't have any characters yet.<br><br>
+          To get started, tap the '+' in the bottom right
         </div>
 
         <!-- Character List -->
