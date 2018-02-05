@@ -1,32 +1,55 @@
 <template>
-  <div id="app">
+  <v-app>
+    <!-- <v-navigation-drawer app></v-navigation-drawer>
+    <v-toolbar app></v-toolbar> -->
+    <TheNavDrawer
+      :open="navDrawerOpen"
+      @close="navDrawerOpen = false"
+    />
+    <TheToolbar
+      @toggle="navDrawerOpen = !navDrawerOpen"
+    />
+    <v-content>
+      <!-- <v-container fluid> -->
+      <router-view></router-view>
+      <!-- </v-container> -->
+    </v-content>
+    <v-footer app></v-footer>
+  </v-app>
+  <!-- <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
-  </div>
+  </div> -->
 </template>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import TheToolbar from './components/layout/TheToolbar'
+import TheNavDrawer from './components/layout/TheNavDrawer'
+import firebase from './mixins/firebase'
 
-#nav {
-  padding: 30px;
-}
+export default {
+  // Name
+  name: 'dnd-hub-app',
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  // Components
+  components: {
+    TheToolbar,
+    TheNavDrawer
+  },
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+  // Mixins
+  mixins: [
+    firebase
+  ],
+
+  // Data
+  data () {
+    return {
+      navDrawerOpen: false
+    }
+  }
 }
-</style>
+</script>
