@@ -74,4 +74,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.the-toolbar {
+  z-index: 6;
+}
 </style>

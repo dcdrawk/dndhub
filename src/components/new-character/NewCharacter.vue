@@ -162,6 +162,7 @@
                 block
                 color="secondary"
                 :disabled="!isFormValid"
+                :loading="loading"
                 @click="createCharacter()"
               >
                 Create
@@ -218,7 +219,8 @@ export default {
         class: undefined,
         subclass: undefined,
         custom: {}
-      }
+      },
+      loading: false
     }
   },
 
@@ -264,19 +266,24 @@ export default {
     async createCharacter () {
       try {
         await this.validate()
+        this.loading = true
         // Clean up any undefined variables
         for (var i in this.character) {
-          if (this.character[i] === undefined) delete this.characters[i]
+          if (this.character[i] === undefined) delete this.character[i]
         }
-        const character = await this.$db
+        const characterRef = await this.$db
           .ref(`characters/${this.user.uid}`)
           .push(this.character)
           .once('value')
-        console.log(character.val())
-        this.$store.commit('select_character', character.val())
-        // this.$router.push('/characters')
+        const key = characterRef.key
+        const character = characterRef.val()
+        character['.key'] = key
+        this.$store.commit('select_character', character)
+        this.$emit('close')
       } catch (error) {
         console.warn(error)
+      } finally {
+        this.loading = false
       }
     }
   }

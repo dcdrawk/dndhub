@@ -2,7 +2,7 @@
   <!-- Nav Drawer -->
   <v-navigation-drawer
     app
-    absolute
+    fixed
     light
     temporary
     :value="open"
@@ -35,6 +35,18 @@
       <v-divider/>
 
       <!-- Character Menu -->
+      <v-list-tile
+        v-if="user && character"
+      >
+        <v-list-tile-content>
+
+        <!-- Nav Drawer List Title -->
+        <v-list-tile-title class="title">
+          {{ character.name }}
+        </v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+
       <v-list-tile
         v-if="user && character"
         v-for="(item, index) in characterMenu"
