@@ -44,7 +44,11 @@ export default new Vuex.Store({
      * @param {Object} character
      */
     select_character (state, character) {
-      localStorage.setItem('character', JSON.stringify(character))
+      if (character === undefined) {
+        localStorage.removeItem('character')
+      } else {
+        localStorage.setItem('character', JSON.stringify(character))
+      }
       state.character = character
     }
   },

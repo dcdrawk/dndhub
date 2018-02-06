@@ -24,19 +24,6 @@
           Create New Character
         </v-toolbar-title>
         <v-spacer></v-spacer>
-        <!-- <v-toolbar-items>
-          <v-btn dark flat @click.native="dialog = false">Save</v-btn>
-        </v-toolbar-items> -->
-        <!-- <v-menu bottom right offset-y>
-          <v-btn slot="activator" dark icon>
-            <v-icon>more_vert</v-icon>
-          </v-btn>
-          <v-list>
-            <v-list-tile v-for="(item, i) in items" :key="i" @click="test">
-              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-            </v-list-tile>
-          </v-list>
-        </v-menu> -->
       </v-toolbar>
       <v-card-text>
         <v-container grid-list-md>
@@ -254,15 +241,20 @@ export default {
 
   // Methods
   methods: {
+    /**
+     * Handle the customize event
+     */
     handleCustomize (field) {
       this.$set(
         this.character.custom,
         field,
         !this.character.custom[field]
       )
-      // this.character.custom[field] = !this.character.custom[field]
     },
 
+    /**
+     * Create Character
+     */
     async createCharacter () {
       try {
         await this.validate()
@@ -277,7 +269,7 @@ export default {
           .once('value')
         const key = characterRef.key
         const character = characterRef.val()
-        character['.key'] = key
+        character.id = key
         this.$store.commit('select_character', character)
         this.$emit('close')
       } catch (error) {

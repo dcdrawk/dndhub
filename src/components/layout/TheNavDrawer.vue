@@ -6,6 +6,7 @@
     light
     temporary
     :value="open"
+    class="the-nav-drawer"
     @input="handleInput($event)"
   >
     <!-- Nav Drawer List -->
@@ -104,9 +105,9 @@ export default {
         href: '/profile',
         active: false
       }, {
-        title: 'Character List',
+        title: 'Characters',
         icon: 'person',
-        href: '/character-list',
+        href: '/characters',
         active: false
       }],
 
@@ -117,7 +118,7 @@ export default {
       characterMenu: [{
         title: 'General',
         icon: 'person',
-        href: '/todo',
+        href: 'character/general',
         active: false
       }, {
         title: 'Class',
@@ -208,4 +209,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.the-nav-drawer {
+  z-index: 7;
+}
 </style>
