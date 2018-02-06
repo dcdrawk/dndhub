@@ -3,7 +3,7 @@
     <!-- Select -->
     <v-select
       bottom
-      v-if="!custom && items"
+      v-if="!custom && items || disabled"
       class="pb-0"
       :label="label"
       :items="items"
@@ -91,5 +91,6 @@ export default {
 .edit-button {
   min-width: 36px;
   flex: 0 1 auto;
+  opacity: .75;
 }
 </style>

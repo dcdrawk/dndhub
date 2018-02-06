@@ -10,7 +10,9 @@ export default new Vuex.Store({
   state: {
     user: undefined,
     gameData: {},
-    character: undefined
+    character: localStorage.getItem('character')
+      ? JSON.parse(localStorage.getItem('character'))
+      : undefined
   },
 
   /**
@@ -41,7 +43,8 @@ export default new Vuex.Store({
      * @param {Object} state
      * @param {Object} character
      */
-    selectCharacter (state, character) {
+    select_character (state, character) {
+      localStorage.setItem('character', JSON.stringify(character))
       state.character = character
     }
   },
