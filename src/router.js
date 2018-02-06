@@ -30,6 +30,9 @@ export default new Router({
       name: 'Create Account',
       component: CreateAccount
     },
+    /**
+     * User Routes
+     */
     {
       path: '/profile',
       name: 'Profile',

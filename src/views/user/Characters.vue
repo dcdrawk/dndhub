@@ -14,7 +14,8 @@
           To get started, tap the '+' in the bottom right
         </div>
 
-        <TheCharacterList
+        <!-- Character List -->
+        <character-list
           :characters="characters"
         />
       </v-flex>
@@ -43,17 +44,16 @@
 </template>
 
 <script>
-import TheCharacterList from '../../components/characters/TheCharacterList'
+import CharacterList from '../../components/characters/CharacterList'
 import NewCharacter from '../../components/characters/NewCharacter'
-// // import TheCharacterList from '../../components/characters/TheCharacterList'
 
 export default {
   // Name
-  name: 'character-list',
+  name: 'characters',
 
   // Components
   components: {
-    TheCharacterList,
+    CharacterList,
     NewCharacter
   },
 
@@ -106,9 +106,6 @@ export default {
 .no-characters-message {
   margin: 20px 0 10px;
   text-align: center;
-}
-.character-list {
-  margin-bottom: 72px;
 }
 .loading {
   padding: 32px 16px;
