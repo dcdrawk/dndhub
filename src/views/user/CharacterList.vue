@@ -78,6 +78,8 @@
 
 <script>
 import NewCharacter from '../../components/new-character/NewCharacter'
+// import classes from '../../mixins/classes'
+
 export default {
   // Name
   name: 'character-list',
@@ -86,6 +88,11 @@ export default {
   components: {
     NewCharacter
   },
+
+  // // Mixins
+  // mixinx: [
+  //   classes
+  // ],
 
   // Props
   props: {},
