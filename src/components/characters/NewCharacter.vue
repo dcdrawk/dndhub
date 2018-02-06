@@ -205,7 +205,9 @@ export default {
         background: undefined,
         class: undefined,
         subclass: undefined,
-        custom: {}
+        custom: {
+          init: true
+        }
       },
       loading: false
     }

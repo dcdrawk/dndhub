@@ -10,7 +10,7 @@
     <the-toolbar
       @toggle="navDrawerOpen = !navDrawerOpen"
     />
-    <v-content>
+    <v-content fluid>
       <router-view></router-view>
     </v-content>
 
