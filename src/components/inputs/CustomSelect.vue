@@ -33,10 +33,10 @@
       :disabled="disabled"
       @click="customize()"
     >
-      <v-icon v-if="!custom">
+      <v-icon v-if="!custom" color="grey">
         edit
       </v-icon>
-      <v-icon v-else>
+      <v-icon v-else color="grey">
         close
       </v-icon>
     </v-btn>
@@ -77,7 +77,6 @@ export default {
      */
     customize () {
       this.$emit('customize')
-      console.log('dkowakdaopkd')
       this.$nextTick(() => {
         if (!this.custom) return
         this.$refs.input.focus()
@@ -91,6 +90,5 @@ export default {
 .edit-button {
   min-width: 36px;
   flex: 0 1 auto;
-  opacity: .75;
 }
 </style>
