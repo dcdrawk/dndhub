@@ -14,7 +14,6 @@
       <router-view></router-view>
       <!-- </v-container> -->
     </v-content>
-    <v-footer app></v-footer>
   </v-app>
   <!-- <div id="app">
     <div id="nav">
@@ -29,7 +28,7 @@
 import TheToolbar from './components/layout/TheToolbar'
 import TheNavDrawer from './components/layout/TheNavDrawer'
 import firebase from './mixins/firebase'
-import gameData from './mixins/gameData'
+import gameData from './mixins/game-data/gameData'
 
 export default {
   // Name

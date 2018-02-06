@@ -11,7 +11,7 @@ import CreateAccount from './views/auth/CreateAccount'
  * User Views
  */
 import Profile from './views/user/Profile'
-import CharacterList from './views/user/CharacterList'
+import Characters from './views/user/Characters'
 
 Vue.use(Router)
 
@@ -30,15 +30,18 @@ export default new Router({
       name: 'Create Account',
       component: CreateAccount
     },
+    /**
+     * User Routes
+     */
     {
       path: '/profile',
       name: 'Profile',
       component: Profile
     },
     {
-      path: '/character-list',
-      name: 'CharacterList',
-      component: CharacterList
+      path: '/characters',
+      name: 'Characters',
+      component: Characters
     }
   ]
 })

@@ -9,7 +9,10 @@ export default new Vuex.Store({
    */
   state: {
     user: undefined,
-    gameData: {}
+    gameData: {},
+    character: localStorage.getItem('character')
+      ? JSON.parse(localStorage.getItem('character'))
+      : undefined
   },
 
   /**
@@ -33,6 +36,20 @@ export default new Vuex.Store({
      */
     update_game_data (state, update) {
       Vue.set(state.gameData, update.field, update.data)
+    },
+
+    /**
+     * Select Character
+     * @param {Object} state
+     * @param {Object} character
+     */
+    select_character (state, character) {
+      if (character === undefined) {
+        localStorage.removeItem('character')
+      } else {
+        localStorage.setItem('character', JSON.stringify(character))
+      }
+      state.character = character
     }
   },
 
