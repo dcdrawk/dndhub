@@ -271,6 +271,10 @@ export default {
         const character = characterRef.val()
         character.id = key
         this.$store.commit('select_character', character)
+        this.$bus.$emit(
+          'toast',
+          `Character Created!`
+        )
         this.$emit('close')
       } catch (error) {
         console.warn(error)

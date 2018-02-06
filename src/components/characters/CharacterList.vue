@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="character-list-container">
 
   <!-- Character List -->
   <v-list
@@ -68,8 +68,8 @@
         </v-menu>
       </v-list-tile-action>
     </v-list-tile>
-    <v-divider/>
   </v-list>
+  <v-divider/>
 
   <!-- Delete Character Dialog -->
   <v-dialog
@@ -152,6 +152,10 @@ export default {
         await this.$db
           .ref(`characters/${this.user.uid}/${this.characterToDelete.id}`)
           .remove()
+        this.$bus.$emit(
+          'toast',
+          `Character Deleted.`
+        )
       } catch (error) {
 
       } finally {
@@ -172,6 +176,10 @@ export default {
         .ref(`characters/${this.user.uid}`)
         .push(character)
       this.$emit('duplicate', chararacteRef.key)
+      this.$bus.$emit(
+        'toast',
+        `Character Duplicated.`
+      )
     },
 
     /**
@@ -197,7 +205,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.character-list {
+.character-list-container {
   margin-bottom: 72px;
 }
 </style>

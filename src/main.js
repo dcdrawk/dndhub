@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './registerServiceWorker'
+import eventBus from './eventBus'
 import firebase from './firebase'
 import VeeValidate from 'vee-validate'
 import Vuetify from 'vuetify'
@@ -11,6 +12,7 @@ import 'vuetify/dist/vuetify.min.css'
 Vue.config.productionTip = false
 Vue.use(Vuetify)
 Vue.use(VeeValidate)
+Vue.use(eventBus)
 Vue.use(firebase)
 
 new Vue({

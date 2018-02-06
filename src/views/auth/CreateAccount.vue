@@ -132,6 +132,10 @@ export default {
         await data.updateProfile({
           displayName: this.displayName
         })
+        this.$bus.$emit(
+          'toast',
+          `Signed In as ${this.email}`
+        )
         this.$router.push('profile')
       } catch (error) {
         console.warn(error)
