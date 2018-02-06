@@ -1,32 +1,28 @@
 <template>
   <v-app>
-    <!-- <v-navigation-drawer app></v-navigation-drawer>
-    <v-toolbar app></v-toolbar> -->
-    <TheNavDrawer
+    <!-- Nav Drawer -->
+    <the-nav-drawer
       :open="navDrawerOpen"
       @close="navDrawerOpen = false"
     />
-    <TheToolbar
+
+    <!-- Toolbar -->
+    <the-toolbar
       @toggle="navDrawerOpen = !navDrawerOpen"
     />
     <v-content>
-      <!-- <v-container fluid> -->
       <router-view></router-view>
-      <!-- </v-container> -->
     </v-content>
+
+    <!-- Toaster -->
+    <the-toaster/>
   </v-app>
-  <!-- <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div> -->
 </template>
 
 <script>
 import TheToolbar from './components/layout/TheToolbar'
 import TheNavDrawer from './components/layout/TheNavDrawer'
+import TheToaster from './components/toaster/TheToaster'
 import firebase from './mixins/firebase'
 import gameData from './mixins/game-data/gameData'
 
@@ -37,7 +33,8 @@ export default {
   // Components
   components: {
     TheToolbar,
-    TheNavDrawer
+    TheNavDrawer,
+    TheToaster
   },
 
   // Mixins

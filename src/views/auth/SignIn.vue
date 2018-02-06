@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout row wrap justify-center>
-      <v-flex xs12 md6 lg2>
+      <v-flex xs12 md6 lg4 xl2>
 
         <!-- Title -->
         <h3 class="title">
@@ -98,6 +98,10 @@ export default {
             this.email,
             this.password
           )
+        this.$bus.$emit(
+          'toast',
+          `Signed In as ${this.email}`
+        )
         this.$router.push('profile')
       } catch (error) {
         console.warn(error)
