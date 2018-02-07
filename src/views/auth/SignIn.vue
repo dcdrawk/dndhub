@@ -2,7 +2,15 @@
   <v-container>
     <v-layout row wrap justify-center>
       <v-flex xs12 md6 lg4 xl2>
-
+        <!-- Signed In As -->
+        <v-alert
+          v-if="user"
+          type="success"
+          :value="true"
+          class="mb-4"
+        >
+          Signed in as <strong>{{ user.email }}</strong>
+        </v-alert>
         <!-- Title -->
         <h3 class="title">
           Welcome to DnDHub
@@ -10,10 +18,9 @@
 
         <!-- Subheading -->
         <p class="subheading">
-          Create characters,
-          track quests,
-          join friends,
-          and start adventures.
+          Make characters<br>
+          Join friends<br>
+          Start adventures
         </p>
 
         <!-- Email field -->
@@ -49,15 +56,19 @@
           Sign In
         </v-btn>
 
+        <p class="text-xs-center mt-4">
+          Don't have an account yet? <router-link to="create-account">Create one</router-link>.
+        </p>
+
         <!-- Create Account -->
-        <v-btn
+        <!-- <v-btn
           flat
           block
           color="primary"
           to="create-account"
         >
           Create Account
-        </v-btn>
+        </v-btn> -->
       </v-flex>
       <v-flex xs12 class="actions">
       </v-flex>
@@ -77,6 +88,13 @@ export default {
       password: undefined,
       loading: false,
       error: undefined
+    }
+  },
+
+  // Computed
+  computed: {
+    user () {
+      return this.$store.state.user
     }
   },
 

@@ -1,5 +1,5 @@
 <template>
-  <v-layout column justify-center>
+  <v-layout row justify-center>
     <transition appear name="slide-y-reverse-transition" mode="out-in">
 
       <!-- Loading Spinner -->
@@ -7,7 +7,7 @@
         <v-progress-circular indeterminate color="secondary"></v-progress-circular>
       </v-flex>
 
-      <v-flex v-else xs12>
+      <v-flex v-else xs12 md9>
         <!-- No Characters Message -->
         <div class="no-characters-message" v-if="characters.length === 0">
           It looks like you don't have any characters yet.<br><br>

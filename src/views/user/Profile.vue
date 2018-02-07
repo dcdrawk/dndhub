@@ -4,13 +4,9 @@
       <v-flex xs12 v-if="user">
 
         <!-- Signed In As -->
-        <v-card>
-          <v-card-title class="signed-in-as green white--text">
-            <div >
-              Signed in as <strong>{{ user.email }}</strong>
-            </div>
-          </v-card-title>
-        </v-card>
+        <v-alert type="success" :value="true" class="signed-in-as">
+          Signed in as <strong>{{ user.email }}</strong>
+        </v-alert>
 
         <!-- Display Name Field -->
         <v-text-field

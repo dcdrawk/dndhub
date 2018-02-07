@@ -64,7 +64,7 @@
               />
             </v-flex>
 
-            <v-flex xs12>
+            <v-flex xs12 md6>
               <custom-select
                 label="Race"
                 :value="character.race"
@@ -77,7 +77,7 @@
               />
             </v-flex>
 
-            <v-flex xs12>
+            <v-flex xs12 md6>
               <custom-select
                 :disabled="!character.race"
                 label="Subrace"
@@ -91,7 +91,7 @@
               />
             </v-flex>
 
-            <v-flex xs12>
+            <v-flex xs12 md6>
               <custom-select
                 label="Class"
                 :value="character.class"
@@ -104,7 +104,7 @@
               />
             </v-flex>
 
-            <v-flex xs12>
+            <v-flex xs12 md6>
               <custom-select
                 :disabled="!character.class"
                 :label="subclassLabel || 'Subclass'"
@@ -118,7 +118,7 @@
               />
             </v-flex>
 
-            <v-flex xs12>
+            <v-flex md6>
               <custom-select
                 label="Alignment"
                 :value="character.alignment"
@@ -131,7 +131,7 @@
               />
             </v-flex>
 
-            <v-flex xs12>
+            <v-flex md6>
               <custom-select
                 label="Background"
                 :value="character.background"
