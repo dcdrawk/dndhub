@@ -1,6 +1,19 @@
 <template>
   <!-- <v-content> -->
     <v-container class="general" v-if="character">
+      <!-- <v-tabs
+        v-model="active"
+        color="cyan"
+        dark
+        slider-color="yellow"
+      >
+        <v-tab
+          v-for="n in 3"
+          :key="n"
+          ripple
+        >test
+        </v-tab>
+      </v-tabs> -->
       <v-layout row wrap>
         <v-flex xs12>
           <v-text-field
@@ -127,8 +140,8 @@
 
 <script>
 /**
- * <component></component>
- * @desc description
+ * <general></general>
+ * @desc A character's general / basic info
  */
 import classes from '../../mixins/game-data/classes'
 import races from '../../mixins/game-data/races'
@@ -137,7 +150,7 @@ import character from '../../mixins/character'
 import CustomSelect from '../../components/inputs/CustomSelect'
 export default {
   // Name
-  name: 'the-component',
+  name: 'general',
 
   // Components
   components: {
@@ -157,12 +170,8 @@ export default {
     alignments () {
       return this.$store.state.gameData.alignments
     },
-
     backgrounds () {
       return this.$store.state.gameData.backgrounds
-    },
-    character () {
-      return this.$store.state.character
     }
   }
 }

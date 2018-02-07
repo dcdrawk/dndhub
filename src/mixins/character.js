@@ -9,6 +9,11 @@ export default {
   },
 
   methods: {
+    /**
+     * Update Character
+     * @param {String} field
+     * @param {String|Boolean|Array|Object} value
+     */
     updateCharacter (field, value) {
       let update = {}
       value = value || ''
@@ -23,8 +28,12 @@ export default {
       })
     },
 
+    /**
+     * Customize Character
+     * @param {String} field
+     * @param {Boolean} value
+     */
     customizeCharacter (field, value) {
-      console.log('customize!', field, value)
       let update = {}
       update[field] = value
       this.$db.ref(`characters/${this.user.uid}/${this.character.id}/custom`)
