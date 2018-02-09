@@ -1,20 +1,43 @@
 <template>
   <!-- <v-content> -->
-    <v-container class="general" v-if="character">
-      <!-- <v-tabs
+    <!-- <v-container class="general" v-if="character"> -->
+      <v-tabs
+        v-if="character"
         v-model="active"
         color="cyan"
         dark
         slider-color="yellow"
       >
         <v-tab
-          v-for="n in 3"
-          :key="n"
+          v-for="(tab, index) in tabs"
+          :key="index"
           ripple
-        >test
+        >
+          {{ tab.title }}
         </v-tab>
-      </v-tabs> -->
-      <v-layout row wrap>
+        <v-tab-item>
+          <v-card flat>
+            <v-card-text>
+              <general-summary/>
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+        <v-tab-item>
+          <v-card flat>
+            <v-card-text>
+              <general-summary/>
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+        <v-tab-item>
+          <v-card flat>
+            <v-card-text>
+              <general-summary/>
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+      </v-tabs>
+      <!-- <v-layout row wrap>
         <v-flex xs12>
           <v-text-field
             label="Character Name"
@@ -133,8 +156,8 @@
             @customize="customizeCharacter('background', !character.custom.background)"
           />
         </v-flex>
-      </v-layout>
-    </v-container>
+      </v-layout> -->
+    <!-- </v-container> -->
   <!-- </v-content> -->
 </template>
 
@@ -148,13 +171,16 @@ import races from '../../mixins/game-data/races'
 import validation from '../../mixins/validation'
 import character from '../../mixins/character'
 import CustomSelect from '../../components/inputs/CustomSelect'
+import GeneralSummary from '../../components/character/general/GeneralSummary'
+
 export default {
   // Name
   name: 'general',
 
   // Components
   components: {
-    CustomSelect
+    CustomSelect,
+    GeneralSummary
   },
 
   // Mixins
@@ -164,6 +190,19 @@ export default {
     races,
     validation
   ],
+
+  // Data
+  data () {
+    return {
+      tabs: [{
+        title: 'Summary'
+      }, {
+        title: 'Appearance'
+      }, {
+        title: 'Background'
+      }]
+    }
+  },
 
   // Computed
   computed: {
