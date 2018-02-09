@@ -67,17 +67,14 @@
           Create Account
         </v-btn>
 
-        <!-- Create Account -->
+        <!-- Sign In Link -->
         <p class="account-text">
           Already Have an account?
+          <router-link to="/">
+            Sign In
+          </router-link>
         </p>
-        <v-btn
-          flat
-          block
-          color="primary"
-        >
-          Sign In
-        </v-btn>
+
       </v-flex>
       <v-flex xs12 class="actions">
       </v-flex>

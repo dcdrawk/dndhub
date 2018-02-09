@@ -3,7 +3,6 @@
   <v-navigation-drawer
     app
     fixed
-    light
     temporary
     :value="open"
     class="the-nav-drawer"
