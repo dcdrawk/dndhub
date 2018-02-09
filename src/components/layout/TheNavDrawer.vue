@@ -118,7 +118,7 @@ export default {
       characterMenu: [{
         title: 'General',
         icon: 'person',
-        href: 'character/general',
+        href: '/character/general',
         active: false
       }, {
         title: 'Class',

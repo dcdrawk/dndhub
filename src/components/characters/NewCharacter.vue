@@ -26,7 +26,7 @@
         <v-spacer></v-spacer>
       </v-toolbar>
       <v-card-text>
-        <v-container grid-list-md>
+        <v-container class="pa-0">
           <v-layout row wrap>
             <v-flex xs12>
               <v-text-field
@@ -40,7 +40,7 @@
               />
             </v-flex>
 
-            <v-flex xs6>
+            <v-flex xs6 class="pr-1">
               <v-text-field
                 label="Level"
                 type="number"
@@ -52,7 +52,7 @@
               />
             </v-flex>
 
-            <v-flex xs6>
+            <v-flex xs6 class="pl-1">
               <v-text-field
                 label="Experience"
                 type="number"
@@ -205,7 +205,9 @@ export default {
         background: undefined,
         class: undefined,
         subclass: undefined,
-        custom: {}
+        custom: {
+          init: true
+        }
       },
       loading: false
     }

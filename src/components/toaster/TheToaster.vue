@@ -55,13 +55,13 @@ export default {
       }
       this.queue.push(Object.assign({}, toast))
       if (this.processingQueue === false) {
-        this.processQueue() // Process the queue if it's not doing so already
+        this.processQueue()
       }
     },
 
     /**
      * Process Queue
-     * Grab the first toast in the queue
+     * Grab the first toast in the queue and remove it from the array
      */
     processQueue () {
       this.processingQueue = true
@@ -74,6 +74,10 @@ export default {
       }, this.duration)
     },
 
+    /**
+     * Check Queue
+     * If there are still toasts left, continue to process the queue
+     */
     checkQueue () {
       if (this.queue.length > 0) {
         this.queueTimeout = setTimeout(() => {
@@ -84,7 +88,10 @@ export default {
       }
     },
 
-    // Close the toast
+    /**
+     * Close Toast
+     * clear timeouts, hide toast, check queue
+     */
     closeToast () {
       clearTimeout(this.processTimeout)
       clearTimeout(this.queueTimeout)

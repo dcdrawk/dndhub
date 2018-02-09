@@ -50,6 +50,27 @@ export default new Vuex.Store({
         localStorage.setItem('character', JSON.stringify(character))
       }
       state.character = character
+    },
+
+    /**
+     * Update Character
+     * @param {Object} state
+     * @param {Object} update
+     */
+    update_character (state, update) {
+      Vue.set(state.character, update.field, update.value)
+      localStorage.setItem('character', JSON.stringify(state.character))
+    },
+
+    /**
+     * Customize Character
+     * @param {Object} state
+     * @param {Object} update
+     */
+    customize_character (state, update) {
+      if (!state.character.custom) Vue.set(state.character, 'custom', {})
+      Vue.set(state.character.custom, update.field, update.value)
+      localStorage.setItem('character', JSON.stringify(state.character))
     }
   },
 

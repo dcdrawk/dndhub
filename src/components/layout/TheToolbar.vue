@@ -6,6 +6,7 @@
     fixed
     dark
     color="primary"
+    scroll-off-screen
   >
     <!-- Toolbar Side Icon -->
     <v-toolbar-side-icon

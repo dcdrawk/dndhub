@@ -13,6 +13,11 @@ import CreateAccount from './views/auth/CreateAccount'
 import Profile from './views/user/Profile'
 import Characters from './views/user/Characters'
 
+/**
+ * Character Views
+ */
+import General from './views/character/General'
+
 Vue.use(Router)
 
 export default new Router({
@@ -42,6 +47,15 @@ export default new Router({
       path: '/characters',
       name: 'Characters',
       component: Characters
+    },
+
+    /**
+     * Character Routes
+     */
+    {
+      path: '/character/general',
+      name: 'Genral Info',
+      component: General
     }
   ]
 })
