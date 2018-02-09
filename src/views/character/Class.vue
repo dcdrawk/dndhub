@@ -22,11 +22,11 @@
           v-for="(tabItem, index) in tabs"
           :key="index"
         >
-          <v-card flat>
-            <v-card-text>
-              <component :is="tabItem.component"/>
-            </v-card-text>
-          </v-card>
+          <!-- <v-card flat>
+            <v-card-text> -->
+          <component :is="tabItem.component"/>
+            <!-- </v-card-text>
+          </v-card> -->
         </v-tab-item>
       </v-tabs>
 </template>

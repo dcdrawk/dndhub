@@ -37,6 +37,9 @@ export default {
       if (!this.subclass) return
       // if (this.character.level < this.archetypes.level) return
       return this.subclass.name
+    },
+    user () {
+      return this.$store.state.user
     }
   },
 
@@ -69,11 +72,11 @@ export default {
       }
     },
 
-    toggleMulticlass (value) {
-      // const classList = this.character.classList || []
-      // classList.push({})
-      this.updateCharacter('enableMulticlass', value)
-    },
+    // toggleMulticlass (value) {
+    //   // const classList = this.character.classList || []
+    //   // classList.push({})
+    //   this.updateCharacter('enableMulticlass', value)
+    // },
 
     getFeatures (className) {
       for (let features of this.classFeatures) {
@@ -123,6 +126,42 @@ export default {
     setArchetype (archetype) {
       this.setFeatures(archetype)
       this.character.update('archetype', archetype)
+    },
+
+    addMulticlass () {
+      console.log('add multiclass')
+      console.log(`characters/${this.user.uid}/${this.character.id}/multiclass`)
+      this.$db.ref(`characters/${this.user.uid}/${this.character.id}/multiclass`)
+        .push({
+          init: true
+        })
+      // const multiclassArray = this.character.multiclass || []
+      // multiclassArray.push({})
+      // this.updateCharacter('multiclass', multiclassArray)
+    },
+
+    updateMulticlass (index, field, value) {
+    //   if (field === 'class') {
+    //     console.log('test')
+    //     const classObj = this.getClass(value)
+    //     const multiclass = this.character.multiclass
+    //     multiclass[index] = classObj
+    //     this.updateCharacter('multiclass', multiclass)
+    //   }
+    },
+
+    customizeMulticlass (index, prop, value) {
+      // const custom = this.character.custom.multiclass
+      // custom[index][field] = value
+      console.log(value)
+      const update = {
+        field: 'multiclass',
+        index: index,
+        prop: prop,
+        value: value
+      }
+      console.log(update)
+      this.customizeCharacter('multiclass', update)
     },
 
     customizeHitDice (value) {

@@ -8,7 +8,35 @@ export default {
     }
   },
 
+  // mounted () {
+  //   this.$db.ref(`characters/${this.user.uid}/${this.character.id}/`)
+  //     .on('value', (snapshot) => {
+  //       this.$store.commit('update_character', snapshot.val())
+  //     })
+  // },
+
+  // Watch
+  // watch: {
+  //   user: {
+  //     immediate: true,
+  //     handler: function (newValue, oldValue) {
+  //       if (!newValue) return
+  //       this.initCharacter()
+  //     }
+  //   }
+  // },
+
+  // Methods
   methods: {
+    initCharacter () {
+      console.log('init character...')
+      this.$db.ref(`characters/${this.user.uid}/${this.character.id}/`)
+        .on('value', (snapshot) => {
+          console.log('character updated!')
+          // this.$store.commit('update_character', snapshot.val())
+        })
+    },
+
     /**
      * Update Character
      * @param {String} field
@@ -21,11 +49,6 @@ export default {
 
       this.$db.ref(`characters/${this.user.uid}/${this.character.id}/`)
         .update(update)
-
-      this.$store.commit('update_character', {
-        field: field,
-        value: value
-      })
     },
 
     /**

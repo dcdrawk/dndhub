@@ -206,7 +206,10 @@ export default {
         class: undefined,
         subclass: undefined,
         custom: {
-          init: true
+          init: true,
+          multiclass: [{
+            init: true
+          }]
         }
       },
       loading: false

@@ -69,9 +69,29 @@ export default new Vuex.Store({
      */
     customize_character (state, update) {
       if (!state.character.custom) Vue.set(state.character, 'custom', {})
-      Vue.set(state.character.custom, update.field, update.value)
+      // console.log(update.value.prop)
+      switch (update.value) {
+        case (typeof update.value === 'boolean'):
+          Vue.set(state.character.custom, update.field, update.value)
+          break
+        case (typeof update.value === 'object'):
+          Vue.set(
+            state.character.custom[update.field][update.value.index],
+            update.value.prop,
+            update.value.value
+          )
+      }
+      console.log(update.value.prop)
+      console.log(update.value.index)
+      console.log(update.value.value)
+      console.log(state.character.custom[update.field][update.value.index])
+      // if (typeof update === 'boolean') {
+      //   Vue.set(state.character.custom, update.field, update.value)
+      // }
       localStorage.setItem('character', JSON.stringify(state.character))
     }
+
+    // customize_deep ()
   },
 
   /**
