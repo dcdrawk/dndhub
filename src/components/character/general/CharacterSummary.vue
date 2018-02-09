@@ -107,6 +107,7 @@ import races from '../../../mixins/game-data/races'
 import validation from '../../../mixins/validation'
 import character from '../../../mixins/character'
 import CustomSelect from '../../inputs/CustomSelect'
+
 export default {
   // Name
   name: 'character-summary',

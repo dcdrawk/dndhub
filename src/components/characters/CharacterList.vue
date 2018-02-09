@@ -37,14 +37,14 @@
 
         <v-list-tile-action>
           <!-- List Menu -->
-          <v-menu v-if="user" light left :z-index="5">
+          <v-menu v-if="user" left :z-index="5">
             <!-- Menu Activator -->
-            <v-btn class="menu-toggle" light icon slot="activator">
+            <v-btn class="menu-toggle" icon slot="activator">
               <v-icon>more_vert</v-icon>
             </v-btn>
 
             <!-- Menu List -->
-            <v-list light dense>
+            <v-list dense>
               <!-- Duplicate Character -->
               <v-list-tile
                 @click="duplicateCharacter(item)"

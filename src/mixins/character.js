@@ -44,5 +44,24 @@ export default {
         value: value
       })
     }
+
+    /**
+     * Set Class
+     * @param {String} field
+     * @param {String|Boolean|Array|Object} value
+     */
+    // setClass (field, value) {
+    //   let update = {}
+    //   value = value || ''
+    //   update[field] = value
+
+    //   this.$db.ref(`characters/${this.user.uid}/${this.character.id}/`)
+    //     .update(update)
+
+    //   this.$store.commit('update_character', {
+    //     field: field,
+    //     value: value
+    //   })
+    // },
   }
 }

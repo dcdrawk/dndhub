@@ -1,4 +1,11 @@
+import character from '../character'
+
 export default {
+  // Mixins
+  mixins: [
+    character
+  ],
+
   // Computed
   computed: {
     classes () {
@@ -35,31 +42,37 @@ export default {
 
   // Methods
   methods: {
-    getSubclasses (className) {
-      if (!className) return
-      for (let i in this.classes) {
-        if (className === this.classes[i].name) {
-          return this.classes[i].archetypes
-        }
-      }
-    },
+    // getSubclasses (className) {
+    //   if (!className) return
+    //   for (let i in this.classes) {
+    //     if (className === this.classes[i].name) {
+    //       return this.classes[i].archetypes
+    //     }
+    //   }
+    // },
 
-    getArchetypeOptions (className, level) {
-      const archetypes = this.getSubclasses(className)
-      if (!archetypes) return
-      return archetypes.options
-    },
+    // getArchetypeOptions (className, level) {
+    //   const archetypes = this.getSubclasses(className)
+    //   if (!archetypes) return
+    //   return archetypes.options
+    // },
 
-    getArchetypeLabel (className) {
-      const archetypes = this.getSubclasses(className)
-      if (!archetypes) return
-      return archetypes.name
-    },
+    // getArchetypeLabel (className) {
+    //   const archetypes = this.getSubclasses(className)
+    //   if (!archetypes) return
+    //   return archetypes.name
+    // },
 
     getClass (className) {
       for (let classObj of this.classes) {
         if (classObj.name === className) return classObj
       }
+    },
+
+    toggleMulticlass (value) {
+      // const classList = this.character.classList || []
+      // classList.push({})
+      this.updateCharacter('enableMulticlass', value)
     },
 
     getFeatures (className) {
@@ -96,10 +109,7 @@ export default {
         field: 'class',
         value: classObj.name
       }, {
-        field: 'archetype',
-        value: ''
-      }, {
-        field: 'specialization',
+        field: 'subclass',
         value: ''
       }, {
         field: 'proficiencies',

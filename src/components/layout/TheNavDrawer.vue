@@ -122,42 +122,42 @@ export default {
       }, {
         title: 'Class',
         icon: 'person',
-        href: '/todo',
+        href: '/character/class',
         active: false
       }, {
         title: 'Race',
         icon: 'person',
-        href: '/todo',
+        href: '/character/race',
         active: false
       }, {
         title: 'Feats',
         icon: 'person',
-        href: '/todo',
+        href: '/character/feats',
         active: false
       }, {
         title: 'Stats',
         icon: 'person',
-        href: '/todo',
+        href: '/character/stats',
         active: false
       }, {
         title: 'Armor',
         icon: 'person',
-        href: '/todo',
+        href: '/character/armor',
         active: false
       }, {
         title: 'Weapons',
         icon: 'person',
-        href: '/todo',
+        href: '/character/weapons',
         active: false
       }, {
         title: 'Spells',
         icon: 'person',
-        href: '/todo',
+        href: '/character/spells',
         active: false
       }, {
         title: 'Equipment',
         icon: 'person',
-        href: '/todo',
+        href: '/character/equipment',
         active: false
       }]
     }
