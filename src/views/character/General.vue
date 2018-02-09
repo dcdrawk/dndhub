@@ -3,10 +3,11 @@
     <!-- <v-container class="general" v-if="character"> -->
       <v-tabs
         v-if="character"
-        v-model="active"
+        v-model="activeTab"
         color="cyan"
         dark
         slider-color="yellow"
+        class="page-tabs elevation-1"
       >
         <v-tab
           v-for="(tab, index) in tabs"
@@ -15,150 +16,19 @@
         >
           {{ tab.title }}
         </v-tab>
-        <v-tab-item>
+
+        <!-- Tab Items (content) -->
+        <v-tab-item
+          v-for="(tabItem, index) in tabs"
+          :key="index"
+        >
           <v-card flat>
             <v-card-text>
-              <general-summary/>
-            </v-card-text>
-          </v-card>
-        </v-tab-item>
-        <v-tab-item>
-          <v-card flat>
-            <v-card-text>
-              <general-summary/>
-            </v-card-text>
-          </v-card>
-        </v-tab-item>
-        <v-tab-item>
-          <v-card flat>
-            <v-card-text>
-              <general-summary/>
+              <component :is="tabItem.component"/>
             </v-card-text>
           </v-card>
         </v-tab-item>
       </v-tabs>
-      <!-- <v-layout row wrap>
-        <v-flex xs12>
-          <v-text-field
-            label="Character Name"
-            type="text"
-            required
-            :value="character.name"
-            v-validate="'required'"
-            data-vv-name="name"
-            :error-messages="errors.collect('name')"
-            @input="updateCharacter('name', $event)"
-          />
-        </v-flex>
-
-        <v-flex xs6 class="pr-1">
-          <v-text-field
-            label="Level"
-            type="number"
-            required
-            :value="character.level"
-            v-validate="'required'"
-            data-vv-name="level"
-            :error-messages="errors.collect('level')"
-            @input="updateCharacter('level', $event)"
-          />
-        </v-flex>
-
-        <v-flex xs6 class="pl-2">
-          <v-text-field
-            label="Experience"
-            type="number"
-            required
-            :value="character.experience"
-            v-validate="'required'"
-            data-vv-name="experience"
-            :error-messages="errors.collect('experience')"
-            @input="updateCharacter('experience', $event)"
-          />
-        </v-flex>
-
-        <v-flex xs12>
-          <custom-select
-            label="Race"
-            :value="character.race"
-            :items="races"
-            item-text="name"
-            item-value="name"
-            :custom="character.custom.race"
-            @input="updateCharacter('race', $event)"
-            @customize="customizeCharacter('race', !character.custom.race)"
-          />
-        </v-flex>
-
-        <v-flex xs12>
-          <custom-select
-            :disabled="!character.race"
-            label="Subrace"
-            :value="character.subrace"
-            :items="subraces"
-            item-text="name"
-            item-value="name"
-            :custom="character.custom.subrace"
-            @input="updateCharacter('subrace', $event)"
-            @customize="customizeCharacter('subrace', !character.custom.subrace)"
-          />
-        </v-flex>
-
-        <v-flex xs12>
-          <custom-select
-            label="Class"
-            :value="character.class"
-            :items="classes"
-            item-text="name"
-            item-value="name"
-            :custom="character.custom.class"
-            @input="updateCharacter('class', $event)"
-            @customize="customizeCharacter('class', !character.custom.class)"
-          />
-        </v-flex>
-
-        <v-flex xs12>
-          <custom-select
-            :disabled="!character.class"
-            :label="subclassLabel || 'Subclass'"
-            :value="character.subclass"
-            :items="subclassOptions"
-            item-text="title"
-            item-value="title"
-            :custom="character.custom.subclass"
-            @input="updateCharacter('subclass', $event)"
-            @customize="customizeCharacter('subclass', !character.custom.subclass)"
-          />
-        </v-flex>
-
-        <v-flex xs12>
-          <custom-select
-            label="Alignment"
-            :value="character.alignment"
-            :items="alignments"
-            item-text="name"
-            item-value="name"
-            :custom="character.custom.alignment"
-            @input="updateCharacter('alignment', $event)"
-            @customize="customizeCharacter('alignment', !character.custom.alignment)"
-          />
-        </v-flex>
-
-        <v-flex xs12>
-          <custom-select
-            label="Background"
-            :value="character.background"
-            :items="backgrounds"
-            item-text="name"
-            item-value="name"
-            :custom="character.custom.background"
-            @input="updateCharacter('background', $event)"
-            @customize="customizeCharacter('background', !character.custom.background)"
-          />
-        </v-flex>
-      </v-layout> -->
-    <!-- </v-container> -->
-  <!-- </v-content> -->
 </template>
 
 <script>
@@ -166,12 +36,14 @@
  * <general></general>
  * @desc A character's general / basic info
  */
-import classes from '../../mixins/game-data/classes'
-import races from '../../mixins/game-data/races'
-import validation from '../../mixins/validation'
+// import classes from '../../mixins/game-data/classes'
+// import races from '../../mixins/game-data/races'
+// import validation from '../../mixins/validation'
 import character from '../../mixins/character'
-import CustomSelect from '../../components/inputs/CustomSelect'
-import GeneralSummary from '../../components/character/general/GeneralSummary'
+// import CustomSelect from '../../components/inputs/CustomSelect'
+import CharacterSummary from '../../components/character/general/CharacterSummary'
+import Appearance from '../../components/character/general/Appearance'
+import Background from '../../components/character/general/Background'
 
 export default {
   // Name
@@ -179,27 +51,33 @@ export default {
 
   // Components
   components: {
-    CustomSelect,
-    GeneralSummary
+    // CustomSelect,
+    CharacterSummary,
+    Appearance,
+    Background
   },
 
   // Mixins
   mixins: [
-    character,
-    classes,
-    races,
-    validation
+    character
+    // classes,
+    // races,
+    // validation
   ],
 
   // Data
   data () {
     return {
+      activeTab: undefined,
       tabs: [{
-        title: 'Summary'
+        title: 'Summary',
+        component: 'character-summary'
       }, {
-        title: 'Appearance'
+        title: 'Appearance',
+        component: 'appearance'
       }, {
-        title: 'Background'
+        title: 'Background',
+        component: 'background'
       }]
     }
   },
@@ -217,4 +95,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.page-tabs {
+  max-width: 1200px;
+  margin: auto;
+  @media screen and (min-width: 1260px) {
+    margin-top: 20px;
+  }
+}
 </style>
