@@ -1,5 +1,6 @@
 import Firebase from 'firebase'
 // import Vue from 'vue'
+import Store from '../store'
 
 /**
  * Default Character
@@ -55,6 +56,7 @@ export default class Character {
         .ref(`characters/${this.getUser().uid}`)
         .push(character)
         .once('value')
+
       const key = snapshot.key
       const characterValue = snapshot.val()
       characterValue.id = key
@@ -65,8 +67,22 @@ export default class Character {
     }
   }
 
-  static test (test) {
-    this.test = test
-    console.dir(this)
+  static async select (characterId) {
+    try {
+      Store.commit('select_character', characterId)
+      await Firebase.database()
+        .ref(`characters/${this.getUser().uid}/${characterId}`)
+        .on('value', (snapshot) => {
+          // Vue.set(this)
+          const character = snapshot.val()
+          character.id = snapshot.key
+          Store.commit('update_character', character)
+        })
+    } catch (error) {
+
+    }
+    // this.test = test
+    // Vue.set(this, 'test', test)
+    // console.dir(this)
   }
 }

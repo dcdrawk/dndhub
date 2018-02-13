@@ -78,6 +78,7 @@ export default {
     user: {
       immediate: true,
       handler: function (newValue, oldValue) {
+        console.log('user!', newValue)
         if (!newValue) return
         this.getCharacters()
       }
@@ -91,6 +92,7 @@ export default {
      * Gets a list of the user's characters
      */
     getCharacters () {
+      console.log('get characters!')
       this.loading = true
       this.$db.ref(`characters/${this.user.uid}`)
         .on('value', (snapshot) => {

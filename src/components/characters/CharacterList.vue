@@ -103,6 +103,8 @@
 </template>
 
 <script>
+import Character from '../../models/character'
+
 export default {
   // Name
   name: 'the-character-list',
@@ -133,9 +135,7 @@ export default {
     },
 
     characterId () {
-      return this.character
-        ? this.character.id
-        : undefined
+      return this.$store.state.characterId
     }
   },
 
@@ -187,8 +187,9 @@ export default {
      * @param {String} - key
      */
     selectCharacter (character, key) {
-      character.id = key
-      this.$store.commit('select_character', character)
+      Character.select(key)
+      // character.id = key
+      // this.$store.commit('select_character', character)
     },
 
     /**
