@@ -170,6 +170,7 @@ import classes from '../../mixins/game-data/classes'
 import races from '../../mixins/game-data/races'
 import validation from '../../mixins/validation'
 import CustomSelect from '../inputs/CustomSelect'
+import Character from '../../models/character'
 
 export default {
   // Name
@@ -263,24 +264,26 @@ export default {
     async createCharacter () {
       try {
         await this.validate()
+        const character = Character.create(this.character)
+        Character.test('TEST')
         this.loading = true
         // Clean up any undefined variables
-        for (var i in this.character) {
-          if (this.character[i] === undefined) delete this.character[i]
-        }
-        const characterRef = await this.$db
-          .ref(`characters/${this.user.uid}`)
-          .push(this.character)
-          .once('value')
-        const key = characterRef.key
-        const character = characterRef.val()
-        character.id = key
+        // for (var i in this.character) {
+        //   if (this.character[i] === undefined) delete this.character[i]
+        // }
+        // const characterRef = await this.$db
+        //   .ref(`characters/${this.user.uid}`)
+        //   .push(this.character)
+        //   .once('value')
+        // const key = characterRef.key
+        // const character = characterRef.val()
+        // character.id = key
         this.$store.commit('select_character', character)
         this.$bus.$emit(
           'toast',
           `Character Created!`
         )
-        this.$emit('close')
+        // this.$emit('close')
       } catch (error) {
         console.warn(error)
       } finally {

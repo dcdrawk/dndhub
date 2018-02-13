@@ -1,9 +1,9 @@
-import character from '../character'
+// import character from '../character'
 
 export default {
   // Mixins
   mixins: [
-    character
+    // character
   ],
 
   // Computed
