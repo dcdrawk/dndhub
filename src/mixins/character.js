@@ -1,4 +1,4 @@
-import CharacterCRUD from '../models/characterCRUD'
+// import CharacterCRUD from '../models/characterCRUD'
 
 export default {
   computed: {
@@ -7,6 +7,9 @@ export default {
     },
     character () {
       return this.$store.state.character
+    },
+    characterId () {
+      return this.$store.state.characterId
     }
   },
 
@@ -48,10 +51,12 @@ export default {
       let update = {}
       value = value || ''
       update[field] = value
-
-      CharacterCRUD.update()
-      // this.$db.ref(`characters/${this.user.uid}/${this.character.id}/`)
-      //   .update(update)
+      this.$db.ref(`characters/${this.user.uid}/${this.characterId}/`)
+        .update(update)
+      this.$store.commit('update_character_field', {
+        field: field,
+        value: value
+      })
     },
 
     /**

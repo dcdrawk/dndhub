@@ -45,6 +45,15 @@ export default {
 
   // Methods
   methods: {
+    getSubclassLabel (className) {
+      if (!className) return
+      for (let i in this.classes) {
+        if (className === this.classes[i].name) {
+          return this.classes[i].archetypes.name
+        }
+      }
+    },
+
     getSubclassOptions (className) {
       if (!className) return
       for (let i in this.classes) {
@@ -60,7 +69,7 @@ export default {
     //   return archetypes.options
     // },
 
-    // getArchetypeLabel (className) {
+    // getSubclassLabel (className) {
     //   const archetypes = this.getSubclasses(className)
     //   if (!archetypes) return
     //   return archetypes.name

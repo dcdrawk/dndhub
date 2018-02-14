@@ -8,28 +8,32 @@
             <v-flex xs12 md6>
               <custom-select
                 label="Class"
-                :value="character.class"
+                :value="primaryClass.name"
                 :items="classes"
                 item-text="name"
                 item-value="name"
-                :custom="character.custom.class"
-                @input="updateCharacter('class', $event)"
-                @customize="customizeCharacter('class', !character.custom.class)"
+                :custom="primaryClass.custom.name"
+                @input="updateClass(primaryClassId, 'name', $event)"
+                @customize="customizeClass(primaryClassId, 'name', !primaryClass.custom.name)"
               />
+              <!-- {{ primaryClass }} -->
             </v-flex>
 
             <v-flex xs12 md6>
               <custom-select
-                :disabled="!character.class"
-                :label="subclassLabel || 'Subclass'"
+                :disabled="!primaryClass.name"
+                :label="getSubclassLabel(primaryClass.name) || 'Subclass'"
                 :value="character.subclass"
-                :items="subclassOptions"
+                :items="getSubclassOptions(primaryClass.name)"
                 item-value="title"
-                :custom="character.custom.subclass"
-                @input="updateCharacter('subclass', $event)"
-                @customize="customizeCharacter('subclass', !character.custom.subclass)"
+                item-text="title"
+                :custom="primaryClass.custom.subclass"
+                @input="updateClass(primaryClassId, 'subclass', $event)"
+                @customize="customizeClass(primaryClassId, 'subclass', !primaryClass.custom.subclass)"
               />
             </v-flex>
+
+            <!-- {{ getSubclassOptions(primaryClass.name) }} -->
 
             <v-flex xs12 md6>
               <v-checkbox
@@ -125,7 +129,68 @@ export default {
   mixins: [
     character,
     classes
-  ]
+  ],
+
+  computed: {
+    user () {
+      return this.$store.state.user
+    },
+
+    characterClasses () {
+      const classKey = Object.keys(this.character.classes)[0]
+      return this.character
+        ? this.character.classes[classKey]
+        : {}
+    },
+
+    primaryClassId () {
+      return this.character
+        ? Object.keys(this.character.classes)[0]
+        : {}
+    },
+
+    primaryClass () {
+      return this.primaryClassId
+        ? this.character.classes[this.primaryClassId]
+        : {}
+    }
+  },
+
+  methods: {
+    /**
+     * Handle the customize event
+     */
+    customizeClass (id, field, value) {
+      const update = {}
+      update[field] = value
+      this.$db.ref(`characters/${this.user.uid}/${this.characterId}/classes/${id}/custom`)
+        .update(update)
+      this.$store.commit('customize_class', {
+        id: id,
+        field: field,
+        value: value
+      })
+    },
+
+    async updateClass (id, field, value) {
+      try {
+        const update = {}
+        update[field] = value
+        this.$db
+          .ref(`characters/${this.user.uid}/${this.characterId}/classes/${id}`)
+          .update(update)
+      } catch (error) {
+
+      } finally {
+        const classes = this.character.classes
+        classes[id][field] = value
+        this.$store.commit('update_character_field', {
+          field: 'classes',
+          value: classes
+        })
+      }
+    }
+  }
 }
 </script>
 

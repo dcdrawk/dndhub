@@ -124,6 +124,15 @@ export default {
     races,
     validation
   ]
+
+  // Computed
+  // computed: {
+  //   primaryClass () {
+  //     return this.character
+  //       ? this.character.classes[0]
+  //       : undefined
+  //   }
+  // }
 }
 </script>
 

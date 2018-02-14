@@ -214,10 +214,10 @@ export default {
         // class: undefined,
         // subclass: undefined,
         custom: {
-          init: true,
-          multiclass: [{
-            init: true
-          }]
+          init: true
+          // multiclass: [{
+          //   init: true
+          // }]
         }
       },
       characterClasses: [{
