@@ -31,7 +31,13 @@
 
           <!-- Character Details -->
           <v-list-tile-sub-title>
-            Level {{ item.level }} {{ item.race }} {{ item.class }}
+            Level {{ item.level }} {{ item.race }}
+            <span
+             v-for="(classObj, key) in item.classes"
+             :key="key"
+            >
+              {{classObj.name}}
+            </span>
           </v-list-tile-sub-title>
         </v-list-tile-content>
 
@@ -57,7 +63,7 @@
 
               <!-- Delete -->
               <v-list-tile
-                @click="showDeleteDialog(item)"
+                @click="showDeleteDialog(item, key)"
               >
                 <v-list-tile-title>
                   <v-icon class="mr-2">delete</v-icon>
@@ -103,7 +109,7 @@
 </template>
 
 <script>
-import Character from '../../models/character'
+import CharacterCRUD from '../../models/characterCRUD'
 
 export default {
   // Name
@@ -143,14 +149,15 @@ export default {
   methods: {
     /**
      * Delete Character
-     * @param {String} - id
      */
-    async deleteCharacter (id) {
+    async deleteCharacter () {
       try {
         this.loading = true
-        await this.$db
-          .ref(`characters/${this.user.uid}/${this.characterToDelete.id}`)
-          .remove()
+        console.log(this.characterToDelete)
+        await CharacterCRUD.delete(this.characterToDelete.id)
+        // await this.$db
+        //   .ref(`characters/${this.user.uid}/${this.characterToDelete.id}`)
+        //   .remove()
         this.$bus.$emit(
           'toast',
           `Character Deleted.`
@@ -187,7 +194,7 @@ export default {
      * @param {String} - key
      */
     selectCharacter (character, key) {
-      Character.select(key)
+      CharacterCRUD.select(key)
       // character.id = key
       // this.$store.commit('select_character', character)
     },
@@ -196,9 +203,10 @@ export default {
      * Show Delete Dialog
      * @param {Object} - character
      */
-    async showDeleteDialog (character) {
+    async showDeleteDialog (character, id) {
       this.deleteCharacterDialog = true
       this.characterToDelete = character
+      this.$set(this.characterToDelete, 'id', id)
     }
   }
 }

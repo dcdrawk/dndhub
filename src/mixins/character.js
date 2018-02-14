@@ -1,3 +1,5 @@
+import CharacterCRUD from '../models/characterCRUD'
+
 export default {
   computed: {
     user () {
@@ -47,8 +49,9 @@ export default {
       value = value || ''
       update[field] = value
 
-      this.$db.ref(`characters/${this.user.uid}/${this.character.id}/`)
-        .update(update)
+      CharacterCRUD.update()
+      // this.$db.ref(`characters/${this.user.uid}/${this.character.id}/`)
+      //   .update(update)
     },
 
     /**

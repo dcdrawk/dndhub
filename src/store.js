@@ -64,6 +64,17 @@ export default new Vuex.Store({
     },
 
     /**
+     * Update Character
+     * @param {Object} state
+     * @param {Object} update
+     */
+    update_character_field (state, update) {
+      if (!state.character) return
+      Vue.set(state.character, update.field, update.value)
+      // localStorage.setItem('character', JSON.stringify(state.character))
+    },
+
+    /**
      * Customize Character
      * @param {Object} state
      * @param {Object} update

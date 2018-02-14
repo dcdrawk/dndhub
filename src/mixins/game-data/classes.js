@@ -45,14 +45,14 @@ export default {
 
   // Methods
   methods: {
-    // getSubclasses (className) {
-    //   if (!className) return
-    //   for (let i in this.classes) {
-    //     if (className === this.classes[i].name) {
-    //       return this.classes[i].archetypes
-    //     }
-    //   }
-    // },
+    getSubclassOptions (className) {
+      if (!className) return
+      for (let i in this.classes) {
+        if (className === this.classes[i].name) {
+          return this.classes[i].archetypes.options
+        }
+      }
+    },
 
     // getArchetypeOptions (className, level) {
     //   const archetypes = this.getSubclasses(className)

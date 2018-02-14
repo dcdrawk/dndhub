@@ -72,6 +72,10 @@
                 item-text="name"
                 item-value="name"
                 :custom="character.custom.race"
+                required
+                v-validate="'required'"
+                data-vv-name="race"
+                :error-messages="errors.collect('race')"
                 @input="character.race = $event"
                 @customize="handleCustomize('race')"
               />
@@ -94,31 +98,34 @@
             <v-flex xs12 md6>
               <custom-select
                 label="Class"
-                :value="character.class"
+                :value="characterClasses[0].name"
                 :items="classes"
                 item-text="name"
                 item-value="name"
-                :custom="character.custom.class"
-                @input="character.class = $event"
-                @customize="handleCustomize('class')"
+                :custom="characterClasses[0].custom.name"
+                v-validate="'required'"
+                data-vv-name="class"
+                :error-messages="errors.collect('class')"
+                @input="characterClasses[0].name = $event"
+                @customize="customizeClass('name')"
               />
             </v-flex>
 
             <v-flex xs12 md6>
               <custom-select
-                :disabled="!character.class"
+                :disabled="!characterClasses[0].name"
                 :label="subclassLabel || 'Subclass'"
-                :value="character.subclass"
-                :items="subclassOptions"
+                :value="characterClasses[0].subclass"
+                :items="getSubclassOptions(characterClasses[0].name)"
                 item-text="title"
                 item-value="title"
-                :custom="character.custom.subclass"
-                @input="character.subclass = $event"
-                @customize="handleCustomize('subclass')"
+                :custom="characterClasses[0].custom.subclass"
+                @input="characterClasses[0].subclass = $event"
+                @customize="customizeClass('subclass')"
               />
             </v-flex>
 
-            <v-flex md6>
+            <v-flex xs12 md6>
               <custom-select
                 label="Alignment"
                 :value="character.alignment"
@@ -131,7 +138,7 @@
               />
             </v-flex>
 
-            <v-flex md6>
+            <v-flex xs12 md6>
               <custom-select
                 label="Background"
                 :value="character.background"
@@ -170,7 +177,7 @@ import classes from '../../mixins/game-data/classes'
 import races from '../../mixins/game-data/races'
 import validation from '../../mixins/validation'
 import CustomSelect from '../inputs/CustomSelect'
-import Character from '../../models/character'
+import CharacterCRUD from '../../models/characterCRUD'
 
 export default {
   // Name
@@ -204,8 +211,8 @@ export default {
         subrace: undefined,
         alignment: undefined,
         background: undefined,
-        class: undefined,
-        subclass: undefined,
+        // class: undefined,
+        // subclass: undefined,
         custom: {
           init: true,
           multiclass: [{
@@ -213,6 +220,16 @@ export default {
           }]
         }
       },
+      characterClasses: [{
+        name: undefined,
+        subclass: undefined,
+        level: undefined,
+        hitDice: undefined,
+        custom: {
+          name: false,
+          subclass: false
+        }
+      }],
       loading: false
     }
   },
@@ -259,15 +276,30 @@ export default {
     },
 
     /**
+     * Handle the customize event
+     */
+    customizeClass (field) {
+      this.$set(
+        this.characterClasses[0].custom,
+        field,
+        !this.characterClasses[0].custom[field]
+      )
+    },
+
+    /**
      * Create Character
      */
     async createCharacter () {
       try {
         await this.validate()
-        const character = Character.create(this.character)
-        Character.test('TEST')
+        const characterValue = await CharacterCRUD.create(
+          this.character, this.characterClasses
+        )
+        // Character.test('TEST')
         this.loading = true
-        Character.select(character.id)
+
+        CharacterCRUD.select(characterValue.id)
+        // Character
         // this.$store.commit('select_character', character)
         this.$bus.$emit(
           'toast',

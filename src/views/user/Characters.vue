@@ -9,7 +9,7 @@
 
       <v-flex v-else xs12 md9>
         <!-- No Characters Message -->
-        <div class="no-characters-message" v-if="characters.length === 0">
+        <div class="no-characters-message" v-if="!characters">
           It looks like you don't have any characters yet.<br><br>
           To get started, tap the '+' in the bottom right
         </div>
@@ -29,6 +29,7 @@
       fixed
       bottom
       right
+      small
       @click="newCharacterDialog = true"
     >
       <v-icon>add</v-icon>
