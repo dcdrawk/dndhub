@@ -133,7 +133,9 @@ export default {
       this.$db.ref(
         `classFeatures/${this.characterId}`
       ).on('value', (snapshot) => {
-        const features = Object.values(snapshot.val())
+        const value = snapshot.val()
+        // if (!value) return
+        const features = Object.values(value || [])
           .map((item, index) => {
             item.id = Object.keys(snapshot.val())[index]
             item.custom = true

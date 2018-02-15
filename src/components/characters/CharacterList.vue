@@ -36,13 +36,13 @@
               v-if="item.enableMulticlass"
             >
               <span
-              v-for="(classObj, key) in item.classes"
-              :key="key"
+                v-for="(classObj, key) in item.classes"
+                :key="key"
               >
                 {{classObj.name}}
               </span>
             </span>
-            <span v-else>
+            <span v-else-if="item.classes">
               {{ item.classes[Object.keys(item.classes)[0]].name }}
             </span>
           </v-list-tile-sub-title>
@@ -139,10 +139,6 @@ export default {
 
   // Computed
   computed: {
-    character () {
-      return this.$store.state.character
-    },
-
     user () {
       return this.$store.state.user
     },

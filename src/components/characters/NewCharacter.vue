@@ -211,6 +211,14 @@ export default {
         subrace: undefined,
         alignment: undefined,
         background: undefined,
+        proficiencies: {
+          armor: '',
+          weapons: '',
+          tools: '',
+          languages: '',
+          skills: '',
+          other: ''
+        },
         // class: undefined,
         // subclass: undefined,
         custom: {

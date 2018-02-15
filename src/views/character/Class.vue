@@ -68,7 +68,7 @@ import character from '../../mixins/character'
 import ClassSummary from '../../components/character/class/ClassSummary'
 import ClassFeatures from '../../components/character/class/ClassFeatures'
 import ClassFeatureDialog from '../../components/character/class/ClassFeatureDialog'
-import Background from '../../components/character/general/Background'
+import ClassProficiencies from '../../components/character/class/ClassProficiencies'
 
 export default {
   // Name
@@ -80,7 +80,7 @@ export default {
     ClassSummary,
     ClassFeatures,
     ClassFeatureDialog,
-    Background
+    ClassProficiencies
   },
 
   // Mixins
@@ -109,7 +109,7 @@ export default {
         fabAction: () => { this.$bus.$emit('new-class-feat') }
       }, {
         title: 'Proficiencies',
-        component: 'background',
+        component: 'class-proficiencies',
         showFab: false
       }]
     }
