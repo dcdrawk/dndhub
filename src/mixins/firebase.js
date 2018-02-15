@@ -1,4 +1,11 @@
+import CharacterCRUD from '../models/characterCRUD'
 export default {
+  // Computed
+  computed: {
+    characterId () {
+      return this.$store.state.characterId
+    }
+  },
   // Methods
   methods: {
     /**
@@ -11,6 +18,7 @@ export default {
         if (user) {
           console.log('a user has signed in!')
           this.$store.commit('update_user', user)
+          if (this.characterId) CharacterCRUD.select(this.characterId)
         } else {
           console.log('no user is signed in...')
           this.$store.commit('update_user', undefined)

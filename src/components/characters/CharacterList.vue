@@ -11,7 +11,7 @@
       <v-list-tile
         v-for="(item, key) in characters"
         :key="key"
-        @click.capture="selectCharacter(item, key)"
+        @click="selectCharacter(key)"
       >
         <!-- Checkbox -->
         <v-list-tile-action>
@@ -197,13 +197,11 @@ export default {
 
     /**
      * Select Character
-     * @param {Object} - character
-     * @param {String} - key
+     * @param {String} - id
      */
-    selectCharacter (character, key) {
-      CharacterCRUD.select(key)
-      // character.id = key
-      // this.$store.commit('select_character', character)
+    selectCharacter (id) {
+      if (id === this.characterId) return
+      CharacterCRUD.select(id)
     },
 
     /**

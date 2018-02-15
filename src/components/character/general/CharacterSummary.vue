@@ -40,7 +40,84 @@
         />
       </v-flex>
 
-      <v-flex xs12 md6>
+      <v-flex xs6>
+        <v-text-field
+          label="Gender"
+          type="number"
+          :value="character.gender"
+          @input="updateCharacter('gender', $event)"
+        />
+      </v-flex>
+      <v-flex xs6>
+        <v-text-field
+          label="Size"
+          type="number"
+          :value="character.size"
+          @input="updateCharacter('size', $event)"
+        />
+      </v-flex>
+      <v-flex xs6>
+        <v-text-field
+          label="Age"
+          type="number"
+          :value="character.age"
+          @input="updateCharacter('age', $event)"
+        />
+      </v-flex>
+
+      <v-flex xs6>
+        <v-text-field
+          label="Height"
+          type="text"
+          :value="character.height"
+          @input="updateCharacter('height', $event)"
+        />
+      </v-flex>
+
+      <v-flex xs6>
+        <v-text-field
+          label="Weight"
+          type="number"
+          :value="character.weight"
+          @input="updateCharacter('weight', $event)"
+        />
+      </v-flex>
+      <v-flex xs6>
+        <v-text-field
+          label="Eyes"
+          type="text"
+          :value="character.eyes"
+          @input="updateCharacter('eyes', $event)"
+        />
+      </v-flex>
+      <v-flex xs6>
+        <v-text-field
+          label="Skin"
+          type="text"
+          :value="character.skin"
+          @input="updateCharacter('skin', $event)"
+        />
+      </v-flex>
+      <v-flex xs6>
+        <v-text-field
+          label="Hair"
+          type="text"
+          :value="character.hair"
+          @input="updateCharacter('hair', $event)"
+        />
+      </v-flex>
+
+      <v-flex xs12>
+        <v-text-field
+          label="Description"
+          type="text"
+          v-model="character.description"
+          multi-line
+          @input="updateCharacter('description', $event)"
+        />
+      </v-flex>
+
+      <!-- <v-flex xs12 md6>
         <custom-select
           label="Race"
           :value="character.race"
@@ -65,9 +142,9 @@
           @input="updateCharacter('subrace', $event)"
           @customize="customizeCharacter('subrace', !character.custom.subrace)"
         />
-      </v-flex>
+      </v-flex> -->
 
-      <v-flex xs12 md6>
+      <!-- <v-flex xs12 md6>
         <custom-select
           label="Class"
           :value="character.class"
@@ -92,7 +169,7 @@
           @input="updateCharacter('subclass', $event)"
           @customize="customizeCharacter('subclass', !character.custom.subclass)"
         />
-      </v-flex>
+      </v-flex> -->
     </v-layout>
   </v-container>
 </template>
