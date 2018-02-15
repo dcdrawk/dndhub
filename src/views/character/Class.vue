@@ -1,34 +1,58 @@
 <template>
+  <section>
   <!-- <v-content> -->
     <!-- <v-container class="general" v-if="character"> -->
-      <v-tabs
-        v-if="character"
-        v-model="activeTab"
-        color="cyan"
-        dark
-        slider-color="yellow"
-        class="page-tabs elevation-1"
+    <v-tabs
+      v-if="character"
+      v-model="activeTab"
+      color="cyan"
+      dark
+      slider-color="yellow"
+      class="page-tabs elevation-1"
+    >
+      <v-tab
+        v-for="(tab, index) in tabs"
+        :key="index"
+        ripple
       >
-        <v-tab
-          v-for="(tab, index) in tabs"
-          :key="index"
-          ripple
-        >
-          {{ tab.title }}
-        </v-tab>
+        {{ tab.title }}
+      </v-tab>
 
-        <!-- Tab Items (content) -->
-        <v-tab-item
-          v-for="(tabItem, index) in tabs"
-          :key="index"
-        >
-          <!-- <v-card flat>
-            <v-card-text> -->
-          <component :is="tabItem.component"/>
-            <!-- </v-card-text>
-          </v-card> -->
-        </v-tab-item>
-      </v-tabs>
+      <!-- Tab Items (content) -->
+      <v-tab-item
+        v-for="(tabItem, index) in tabs"
+        :key="index"
+      >
+        <!-- <v-card flat>
+          <v-card-text> -->
+        <component :is="tabItem.component"/>
+          <!-- </v-card-text>
+        </v-card> -->
+      </v-tab-item>
+    </v-tabs>
+
+    <!-- Floating Action Button -->
+    <v-fab-transition v-if="activeTab">
+      <v-btn
+        v-if="tabs[activeTab].showFab"
+        color="secondary"
+        dark
+        fab
+        fixed
+        bottom
+        right
+        small
+        @click="tabs[activeTab].fabAction"
+      >
+        <v-icon>add</v-icon>
+      </v-btn>
+    </v-fab-transition>
+
+    <class-feature-dialog
+      :show-dialog="showClassFeatureDialog"
+      @close="showClassFeatureDialog = false"
+    />
+  </section>
 </template>
 
 <script>
@@ -38,7 +62,8 @@
  */
 import character from '../../mixins/character'
 import ClassSummary from '../../components/character/class/ClassSummary'
-import Appearance from '../../components/character/general/Appearance'
+import ClassFeatures from '../../components/character/class/ClassFeatures'
+import ClassFeatureDialog from '../../components/character/class/ClassFeatureDialog'
 import Background from '../../components/character/general/Background'
 
 export default {
@@ -49,7 +74,8 @@ export default {
   components: {
     // CustomSelect,
     ClassSummary,
-    Appearance,
+    ClassFeatures,
+    ClassFeatureDialog,
     Background
   },
 
@@ -65,15 +91,20 @@ export default {
   data () {
     return {
       activeTab: undefined,
+      showClassFeatureDialog: false,
       tabs: [{
         title: 'Summary',
-        component: 'class-summary'
+        component: 'class-summary',
+        showFab: false
       }, {
         title: 'Features',
-        component: 'appearance'
+        component: 'class-features',
+        showFab: true,
+        fabAction: () => { this.showClassFeatureDialog = true }
       }, {
         title: 'Proficiencies',
-        component: 'background'
+        component: 'background',
+        showFab: false
       }]
     }
   },
