@@ -33,10 +33,17 @@
           <v-list-tile-sub-title>
             Level {{ item.level }} {{ item.race }}
             <span
-             v-for="(classObj, key) in item.classes"
-             :key="key"
+              v-if="item.enableMulticlass"
             >
-              {{classObj.name}}
+              <span
+              v-for="(classObj, key) in item.classes"
+              :key="key"
+              >
+                {{classObj.name}}
+              </span>
+            </span>
+            <span v-else>
+              {{ item.classes[Object.keys(item.classes)[0]].name }}
             </span>
           </v-list-tile-sub-title>
         </v-list-tile-content>

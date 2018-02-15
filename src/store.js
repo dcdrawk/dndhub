@@ -70,7 +70,8 @@ export default new Vuex.Store({
      */
     update_character_field (state, update) {
       if (!state.character) return
-      Vue.set(state.character, update.field, update.value)
+      state.character = Object.assign({}, state.character, {[update.field]: update.value})
+      // Vue.set(state.character, update.field, update.value)
       // localStorage.setItem('character', JSON.stringify(state.character))
     },
 

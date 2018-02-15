@@ -114,7 +114,7 @@
             <v-flex xs12 md6>
               <custom-select
                 :disabled="!characterClasses[0].name"
-                :label="subclassLabel || 'Subclass'"
+                :label="getSubclassLabel() || 'Subclass'"
                 :value="characterClasses[0].subclass"
                 :items="getSubclassOptions(characterClasses[0].name)"
                 item-text="title"

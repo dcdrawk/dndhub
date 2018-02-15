@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card flat>
+    <v-card flat class="mb-1">
       <v-card-text>
         <v-container grid-list-md>
           <v-layout row wrap>
@@ -50,7 +50,7 @@
       </v-card-text>
     </v-card>
 
-    <v-divider/>
+    <!-- <v-divider/> -->
 
     <v-card
       v-if="character.enableMulticlass"
@@ -60,10 +60,12 @@
         Multiclass
       </v-card-title>
 
-      <v-card-text
-        v-for="(classObject, index) in character.multiclass"
+      <div
+        v-for="(classObject, key, index) in multiclassArray"
         :key="index"
       >
+
+      <v-card-text>
         <v-container grid-list-md>
           <v-layout row wrap>
 
@@ -74,11 +76,23 @@
                 :items="classes"
                 item-text="name"
                 item-value="name"
-                :custom="character.custom.multiclass[index].class"
-                @input="updateMulticlass(index, 'class', $event)"
-                @customize="customizeMulticlass(index, 'class', !character.custom.multiclass[index].class)"
+                :custom="classObject.custom.name"
+                @input="updateClass(key, 'name', $event)"
+                @customize="customizeClass(index, 'name', !classObject.custom.name)"
               />
-              {{ character.multiclass[index].name }}
+            </v-flex>
+
+            <v-flex>
+              <v-btn
+                flat
+                icon
+                class="ma-0"
+                @click="removeClass(key)"
+              >
+                <v-icon>
+                  delete
+                </v-icon>
+              </v-btn>
             </v-flex>
 
             <!-- <v-flex xs12 md6>
@@ -96,6 +110,8 @@
           </v-layout>
         </v-container>
       </v-card-text>
+        <v-divider/>
+      </div>
 
       <v-btn
         flat
@@ -118,7 +134,7 @@ import CustomSelect from '../../inputs/CustomSelect'
 
 export default {
   // Name
-  name: 'character-summary',
+  name: 'class-summary',
 
   // Components
   components: {
@@ -153,6 +169,18 @@ export default {
       return this.primaryClassId
         ? this.character.classes[this.primaryClassId]
         : {}
+    },
+
+    multiclassArray () {
+      if (!this.character) return
+      const classes = Object.assign({}, this.character.classes)
+      console.log(classes[this.primaryClassId])
+      delete classes[this.primaryClassId]
+      return classes
+    },
+
+    classURL () {
+      return `characters/${this.user.uid}/${this.characterId}/classes/`
     }
   },
 
@@ -163,7 +191,7 @@ export default {
     customizeClass (id, field, value) {
       const update = {}
       update[field] = value
-      this.$db.ref(`characters/${this.user.uid}/${this.characterId}/classes/${id}/custom`)
+      this.$db.ref(`${this.classURL}/custom`)
         .update(update)
       this.$store.commit('customize_class', {
         id: id,
@@ -172,12 +200,16 @@ export default {
       })
     },
 
+    // removeClass (id) {
+
+    // },
+
     async updateClass (id, field, value) {
       try {
         const update = {}
         update[field] = value
         this.$db
-          .ref(`characters/${this.user.uid}/${this.characterId}/classes/${id}`)
+          .ref(this.classURL)
           .update(update)
       } catch (error) {
 
