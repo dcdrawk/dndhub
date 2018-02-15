@@ -191,7 +191,7 @@ export default {
     customizeClass (id, field, value) {
       const update = {}
       update[field] = value
-      this.$db.ref(`${this.classURL}/custom`)
+      this.$db.ref(`${this.classURL}/${id}/custom`)
         .update(update)
       this.$store.commit('customize_class', {
         id: id,
@@ -209,7 +209,7 @@ export default {
         const update = {}
         update[field] = value
         this.$db
-          .ref(this.classURL)
+          .ref(`${this.classURL}/${id}`)
           .update(update)
       } catch (error) {
 
