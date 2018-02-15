@@ -25,7 +25,10 @@
       >
         <!-- <v-card flat>
           <v-card-text> -->
-        <component :is="tabItem.component"/>
+        <component
+          :is="tabItem.component"
+          @show-feature="handleShowFeature($event)"
+        />
           <!-- </v-card-text>
         </v-card> -->
       </v-tab-item>
@@ -48,10 +51,11 @@
       </v-btn>
     </v-fab-transition>
 
-    <class-feature-dialog
+    <!-- <class-feature-dialog
       :show-dialog="showClassFeatureDialog"
-      @close="showClassFeatureDialog = false"
-    />
+      :feature="selectedFeature"
+      @close="handleDialogClose()"
+    /> -->
   </section>
 </template>
 
@@ -92,6 +96,8 @@ export default {
     return {
       activeTab: undefined,
       showClassFeatureDialog: false,
+      selectedFeature: undefined,
+      // classFeatureEdit:
       tabs: [{
         title: 'Summary',
         component: 'class-summary',
@@ -100,7 +106,7 @@ export default {
         title: 'Features',
         component: 'class-features',
         showFab: true,
-        fabAction: () => { this.showClassFeatureDialog = true }
+        fabAction: () => { this.$bus.$emit('new-class-feat') }
       }, {
         title: 'Proficiencies',
         component: 'background',
@@ -116,6 +122,21 @@ export default {
     },
     backgrounds () {
       return this.$store.state.gameData.backgrounds
+    }
+  },
+
+  // Methods
+  methods: {
+    handleShowFeature (event) {
+      this.selectedFeature = event
+      this.showClassFeatureDialog = true
+    },
+
+    handleDialogClose () {
+      this.showClassFeatureDialog = false
+      // setTimeout(() => {
+      //   this.selectedFeature = undefined
+      // }, 500)
     }
   }
 }
