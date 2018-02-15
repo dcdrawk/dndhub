@@ -116,7 +116,11 @@ export default {
       if (!this.classFeaturesData || !this.character) return
       let defaultFeatures = []
       if (this.character.enableMulticlass) {
-
+        for (let i in this.character.classes) {
+          const classObj = this.character.classes[i]
+          // this.character.classes.forEach((classObj) => {
+          defaultFeatures = defaultFeatures.concat(this.getFeaturesData(classObj))
+        }
       } else {
         defaultFeatures = this.getFeaturesData(this.primaryClass)
       }
@@ -130,7 +134,8 @@ export default {
         `classFeatures/${this.characterId}`
       ).on('value', (snapshot) => {
         const features = Object.values(snapshot.val())
-          .map((item) => {
+          .map((item, index) => {
+            item.id = Object.keys(snapshot.val())[index]
             item.custom = true
             return item
           })

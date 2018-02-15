@@ -39,6 +39,7 @@
                 v-validate="'required'"
                 data-vv-name="name"
                 :error-messages="errors.collect('name')"
+                @input="handleInput('name', $event)"
               />
             </v-flex>
 
@@ -71,7 +72,7 @@
             </v-flex>
 
             <v-flex xs12
-              v-if="!feature"
+              v-if="feature.new"
             >
               <v-btn
                 block
@@ -85,24 +86,15 @@
             </v-flex>
 
             <v-flex
-              v-else-if="feature.custom"
+              v-if="feature.custom"
             >
               <v-btn
-                color="secondary"
-                :disabled="!isFormValid"
-                :loading="loading"
-                class="mr-0 ml-0"
-                @click="addClassFeature()"
-              >
-                Save & close
-              </v-btn>
-              <v-btn
                 flat
-                color="error"
+                icon
                 :loading="loading"
                 @click="deleteClassFeature()"
               >
-                Delete
+                <v-icon>delete</v-icon>
               </v-btn>
             </v-flex>
           </v-layout>
@@ -121,7 +113,7 @@ import races from '../../../mixins/game-data/races'
 import character from '../../../mixins/character'
 import validation from '../../../mixins/validation'
 import CustomSelect from '../../inputs/CustomSelect'
-// import CharacterCRUD from '../../../models/characterCRUD'
+import debounce from 'debounce'
 
 export default {
   // Name
@@ -143,7 +135,6 @@ export default {
   // Props
   props: {
     showDialog: Boolean,
-    // edit: Boolean,
     feature: Object
   },
 
@@ -161,10 +152,17 @@ export default {
 
   // Computed
   computed: {
+    characterId () {
+      return this.$store.state.characterId
+    },
     isFormValid () {
       return Object.keys(this.fields).every(
         key => this.fields[key].valid
       )
+    },
+    featureURL () {
+      if (!this.feature) return
+      return `classFeatures/${this.characterId}/${this.feature.id}`
     },
     isReadOnly () {
       if (this.feature.new || this.feature.custom) {
@@ -197,6 +195,7 @@ export default {
       try {
         await this.validate()
         this.loading = true
+        delete this.classFeature.new
         this.$db.ref(
           `classFeatures/${this.characterId}`
         ).push(this.classFeature)
@@ -210,17 +209,36 @@ export default {
         // CharacterCRUD.select(characterValue.id)
         // Character
         // this.$store.commit('select_character', character)
-        // this.$bus.$emit(
-        //   'toast',
-        //   `Character Created!`
-        // )
+        this.$bus.$emit('toast', 'Class Feat Added.')
         this.$emit('close')
       } catch (error) {
         console.warn(error)
       } finally {
         this.loading = false
       }
+    },
+
+    deleteClassFeature () {
+      this.$db.ref(this.featureURL).remove()
+      this.$emit('close')
+      this.$bus.$emit('toast', 'Class Feat Removed')
+    },
+
+    updateClassFeature (field, value) {
+      const update = {}
+      update[field] = value
+      this.$db.ref(this.featureURL).update(update)
+    },
+
+    handleInput (field, value) {
+      if (this.feature.new) return
+      this.updateClassFeature(field, value)
     }
+
+  },
+
+  mounted () {
+    this.updateClassFeature = debounce(this.updateClassFeature, 500)
   }
 }
 </script>

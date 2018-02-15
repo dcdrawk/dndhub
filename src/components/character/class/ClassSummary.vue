@@ -23,7 +23,7 @@
               <custom-select
                 :disabled="!primaryClass.name"
                 :label="getSubclassLabel(primaryClass.name) || 'Subclass'"
-                :value="character.subclass"
+                :value="primaryClass.subclass"
                 :items="getSubclassOptions(primaryClass.name)"
                 item-value="title"
                 item-text="title"
@@ -79,6 +79,19 @@
                 :custom="classObject.custom.name"
                 @input="updateClass(key, 'name', $event)"
                 @customize="customizeClass(index, 'name', !classObject.custom.name)"
+              />
+            </v-flex>
+
+            <v-flex xs12 md6>
+              <custom-select
+                :label="getSubclassLabel(classObject.name) || 'Subclass'"
+                :value="classObject.subclass"
+                :items="getSubclassOptions(classObject.name)"
+                item-text="title"
+                item-value="title"
+                :custom="classObject.custom.subclass"
+                @input="updateClass(key, 'subclass', $event)"
+                @customize="customizeClass(index, 'subclass', !classObject.custom.subclass)"
               />
             </v-flex>
 
@@ -170,6 +183,12 @@ export default {
         ? this.character.classes[this.primaryClassId]
         : {}
     },
+
+    // primarySubclass () {
+    //   return this.primaryClassId
+    //     ? this.character.classes[this.primaryClassId]
+    //     : {}
+    // },
 
     multiclassArray () {
       if (!this.character) return
