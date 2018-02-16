@@ -39,7 +39,7 @@
 
 <script>
 /**
- * <class-feature></class-feature>
+ * <class-features></class-features>
  * @desc A character's class features
  */
 import classes from '../../../mixins/game-data/classes'
@@ -63,6 +63,7 @@ export default {
     classes
   ],
 
+  // Data
   data () {
     return {
       defaultFeature: {
@@ -78,6 +79,7 @@ export default {
     }
   },
 
+  // Computed
   computed: {
     user () {
       return this.$store.state.user
@@ -102,12 +104,8 @@ export default {
     classFeaturesArray () {
       const array = [...this.classFeatures, ...this.defaultClassFeatures]
       return array.sort((a, b) => {
-        if (+a.level < +b.level) {
-          return -1
-        }
-        if (+a.level > +b.level) {
-          return 1
-        }
+        if (+a.level < +b.level) return -1
+        if (+a.level > +b.level) return 1
         return 0
       })
     },
@@ -118,7 +116,6 @@ export default {
       if (this.character.enableMulticlass) {
         for (let i in this.character.classes) {
           const classObj = this.character.classes[i]
-          // this.character.classes.forEach((classObj) => {
           defaultFeatures = defaultFeatures.concat(this.getFeaturesData(classObj))
         }
       } else {
@@ -128,13 +125,17 @@ export default {
     }
   },
 
+  // Methods
   methods: {
+    /**
+     * Get Class Features
+     * retrieve the list of the characters custom class features from firebase
+     */
     getClassFeatures () {
       this.$db.ref(
         `classFeatures/${this.characterId}`
       ).on('value', (snapshot) => {
         const value = snapshot.val()
-        // if (!value) return
         const features = Object.values(value || [])
           .map((item, index) => {
             item.id = Object.keys(snapshot.val())[index]
@@ -145,6 +146,11 @@ export default {
       })
     },
 
+    /**
+     * Get Features Data
+     * return an array of all features associated with a class
+     * @param {Object} - classObj
+     */
     getFeaturesData (classObj) {
       let features = []
       for (let i in this.classFeaturesData) {
@@ -167,14 +173,21 @@ export default {
       return features
     },
 
+    /**
+     * Handle Show Dialog
+     * Select the feature and show the dialog
+     * @param {Object} feature
+     */
     handleShowDialog (feature) {
       this.selectedFeature = feature
       this.showDialog = true
     }
   },
 
+  // Created
   created () {
     this.getClassFeatures()
+    // Listen for events from the parent component
     this.$bus.$on('new-class-feat', () => {
       this.selectedFeature = this.defaultFeature
       this.showDialog = true

@@ -70,66 +70,6 @@
                 @input="handleInput('other', $event)"
               />
             </v-flex>
-
-            <!-- <v-flex xs12 md6>
-              <v-select
-                label="Weapons"
-                v-model="armor"
-                tags
-                chips
-                deletable-chips
-              />
-            </v-flex>
-
-            <v-flex xs12 md6>
-              <v-select
-                label="Tools"
-                v-model="armor"
-                tags
-                chips
-                deletable-chips
-              />
-            </v-flex>
-
-            <v-flex xs12 md6>
-              <v-select
-                label="Saving Throws"
-                v-model="armor"
-                tags
-                chips
-                deletable-chips
-              />
-            </v-flex>
-
-            <v-flex xs12 md6>
-              <v-select
-                label="Languages"
-                v-model="armor"
-                tags
-                chips
-                deletable-chips
-              />
-            </v-flex>
-
-            <v-flex xs12 md6>
-              <v-select
-                label="Skills"
-                v-model="armor"
-                tags
-                chips
-                deletable-chips
-              />
-            </v-flex>
-
-            <v-flex xs12 md6>
-              <v-select
-                label="Other"
-                v-model="armor"
-                tags
-                chips
-                deletable-chips
-              />
-            </v-flex> -->
           </v-layout>
         </v-container>
       </v-card-text>
@@ -139,23 +79,15 @@
 
 <script>
 /**
- * <class-summary></class-summary>
- * @desc A character's class and optional multiclasses
+ * <class-proficiencies></class-proficiencies>
+ * @desc A character's class proficiencies
  */
-// import classes from '../../../mixins/game-data/classes'
-// import character from '../../../mixins/character'
-// import CustomSelect from '../../inputs/CustomSelect'
 
 export default {
   // Name
   name: 'class-proficiencies',
 
-  data () {
-    return {
-      // armor: undefined
-    }
-  },
-
+  // Computed
   computed: {
     user () {
       return this.$store.state.user
@@ -200,10 +132,13 @@ export default {
       return this.proficiencies.other.split(',')
         .filter((item) => item !== '')
     }
-
   },
 
+  // Methods
   methods: {
+    /**
+     * Handle Input
+     */
     handleInput (field, value) {
       const proficiencies = this.proficiencies
       proficiencies[field] = value.join(',')
@@ -214,6 +149,9 @@ export default {
       this.updateProficiency(field, value)
     },
 
+    /**
+     * Update Proficiency
+     */
     updateProficiency (field, value) {
       const update = {}
       update[field] = value.join(',')

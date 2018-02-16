@@ -1,10 +1,11 @@
 <template>
   <div>
+    <!-- Primary Class Card -->
     <v-card flat class="mb-1">
       <v-card-text>
         <v-container grid-list-md>
           <v-layout row wrap>
-
+            <!-- Primary Class Name -->
             <v-flex xs12 md6>
               <custom-select
                 label="Class"
@@ -16,9 +17,9 @@
                 @input="updateClass(primaryClassId, 'name', $event)"
                 @customize="customizeClass(primaryClassId, 'name', !primaryClass.custom.name)"
               />
-              <!-- {{ primaryClass }} -->
             </v-flex>
 
+            <!-- Primary Class Subclass -->
             <v-flex xs12 md6>
               <custom-select
                 :disabled="!primaryClass.name"
@@ -33,8 +34,7 @@
               />
             </v-flex>
 
-            <!-- {{ getSubclassOptions(primaryClass.name) }} -->
-
+            <!-- Enable Multiclass Checkbox -->
             <v-flex xs12 md6>
               <v-checkbox
                 color="secondary"
@@ -50,8 +50,7 @@
       </v-card-text>
     </v-card>
 
-    <!-- <v-divider/> -->
-
+    <!-- Enable Multiclass -->
     <v-card
       v-if="character.enableMulticlass"
       flat
@@ -64,68 +63,57 @@
         v-for="(classObject, key, index) in multiclassArray"
         :key="index"
       >
+        <v-card-text>
+          <v-container grid-list-md>
+            <v-layout row wrap>
+              <!-- Multiclass Name-->
+              <v-flex xs12 md6>
+                <custom-select
+                  label="Class"
+                  :value="classObject.name"
+                  :items="classes"
+                  item-text="name"
+                  item-value="name"
+                  :custom="classObject.custom.name"
+                  @input="updateClass(key, 'name', $event)"
+                  @customize="customizeClass(index, 'name', !classObject.custom.name)"
+                />
+              </v-flex>
 
-      <v-card-text>
-        <v-container grid-list-md>
-          <v-layout row wrap>
+              <!-- Multiclass Subclass -->
+              <v-flex xs12 md6>
+                <custom-select
+                  :label="getSubclassLabel(classObject.name) || 'Subclass'"
+                  :value="classObject.subclass"
+                  :items="getSubclassOptions(classObject.name)"
+                  item-text="title"
+                  item-value="title"
+                  :custom="classObject.custom.subclass"
+                  @input="updateClass(key, 'subclass', $event)"
+                  @customize="customizeClass(index, 'subclass', !classObject.custom.subclass)"
+                />
+              </v-flex>
 
-            <v-flex xs12 md6>
-              <custom-select
-                label="Class"
-                :value="classObject.name"
-                :items="classes"
-                item-text="name"
-                item-value="name"
-                :custom="classObject.custom.name"
-                @input="updateClass(key, 'name', $event)"
-                @customize="customizeClass(index, 'name', !classObject.custom.name)"
-              />
-            </v-flex>
-
-            <v-flex xs12 md6>
-              <custom-select
-                :label="getSubclassLabel(classObject.name) || 'Subclass'"
-                :value="classObject.subclass"
-                :items="getSubclassOptions(classObject.name)"
-                item-text="title"
-                item-value="title"
-                :custom="classObject.custom.subclass"
-                @input="updateClass(key, 'subclass', $event)"
-                @customize="customizeClass(index, 'subclass', !classObject.custom.subclass)"
-              />
-            </v-flex>
-
-            <v-flex>
-              <v-btn
-                flat
-                icon
-                class="ma-0"
-                @click="removeClass(key)"
-              >
-                <v-icon>
-                  delete
-                </v-icon>
-              </v-btn>
-            </v-flex>
-
-            <!-- <v-flex xs12 md6>
-              <custom-select
-                :disabled="!character.class"
-                :label="subclassLabel || 'Subclass'"
-                :value="character.subclass"
-                :items="subclassOptions"
-                item-value="title"
-                :custom="character.custom.subclass"
-                @input="updateCharacter('subclass', $event)"
-                @customize="customizeCharacter('subclass', !character.custom.subclass)"
-              />
-            </v-flex> -->
-          </v-layout>
-        </v-container>
-      </v-card-text>
+              <!-- Multiclass Delete -->
+              <v-flex>
+                <v-btn
+                  flat
+                  icon
+                  class="ma-0"
+                  @click="removeClass(key)"
+                >
+                  <v-icon>
+                    delete
+                  </v-icon>
+                </v-btn>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card-text>
         <v-divider/>
       </div>
 
+      <!-- Add Multiclass -->
       <v-btn
         flat
         @click="addMulticlass()"
@@ -184,16 +172,9 @@ export default {
         : {}
     },
 
-    // primarySubclass () {
-    //   return this.primaryClassId
-    //     ? this.character.classes[this.primaryClassId]
-    //     : {}
-    // },
-
     multiclassArray () {
       if (!this.character) return
       const classes = Object.assign({}, this.character.classes)
-      console.log(classes[this.primaryClassId])
       delete classes[this.primaryClassId]
       return classes
     },
@@ -219,10 +200,9 @@ export default {
       })
     },
 
-    // removeClass (id) {
-
-    // },
-
+    /**
+     * Update the characters class
+     */
     async updateClass (id, field, value) {
       try {
         const update = {}

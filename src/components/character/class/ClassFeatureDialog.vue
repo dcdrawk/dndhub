@@ -26,9 +26,13 @@
         </v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
+
+      <!-- Card Text -->
       <v-card-text>
         <v-container class="pa-0">
           <v-layout row wrap>
+
+            <!-- Class Feature Name -->
             <v-flex xs12>
               <v-text-field
                 label="Name"
@@ -43,6 +47,7 @@
               />
             </v-flex>
 
+            <!-- Class Feature Level -->
             <v-flex xs12>
               <v-text-field
                 label="Level"
@@ -56,6 +61,7 @@
               />
             </v-flex>
 
+            <!-- Class Feature Description -->
             <v-flex xs12>
               <v-text-field
                 label="Description"
@@ -71,6 +77,7 @@
               />
             </v-flex>
 
+            <!-- Save Button (new) -->
             <v-flex xs12
               v-if="feature.new"
             >
@@ -85,6 +92,7 @@
               </v-btn>
             </v-flex>
 
+            <!-- Delete Button (custom) -->
             <v-flex
               v-if="feature.custom"
             >
@@ -99,9 +107,7 @@
             </v-flex>
           </v-layout>
         </v-container>
-        <!-- test -->
       </v-card-text>
-
       <div style="flex: 1 1 auto;"/>
     </v-card>
   </v-dialog>
@@ -173,6 +179,7 @@ export default {
     }
   },
 
+  // Watch
   watch: {
     showDialog (newValue, oldValue) {
       if (newValue) {
@@ -200,15 +207,6 @@ export default {
           `classFeatures/${this.characterId}`
         ).push(this.classFeature)
 
-        // const characterValue = await CharacterCRUD.create(
-        //   this.character, this.characterClasses
-        // )
-        // // Character.test('TEST')
-        // this.loading = true
-
-        // CharacterCRUD.select(characterValue.id)
-        // Character
-        // this.$store.commit('select_character', character)
         this.$bus.$emit('toast', 'Class Feat Added.')
         this.$emit('close')
       } catch (error) {
@@ -218,25 +216,34 @@ export default {
       }
     },
 
+    /**
+     * Delete Class Feature
+     */
     deleteClassFeature () {
       this.$db.ref(this.featureURL).remove()
       this.$emit('close')
       this.$bus.$emit('toast', 'Class Feat Removed')
     },
 
+    /**
+     * Update Class Feature
+     */
     updateClassFeature (field, value) {
       const update = {}
       update[field] = value
       this.$db.ref(this.featureURL).update(update)
     },
 
+    /**
+     * Handle Input
+     */
     handleInput (field, value) {
       if (this.feature.new) return
       this.updateClassFeature(field, value)
     }
-
   },
 
+  // Mounted
   mounted () {
     this.updateClassFeature = debounce(this.updateClassFeature, 500)
   }
