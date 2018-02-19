@@ -27,7 +27,6 @@
           <v-card-text> -->
         <component
           :is="tabItem.component"
-          @show-feature="handleShowFeature($event)"
         />
           <!-- </v-card-text>
         </v-card> -->
@@ -51,11 +50,6 @@
       </v-btn>
     </v-fab-transition>
 
-    <!-- <class-feature-dialog
-      :show-dialog="showClassFeatureDialog"
-      :feature="selectedFeature"
-      @close="handleDialogClose()"
-    /> -->
   </section>
 </template>
 
@@ -66,7 +60,7 @@
  */
 import character from '../../mixins/character'
 import RaceSummary from '../../components/character/race/RaceSummary'
-import ClassFeatures from '../../components/character/class/ClassFeatures'
+import RaceTraits from '../../components/character/race/RaceTraits'
 import ClassFeatureDialog from '../../components/character/class/ClassFeatureDialog'
 import ClassProficiencies from '../../components/character/class/ClassProficiencies'
 
@@ -78,7 +72,7 @@ export default {
   components: {
     // CustomSelect,
     RaceSummary,
-    ClassFeatures,
+    RaceTraits,
     ClassFeatureDialog,
     ClassProficiencies
   },
@@ -86,54 +80,34 @@ export default {
   // Mixins
   mixins: [
     character
-    // classes,
-    // races,
-    // validation
   ],
 
   // Data
   data () {
     return {
       activeTab: undefined,
-      showClassFeatureDialog: false,
-      selectedFeature: undefined,
-      // classFeatureEdit:
       tabs: [{
         title: 'Summary',
         component: 'race-summary',
         showFab: false
       }, {
-        title: 'Features',
-        component: 'class-features',
+        title: 'Traits',
+        component: 'race-traits',
         showFab: true,
-        fabAction: () => { this.$bus.$emit('new-class-feat') }
-      }, {
-        title: 'Proficiencies',
-        component: 'class-proficiencies',
-        showFab: false
+        fabAction: () => { this.$bus.$emit('new-race-trait') }
       }]
-    }
-  },
-
-  // Computed
-  computed: {
-    alignments () {
-      return this.$store.state.gameData.alignments
-    },
-    backgrounds () {
-      return this.$store.state.gameData.backgrounds
     }
   },
 
   // Methods
   methods: {
-    handleShowFeature (event) {
-      this.selectedFeature = event
-      this.showClassFeatureDialog = true
+    handleShowTrait (event) {
+      this.selectedItem = event
+      this.showDialog = true
     },
 
     handleDialogClose () {
-      this.showClassFeatureDialog = false
+      this.showDialog = false
     }
   }
 }

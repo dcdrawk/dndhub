@@ -27,17 +27,26 @@
                 item-text="name"
                 item-value="name"
                 :custom="character.custom.subrace"
-                @input="updateCharacter('subrace', $event);"
+                @input="updateSubrace($event);"
                 @customize="customizeCharacter('subrace', !character.custom.subrace)"
               />
             </v-flex>
 
             <v-flex xs12 md6>
               <v-text-field
-                label="Ability Score Increase"
+                label="Ability Score Increase (Race)"
                 type="text"
-                :value="character.abilityScoreIncrease"
-                @input="updateCharacter('abilityScoreIncrease', $event)"
+                :value="character.abilityScoreIncreaseRace"
+                @input="updateCharacter('abilityScoreIncreaseRace', $event)"
+              />
+            </v-flex>
+
+            <v-flex xs12 md6>
+              <v-text-field
+                label="Ability Score Increase (Subrace)"
+                type="text"
+                :value="character.abilityScoreIncreaseSubrace"
+                @input="updateCharacter('abilityScoreIncreaseSubrace', $event)"
               />
             </v-flex>
 
@@ -95,7 +104,17 @@ export default {
       this.updateCharacter('race', value)
       this.updateCharacter('subrace', value)
       this.updateCharacter('speed', race.speed)
-      this.updateCharacter('abilityScoreIncrease', race.abilityScoreIncrease)
+      this.updateCharacter('abilityScoreIncreaseRace', race.abilityScoreIncrease)
+    },
+
+    /**
+     * Update the characters subrace
+     */
+    async updateSubrace (value) {
+      const subrace = this.getSubrace(value)
+      console.log(subrace)
+      this.updateCharacter('subrace', value)
+      this.updateCharacter('abilityScoreIncreaseSubrace', subrace.abilityScoreIncrease)
     }
   }
 }
