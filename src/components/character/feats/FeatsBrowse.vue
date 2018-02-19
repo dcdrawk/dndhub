@@ -30,7 +30,7 @@
           <v-list-tile-action>
             <v-btn
               icon
-              @click="addItem(item)"
+              @click.stop="addItem(item)"
             >
               <v-icon>add</v-icon>
             </v-btn>
@@ -77,7 +77,6 @@ export default {
   // Mixins
   mixins: [
     character
-    // races
   ],
 
   // Data
@@ -87,10 +86,8 @@ export default {
       dialogEvent: 'new-feat',
       defaultItem: {
         name: '',
-        description: '',
-        new: true
+        description: ''
       },
-      // items: undefined,
       selectedItem: undefined,
       showDialog: false
     }
@@ -100,7 +97,6 @@ export default {
   computed: {
     items () {
       return this.$store.state.gameData.feats.map((item) => {
-        // item.new = true
         return item
       })
     }
@@ -108,12 +104,19 @@ export default {
 
   // Methods
   methods: {
+    /**
+     * Push the item to firebase
+     * @param {Object] - item}
+     */
     addItem (item) {
       this.$db.ref(`${this.endpoint}/${this.characterId}`)
         .push(item)
       this.$bus.$emit('toast', `Added the ${item.name} Feat`)
     },
 
+    /**
+     * Handing adding the item
+     */
     handleAddItem () {
       this.addItem(this.selectedItem)
       this.showDialog = false
@@ -125,21 +128,9 @@ export default {
      * @param {Object} feature
      */
     handleShowDialog (item) {
-      // this.addItem(this.selectedItem)
-      // this.showDialog = false
       this.selectedItem = item
       this.showDialog = true
     }
-  },
-
-  // Created
-  created () {
-    // this.getItems()
-    // Listen for events from the parent component
-    // this.$bus.$on(this.dialogEvent, () => {
-    //   this.selectedItem = {...this.defaultItem}
-    //   this.showDialog = true
-    // })
   }
 }
 </script>

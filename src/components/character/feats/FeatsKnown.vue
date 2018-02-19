@@ -1,15 +1,32 @@
 <template>
-  <div>
+  <div v-if="filteredItems">
+    <v-card>
+      <v-card-text class="pl-3 pr-3 pt-0 pb-0">
+        <v-text-field
+          placeholder="Search"
+          prepend-icon="search"
+          v-model="search"
+        />
+
+        <p
+          v-if="filteredItems.length === 0"
+          class="text-xs-center pb-3 ma-0"
+        >
+          No Feats found.
+        </p>
+      </v-card-text>
+
+    </v-card>
     <!-- Character List -->
     <v-list
-      v-if="items"
+      v-if="filteredItems.length > 0"
       two-line
       dense
       class="elevation-1"
     >
       <!-- Traits List -->
       <v-list-tile
-        v-for="(item, key) in items"
+        v-for="(item, key) in filteredItems"
         :key="key"
         @click="handleShowDialog(item)"
       >
@@ -28,29 +45,32 @@
       </v-list-tile>
     </v-list>
 
-    <p
-      v-else
-      class="ma-4 text-xs-center"
-    >
-      No Known Feats
-    </p>
-    <!-- <race-trait-dialog
+    <!-- <v-card v-if="filteredItems.length === 0">
+      <v-card-text class="pa-0 pt-4 pb-1">
+        <p class="text-xs-center">
+          No Feats found.
+        </p>
+      </v-card-text>
+    </v-card> -->
+
+    <feats-dialog
       :show-dialog="showDialog"
       :item="selectedItem"
+      :new-item="newItem"
+      @add-item="handleAddItem($event)"
       @close="showDialog = false"
-    /> -->
+    />
+
   </div>
 </template>
 
 <script>
 /**
- * <class-features></class-features>
- * @desc A character's class features
+ * <feats-known></feats-known>
+ * @desc A character's known feats
  */
-// import races from '../../../mixins/game-data/races'
 import character from '../../../mixins/character'
-// import CustomSelect from '../../inputs/CustomSelect'
-// import RaceTraitDialog from './RaceTraitDialog'
+import FeatsDialog from './FeatsDialog'
 
 export default {
   // Name
@@ -58,15 +78,12 @@ export default {
 
   // Components
   components: {
-    // CustomSelect,
-    // RaceTraitDialog
-    // ClassFeatureDialog
+    FeatsDialog
   },
 
   // Mixins
   mixins: [
     character
-    // races
   ],
 
   // Data
@@ -76,9 +93,10 @@ export default {
       dialogEvent: 'new-feat',
       defaultItem: {
         name: '',
-        description: '',
-        new: true
+        description: ''
       },
+      search: undefined,
+      newItem: false,
       items: undefined,
       selectedItem: undefined,
       showDialog: false
@@ -87,6 +105,19 @@ export default {
 
   // Computed
   computed: {
+    filteredItems () {
+      if (!this.items) return
+      const array = this.items.filter((item) => {
+        return this.search
+          ? item.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1
+          : true
+      }).sort((a, b) => {
+        if (a.name < b.name) return -1
+        if (a.name > b.name) return 1
+        return 0
+      })
+      return array
+    }
   },
 
   // Methods
@@ -99,45 +130,37 @@ export default {
       this.$db.ref(
         `${this.endpoint}/${this.characterId}`
       ).on('value', (snapshot) => {
-        // const value = snapshot.val()
+        const value = snapshot.val()
 
-        // const traits = Object.values(value || [])
-        // .map((item, index) => {
-        //   item.id = Object.keys(snapshot.val())[index]
-        //   item.custom = true
-        //   item.source = 'Custom'
-        //   return item
-        // })
-        this.items = snapshot.val()
+        const items = Object.values(value || [])
+          .map((item, index) => {
+            item.id = Object.keys(snapshot.val())[index]
+            return item
+          })
+        this.items = items
       })
     },
 
     /**
-     * Get Features Data
-     * return an array of all features associated with a class
-     * @param {Object} - classObj
+     * Adds the item to firebase
+     * @param {Object} - item
      */
-    // getTraitsData (classObj) {
-    //   let features = []
-    //   for (let i in this.classFeaturesData) {
-    //     const classFeature = this.classFeaturesData[i]
-    //     if (classObj.name === classFeature.class) {
-    //       const abilities = classFeature.abilities.map((ability) => {
-    //         const subclass = classFeature.subclass === 'default'
-    //           ? classFeature.class
-    //           : classFeature.subclass
-    //         ability.subclass = subclass
-    //         return ability
-    //       })
-    //       if (classFeature.subclass === 'default') {
-    //         features = features.concat(abilities)
-    //       } else if (classFeature.subclass === classObj.subclass) {
-    //         features = features.concat(abilities)
-    //       }
-    //     }
-    //   }
-    //   return features
-    // },
+    addItem (item) {
+      console.log('feats known add item...')
+      this.$db.ref(`${this.endpoint}/${this.characterId}`)
+        .push(item)
+      this.$bus.$emit('toast', `Added the ${item.name} Feat`)
+    },
+
+    /**
+     * Adds the item from the dialog
+     * @param {Object} - item
+     */
+    handleAddItem (item) {
+      console.log('known add item')
+      this.addItem(item)
+      this.showDialog = false
+    },
 
     /**
      * Handle Show Dialog
@@ -146,6 +169,7 @@ export default {
      */
     handleShowDialog (feature) {
       this.selectedItem = feature
+      this.newItem = false
       this.showDialog = true
     }
   },
@@ -156,6 +180,7 @@ export default {
     // Listen for events from the parent component
     this.$bus.$on(this.dialogEvent, () => {
       this.selectedItem = {...this.defaultItem}
+      this.newItem = true
       this.showDialog = true
     })
   }
@@ -163,10 +188,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.class-features {
+.tab-content {
   min-height: 100vh;
-}
-.source {
-  opacity: 0.5;
 }
 </style>

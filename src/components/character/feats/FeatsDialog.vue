@@ -21,7 +21,7 @@
 
         <!-- Dialog Title -->
         <v-toolbar-title>
-          <span v-if="item.new">New</span>
+          <span v-if="newItem">New</span>
            Feat
         </v-toolbar-title>
         <v-spacer></v-spacer>
@@ -32,7 +32,7 @@
         <v-container class="pa-0">
           <v-layout row wrap>
 
-            <!-- Class Feature Name -->
+            <!-- Feat Name -->
             <v-flex xs12>
               <v-text-field
                 label="Name"
@@ -47,7 +47,7 @@
               />
             </v-flex>
 
-            <!-- Class Feature Description -->
+            <!-- Feat Description -->
             <v-flex xs12>
               <v-text-field
                 label="Description"
@@ -64,26 +64,21 @@
               />
             </v-flex>
 
-            <!-- Save Button (new) -->
-            <v-flex xs12
-              v-if="browse"
-            >
+            <!-- Dialog Buttons -->
+            <v-flex xs12>
               <v-btn
+                v-if="browse || newItem"
                 block
                 color="secondary"
                 :disabled="!isFormValid"
                 :loading="loading"
-                @click="$emit('add-item')"
+                @click="$emit('add-item', selectedItem)"
               >
                 Add
               </v-btn>
-            </v-flex>
 
-            <!-- Delete Button (custom) -->
-            <v-flex
-              v-if="item.custom"
-            >
-              <v-btn
+               <v-btn
+                v-if="!browse && !newItem"
                 flat
                 icon
                 :loading="loading"
@@ -92,6 +87,7 @@
                 <v-icon>delete</v-icon>
               </v-btn>
             </v-flex>
+
           </v-layout>
         </v-container>
       </v-card-text>
@@ -125,7 +121,8 @@ export default {
   props: {
     showDialog: Boolean,
     item: Object,
-    browse: Boolean
+    browse: Boolean,
+    newItem: Boolean
   },
 
   // Data
@@ -155,7 +152,7 @@ export default {
       return `${this.endpoint}/${this.characterId}/${this.item.id}`
     },
     isReadOnly () {
-      if (this.item.new || this.item.custom) {
+      if (this.newItem || !this.browse) {
         return false
       } else {
         return true
@@ -175,27 +172,6 @@ export default {
 
   // Methods
   methods: {
-    /**
-     * Add Item
-     */
-    async addItem () {
-      try {
-        await this.validate()
-        this.loading = true
-        delete this.selectedItem.new
-        this.$db.ref(
-          `${this.endpoint}/${this.characterId}`
-        ).push(this.selectedItem)
-
-        this.$bus.$emit('toast', 'Race Trait Added.')
-        this.$emit('close')
-      } catch (error) {
-        console.warn(error)
-      } finally {
-        this.loading = false
-      }
-    },
-
     /**
      * Delete Item
      */
@@ -218,7 +194,7 @@ export default {
      * Handle Input
      */
     handleInput (field, value) {
-      if (this.item.new) return
+      if (this.newItem) return
       this.updateItem(field, value)
     }
   },
