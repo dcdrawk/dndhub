@@ -50,22 +50,24 @@
 
 <script>
 /**
- * <character-class></character-class>
+ * <race></race>
  * @desc A character's general / basic info
  */
 import character from '../../mixins/character'
-import ClassSummary from '../../components/character/class/ClassSummary'
-import ClassFeatures from '../../components/character/class/ClassFeatures'
+import RaceSummary from '../../components/character/race/RaceSummary'
+import RaceTraits from '../../components/character/race/RaceTraits'
+import ClassFeatureDialog from '../../components/character/class/ClassFeatureDialog'
 import ClassProficiencies from '../../components/character/class/ClassProficiencies'
 
 export default {
   // Name
-  name: 'character-class',
+  name: 'race',
 
   // Components
   components: {
-    ClassSummary,
-    ClassFeatures,
+    RaceSummary,
+    RaceTraits,
+    ClassFeatureDialog,
     ClassProficiencies
   },
 
@@ -80,17 +82,13 @@ export default {
       activeTab: undefined,
       tabs: [{
         title: 'Summary',
-        component: 'class-summary',
+        component: 'race-summary',
         showFab: false
       }, {
-        title: 'Features',
-        component: 'class-features',
+        title: 'Traits',
+        component: 'race-traits',
         showFab: true,
-        fabAction: () => { this.$bus.$emit('new-class-feat') }
-      }, {
-        title: 'Proficiencies',
-        component: 'class-proficiencies',
-        showFab: false
+        fabAction: () => { this.$bus.$emit('new-race-trait') }
       }]
     }
   }

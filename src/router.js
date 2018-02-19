@@ -18,6 +18,7 @@ import Characters from './views/user/Characters'
  */
 import General from './views/character/General'
 import CharacterClass from './views/character/Class'
+import Race from './views/character/Race'
 
 Vue.use(Router)
 
@@ -62,6 +63,11 @@ export default new Router({
       path: '/character/class',
       name: 'Class',
       component: CharacterClass
+    },
+    {
+      path: '/character/race',
+      name: 'Race',
+      component: Race
     }
   ]
 })

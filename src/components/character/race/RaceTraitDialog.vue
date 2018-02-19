@@ -22,7 +22,7 @@
         <!-- Dialog Title -->
         <v-toolbar-title>
           <span v-if="item.new">New</span>
-           Class Feature
+           Race Trait
         </v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
@@ -44,21 +44,6 @@
                 data-vv-name="name"
                 :error-messages="errors.collect('name')"
                 @input="handleInput('name', $event)"
-              />
-            </v-flex>
-
-            <!-- Class Feature Level -->
-            <v-flex xs12>
-              <v-text-field
-                label="Level"
-                type="number"
-                required
-                :readonly="isReadOnly"
-                v-model="selectedItem.level"
-                v-validate="'required'"
-                data-vv-name="level"
-                :error-messages="errors.collect('level')"
-                @input="handleInput('level', $event)"
               />
             </v-flex>
 
@@ -118,11 +103,17 @@
 <script>
 import character from '../../../mixins/character'
 import validation from '../../../mixins/validation'
+import CustomSelect from '../../inputs/CustomSelect'
 import debounce from 'debounce'
 
 export default {
   // Name
-  name: 'class-feature-dialog',
+  name: 'race-trait-dialog',
+
+  // Components
+  components: {
+    CustomSelect
+  },
 
   // Mixins
   mixins: [
@@ -145,7 +136,7 @@ export default {
         description: ''
       },
       loading: false,
-      endpoint: 'classFeatures'
+      endpoint: 'raceTraits'
     }
   },
 
@@ -185,7 +176,7 @@ export default {
   // Methods
   methods: {
     /**
-     * Add Class Feature
+     * Add Item
      */
     async addItem () {
       try {
@@ -196,7 +187,7 @@ export default {
           `${this.endpoint}/${this.characterId}`
         ).push(this.selectedItem)
 
-        this.$bus.$emit('toast', 'Class Feat Added.')
+        this.$bus.$emit('toast', 'Race Trait Added.')
         this.$emit('close')
       } catch (error) {
         console.warn(error)
@@ -206,16 +197,16 @@ export default {
     },
 
     /**
-     * Delete Class Feature
+     * Delete Item
      */
     deleteItem () {
       this.$db.ref(this.firebaseURL).remove()
       this.$emit('close')
-      this.$bus.$emit('toast', 'Class Feat Removed')
+      this.$bus.$emit('toast', 'Race Trait Removed')
     },
 
     /**
-     * Update Class Feature
+     * Update Item
      */
     updateItem (field, value) {
       const update = {}
@@ -234,7 +225,7 @@ export default {
 
   // Mounted
   mounted () {
-    this.updateItem = debounce(this.updateItem, 500)
+    this.updateClassFeature = debounce(this.updateClassFeature, 500)
   }
 }
 </script>

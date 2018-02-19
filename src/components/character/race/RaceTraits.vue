@@ -2,34 +2,32 @@
   <div class="class-features">
     <!-- Character List -->
     <v-list
-      v-if="classFeatures"
+      v-if="traits"
       two-line
       dense
       class="character-list elevation-1"
     >
-      <!-- List Tile -->
+      <!-- Traits List -->
       <v-list-tile
-        v-for="(item, key) in classFeaturesArray"
+        v-for="(item, key) in traits"
         :key="key"
         @click="handleShowDialog(item)"
       >
         <!-- Content -->
         <v-list-tile-content>
-          <!-- Character Name -->
+          <!-- Trait Name -->
           <v-list-tile-title>
             {{ item.name }}
           </v-list-tile-title>
 
           <!-- Character Details -->
           <v-list-tile-sub-title>
-            Level {{ item.level }}
-            <span class="subclass">{{ item.subclass || 'Custom' }} </span>
+            {{ item.source }}
           </v-list-tile-sub-title>
         </v-list-tile-content>
       </v-list-tile>
     </v-list>
-
-    <class-feature-dialog
+    <race-trait-dialog
       :show-dialog="showDialog"
       :item="selectedItem"
       @close="showDialog = false"
@@ -42,40 +40,39 @@
  * <class-features></class-features>
  * @desc A character's class features
  */
-import classes from '../../../mixins/game-data/classes'
+import races from '../../../mixins/game-data/races'
 import character from '../../../mixins/character'
-import CustomSelect from '../../inputs/CustomSelect'
-import ClassFeatureDialog from './ClassFeatureDialog'
 
+import CustomSelect from '../../inputs/CustomSelect'
+import RaceTraitDialog from './RaceTraitDialog'
 export default {
   // Name
-  name: 'class-features',
+  name: 'race-traits',
 
   // Components
   components: {
     CustomSelect,
-    ClassFeatureDialog
+    RaceTraitDialog
+    // ClassFeatureDialog
   },
 
   // Mixins
   mixins: [
     character,
-    classes
+    races
   ],
 
   // Data
   data () {
     return {
       defaultItem: {
-        title: '',
-        level: 1,
+        name: '',
         description: '',
         new: true
       },
-      classFeatures: undefined,
+      customTraits: [],
       selectedItem: undefined,
-      showDialog: false,
-      hideFab: true
+      showDialog: false
     }
   },
 
@@ -85,64 +82,96 @@ export default {
       return this.$store.state.user
     },
 
-    classFeaturesData () {
-      return this.$store.state.gameData.classFeatures
+    race () {
+      if (!this.character) return
+      return this.character.race
     },
 
-    primaryClassId () {
-      return this.character
-        ? Object.keys(this.character.classes)[0]
-        : {}
+    subrace () {
+      if (!this.character) return
+      return this.character.subrace
     },
 
-    primaryClass () {
-      return this.primaryClassId
-        ? this.character.classes[this.primaryClassId]
-        : {}
+    raceData () {
+      for (let i in this.races) {
+        if (this.races[i].name === this.race) {
+          return this.races[i]
+        }
+      }
     },
 
-    classFeaturesArray () {
-      const array = [...this.classFeatures, ...this.defaultClassFeatures]
+    subraceData () {
+      if (!this.subrace) return
+      for (let i in this.raceData.subraces) {
+        if (this.raceData.subraces[i].name === this.subrace) {
+          return this.raceData.subraces[i]
+        }
+      }
+    },
+
+    raceTraitsData () {
+      return this.raceData.traits.map((item) => {
+        item.source = this.race
+        return item
+      })
+    },
+
+    subraceTraitsData () {
+      if (!this.subraceData) return []
+      return this.subraceData.traits.map((item) => {
+        item.source = this.subrace
+        return item
+      })
+    },
+
+    traits () {
+      const array = [
+        ...this.customTraits,
+        ...this.raceTraitsData,
+        ...this.subraceTraitsData
+      ]
+      // return array
       return array.sort((a, b) => {
-        if (+a.level < +b.level) return -1
-        if (+a.level > +b.level) return 1
+        if (a.name < b.name) return -1
+        if (a.name > b.name) return 1
         return 0
       })
     },
 
-    defaultClassFeatures () {
+    defaultRaceTraits () {
       if (!this.classFeaturesData || !this.character) return
-      let defaultItems = []
+      let defaultFeatures = []
       if (this.character.enableMulticlass) {
         for (let i in this.character.classes) {
           const classObj = this.character.classes[i]
-          defaultItems = defaultItems.concat(this.getFeaturesData(classObj))
+          defaultFeatures = defaultFeatures.concat(this.getTraitsData(classObj))
         }
       } else {
-        defaultItems = this.getFeaturesData(this.primaryClass)
+        defaultFeatures = this.getTraitsData(this.primaryClass)
       }
-      return defaultItems
+      return defaultFeatures
     }
   },
 
   // Methods
   methods: {
     /**
-     * Get Class Features
-     * retrieve the list of the characters custom class features from firebase
+     * Get Race Traits
+     * retrieve the list of the characters custom traits
      */
-    getClassFeatures () {
+    getRaceTraits () {
       this.$db.ref(
-        `classFeatures/${this.characterId}`
+        `raceTraits/${this.characterId}`
       ).on('value', (snapshot) => {
         const value = snapshot.val()
-        const features = Object.values(value || [])
+        const traits = Object.values(value || [])
           .map((item, index) => {
             item.id = Object.keys(snapshot.val())[index]
             item.custom = true
+            item.source = 'Custom'
             return item
           })
-        this.classFeatures = features
+        this.customTraits = traits
       })
     },
 
@@ -151,7 +180,7 @@ export default {
      * return an array of all features associated with a class
      * @param {Object} - classObj
      */
-    getFeaturesData (classObj) {
+    getTraitsData (classObj) {
       let features = []
       for (let i in this.classFeaturesData) {
         const classFeature = this.classFeaturesData[i]
@@ -186,9 +215,10 @@ export default {
 
   // Created
   created () {
-    this.getClassFeatures()
+    this.getRaceTraits()
     // Listen for events from the parent component
-    this.$bus.$on('new-class-feat', () => {
+    this.$bus.$on('new-race-trait', () => {
+      // this.selectedItem = this.defaultFeature
       this.selectedItem = {...this.defaultItem}
       this.showDialog = true
     })
@@ -200,7 +230,7 @@ export default {
 .class-features {
   min-height: 100vh;
 }
-.subclass {
+.source {
   opacity: 0.5;
 }
 </style>
