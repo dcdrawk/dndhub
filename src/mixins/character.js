@@ -67,7 +67,7 @@ export default {
     customizeCharacter (field, value) {
       let update = {}
       update[field] = value
-      this.$db.ref(`characters/${this.user.uid}/${this.character.id}/custom`)
+      this.$db.ref(`characters/${this.user.uid}/${this.characterId}/custom`)
         .update(update)
 
       this.$store.commit('customize_character', {

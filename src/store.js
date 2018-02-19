@@ -82,17 +82,17 @@ export default new Vuex.Store({
      */
     customize_character (state, update) {
       if (!state.character.custom) Vue.set(state.character, 'custom', {})
-      // console.log(update.value.prop)
-      switch (update.value) {
-        case (typeof update.value === 'boolean'):
+      switch (typeof update.value) {
+        case 'boolean':
           Vue.set(state.character.custom, update.field, update.value)
           break
-        case (typeof update.value === 'object'):
+        case 'object':
           Vue.set(
             state.character.custom[update.field][update.value.index],
             update.value.prop,
             update.value.value
           )
+          break
       }
       // localStorage.setItem('character', JSON.stringify(state.character))
     },
