@@ -17,6 +17,7 @@ import Characters from './views/user/Characters'
  * Character Views
  */
 import General from './views/character/General'
+import CharacterClass from './views/character/Class'
 
 Vue.use(Router)
 
@@ -56,6 +57,11 @@ export default new Router({
       path: '/character/general',
       name: 'Genral Info',
       component: General
+    },
+    {
+      path: '/character/class',
+      name: 'Class',
+      component: CharacterClass
     }
   ]
 })

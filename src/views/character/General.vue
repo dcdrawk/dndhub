@@ -73,9 +73,9 @@ export default {
         title: 'Summary',
         component: 'character-summary'
       }, {
-        title: 'Appearance',
-        component: 'appearance'
-      }, {
+      //   title: 'Appearance',
+      //   component: 'appearance'
+      // }, {
         title: 'Background',
         component: 'background'
       }]

@@ -30,6 +30,16 @@
 
       <v-flex xs12>
         <v-text-field
+          label="Background Feature"
+          type="text"
+          v-model="character.backgroundFeature"
+          multi-line
+          @input="updateCharacter('backgroundFeature', $event)"
+        />
+      </v-flex>
+
+      <v-flex xs12>
+        <v-text-field
           label="Personality"
           type="text"
           v-model="character.personality"

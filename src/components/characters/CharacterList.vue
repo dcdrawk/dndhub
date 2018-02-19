@@ -11,7 +11,7 @@
       <v-list-tile
         v-for="(item, key) in characters"
         :key="key"
-        @click.capture="selectCharacter(item, key)"
+        @click="selectCharacter(key)"
       >
         <!-- Checkbox -->
         <v-list-tile-action>
@@ -31,20 +31,33 @@
 
           <!-- Character Details -->
           <v-list-tile-sub-title>
-            Level {{ item.level }} {{ item.race }} {{ item.class }}
+            Level {{ item.level }} {{ item.race }}
+            <span
+              v-if="item.enableMulticlass"
+            >
+              <span
+                v-for="(classObj, key) in item.classes"
+                :key="key"
+              >
+                {{classObj.name}}
+              </span>
+            </span>
+            <span v-else-if="item.classes">
+              {{ item.classes[Object.keys(item.classes)[0]].name }}
+            </span>
           </v-list-tile-sub-title>
         </v-list-tile-content>
 
         <v-list-tile-action>
           <!-- List Menu -->
-          <v-menu v-if="user" light left :z-index="5">
+          <v-menu v-if="user" left :z-index="5">
             <!-- Menu Activator -->
-            <v-btn class="menu-toggle" light icon slot="activator">
+            <v-btn class="menu-toggle" icon slot="activator">
               <v-icon>more_vert</v-icon>
             </v-btn>
 
             <!-- Menu List -->
-            <v-list light dense>
+            <v-list dense>
               <!-- Duplicate Character -->
               <v-list-tile
                 @click="duplicateCharacter(item)"
@@ -57,7 +70,7 @@
 
               <!-- Delete -->
               <v-list-tile
-                @click="showDeleteDialog(item)"
+                @click="showDeleteDialog(item, key)"
               >
                 <v-list-tile-title>
                   <v-icon class="mr-2">delete</v-icon>
@@ -103,6 +116,8 @@
 </template>
 
 <script>
+import CharacterCRUD from '../../models/characterCRUD'
+
 export default {
   // Name
   name: 'the-character-list',
@@ -124,18 +139,12 @@ export default {
 
   // Computed
   computed: {
-    character () {
-      return this.$store.state.character
-    },
-
     user () {
       return this.$store.state.user
     },
 
     characterId () {
-      return this.character
-        ? this.character.id
-        : undefined
+      return this.$store.state.characterId
     }
   },
 
@@ -143,14 +152,15 @@ export default {
   methods: {
     /**
      * Delete Character
-     * @param {String} - id
      */
-    async deleteCharacter (id) {
+    async deleteCharacter () {
       try {
         this.loading = true
-        await this.$db
-          .ref(`characters/${this.user.uid}/${this.characterToDelete.id}`)
-          .remove()
+        console.log(this.characterToDelete)
+        await CharacterCRUD.delete(this.characterToDelete.id)
+        // await this.$db
+        //   .ref(`characters/${this.user.uid}/${this.characterToDelete.id}`)
+        //   .remove()
         this.$bus.$emit(
           'toast',
           `Character Deleted.`
@@ -183,21 +193,21 @@ export default {
 
     /**
      * Select Character
-     * @param {Object} - character
-     * @param {String} - key
+     * @param {String} - id
      */
-    selectCharacter (character, key) {
-      character.id = key
-      this.$store.commit('select_character', character)
+    selectCharacter (id) {
+      if (id === this.characterId) return
+      CharacterCRUD.select(id)
     },
 
     /**
      * Show Delete Dialog
      * @param {Object} - character
      */
-    async showDeleteDialog (character) {
+    async showDeleteDialog (character, id) {
       this.deleteCharacterDialog = true
       this.characterToDelete = character
+      this.$set(this.characterToDelete, 'id', id)
     }
   }
 }

@@ -1,59 +1,28 @@
+// import character from '../character'
+
 export default {
+  // Mixins
+  mixins: [
+    // character
+  ],
+
   // Computed
   computed: {
     classes () {
       return this.$store.state.gameData.classes
-    },
-    classFeatures () {
-      return this.$store.state.gameData.classFeatures
-    },
-    subclass () {
-      const className = this.character.class
-      if (!className) return
-      for (let i in this.classes) {
-        if (className === this.classes[i].name) {
-          return this.classes[i].archetypes
-        }
-      }
-    },
-    subclassOptions () {
-      return this.subclass
-        ? this.subclass.options
-        : undefined
-    },
-    archetypeOptions () {
-      if (!this.archetypes) return
-      // if (this.character.level < this.archetypes.level) return
-      return this.archetypes.options
-    },
-    subclassLabel () {
-      if (!this.subclass) return
-      // if (this.character.level < this.archetypes.level) return
-      return this.subclass.name
     }
   },
 
   // Methods
   methods: {
-    getSubclasses (className) {
+    getSubclassLabel (className) {
       if (!className) return
-      for (let i in this.classes) {
-        if (className === this.classes[i].name) {
-          return this.classes[i].archetypes
-        }
-      }
+      return this.getClass(className).archetypes.name
     },
 
-    getArchetypeOptions (className, level) {
-      const archetypes = this.getSubclasses(className)
-      if (!archetypes) return
-      return archetypes.options
-    },
-
-    getArchetypeLabel (className) {
-      const archetypes = this.getSubclasses(className)
-      if (!archetypes) return
-      return archetypes.name
+    getSubclassOptions (className) {
+      if (!className) return
+      return this.getClass(className).archetypes.options
     },
 
     getClass (className) {
@@ -62,67 +31,46 @@ export default {
       }
     },
 
-    getFeatures (className) {
-      for (let features of this.classFeatures) {
-        if (features.class === className) return features.abilities
+    getHitDice (className) {
+      if (!className) return
+      return this.getClass(className).hitDice
+    },
+
+    async addMulticlass () {
+      try {
+        const ref = await this.$db
+          .ref(`characters/${this.user.uid}/${this.characterId}/classes`)
+          .push({
+            name: '',
+            subclass: '',
+            hitDice: '',
+            custom: {
+              init: true
+            }
+          })
+          .once('value')
+
+        const classes = this.character.classes
+        classes[ref.key] = ref.val()
+        this.$store.commit('update_character_field', {
+          field: 'classes',
+          value: classes
+        })
+      } catch (error) {
+
       }
     },
 
-    setFeatures (newClass, oldClass) {
-      const features = {...this.character.classFeatures || {}}
-      // const features = {}
-      if (oldClass && features[oldClass]) {
-        delete features[oldClass]
-      }
-      features[newClass] = this.getFeatures(newClass) || []
-      this.character.update('classFeatures', features)
-    },
+    removeClass (id) {
+      this.$db
+        .ref(`characters/${this.user.uid}/${this.characterId}/classes/${id}`)
+        .remove()
 
-    /**
-     * Set Class
-     * @desc Sets a character's class, and related fields
-     * @param {String} className
-     */
-    setClass (className) {
-      const classObj = this.getClass(className)
-      if (classObj.name === this.character.class) return
-      this.setFeatures(classObj.name, this.character.class)
-      if (!classObj) {
-        this.character.update('class', className)
-        return
-      }
-
-      this.character.updateMultiple([{
-        field: 'class',
-        value: classObj.name
-      }, {
-        field: 'archetype',
-        value: ''
-      }, {
-        field: 'specialization',
-        value: ''
-      }, {
-        field: 'proficiencies',
-        value: classObj.proficiencies
-      }, {
-        field: 'hitDice',
-        value: classObj.hitDice
-      }])
-    },
-
-    setArchetype (archetype) {
-      this.setFeatures(archetype)
-      this.character.update('archetype', archetype)
-    },
-
-    customizeHitDice (value) {
-      this.$nextTick(() => {
-        this.character.customize('hitDice', value)
-        const classObj = this.getClass(this.character.class)
-        this.character.update(
-          'hitDice',
-          classObj ? classObj.hitDice : 'd8'
-        )
+      const classes = this.character.classes
+      delete classes[id]
+      this.$store.commit('update_character_field', {
+        field: 'classes',
+        value: classes
       })
     }
   }
