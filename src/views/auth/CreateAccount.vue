@@ -32,8 +32,9 @@
           <v-text-field
             type="password"
             label="Password"
-            v-validate="'required|confirmed:confirm_password'"
+            v-validate="'required'"
             data-vv-name="password"
+            name="password"
             :error-messages="errors.collect('password')"
             v-model="password"
           />
@@ -42,11 +43,13 @@
           <v-text-field
             type="password"
             label="Confirm Password"
-            v-validate="'required|confirmed:confirm_password'"
+            v-validate="'confirmed:password'"
             data-vv-name="confirm_password"
+            name="confirm_password"
             :error-messages="errors.collect('confirm_password')"
             v-model="confirmPassword"
           />
+
         </form>
 
         <!-- Error Message -->
