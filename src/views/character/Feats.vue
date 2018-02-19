@@ -80,12 +80,12 @@ export default {
       tabs: [{
         title: 'Known',
         component: 'feats-known',
-        showFab: false
+        showFab: true,
+        fabAction: () => { this.$bus.$emit('new-feat') }
       }, {
         title: 'Browse',
         component: 'feats-browse',
-        showFab: true,
-        fabAction: () => { this.$bus.$emit('new-feat') }
+        showFab: false
       }]
     }
   }

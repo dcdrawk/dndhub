@@ -13,7 +13,8 @@ export default {
         'classes',
         'alignments',
         'backgrounds',
-        'classFeatures'
+        'classFeatures',
+        'feats'
       ],
       // Update the version number if data json is updated.
       // So we can store the json in LocalStorage

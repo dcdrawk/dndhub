@@ -7,25 +7,38 @@
       dense
       class="elevation-1"
     >
-      <!-- Traits List -->
-      <v-list-tile
-        v-for="(item, key) in items"
-        :key="key"
-        @click="handleShowDialog(item)"
-      >
-        <!-- Content -->
-        <v-list-tile-content>
-          <!-- Trait Name -->
-          <v-list-tile-title>
-            {{ item.name }}
-          </v-list-tile-title>
+      <template v-for="(item, index) in items">
+        <!-- Traits List -->
+        <v-list-tile
+          :key="item.title"
+          @click="handleShowDialog(item)"
+        >
+          <!-- Content -->
+          <v-list-tile-content>
+            <!-- Trait Name -->
+            <v-list-tile-title>
+              {{ item.name }}
+            </v-list-tile-title>
 
-          <!-- Character Details -->
-          <v-list-tile-sub-title>
-            {{ item.source }}
-          </v-list-tile-sub-title>
-        </v-list-tile-content>
-      </v-list-tile>
+            <!-- Character Details -->
+            <v-list-tile-sub-title>
+              {{ item.description }}
+            </v-list-tile-sub-title>
+
+            <!-- Feat Add -->
+          </v-list-tile-content>
+          <v-list-tile-action>
+            <v-btn
+              icon
+              @click="addItem(item)"
+            >
+              <v-icon>add</v-icon>
+            </v-btn>
+            <!-- {{ item.name }} -->
+          </v-list-tile-action>
+        </v-list-tile>
+        <v-divider :key="`${index}-divider`"></v-divider>
+      </template>
     </v-list>
 
     <p
@@ -34,11 +47,13 @@
     >
       No Known Feats
     </p>
-    <!-- <race-trait-dialog
+    <feats-dialog
       :show-dialog="showDialog"
       :item="selectedItem"
+      :browse="true"
+      @add-item="handleAddItem()"
       @close="showDialog = false"
-    /> -->
+    />
   </div>
 </template>
 
@@ -47,10 +62,8 @@
  * <class-features></class-features>
  * @desc A character's class features
  */
-// import races from '../../../mixins/game-data/races'
 import character from '../../../mixins/character'
-// import CustomSelect from '../../inputs/CustomSelect'
-// import RaceTraitDialog from './RaceTraitDialog'
+import FeatsDialog from './FeatsDialog'
 
 export default {
   // Name
@@ -58,9 +71,7 @@ export default {
 
   // Components
   components: {
-    // CustomSelect,
-    // RaceTraitDialog
-    // ClassFeatureDialog
+    FeatsDialog
   },
 
   // Mixins
@@ -79,7 +90,7 @@ export default {
         description: '',
         new: true
       },
-      items: undefined,
+      // items: undefined,
       selectedItem: undefined,
       showDialog: false
     }
@@ -87,77 +98,48 @@ export default {
 
   // Computed
   computed: {
+    items () {
+      return this.$store.state.gameData.feats.map((item) => {
+        // item.new = true
+        return item
+      })
+    }
   },
 
   // Methods
   methods: {
-    /**
-     * Get Items
-     * retrieve the list of items
-     */
-    getItems () {
-      this.$db.ref(
-        `${this.endpoint}/${this.characterId}`
-      ).on('value', (snapshot) => {
-        // const value = snapshot.val()
-
-        // const traits = Object.values(value || [])
-        // .map((item, index) => {
-        //   item.id = Object.keys(snapshot.val())[index]
-        //   item.custom = true
-        //   item.source = 'Custom'
-        //   return item
-        // })
-        this.items = snapshot.val()
-      })
+    addItem (item) {
+      this.$db.ref(`${this.endpoint}/${this.characterId}`)
+        .push(item)
+      this.$bus.$emit('toast', `Added the ${item.name} Feat`)
     },
 
-    /**
-     * Get Features Data
-     * return an array of all features associated with a class
-     * @param {Object} - classObj
-     */
-    // getTraitsData (classObj) {
-    //   let features = []
-    //   for (let i in this.classFeaturesData) {
-    //     const classFeature = this.classFeaturesData[i]
-    //     if (classObj.name === classFeature.class) {
-    //       const abilities = classFeature.abilities.map((ability) => {
-    //         const subclass = classFeature.subclass === 'default'
-    //           ? classFeature.class
-    //           : classFeature.subclass
-    //         ability.subclass = subclass
-    //         return ability
-    //       })
-    //       if (classFeature.subclass === 'default') {
-    //         features = features.concat(abilities)
-    //       } else if (classFeature.subclass === classObj.subclass) {
-    //         features = features.concat(abilities)
-    //       }
-    //     }
-    //   }
-    //   return features
-    // },
+    handleAddItem () {
+      this.addItem(this.selectedItem)
+      this.showDialog = false
+    },
 
     /**
      * Handle Show Dialog
      * Select the feature and show the dialog
      * @param {Object} feature
      */
-    handleShowDialog (feature) {
-      this.selectedItem = feature
+    handleShowDialog (item) {
+      // this.addItem(this.selectedItem)
+      // this.showDialog = false
+      this.selectedItem = item
       this.showDialog = true
     }
   },
 
   // Created
   created () {
-    this.getItems()
+    // this.getItems()
     // Listen for events from the parent component
-    this.$bus.$on(this.dialogEvent, () => {
-      this.selectedItem = {...this.defaultItem}
-      this.showDialog = true
-    })
+    // this.$bus.$on(this.dialogEvent, () => {
+    //   this.selectedItem = {...this.defaultItem}
+    //   this.showDialog = true
+    // })
   }
 }
 </script>
