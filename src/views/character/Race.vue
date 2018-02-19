@@ -1,7 +1,6 @@
 <template>
   <section>
-  <!-- <v-content> -->
-    <!-- <v-container class="general" v-if="character"> -->
+
     <v-tabs
       v-if="character"
       v-model="activeTab"
@@ -23,13 +22,9 @@
         v-for="(tabItem, index) in tabs"
         :key="index"
       >
-        <!-- <v-card flat>
-          <v-card-text> -->
         <component
           :is="tabItem.component"
         />
-          <!-- </v-card-text>
-        </v-card> -->
       </v-tab-item>
     </v-tabs>
 
@@ -55,7 +50,7 @@
 
 <script>
 /**
- * <character-class></character-class>
+ * <race></race>
  * @desc A character's general / basic info
  */
 import character from '../../mixins/character'
@@ -66,11 +61,10 @@ import ClassProficiencies from '../../components/character/class/ClassProficienc
 
 export default {
   // Name
-  name: 'character-class',
+  name: 'race',
 
   // Components
   components: {
-    // CustomSelect,
     RaceSummary,
     RaceTraits,
     ClassFeatureDialog,
@@ -96,18 +90,6 @@ export default {
         showFab: true,
         fabAction: () => { this.$bus.$emit('new-race-trait') }
       }]
-    }
-  },
-
-  // Methods
-  methods: {
-    handleShowTrait (event) {
-      this.selectedItem = event
-      this.showDialog = true
-    },
-
-    handleDialogClose () {
-      this.showDialog = false
     }
   }
 }

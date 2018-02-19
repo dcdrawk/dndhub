@@ -31,7 +31,7 @@
 
     <class-feature-dialog
       :show-dialog="showDialog"
-      :feature="selectedFeature"
+      :item="selectedItem"
       @close="showDialog = false"
     />
   </div>
@@ -44,9 +44,9 @@
  */
 import classes from '../../../mixins/game-data/classes'
 import character from '../../../mixins/character'
-
 import CustomSelect from '../../inputs/CustomSelect'
 import ClassFeatureDialog from './ClassFeatureDialog'
+
 export default {
   // Name
   name: 'class-features',
@@ -66,14 +66,14 @@ export default {
   // Data
   data () {
     return {
-      defaultFeature: {
+      defaultItem: {
         title: '',
         level: 1,
         description: '',
         new: true
       },
       classFeatures: undefined,
-      selectedFeature: undefined,
+      selectedItem: undefined,
       showDialog: false,
       hideFab: true
     }
@@ -112,16 +112,16 @@ export default {
 
     defaultClassFeatures () {
       if (!this.classFeaturesData || !this.character) return
-      let defaultFeatures = []
+      let defaultItems = []
       if (this.character.enableMulticlass) {
         for (let i in this.character.classes) {
           const classObj = this.character.classes[i]
-          defaultFeatures = defaultFeatures.concat(this.getFeaturesData(classObj))
+          defaultItems = defaultItems.concat(this.getFeaturesData(classObj))
         }
       } else {
-        defaultFeatures = this.getFeaturesData(this.primaryClass)
+        defaultItems = this.getFeaturesData(this.primaryClass)
       }
-      return defaultFeatures
+      return defaultItems
     }
   },
 
@@ -179,7 +179,7 @@ export default {
      * @param {Object} feature
      */
     handleShowDialog (feature) {
-      this.selectedFeature = feature
+      this.selectedItem = feature
       this.showDialog = true
     }
   },
@@ -189,7 +189,7 @@ export default {
     this.getClassFeatures()
     // Listen for events from the parent component
     this.$bus.$on('new-class-feat', () => {
-      this.selectedFeature = this.defaultFeature
+      this.selectedItem = {...this.defaultItem}
       this.showDialog = true
     })
   }

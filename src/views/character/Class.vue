@@ -1,7 +1,6 @@
 <template>
   <section>
-  <!-- <v-content> -->
-    <!-- <v-container class="general" v-if="character"> -->
+
     <v-tabs
       v-if="character"
       v-model="activeTab"
@@ -23,14 +22,9 @@
         v-for="(tabItem, index) in tabs"
         :key="index"
       >
-        <!-- <v-card flat>
-          <v-card-text> -->
         <component
           :is="tabItem.component"
-          @show-feature="handleShowFeature($event)"
         />
-          <!-- </v-card-text>
-        </v-card> -->
       </v-tab-item>
     </v-tabs>
 
@@ -51,11 +45,6 @@
       </v-btn>
     </v-fab-transition>
 
-    <!-- <class-feature-dialog
-      :show-dialog="showClassFeatureDialog"
-      :feature="selectedFeature"
-      @close="handleDialogClose()"
-    /> -->
   </section>
 </template>
 
@@ -67,7 +56,6 @@
 import character from '../../mixins/character'
 import ClassSummary from '../../components/character/class/ClassSummary'
 import ClassFeatures from '../../components/character/class/ClassFeatures'
-import ClassFeatureDialog from '../../components/character/class/ClassFeatureDialog'
 import ClassProficiencies from '../../components/character/class/ClassProficiencies'
 
 export default {
@@ -76,28 +64,20 @@ export default {
 
   // Components
   components: {
-    // CustomSelect,
     ClassSummary,
     ClassFeatures,
-    ClassFeatureDialog,
     ClassProficiencies
   },
 
   // Mixins
   mixins: [
     character
-    // classes,
-    // races,
-    // validation
   ],
 
   // Data
   data () {
     return {
       activeTab: undefined,
-      showClassFeatureDialog: false,
-      selectedFeature: undefined,
-      // classFeatureEdit:
       tabs: [{
         title: 'Summary',
         component: 'class-summary',
@@ -112,31 +92,6 @@ export default {
         component: 'class-proficiencies',
         showFab: false
       }]
-    }
-  },
-
-  // Computed
-  computed: {
-    alignments () {
-      return this.$store.state.gameData.alignments
-    },
-    backgrounds () {
-      return this.$store.state.gameData.backgrounds
-    }
-  },
-
-  // Methods
-  methods: {
-    handleShowFeature (event) {
-      this.selectedFeature = event
-      this.showClassFeatureDialog = true
-    },
-
-    handleDialogClose () {
-      this.showClassFeatureDialog = false
-      // setTimeout(() => {
-      //   this.selectedFeature = undefined
-      // }, 500)
     }
   }
 }

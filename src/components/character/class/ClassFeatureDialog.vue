@@ -7,7 +7,7 @@
     scrollable
     @input="handleInput($event)"
   >
-    <v-card tile v-if="feature">
+    <v-card tile v-if="item">
       <!-- Dialog Toolbar -->
       <v-toolbar card dark color="primary">
         <!-- Close Button -->
@@ -21,7 +21,7 @@
 
         <!-- Dialog Title -->
         <v-toolbar-title>
-          <span v-if="feature.new">New</span>
+          <span v-if="item.new">New</span>
            Class Feature
         </v-toolbar-title>
         <v-spacer></v-spacer>
@@ -39,7 +39,7 @@
                 type="text"
                 required
                 :readonly="isReadOnly"
-                v-model="classFeature.name"
+                v-model="selectedItem.name"
                 v-validate="'required'"
                 data-vv-name="name"
                 :error-messages="errors.collect('name')"
@@ -54,10 +54,11 @@
                 type="number"
                 required
                 :readonly="isReadOnly"
-                v-model="classFeature.level"
+                v-model="selectedItem.level"
                 v-validate="'required'"
                 data-vv-name="level"
                 :error-messages="errors.collect('level')"
+                @input="handleInput('level', $event)"
               />
             </v-flex>
 
@@ -70,23 +71,24 @@
                 required
                 multi-line
                 :readonly="isReadOnly"
-                v-model="classFeature.description"
+                v-model="selectedItem.description"
                 v-validate="'required'"
                 data-vv-name="description"
                 :error-messages="errors.collect('description')"
+                @input="handleInput('description', $event)"
               />
             </v-flex>
 
             <!-- Save Button (new) -->
             <v-flex xs12
-              v-if="feature.new"
+              v-if="item.new"
             >
               <v-btn
                 block
                 color="secondary"
                 :disabled="!isFormValid"
                 :loading="loading"
-                @click="addClassFeature()"
+                @click="addItem()"
               >
                 Save
               </v-btn>
@@ -94,13 +96,13 @@
 
             <!-- Delete Button (custom) -->
             <v-flex
-              v-if="feature.custom"
+              v-if="item.custom"
             >
               <v-btn
                 flat
                 icon
                 :loading="loading"
-                @click="deleteClassFeature()"
+                @click="deleteItem()"
               >
                 <v-icon>delete</v-icon>
               </v-btn>
@@ -114,26 +116,16 @@
 </template>
 
 <script>
-import classes from '../../../mixins/game-data/classes'
-import races from '../../../mixins/game-data/races'
 import character from '../../../mixins/character'
 import validation from '../../../mixins/validation'
-import CustomSelect from '../../inputs/CustomSelect'
 import debounce from 'debounce'
 
 export default {
   // Name
   name: 'class-feature-dialog',
 
-  // Components
-  components: {
-    CustomSelect
-  },
-
   // Mixins
   mixins: [
-    classes,
-    races,
     character,
     validation
   ],
@@ -141,18 +133,19 @@ export default {
   // Props
   props: {
     showDialog: Boolean,
-    feature: Object
+    item: Object
   },
 
   // Data
   data () {
     return {
-      classFeature: {
+      selectedItem: {
         name: undefined,
         level: 1,
         description: ''
       },
-      loading: false
+      loading: false,
+      endpoint: 'classFeatures'
     }
   },
 
@@ -166,12 +159,12 @@ export default {
         key => this.fields[key].valid
       )
     },
-    featureURL () {
-      if (!this.feature) return
-      return `classFeatures/${this.characterId}/${this.feature.id}`
+    firebaseURL () {
+      if (!this.item) return
+      return `${this.endpoint}/${this.characterId}/${this.item.id}`
     },
     isReadOnly () {
-      if (this.feature.new || this.feature.custom) {
+      if (this.item.new || this.item.custom) {
         return false
       } else {
         return true
@@ -183,12 +176,8 @@ export default {
   watch: {
     showDialog (newValue, oldValue) {
       if (newValue) {
-        const defaultFeature = {
-          name: undefined,
-          level: 1,
-          description: ''
-        }
-        this.classFeature = this.feature || defaultFeature
+        this.$validator.reset()
+        this.selectedItem = this.item
       }
     }
   },
@@ -198,14 +187,14 @@ export default {
     /**
      * Add Class Feature
      */
-    async addClassFeature () {
+    async addItem () {
       try {
         await this.validate()
         this.loading = true
-        delete this.classFeature.new
+        delete this.selectedItem.new
         this.$db.ref(
-          `classFeatures/${this.characterId}`
-        ).push(this.classFeature)
+          `${this.endpoint}/${this.characterId}`
+        ).push(this.selectedItem)
 
         this.$bus.$emit('toast', 'Class Feat Added.')
         this.$emit('close')
@@ -219,8 +208,8 @@ export default {
     /**
      * Delete Class Feature
      */
-    deleteClassFeature () {
-      this.$db.ref(this.featureURL).remove()
+    deleteItem () {
+      this.$db.ref(this.firebaseURL).remove()
       this.$emit('close')
       this.$bus.$emit('toast', 'Class Feat Removed')
     },
@@ -228,24 +217,24 @@ export default {
     /**
      * Update Class Feature
      */
-    updateClassFeature (field, value) {
+    updateItem (field, value) {
       const update = {}
       update[field] = value
-      this.$db.ref(this.featureURL).update(update)
+      this.$db.ref(this.firebaseURL).update(update)
     },
 
     /**
      * Handle Input
      */
     handleInput (field, value) {
-      if (this.feature.new) return
-      this.updateClassFeature(field, value)
+      if (this.item.new) return
+      this.updateItem(field, value)
     }
   },
 
   // Mounted
   mounted () {
-    this.updateClassFeature = debounce(this.updateClassFeature, 500)
+    this.updateItem = debounce(this.updateItem, 500)
   }
 }
 </script>
