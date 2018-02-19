@@ -1,22 +1,10 @@
 <template>
   <div v-if="filteredItems">
-    <v-card>
-      <v-card-text class="pl-3 pr-3 pt-0 pb-0">
-        <v-text-field
-          placeholder="Search"
-          prepend-icon="search"
-          v-model="search"
-        />
+    <search-bar
+      v-model="search"
+      :items="filteredItems"
+    />
 
-        <p
-          v-if="filteredItems.length === 0"
-          class="text-xs-center pb-3 ma-0"
-        >
-          No Feats found.
-        </p>
-      </v-card-text>
-
-    </v-card>
     <!-- Character List -->
     <v-list
       v-if="filteredItems.length > 0"
@@ -45,14 +33,6 @@
       </v-list-tile>
     </v-list>
 
-    <!-- <v-card v-if="filteredItems.length === 0">
-      <v-card-text class="pa-0 pt-4 pb-1">
-        <p class="text-xs-center">
-          No Feats found.
-        </p>
-      </v-card-text>
-    </v-card> -->
-
     <feats-dialog
       :show-dialog="showDialog"
       :item="selectedItem"
@@ -71,6 +51,7 @@
  */
 import character from '../../../mixins/character'
 import FeatsDialog from './FeatsDialog'
+import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
@@ -78,7 +59,8 @@ export default {
 
   // Components
   components: {
-    FeatsDialog
+    FeatsDialog,
+    SearchBar
   },
 
   // Mixins

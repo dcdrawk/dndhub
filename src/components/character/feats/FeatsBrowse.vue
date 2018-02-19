@@ -1,13 +1,18 @@
 <template>
   <div>
+    <search-bar
+      v-model="search"
+      :items="filteredItems"
+    ></search-bar>
+
     <!-- Character List -->
     <v-list
-      v-if="items"
+      v-if="filteredItems.length > 0"
       two-line
       dense
       class="elevation-1"
     >
-      <template v-for="(item, index) in items">
+      <template v-for="(item, index) in filteredItems">
         <!-- Traits List -->
         <v-list-tile
           :key="item.title"
@@ -25,8 +30,9 @@
               {{ item.description }}
             </v-list-tile-sub-title>
 
-            <!-- Feat Add -->
           </v-list-tile-content>
+
+          <!-- Feat Add -->
           <v-list-tile-action>
             <v-btn
               icon
@@ -34,19 +40,15 @@
             >
               <v-icon>add</v-icon>
             </v-btn>
-            <!-- {{ item.name }} -->
           </v-list-tile-action>
         </v-list-tile>
-        <v-divider :key="`${index}-divider`"></v-divider>
+        <v-divider
+          v-if="index < filteredItems.length - 1"
+          :key="`${index}-divider`"
+        ></v-divider>
       </template>
     </v-list>
 
-    <p
-      v-else
-      class="ma-4 text-xs-center"
-    >
-      No Known Feats
-    </p>
     <feats-dialog
       :show-dialog="showDialog"
       :item="selectedItem"
@@ -64,6 +66,7 @@
  */
 import character from '../../../mixins/character'
 import FeatsDialog from './FeatsDialog'
+import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
@@ -71,7 +74,8 @@ export default {
 
   // Components
   components: {
-    FeatsDialog
+    FeatsDialog,
+    SearchBar
   },
 
   // Mixins
@@ -84,6 +88,7 @@ export default {
     return {
       endpoint: 'feats',
       dialogEvent: 'new-feat',
+      search: undefined,
       defaultItem: {
         name: '',
         description: ''
@@ -99,6 +104,18 @@ export default {
       return this.$store.state.gameData.feats.map((item) => {
         return item
       })
+    },
+    filteredItems () {
+      const array = this.items
+      return array.filter((item) => {
+        return this.search
+          ? item.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1
+          : true
+      }).sort((a, b) => {
+        if (a.name < b.name) return -1
+        if (a.name > b.name) return 1
+        return 0
+      })
     }
   },
 
@@ -106,7 +123,7 @@ export default {
   methods: {
     /**
      * Push the item to firebase
-     * @param {Object] - item}
+     * @param {Object} - item
      */
     addItem (item) {
       this.$db.ref(`${this.endpoint}/${this.characterId}`)
@@ -124,8 +141,8 @@ export default {
 
     /**
      * Handle Show Dialog
-     * Select the feature and show the dialog
-     * @param {Object} feature
+     * Select the item, and show the dialog
+     * @param {Object} - item
      */
     handleShowDialog (item) {
       this.selectedItem = item
@@ -136,10 +153,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.class-features {
-  min-height: 100vh;
-}
-.source {
-  opacity: 0.5;
-}
 </style>
