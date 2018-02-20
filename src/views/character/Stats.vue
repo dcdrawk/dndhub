@@ -40,7 +40,7 @@
 import character from '../../mixins/character'
 import AbilityScores from '../../components/character/stats/AbilityScores'
 import Combat from '../../components/character/stats/Combat'
-import SavingThrows from '../../components/character/stats/SavingThrows'
+import Skills from '../../components/character/stats/Skills'
 
 export default {
   // Name
@@ -50,7 +50,7 @@ export default {
   components: {
     AbilityScores,
     Combat,
-    SavingThrows
+    Skills
   },
 
   // Mixins
@@ -69,8 +69,8 @@ export default {
         title: 'Ability Scores',
         component: 'ability-scores'
       }, {
-        title: 'Saving Throws',
-        component: 'saving-throws'
+        title: 'Skills',
+        component: 'skills'
       }]
     }
   },

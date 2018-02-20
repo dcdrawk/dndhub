@@ -4,16 +4,16 @@
       <v-card-text class="pa-1">
         <v-container grid-list-sm>
           <v-layout row wrap class="stat-header mb-2">
-            <v-flex xs3>
+            <v-flex xs6>
               <strong>Stat</strong>
             </v-flex>
-            <v-flex xs3>
+            <v-flex xs2>
               <strong>Base</strong>
             </v-flex>
-            <v-flex xs3>
+            <v-flex xs2>
               <strong>Bonus</strong>
             </v-flex>
-            <v-flex xs3>
+            <v-flex xs2>
               <strong>Modifier</strong>
             </v-flex>
           </v-layout>
@@ -23,12 +23,12 @@
             :key="index"
             class="mb-2"
           >
-            <v-flex xs3 class="pt-2">
+            <v-flex xs6 class="pt-2">
               <span class="stat-name">
-                {{ item.slice(0, 3) }}.
+                {{ item }}
               </span>
             </v-flex>
-            <v-flex xs3>
+            <v-flex xs2>
               <v-text-field
                 type="number"
                 class="pt-0"
@@ -37,7 +37,7 @@
                 @input="updateAbilityScore(item, 'base', $event)"
               />
             </v-flex>
-            <v-flex xs3>
+            <v-flex xs2>
               <v-text-field
                 type="number"
                 class="pt-0"
@@ -46,7 +46,7 @@
                 @input="updateAbilityScore(item, 'bonus', $event)"
               />
             </v-flex>
-            <v-flex xs3>
+            <v-flex xs2>
               <v-text-field
                 type="number"
                 class="pt-0"
@@ -65,16 +65,16 @@
         <h3 class="pl-1 mb-2 mt-2">Saving Throws</h3>
         <v-container grid-list-sm>
           <v-layout row wrap class="stat-header mb-2">
-            <v-flex xs3>
+            <v-flex xs6>
               <strong>Stat</strong>
             </v-flex>
-            <v-flex xs3>
-              <strong>Proficient</strong>
+            <v-flex xs2>
+              <strong>Prof.</strong>
             </v-flex>
-            <v-flex xs3>
+            <v-flex xs2>
               <strong>Bonus</strong>
             </v-flex>
-            <v-flex xs3>
+            <v-flex xs2>
               <strong>Modifier</strong>
             </v-flex>
           </v-layout>
@@ -84,12 +84,12 @@
             :key="index"
             class="mb-2"
           >
-            <v-flex xs3 class="pt-2">
+            <v-flex xs6 class="pt-2">
               <span class="stat-name">
-                {{ item.slice(0, 3) }}.
+                {{ item }}
               </span>
             </v-flex>
-            <v-flex xs3>
+            <v-flex xs2>
               <v-checkbox
                 hide-details
                 color="secondary"
@@ -99,7 +99,7 @@
                 @change="updateSavingThrows(item, 'proficient', $event)"
               />
             </v-flex>
-            <v-flex xs3>
+            <v-flex xs2>
               <v-text-field
                 type="number"
                 class="pt-0"
@@ -108,7 +108,7 @@
                 @input="updateSavingThrows(item, 'bonus', $event)"
               />
             </v-flex>
-            <v-flex xs3>
+            <v-flex xs2>
               <v-text-field
                 type="number"
                 class="pt-0"
