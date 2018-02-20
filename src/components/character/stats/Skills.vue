@@ -1,66 +1,67 @@
 <template>
-  <div>
-    <v-card v-if="characterSkills && characterScores">
-      <v-card-text class="pa-0">
-        <v-container grid-list-sm class="pa-0">
-          <v-layout row wrap class="mb-2 pa-2">
-            <v-flex xs6>
-              <strong>Stat</strong>
-            </v-flex>
-            <v-flex xs2>
-              <strong>Prof.</strong>
-            </v-flex>
-            <v-flex xs2>
-              <strong>Bonus</strong>
-            </v-flex>
-            <v-flex xs2>
-              <strong>Modifier</strong>
-            </v-flex>
-          </v-layout>
+  <v-card v-if="characterSkills && characterScores">
+    <v-card-text class="pa-0">
+      <v-container grid-list-sm class="pa-0">
+        <v-layout row wrap class="mb-2 pa-2">
+          <v-flex xs6>
+            <strong>Stat</strong>
+          </v-flex>
+          <v-flex xs2>
+            <strong>Prof.</strong>
+          </v-flex>
+          <v-flex xs2>
+            <strong>Bonus</strong>
+          </v-flex>
+          <v-flex xs2>
+            <strong>Mod.</strong>
+          </v-flex>
+        </v-layout>
 
-          <v-layout
-            v-for="(item, index) in skills"
-            :key="index"
-            class="pa-2 skill"
-          >
-            <v-flex xs6 class="pt-2">
-              <span class="stat-name">
-                {{ item.name.replace(/_/g, ' ') }}
-              </span>
-            </v-flex>
-            <v-flex xs2>
-              <v-checkbox
-                hide-details
-                color="secondary"
-                :input-value="characterSkills[item.name].proficient"
-                :true-value="true"
-                :false-value="false"
-                @change="updateSkill(item.name, 'proficient', $event)"
-              />
-            </v-flex>
-            <v-flex xs2>
-              <v-text-field
-                type="number"
-                class="pt-0"
-                hide-details
-                :value="characterSkills[item.name].bonus"
-                @input="updateSkill(item.name, 'bonus', $event)"
-              />
-            </v-flex>
-            <v-flex xs2>
-              <v-text-field
-                type="number"
-                class="pt-0"
-                hide-details
-                disabled
-                :value="getSkillModifier(item)"
-              />
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-card-text>
-    </v-card>
-  </div>
+        <v-layout
+          v-for="(item, index) in skills"
+          :key="index"
+          class="pa-2 skill"
+        >
+          <v-flex xs6 class="pt-2">
+            <span class="stat-name">
+              {{ item.name.replace(/_/g, ' ') }}
+            </span>
+            <span class="score">
+              ({{ item.abilityScore.slice(0, 3)}})
+            </span>
+          </v-flex>
+          <v-flex xs2>
+            <v-checkbox
+              hide-details
+              color="secondary"
+              :input-value="characterSkills[item.name].proficient"
+              :true-value="true"
+              :false-value="false"
+              @change="updateSkill(item.name, 'proficient', $event)"
+            />
+          </v-flex>
+          <v-flex xs2>
+            <v-text-field
+              type="number"
+              class="pt-0"
+              hide-details
+              :value="characterSkills[item.name].bonus"
+              @input="updateSkill(item.name, 'bonus', $event)"
+            />
+          </v-flex>
+          <v-flex xs2>
+            <v-text-field
+              type="number"
+              class="pt-0"
+              hide-details
+              disabled
+              :value="getSkillModifier(item)"
+            />
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
@@ -128,7 +129,7 @@ export default {
     },
 
     /**
-     * Get Ability Modifier
+     * Get Skill Modifier
      * @returns {Number} - ability score mod
      */
     getSkillModifier (item) {
@@ -141,7 +142,7 @@ export default {
     },
 
     /**
-     * Update Ability Score
+     * Update Skill
      * Update firebase and the store
      */
     updateSkill (skill, field, value) {
@@ -158,6 +159,10 @@ export default {
       })
     },
 
+    /**
+     * Get Ability Modifier
+     * @returns {Number} - ability score mod
+     */
     getAbilityModifier (item) {
       const base = +this.characterScores[item].base || 0
       const bonus = +this.characterScores[item].bonus || 0
@@ -173,8 +178,12 @@ export default {
   text-transform: capitalize;
 }
 .skill {
-  &:nth-child(odd) {
-    background-color: rgba(255, 255, 255, .1);
+  &:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.05);
   }
+}
+.score {
+  text-transform: capitalize;
+  opacity: .5;
 }
 </style>

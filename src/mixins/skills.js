@@ -53,9 +53,6 @@ export default {
         name: 'performance',
         abilityScore: 'charisma'
       }, {
-        name: 'performance',
-        abilityScore: 'charisma'
-      }, {
         name: 'persuasion',
         abilityScore: 'charisma'
       }]

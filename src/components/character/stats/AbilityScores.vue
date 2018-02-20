@@ -14,7 +14,7 @@
               <strong>Bonus</strong>
             </v-flex>
             <v-flex xs2>
-              <strong>Modifier</strong>
+              <strong>Mod.</strong>
             </v-flex>
           </v-layout>
 
@@ -75,7 +75,7 @@
               <strong>Bonus</strong>
             </v-flex>
             <v-flex xs2>
-              <strong>Modifier</strong>
+              <strong>Mod.</strong>
             </v-flex>
           </v-layout>
 
