@@ -51,3 +51,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.centered-input {
+  input {
+    text-align: center !important;
+  }
+}
+</style>

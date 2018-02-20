@@ -94,8 +94,8 @@
 
 <script>
 /**
- * <general></general>
- * @desc A character's general / basic info
+ * <combat></combat>
+ * @desc A character's combat related stats
  */
 import proficiencyBonus from '../../../mixins/proficiencyBonus'
 import races from '../../../mixins/game-data/races'
