@@ -130,14 +130,14 @@ export default {
         href: '/character/race',
         active: false
       }, {
-        title: 'Feats',
-        icon: 'person',
-        href: '/character/feats',
-        active: false
-      }, {
         title: 'Stats',
         icon: 'person',
         href: '/character/stats',
+        active: false
+      }, {
+        title: 'Feats',
+        icon: 'person',
+        href: '/character/feats',
         active: false
       }, {
         title: 'Armor',
