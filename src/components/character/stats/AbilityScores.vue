@@ -132,16 +132,10 @@
 import abilityScores from '../../../mixins/abilityScores'
 import proficiencyBonus from '../../../mixins/proficiencyBonus'
 import character from '../../../mixins/character'
-import CustomSelect from '../../inputs/CustomSelect'
 
 export default {
   // Name
   name: 'ability-scores',
-
-  // Components
-  components: {
-    CustomSelect
-  },
 
   // Mixins
   mixins: [
@@ -177,6 +171,10 @@ export default {
 
   // Methods
   methods: {
+    /**
+     * Get Ability Scores
+     * get a list of ability scores from firebase, store in Vuex
+     */
     async getAbilityScores () {
       try {
         const snapshot = await this.$db.ref(
@@ -191,6 +189,10 @@ export default {
       }
     },
 
+    /**
+     * Get Saving Throws
+     * get a list of saving thwos from firebase, store in Vuex
+     */
     async getSavingThrows () {
       try {
         const snapshot = await this.$db.ref(
@@ -205,6 +207,10 @@ export default {
       }
     },
 
+    /**
+     * Get Ability Modifier
+     * @returns {Number} - ability score mod
+     */
     getAbilityModifier (item) {
       const base = +this.characterScores[item].base || 0
       const bonus = +this.characterScores[item].bonus || 0
@@ -212,6 +218,10 @@ export default {
       return Math.floor((parseInt(total || 0, 0) / 2 - 5))
     },
 
+    /**
+     * Get Saving Modifier
+     * @returns {Number} - saving throw mod
+     */
     getSavingModifier (item) {
       let score = this.getAbilityModifier(item)
       score += +this.characterSaves[item].bonus || 0
@@ -222,6 +232,10 @@ export default {
       return score
     },
 
+    /**
+     * Update Ability Score
+     * Update firebase and the store
+     */
     updateAbilityScore (score, field, value) {
       const update = {}
       update[field] = value
@@ -236,6 +250,10 @@ export default {
       })
     },
 
+    /**
+     * Update Saving Throws
+     * Update firebase and the store
+     */
     updateSavingThrows (score, field, value) {
       const update = {}
       update[field] = value
