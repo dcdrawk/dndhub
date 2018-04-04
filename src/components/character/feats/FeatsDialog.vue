@@ -5,7 +5,7 @@
     transition="dialog-bottom-transition"
     :overlay="false"
     scrollable
-    @input="handleInput($event)"
+    @input="handleDialog($event)"
   >
     <v-card tile v-if="item">
       <!-- Dialog Toolbar -->
@@ -30,7 +30,7 @@
       <!-- Card Text -->
       <v-card-text>
         <v-container class="pa-0">
-          <v-layout row wrap>
+          <v-layout row wrap v-if="selectedItem">
 
             <!-- Feat Name -->
             <v-flex xs12>
@@ -196,6 +196,14 @@ export default {
     handleInput (field, value) {
       if (this.newItem) return
       this.updateItem(field, value)
+      console.log('handle dialog input')
+    },
+
+    /**
+     * Handle Dialog
+     */
+    handleDialog () {
+      this.$emit('close')
     }
   },
 

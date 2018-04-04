@@ -150,9 +150,16 @@ export default {
      * @param {Object} feature
      */
     handleShowDialog (feature) {
-      this.selectedItem = feature
-      this.newItem = false
-      this.showDialog = true
+      if (this.showDialog) {
+        // this.showDialog = false
+      } else {
+        this.showDialog = true
+        this.selectedItem = feature
+        this.newItem = false
+      }
+      console.log('show!s')
+      // this.$nextTick(() => {
+      // })
     }
   },
 
