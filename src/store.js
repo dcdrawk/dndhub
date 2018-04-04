@@ -10,9 +10,10 @@ export default new Vuex.Store({
   state: {
     user: undefined,
     gameData: {},
-    characterId: localStorage.getItem('characterId')
-      ? JSON.parse(localStorage.getItem('characterId'))
-      : undefined,
+    characterId: localStorage.getItem('characterId'),
+    // characterId: localStorage.getItem('characterId')
+    //   ? JSON.parse(localStorage.getItem('characterId'))
+    //   : undefined,
     character: undefined
   },
 
