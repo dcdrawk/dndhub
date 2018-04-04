@@ -4,7 +4,7 @@
     <v-tabs
       v-if="character"
       v-model="activeTab"
-      color="cyan"
+      color="secondary"
       dark
       fixed-tabs
       slider-color="yellow"
