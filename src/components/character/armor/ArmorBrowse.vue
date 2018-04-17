@@ -31,19 +31,6 @@
             </v-list-tile-sub-title>
 
           </v-list-tile-content>
-          <!-- Content -->
-          <v-list-tile-content>
-            <!-- Trait Name -->
-            <v-list-tile-title>
-              {{ item.name }}
-            </v-list-tile-title>
-
-            <!-- Character Details -->
-            <v-list-tile-sub-title>
-              AC: {{ item.ac }}
-            </v-list-tile-sub-title>
-
-          </v-list-tile-content>
 
           <!-- Armor Add -->
           <v-list-tile-action>

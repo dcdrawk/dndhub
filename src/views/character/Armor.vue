@@ -7,7 +7,7 @@
       color="secondary"
       dark
       fixed-tabs
-      slider-color="pink"
+      slider-color="yellow"
       class="page-tabs elevation-1"
     >
       <v-tab

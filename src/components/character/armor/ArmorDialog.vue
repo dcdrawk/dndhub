@@ -47,6 +47,20 @@
               />
             </v-flex>
 
+            <v-flex xs12>
+              <v-text-field
+                label="Armor Class"
+                type="text"
+                required
+                :readonly="isReadOnly"
+                v-model="selectedItem.ac"
+                v-validate="'required'"
+                data-vv-name="name"
+                :error-messages="errors.collect('name')"
+                @input="handleInput('name', $event)"
+              />
+            </v-flex>
+
             <!-- Armor Description -->
             <v-flex xs12>
               <v-text-field

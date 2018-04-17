@@ -17,21 +17,28 @@
           </v-flex>
         </v-layout>
 
+        <v-divider></v-divider>
+
         <v-layout
           v-for="(item, index) in skills"
           :key="index"
-          class="pa-2 skill"
+          class="pa-0 pr-3 skill"
+          wrap
         >
-          <v-flex xs6 class="pt-2">
-            <span class="stat-name">
+          <v-flex xs12 class="pa-0">
+            <v-divider class="ma-0 pa-0"></v-divider>
+          </v-flex>
+          <v-flex xs6 class="pa-3">
+            <span class="skill__name">
               {{ item.name.replace(/_/g, ' ') }}
             </span>
             <span class="score">
               ({{ item.abilityScore.slice(0, 3)}})
             </span>
           </v-flex>
-          <v-flex xs2>
+          <v-flex xs2 class="pt-2">
             <v-checkbox
+              class="skill__checkbox"
               hide-details
               color="secondary"
               :input-value="characterSkills[item.name].proficient"
@@ -40,7 +47,7 @@
               @change="updateSkill(item.name, 'proficient', $event)"
             />
           </v-flex>
-          <v-flex xs2>
+          <v-flex xs2 class="pt-2">
             <v-text-field
               type="number"
               class="pt-0"
@@ -49,7 +56,7 @@
               @input="updateSkill(item.name, 'bonus', $event)"
             />
           </v-flex>
-          <v-flex xs2>
+          <v-flex xs2 class="pt-2">
             <v-text-field
               type="number"
               class="pt-0"
@@ -174,12 +181,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.stat-name {
-  text-transform: capitalize;
-}
+// .stat-name {
+//   text-transform: capitalize;
+// }
 .skill {
   &:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  &__checkbox {
+    top: 4px;
   }
 }
 .score {
