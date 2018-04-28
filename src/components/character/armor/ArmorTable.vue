@@ -19,6 +19,8 @@
         >
           <td >{{ props.item.name }}</td>
           <td class="text-xs-right">{{ props.item.ac }}</td>
+          <td class="text-xs-right">{{ props.item.ac }}</td>
+          <td class="text-xs-right">{{ props.item.ac }}</td>
         </tr>
       </template>
     </v-data-table>
@@ -60,10 +62,17 @@ export default {
         {
           text: 'Name',
           align: 'left',
-          sortable: false,
           value: 'name'
         },
-        { text: 'ADC',
+        { text: 'AC',
+          value: 'ac',
+          align: 'right'
+        },
+        { text: 'test',
+          value: 'ac',
+          align: 'right'
+        },
+        { text: 'test',
           value: 'ac',
           align: 'right'
         }

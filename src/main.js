@@ -16,7 +16,7 @@ Vue.use(Vuetify, {
     primary: colors.red.darken1,
     secondary: colors.orange.darken1,
     accent: colors.shades.black,
-    error: colors.yellow.accent3
+    error: colors.orange.accent3
   }
 })
 Vue.use(VeeValidate)

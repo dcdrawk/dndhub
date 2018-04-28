@@ -11,6 +11,7 @@
       :item-value="itemValue"
       :value="value"
       :disabled="disabled"
+      :error-messages="errorMessages"
       @input="$emit('input', $event)"
     ></v-select>
 
@@ -62,6 +63,7 @@ export default {
     label: String,
     name: String,
     disabled: Boolean,
+    errorMessages: [Object, Array],
     showAction: {
       type: Boolean,
       default: true
