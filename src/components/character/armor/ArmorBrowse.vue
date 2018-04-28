@@ -1,53 +1,10 @@
 <template>
   <div>
-    <search-bar
-      v-model="search"
-      :items="filteredItems"
-    ></search-bar>
 
-    <!-- Character List -->
-    <v-list
-      v-if="filteredItems.length > 0"
-      two-line
-      dense
-      class="elevation-1"
-    >
-      <template v-for="(item, index) in filteredItems">
-        <!-- Traits List -->
-        <v-list-tile
-          :key="item.title"
-          @click="handleShowDialog(item)"
-        >
-          <!-- Content -->
-          <v-list-tile-content>
-            <!-- Trait Name -->
-            <v-list-tile-title>
-              {{ item.name }}
-            </v-list-tile-title>
-
-            <!-- Character Details -->
-            <v-list-tile-sub-title>
-              AC: {{ item.ac }}
-            </v-list-tile-sub-title>
-
-          </v-list-tile-content>
-
-          <!-- Armor Add -->
-          <v-list-tile-action>
-            <v-btn
-              icon
-              @click.stop="addItem(item)"
-            >
-              <v-icon>add</v-icon>
-            </v-btn>
-          </v-list-tile-action>
-        </v-list-tile>
-        <v-divider
-          v-if="index < filteredItems.length - 1"
-          :key="`${index}-divider`"
-        ></v-divider>
-      </template>
-    </v-list>
+    <armor-table
+      browse
+      :items="items"
+    />
 
     <armor-dialog
       :show-dialog="showDialog"
@@ -61,11 +18,12 @@
 
 <script>
 /**
- * <class-features></class-features>
- * @desc A character's class features
+ * <armor-browse></armor-browse>
+ * @desc Browse and equip armor
  */
 import character from '../../../mixins/character'
 import ArmorDialog from './ArmorDialog'
+import ArmorTable from './ArmorTable'
 import SearchBar from '../../inputs/SearchBar'
 
 export default {
@@ -75,6 +33,7 @@ export default {
   // Components
   components: {
     ArmorDialog,
+    ArmorTable,
     SearchBar
   },
 
@@ -89,6 +48,15 @@ export default {
       endpoint: 'armor',
       dialogEvent: 'new-feat',
       search: undefined,
+      tableHeaders: [
+        {
+          text: 'Name',
+          align: 'left',
+          sortable: false,
+          value: 'name'
+        },
+        { text: 'AC', value: 'ac' }
+      ],
       defaultItem: {
         name: '',
         description: ''

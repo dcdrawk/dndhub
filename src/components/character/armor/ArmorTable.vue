@@ -24,6 +24,7 @@
     </v-data-table>
 
     <armor-dialog
+      :browse="browse"
       :show-dialog="showDialog"
       :item="selectedItem"
       :new-item="newItem"
@@ -39,13 +40,12 @@
  * <armor-known></armor-known>
  * @desc A character's known armor
  */
-import character from '../../../mixins/character'
 import ArmorDialog from './ArmorDialog'
 import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
-  name: 'armor-known',
+  name: 'armor-table',
 
   // Components
   components: {
@@ -53,16 +53,9 @@ export default {
     SearchBar
   },
 
-  // Mixins
-  mixins: [
-    character
-  ],
-
   // Data
   data () {
     return {
-      endpoint: 'armor',
-      dialogEvent: 'new-feat',
       tableHeaders: [
         {
           text: 'Name',
@@ -70,25 +63,28 @@ export default {
           sortable: false,
           value: 'name'
         },
-        { text: 'AC', value: 'ac' }
+        { text: 'ADC',
+          value: 'ac',
+          align: 'right'
+        }
       ],
-      defaultItem: {
-        name: '',
-        description: ''
-      },
-      search: undefined,
-      newItem: false,
-      items: undefined,
       selectedItem: undefined,
-      showDialog: false
+      newItem: false,
+      showDialog: false,
+      search: undefined
     }
   },
 
   // Computed
   computed: {
+    // items () {
+    //   return this.$store.state.gameData.armor.map((item) => {
+    //     return item
+    //   })
+    // },
     filteredItems () {
-      if (!this.items) return
-      const array = this.items.filter((item) => {
+      const array = this.items
+      return array.filter((item) => {
         return this.search
           ? item.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1
           : true
@@ -97,31 +93,17 @@ export default {
         if (a.name > b.name) return 1
         return 0
       })
-      return array
     }
+  },
+
+  // Props
+  props: {
+    items: Array,
+    browse: Boolean
   },
 
   // Methods
   methods: {
-    /**
-     * Get Items
-     * retrieve the list of items
-     */
-    getItems () {
-      this.$db.ref(
-        `${this.endpoint}/${this.characterId}`
-      ).on('value', (snapshot) => {
-        const value = snapshot.val()
-
-        const items = Object.values(value || [])
-          .map((item, index) => {
-            item.id = Object.keys(snapshot.val())[index]
-            return item
-          })
-        this.items = items
-      })
-    },
-
     /**
      * Adds the item to firebase
      * @param {Object} - item
@@ -160,18 +142,18 @@ export default {
       // this.$nextTick(() => {
       // })
     }
-  },
+  }
 
   // Created
-  created () {
-    this.getItems()
-    // Listen for events from the parent component
-    this.$bus.$on(this.dialogEvent, () => {
-      this.selectedItem = {...this.defaultItem}
-      this.newItem = true
-      this.showDialog = true
-    })
-  }
+  // created () {
+  //   this.getItems()
+  //   // Listen for events from the parent component
+  //   this.$bus.$on(this.dialogEvent, () => {
+  //     this.selectedItem = {...this.defaultItem}
+  //     this.newItem = true
+  //     this.showDialog = true
+  //   })
+  // }
 }
 </script>
 
