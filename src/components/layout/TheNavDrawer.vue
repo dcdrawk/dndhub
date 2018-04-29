@@ -31,20 +31,26 @@
           <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
         </v-list-tile-content>
       </v-list-tile>
-
-      <v-divider/>
+    </v-list>
+      <v-divider class="mb-2"/>
+    <v-list subheader>
+      <!-- <v-subheader>Selected Character</v-subheader> -->
 
       <!-- Character Menu -->
       <v-list-tile
+        class="mb-2"
         v-if="user && character"
       >
         <v-list-tile-content>
 
-        <!-- Nav Drawer List Title -->
-        <v-list-tile-title class="title">
-          {{ character.name }}
-        </v-list-tile-title>
-        </v-list-tile-content>
+          <!-- Nav Drawer List Title -->
+          <v-list-tile-sub-title>
+            Selected Character
+          </v-list-tile-sub-title>
+          <v-list-tile-title class="title">
+            {{ character.name }}
+          </v-list-tile-title>
+          </v-list-tile-content>
       </v-list-tile>
 
       <v-list-tile

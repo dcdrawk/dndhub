@@ -13,10 +13,10 @@ import colors from 'vuetify/es5/util/colors'
 Vue.config.productionTip = false
 Vue.use(Vuetify, {
   theme: {
-    primary: colors.indigo.base,
-    secondary: colors.blue.darken1,
+    primary: colors.red.darken1,
+    secondary: colors.orange.darken1,
     accent: colors.shades.black,
-    error: colors.red.accent3
+    error: colors.orange.accent3
   }
 })
 Vue.use(VeeValidate)

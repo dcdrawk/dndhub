@@ -11,9 +11,6 @@ export default new Vuex.Store({
     user: undefined,
     gameData: {},
     characterId: localStorage.getItem('characterId'),
-    // characterId: localStorage.getItem('characterId')
-    //   ? JSON.parse(localStorage.getItem('characterId'))
-    //   : undefined,
     character: undefined
   },
 
@@ -50,7 +47,7 @@ export default new Vuex.Store({
       if (id === undefined) {
         localStorage.removeItem('characterId')
       } else {
-        localStorage.setItem('characterId', JSON.stringify(id))
+        localStorage.setItem('characterId', id)
       }
     },
 

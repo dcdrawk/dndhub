@@ -22,7 +22,7 @@
         <!-- Dialog Title -->
         <v-toolbar-title>
           <span v-if="newItem">New</span>
-           Feat
+           Armor
         </v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
@@ -31,14 +31,13 @@
       <v-card-text>
         <v-container class="pa-0">
           <v-layout row wrap v-if="selectedItem">
-
-            <!-- Feat Name -->
+            <!-- Armor Name -->
             <v-flex xs12>
               <v-text-field
                 label="Name"
                 type="text"
                 required
-                :readonly="isReadOnly"
+                :readonly="browse"
                 v-model="selectedItem.name"
                 v-validate="'required'"
                 data-vv-name="name"
@@ -47,17 +46,71 @@
               />
             </v-flex>
 
-            <!-- Feat Description -->
+            <v-flex xs12>
+              <v-text-field
+                label="Armor Class"
+                type="text"
+                required
+                :readonly="browse"
+                v-model="selectedItem.ac"
+                v-validate="'required'"
+                data-vv-name="ac"
+                :error-messages="errors.collect('ac')"
+                @input="handleInput('ac', $event)"
+              />
+            </v-flex>
+
+            <v-flex xs12>
+              <v-text-field
+                label="Armor Type"
+                type="text"
+                :readonly="browse"
+                v-model="selectedItem.armorType"
+                @input="handleInput('armorType', $event)"
+              />
+            </v-flex>
+
+            <v-flex xs12>
+              <v-text-field
+                label="Weight"
+                type="text"
+                :read-only="browse"
+                v-model="selectedItem.weight"
+                @input="handleInput('weight', $event)"
+              />
+            </v-flex>
+
+            <v-flex xs12>
+              <v-text-field
+                label="Cost"
+                type="text"
+                :readonly="browse"
+                v-model="selectedItem.cost"
+                @input="handleInput('cost', $event)"
+              />
+            </v-flex>
+
+            <v-flex xs12>
+              <v-select
+                label="Properties"
+                :readonly="browse"
+                :value="selectedItem.properties || []"
+                tags
+                chips
+                deletable-chips
+                @input="handleInput('properties', $event)"
+              />
+            </v-flex>
+
+            <!-- Armor Description -->
             <v-flex xs12>
               <v-text-field
                 label="Description"
                 type="text"
                 rows="10"
-                required
                 multi-line
-                :readonly="isReadOnly"
+                :readonly="browse"
                 v-model="selectedItem.description"
-                v-validate="'required'"
                 data-vv-name="description"
                 :error-messages="errors.collect('description')"
                 @input="handleInput('description', $event)"
@@ -77,14 +130,15 @@
                 Add
               </v-btn>
 
-               <v-btn
+              <v-btn
                 v-if="!browse && !newItem"
-                flat
-                icon
+                block
+                color="warning"
+                :disabled="!isFormValid"
                 :loading="loading"
                 @click="deleteItem()"
               >
-                <v-icon>delete</v-icon>
+                Remove {{ newItem }}
               </v-btn>
             </v-flex>
 
@@ -104,7 +158,7 @@ import debounce from 'debounce'
 
 export default {
   // Name
-  name: 'feats-dialog',
+  name: 'armor-dialog',
 
   // Components
   components: {
@@ -130,10 +184,11 @@ export default {
     return {
       selectedItem: {
         name: undefined,
+        ac: undefined,
         description: undefined
       },
       loading: false,
-      endpoint: 'feats'
+      endpoint: 'armor'
     }
   },
 
@@ -164,8 +219,10 @@ export default {
   watch: {
     showDialog (newValue, oldValue) {
       if (newValue) {
-        this.$validator.reset()
+        // this.$validator.reset()
         this.selectedItem = this.item
+      } else {
+        this.$validator.reset()
       }
     }
   },
@@ -178,7 +235,7 @@ export default {
     deleteItem () {
       this.$db.ref(this.firebaseURL).remove()
       this.$emit('close')
-      this.$bus.$emit('toast', 'Race Trait Removed')
+      this.$bus.$emit('toast', `${this.selectedItem.name} Removed`)
     },
 
     /**
@@ -209,7 +266,7 @@ export default {
 
   // Mounted
   mounted () {
-    this.updateClassFeature = debounce(this.updateClassFeature, 500)
+    this.updateClassArmorure = debounce(this.updateClassArmorure, 500)
   }
 }
 </script>

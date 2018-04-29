@@ -1,9 +1,9 @@
 <template>
   <div>
     <v-card v-if="characterScores" class="mb-1">
-      <v-card-text class="pa-1">
-        <v-container grid-list-sm>
-          <v-layout row wrap class="stat-header mb-2">
+      <v-card-text class="pa-0">
+        <v-container grid-list-sm class="pa-0">
+          <v-layout row wrap class="stat-header pt-2 pb-2">
             <v-flex xs6>
               <strong>Stat</strong>
             </v-flex>
@@ -21,10 +21,15 @@
           <v-layout
             v-for="(item, key, index) in abilityScores"
             :key="index"
-            class="mb-2"
+            class="pa-0 stat"
+            wrap
           >
-            <v-flex xs6 class="pt-2">
-              <span class="stat-name">
+            <v-flex xs12 class="pa-0 ma-0">
+              <v-divider class="pa-0 ma-0"></v-divider>
+            </v-flex>
+
+            <v-flex xs6 class="pr-2 pt-2 pb-2">
+              <span class="stat__name">
                 {{ item }}
               </span>
             </v-flex>
@@ -61,7 +66,7 @@
     </v-card>
 
     <v-card v-if="characterSaves">
-      <v-card-text class="pa-1">
+      <v-card-text class="pa-0">
         <h3 class="pl-1 mb-2 mt-2">Saving Throws</h3>
         <v-container grid-list-sm>
           <v-layout row wrap class="stat-header mb-2">
@@ -82,10 +87,10 @@
           <v-layout
             v-for="(item, key, index) in abilityScores"
             :key="index"
-            class="mb-2"
+            class="pt-1 pb-1 stat"
           >
             <v-flex xs6 class="pt-2">
-              <span class="stat-name">
+              <span class="stat__name">
                 {{ item }}
               </span>
             </v-flex>
@@ -272,7 +277,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.stat-name {
-  text-transform: capitalize;
+.stat {
+  &:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  &__name {
+    text-transform: capitalize;
+  }
 }
 </style>

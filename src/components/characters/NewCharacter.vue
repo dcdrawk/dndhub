@@ -67,7 +67,7 @@
             <v-flex xs12 md6>
               <custom-select
                 label="Race"
-                :value="character.race"
+                v-model="character.race"
                 :items="races"
                 item-text="name"
                 item-value="name"
@@ -76,7 +76,6 @@
                 v-validate="'required'"
                 data-vv-name="race"
                 :error-messages="errors.collect('race')"
-                @input="character.race = $event"
                 @customize="handleCustomize('race')"
               />
             </v-flex>
@@ -85,12 +84,11 @@
               <custom-select
                 :disabled="!character.race"
                 label="Subrace"
-                :value="character.subrace"
+                v-model="character.subrace"
                 :items="subraces"
                 item-text="name"
                 item-value="name"
                 :custom="character.custom.subrace"
-                @input="character.subrace = $event"
                 @customize="handleCustomize('subrace')"
               />
             </v-flex>
@@ -98,7 +96,7 @@
             <v-flex xs12 md6>
               <custom-select
                 label="Class"
-                :value="characterClasses[0].name"
+                v-model="characterClasses[0].name"
                 :items="classes"
                 item-text="name"
                 item-value="name"
@@ -106,7 +104,7 @@
                 v-validate="'required'"
                 data-vv-name="class"
                 :error-messages="errors.collect('class')"
-                @input="characterClasses[0].name = $event"
+                @input="validateField('class')"
                 @customize="customizeClass('name')"
               />
             </v-flex>
@@ -115,12 +113,11 @@
               <custom-select
                 :disabled="!characterClasses[0].name"
                 :label="getSubclassLabel() || 'Subclass'"
-                :value="characterClasses[0].subclass"
+                v-model="characterClasses[0].subclass"
                 :items="getSubclassOptions(characterClasses[0].name)"
                 item-text="title"
                 item-value="title"
                 :custom="characterClasses[0].custom.subclass"
-                @input="characterClasses[0].subclass = $event"
                 @customize="customizeClass('subclass')"
               />
             </v-flex>
@@ -219,8 +216,8 @@ export default {
           skills: '',
           other: ''
         },
-        // class: undefined,
-        // subclass: undefined,
+        class: undefined,
+        subclass: undefined,
         custom: {
           init: true
           // multiclass: [{
@@ -263,15 +260,17 @@ export default {
     }
   },
 
-  // Watch
-  watch: {
-    watchProperty (newValue, oldValue) {
-      return newValue
-    }
-  },
-
   // Methods
   methods: {
+    /**
+     * Handle the input validation
+     */
+    // handleValidation (field) {
+    //   this.$nextTick(() => {
+    //     this.$validator.validate(field)
+    //   })
+    // },
+
     /**
      * Handle the customize event
      */

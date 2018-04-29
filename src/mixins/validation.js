@@ -13,6 +13,17 @@ export default {
     },
 
     /**
+     * @function validateField
+     * @desc wait for nextTick and validate a specific field
+     * @param {string} field - name of the input field
+     */
+    validateField (field) {
+      this.$nextTick(() => {
+        this.$validator.validate(field)
+      })
+    },
+
+    /**
      * @function validate
      * @desc validate all fields
      */
@@ -22,10 +33,11 @@ export default {
         if (result) {
           return true
         } else {
-          throw new Error('Validation failed')
+          console.warn('Validation failed')
+          // throw new Error('Validation failed')
         }
       } catch (error) {
-        throw new Error('Validation failed')
+        console.warn(error)
       }
     }
   }

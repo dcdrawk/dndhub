@@ -51,21 +51,21 @@
 
 <script>
 /**
- * <race></race>
- * @desc A character's general / basic info
+ * <armor></armor>
+ * @desc A character's armor, tabs for equipped and browsing
  */
 import character from '../../mixins/character'
-import FeatsBrowse from '../../components/character/feats/FeatsBrowse'
-import FeatsKnown from '../../components/character/feats/FeatsKnown'
+import ArmorBrowse from '../../components/character/armor/ArmorBrowse'
+import ArmorEquipped from '../../components/character/armor/ArmorEquipped'
 
 export default {
   // Name
-  name: 'feats',
+  name: 'armor',
 
   // Components
   components: {
-    FeatsKnown,
-    FeatsBrowse
+    ArmorBrowse,
+    ArmorEquipped
   },
 
   // Mixins
@@ -79,12 +79,15 @@ export default {
       activeTab: undefined,
       tabs: [{
         title: 'Known',
-        component: 'feats-known',
+        component: 'armor-equipped',
         showFab: true,
-        fabAction: () => { this.$bus.$emit('new-feat') }
+        fabAction: () => {
+          console.log('fab action')
+          this.$bus.$emit('new-armor')
+        }
       }, {
         title: 'Browse',
-        component: 'feats-browse',
+        component: 'armor-browse',
         showFab: false
       }]
     }
