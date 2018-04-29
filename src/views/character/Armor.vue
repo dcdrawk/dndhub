@@ -81,7 +81,10 @@ export default {
         title: 'Known',
         component: 'armor-equipped',
         showFab: true,
-        fabAction: () => { this.$bus.$emit('new-armor') }
+        fabAction: () => {
+          console.log('fab action')
+          this.$bus.$emit('new-armor')
+        }
       }, {
         title: 'Browse',
         component: 'armor-browse',

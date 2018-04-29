@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-card-text class="pl-3 pr-3 pt-0 pb-0">
+    <v-card-text class="pl-3 pr-3 pt-0 pb-0 grey lighten-4">
       <v-text-field
         class="pt-2 pb-2"
         clearable

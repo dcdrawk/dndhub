@@ -3,27 +3,70 @@
     <search-bar
       v-model="search"
     />
-    <v-data-table
-      :headers="tableHeaders"
-      :items="items"
-      :search="search"
-      hide-actions
+
+    <p
+      v-if="filteredItems.length === 0"
+      class="pt-3 text-xs-center"
+    >
+      No Items Found
+    </p>
+
+    <!-- Armor List -->
+    <v-list
+      v-if="filteredItems.length > 0"
+      two-line
+      dense
       class="elevation-1"
     >
-      <template
-        slot="items"
-        slot-scope="props"
-      >
-        <tr
-          @click="handleShowDialog(props.item)"
+      <template v-for="(item, index) in filteredItems">
+        <!-- List Tile -->
+        <v-list-tile
+          class="list-tile"
+          :key="item.title"
+          @click="handleShowDialog(item)"
         >
-          <td >{{ props.item.name }}</td>
-          <td class="text-xs-right">{{ props.item.ac }}</td>
-          <td class="text-xs-right">{{ props.item.ac }}</td>
-          <td class="text-xs-right">{{ props.item.ac }}</td>
-        </tr>
+          <!-- Content -->
+          <v-list-tile-content>
+            <!-- Name -->
+            <v-list-tile-title>
+              {{ item.name }}
+            </v-list-tile-title>
+            <!-- AC -->
+            <v-list-tile-sub-title>
+              AC: {{ item.ac }}
+            </v-list-tile-sub-title>
+          </v-list-tile-content>
+
+          <v-list-tile-content>
+            <!-- Trait Name -->
+            <v-list-tile-title class="right-text">
+              Type: {{ item.armorType }}
+            </v-list-tile-title>
+            <!-- Character Details -->
+            <v-list-tile-sub-title class="right-text">
+              Weight: {{ item.weight }}
+              <!-- Cost: {{ item.cost }} -->
+            </v-list-tile-sub-title>
+
+          </v-list-tile-content>
+
+          <!-- Feat Add -->
+          <v-list-tile-action v-if="browse">
+            <v-btn
+              icon
+              color="primary"
+              @click.stop="addItem(item)"
+            >
+              <v-icon>add</v-icon>
+            </v-btn>
+          </v-list-tile-action>
+        </v-list-tile>
+        <v-divider
+          v-if="index < filteredItems.length - 1"
+          :key="`${index}-divider`"
+        ></v-divider>
       </template>
-    </v-data-table>
+    </v-list>
 
     <armor-dialog
       :browse="browse"
@@ -33,7 +76,6 @@
       @add-item="handleAddItem($event)"
       @close="showDialog = false"
     />
-
   </div>
 </template>
 
@@ -42,6 +84,7 @@
  * <armor-known></armor-known>
  * @desc A character's known armor
  */
+import character from '../../../mixins/character'
 import ArmorDialog from './ArmorDialog'
 import SearchBar from '../../inputs/SearchBar'
 
@@ -55,9 +98,16 @@ export default {
     SearchBar
   },
 
+  // Mixins
+  mixins: [
+    character
+  ],
+
   // Data
   data () {
     return {
+      endpoint: 'armor',
+      dialogEvent: 'new-armor',
       tableHeaders: [
         {
           text: 'Name',
@@ -72,7 +122,7 @@ export default {
           value: 'ac',
           align: 'right'
         },
-        { text: 'test2',
+        { text: 'test',
           value: 'ac',
           align: 'right'
         }
@@ -86,11 +136,6 @@ export default {
 
   // Computed
   computed: {
-    // items () {
-    //   return this.$store.state.gameData.armor.map((item) => {
-    //     return item
-    //   })
-    // },
     filteredItems () {
       const array = this.items
       return array.filter((item) => {
@@ -119,6 +164,7 @@ export default {
      */
     addItem (item) {
       console.log('armor known add item...')
+      console.log(`${this.endpoint}/${this.characterId}`)
       this.$db.ref(`${this.endpoint}/${this.characterId}`)
         .push(item)
       this.$bus.$emit('toast', `Added the ${item.name} Armor`)
@@ -140,34 +186,34 @@ export default {
      * @param {Object} feature
      */
     handleShowDialog (feature) {
-      console.log('show!s')
       if (this.showDialog) {
-        // this.showDialog = false
       } else {
         this.showDialog = true
-        this.selectedItem = feature
-        this.newItem = false
+        this.selectedItem = feature || {}
+        this.newItem = typeof feature === 'undefined'
       }
-      // this.$nextTick(() => {
-      // })
     }
-  }
+  },
 
   // Created
-  // created () {
-  //   this.getItems()
-  //   // Listen for events from the parent component
-  //   this.$bus.$on(this.dialogEvent, () => {
-  //     this.selectedItem = {...this.defaultItem}
-  //     this.newItem = true
-  //     this.showDialog = true
-  //   })
-  // }
+  created () {
+    // Listen for events from the parent component
+    this.$bus.$on(this.dialogEvent, () => {
+      if (this.browse) return
+      // this.newItem = true
+      this.handleShowDialog()
+    })
+  },
+
+  destroyed () {
+    this.$bus.$off(this.dialogEvent)
+  }
 }
 </script>
 
 <style scoped lang="scss">
-.tab-content {
-  min-height: 100vh;
+.right-text {
+  color: rgba(0,0,0,.54);
+  text-align: right;
 }
 </style>

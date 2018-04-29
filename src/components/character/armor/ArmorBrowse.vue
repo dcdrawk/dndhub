@@ -1,18 +1,11 @@
 <template>
   <div>
 
-    <armor-table
+    <armor-list
       browse
       :items="items"
     />
 
-    <armor-dialog
-      :show-dialog="showDialog"
-      :item="selectedItem"
-      :browse="true"
-      @add-item="handleAddItem()"
-      @close="showDialog = false"
-    />
   </div>
 </template>
 
@@ -24,6 +17,7 @@
 import character from '../../../mixins/character'
 import ArmorDialog from './ArmorDialog'
 import ArmorTable from './ArmorTable'
+import ArmorList from './ArmorList'
 import SearchBar from '../../inputs/SearchBar'
 
 export default {
@@ -34,6 +28,7 @@ export default {
   components: {
     ArmorDialog,
     ArmorTable,
+    ArmorList,
     SearchBar
   },
 
@@ -93,29 +88,29 @@ export default {
      * Push the item to firebase
      * @param {Object} - item
      */
-    addItem (item) {
-      this.$db.ref(`${this.endpoint}/${this.characterId}`)
-        .push(item)
-      this.$bus.$emit('toast', `Added the ${item.name} Armor`)
-    },
+    // addItem (item) {
+    //   this.$db.ref(`${this.endpoint}/${this.characterId}`)
+    //     .push(item)
+    //   this.$bus.$emit('toast', `Added the ${item.name} Armor`)
+    // },
 
     /**
      * Handing adding the item
      */
-    handleAddItem () {
-      this.addItem(this.selectedItem)
-      this.showDialog = false
-    },
+    // handleAddItem () {
+    //   this.addItem(this.selectedItem)
+    //   this.showDialog = false
+    // },
 
     /**
      * Handle Show Dialog
      * Select the item, and show the dialog
      * @param {Object} - item
      */
-    handleShowDialog (item) {
-      this.selectedItem = item
-      this.showDialog = true
-    }
+    // handleShowDialog (item) {
+    //   this.selectedItem = item
+    //   this.showDialog = true
+    // }
   }
 }
 </script>

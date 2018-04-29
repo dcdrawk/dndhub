@@ -1,36 +1,9 @@
 <template>
   <div v-if="filteredItems">
-    <search-bar
-      v-model="search"
-    />
-    <v-data-table
-      :headers="tableHeaders"
+    <armor-list
       :items="items"
-      :search="search"
-      hide-actions
-      class="elevation-1"
-    >
-      <template
-        slot="items"
-        slot-scope="props"
-      >
-        <tr
-          @click="handleShowDialog(props.item)"
-        >
-          <td >{{ props.item.name }}</td>
-          <td class="text-xs-right">{{ props.item.ac }}</td>
-        </tr>
-      </template>
-    </v-data-table>
-
-    <armor-dialog
-      :show-dialog="showDialog"
-      :item="selectedItem"
-      :new-item="newItem"
-      @add-item="handleAddItem($event)"
-      @close="showDialog = false"
+      @select="handleShowDialog($event)"
     />
-
   </div>
 </template>
 
@@ -41,15 +14,17 @@
  */
 import character from '../../../mixins/character'
 import ArmorDialog from './ArmorDialog'
+import ArmorList from './ArmorList'
 import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
-  name: 'armor-known',
+  name: 'armor-equipped',
 
   // Components
   components: {
     ArmorDialog,
+    ArmorList,
     SearchBar
   },
 
@@ -62,25 +37,25 @@ export default {
   data () {
     return {
       endpoint: 'armor',
-      dialogEvent: 'new-feat',
-      tableHeaders: [
-        {
-          text: 'Name',
-          align: 'left',
-          sortable: false,
-          value: 'name'
-        },
-        { text: 'AC', value: 'ac' }
-      ],
-      defaultItem: {
-        name: '',
-        description: ''
-      },
-      search: undefined,
+      // dialogEvent: 'new-feat',
+      // tableHeaders: [
+      //   {
+      //     text: 'Name',
+      //     align: 'left',
+      //     sortable: false,
+      //     value: 'name'
+      //   },
+      //   { text: 'AC', value: 'ac' }
+      // ],
+      // defaultItem: {
+      //   name: '',
+      //   description: ''
+      // },
+      // search: undefined,
       newItem: false,
-      items: undefined,
-      selectedItem: undefined,
-      showDialog: false
+      items: undefined
+      // selectedItem: undefined,
+      // showDialog: false
     }
   },
 
@@ -141,36 +116,36 @@ export default {
       console.log('known add item')
       this.addItem(item)
       this.showDialog = false
-    },
+    }
 
     /**
      * Handle Show Dialog
      * Select the feature and show the dialog
      * @param {Object} feature
      */
-    handleShowDialog (feature) {
-      console.log('show!s')
-      if (this.showDialog) {
-        // this.showDialog = false
-      } else {
-        this.showDialog = true
-        this.selectedItem = feature
-        this.newItem = false
-      }
-      // this.$nextTick(() => {
-      // })
-    }
+    // handleShowDialog (feature) {
+    //   console.log('show!s')
+    //   if (this.showDialog) {
+    //     // this.showDialog = false
+    //   } else {
+    //     this.showDialog = true
+    //     this.selectedItem = feature
+    //     this.newItem = false
+    //   }
+    //   // this.$nextTick(() => {
+    //   // })
+    // }
   },
 
   // Created
   created () {
     this.getItems()
-    // Listen for events from the parent component
-    this.$bus.$on(this.dialogEvent, () => {
-      this.selectedItem = {...this.defaultItem}
-      this.newItem = true
-      this.showDialog = true
-    })
+    // // Listen for events from the parent component
+    // this.$bus.$on(this.dialogEvent, () => {
+    //   this.selectedItem = {...this.defaultItem}
+    //   this.newItem = true
+    //   this.showDialog = true
+    // })
   }
 }
 </script>
