@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-card v-if="characterScores" class="mb-1">
+    <v-card v-if="characterScores">
       <v-card-text class="pa-0">
         <v-container grid-list-sm class="pa-0">
           <v-layout row wrap class="stat-header pt-2 pb-2">
-            <v-flex xs6>
+            <v-flex xs6 class="pl-3">
               <strong>Stat</strong>
             </v-flex>
             <v-flex xs2>
@@ -28,7 +28,7 @@
               <v-divider class="pa-0 ma-0"></v-divider>
             </v-flex>
 
-            <v-flex xs6 class="pr-2 pt-2 pb-2">
+            <v-flex xs6 class="pl-3 pt-2 pb-2">
               <span class="stat__name">
                 {{ item }}
               </span>
@@ -65,12 +65,14 @@
       </v-card-text>
     </v-card>
 
+    <v-divider/>
+
     <v-card v-if="characterSaves">
       <v-card-text class="pa-0">
-        <h3 class="pl-1 mb-2 mt-2">Saving Throws</h3>
+        <h3 class="pl-3 mb-2 pt-2">Saving Throws</h3>
         <v-container grid-list-sm>
           <v-layout row wrap class="stat-header mb-2">
-            <v-flex xs6>
+            <v-flex xs6 class="pl-3">
               <strong>Stat</strong>
             </v-flex>
             <v-flex xs2>
@@ -87,9 +89,14 @@
           <v-layout
             v-for="(item, key, index) in abilityScores"
             :key="index"
-            class="pt-1 pb-1 stat"
+            class="stat"
+            row
+            wrap
           >
-            <v-flex xs6 class="pt-2">
+            <v-flex xs12 class="pa-0 ma-0">
+              <v-divider class="pa-0 ma-0"></v-divider>
+            </v-flex>
+            <v-flex xs6 class="pl-3 pt-2">
               <span class="stat__name">
                 {{ item }}
               </span>

@@ -1,50 +1,49 @@
 <template>
   <div>
-    <v-card flat class="mb-1">
+    <v-card flat>
       <v-card-text>
+        <v-container grid-list-md>
+          <v-layout row wrap>
+            <v-flex xs12>
+              <v-text-field
+                label="Proficiency Bonus"
+                type="text"
+                :value="proficiencyBonus"
+                persistent-hint
+                disabled
+              />
+            </v-flex>
+            <v-flex xs12>
+              <v-text-field
+                label="Armor Class"
+                type="number"
+                :value="character.armorClass"
+              />
 
-      <v-container grid-list-md>
-        <v-layout row wrap>
-          <v-flex xs12>
-            <v-text-field
-              label="Proficiency Bonus"
-              type="text"
-              :value="proficiencyBonus"
-              persistent-hint
-              disabled
-            />
-          </v-flex>
-          <v-flex xs12>
-            <v-text-field
-              label="Armor Class"
-              type="number"
-              :value="character.armorClass"
-            />
+            </v-flex>
 
-          </v-flex>
+            <v-flex xs6>
+              <v-text-field
+                label="Initiative"
+                type="number"
+                :value="character.initiative"
+              />
+            </v-flex>
 
-          <v-flex xs6>
-            <v-text-field
-              label="Initiative"
-              type="number"
-              :value="character.initiative"
-            />
-          </v-flex>
+            <v-flex xs6>
+              <v-text-field
+                label="Speed"
+                type="number"
+                :value="character.speed"
+              />
+            </v-flex>
 
-          <v-flex xs6>
-            <v-text-field
-              label="Speed"
-              type="number"
-              :value="character.speed"
-            />
-          </v-flex>
-
-        </v-layout>
-        <!-- <v-divider/> -->
-        <!-- <h3>Health</h3> -->
-      </v-container>
+          </v-layout>
+        </v-container>
       </v-card-text>
     </v-card>
+
+    <v-divider/>
 
     <v-card>
       <v-card-text>

@@ -218,11 +218,11 @@ export default {
   // Watch
   watch: {
     showDialog (newValue, oldValue) {
+      this.$validator.reset()
       if (newValue) {
-        // this.$validator.reset()
-        this.selectedItem = this.item
-      } else {
-        this.$validator.reset()
+        this.$nextTick(() => {
+          this.selectedItem = this.item
+        })
       }
     }
   },
