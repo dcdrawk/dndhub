@@ -81,8 +81,8 @@
 
 <script>
 /**
- * <armor-known></armor-known>
- * @desc A character's known armor
+ * <armor-list></armor-list>
+ * @desc A list of armor
  */
 import character from '../../../mixins/character'
 import ArmorDialog from './ArmorDialog'
@@ -90,7 +90,7 @@ import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
-  name: 'armor-table',
+  name: 'armor-list',
 
   // Components
   components: {

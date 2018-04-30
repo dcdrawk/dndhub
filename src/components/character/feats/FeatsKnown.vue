@@ -87,42 +87,6 @@ export default {
           })
         this.items = items
       })
-    },
-
-    /**
-     * Adds the item to firebase
-     * @param {Object} - item
-     */
-    addItem (item) {
-      console.log('feats known add item...')
-      this.$db.ref(`${this.endpoint}/${this.characterId}`)
-        .push(item)
-      this.$bus.$emit('toast', `Added the ${item.name} Feat`)
-    },
-
-    /**
-     * Adds the item from the dialog
-     * @param {Object} - item
-     */
-    handleAddItem (item) {
-      console.log('known add item')
-      this.addItem(item)
-      this.showDialog = false
-    },
-
-    /**
-     * Handle Show Dialog
-     * Select the feature and show the dialog
-     * @param {Object} feature
-     */
-    handleShowDialog (feature) {
-      if (this.showDialog) {
-        // this.showDialog = false
-      } else {
-        this.showDialog = true
-        this.selectedItem = feature
-        this.newItem = false
-      }
     }
   },
 
@@ -130,11 +94,11 @@ export default {
   created () {
     this.getItems()
     // Listen for events from the parent component
-    this.$bus.$on(this.dialogEvent, () => {
-      this.selectedItem = {...this.defaultItem}
-      this.newItem = true
-      this.showDialog = true
-    })
+    // this.$bus.$on(this.dialogEvent, () => {
+    //   this.selectedItem = {...this.defaultItem}
+    //   this.newItem = true
+    //   this.showDialog = true
+    // })
   }
 }
 </script>

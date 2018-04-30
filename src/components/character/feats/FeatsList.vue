@@ -95,25 +95,6 @@ export default {
     return {
       endpoint: 'feats',
       dialogEvent: 'new-feat',
-      tableHeaders: [
-        {
-          text: 'Name',
-          align: 'left',
-          value: 'name'
-        },
-        { text: 'AC',
-          value: 'ac',
-          align: 'right'
-        },
-        { text: 'test',
-          value: 'ac',
-          align: 'right'
-        },
-        { text: 'test',
-          value: 'ac',
-          align: 'right'
-        }
-      ],
       selectedItem: undefined,
       newItem: false,
       showDialog: false,
