@@ -11,15 +11,16 @@
                 :value="proficiencyBonus"
                 persistent-hint
                 disabled
+                @input="updateCharacter('proficiencyBonus', $event)"
               />
             </v-flex>
             <v-flex xs12>
               <v-text-field
                 label="Armor Class"
                 type="number"
-                :value="character.armorClass"
+                :value="character.ac"
+                @input="updateCharacter('ac', $event)"
               />
-
             </v-flex>
 
             <v-flex xs6>
@@ -27,6 +28,7 @@
                 label="Initiative"
                 type="number"
                 :value="character.initiative"
+                @input="updateCharacter('initiative', $event)"
               />
             </v-flex>
 
@@ -35,6 +37,7 @@
                 label="Speed"
                 type="number"
                 :value="character.speed"
+                @input="updateCharacter('speed', $event)"
               />
             </v-flex>
 
