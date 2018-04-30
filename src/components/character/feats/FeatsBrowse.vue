@@ -1,60 +1,8 @@
 <template>
   <div>
-    <search-bar
-      v-model="search"
-      :items="filteredItems"
-    ></search-bar>
-
-    <!-- Character List -->
-    <v-list
-      v-if="filteredItems.length > 0"
-      two-line
-      dense
-      class="elevation-1"
-    >
-      <template v-for="(item, index) in filteredItems">
-        <!-- Traits List -->
-        <v-list-tile
-          :key="item.title"
-          @click="handleShowDialog(item)"
-        >
-          <!-- Content -->
-          <v-list-tile-content>
-            <!-- Trait Name -->
-            <v-list-tile-title>
-              {{ item.name }}
-            </v-list-tile-title>
-
-            <!-- Character Details -->
-            <v-list-tile-sub-title>
-              {{ item.description }}
-            </v-list-tile-sub-title>
-
-          </v-list-tile-content>
-
-          <!-- Feat Add -->
-          <v-list-tile-action>
-            <v-btn
-              icon
-              @click.stop="addItem(item)"
-            >
-              <v-icon>add</v-icon>
-            </v-btn>
-          </v-list-tile-action>
-        </v-list-tile>
-        <v-divider
-          v-if="index < filteredItems.length - 1"
-          :key="`${index}-divider`"
-        ></v-divider>
-      </template>
-    </v-list>
-
-    <feats-dialog
-      :show-dialog="showDialog"
-      :item="selectedItem"
-      :browse="true"
-      @add-item="handleAddItem()"
-      @close="showDialog = false"
+    <feats-list
+      browse
+      :items="items"
     />
   </div>
 </template>
@@ -66,6 +14,7 @@
  */
 import character from '../../../mixins/character'
 import FeatsDialog from './FeatsDialog'
+import FeatsList from './FeatsList'
 import SearchBar from '../../inputs/SearchBar'
 
 export default {
@@ -75,6 +24,7 @@ export default {
   // Components
   components: {
     FeatsDialog,
+    FeatsList,
     SearchBar
   },
 

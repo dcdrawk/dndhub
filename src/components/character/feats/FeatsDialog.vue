@@ -31,7 +31,7 @@
       <v-card-text>
         <v-container class="pa-0">
           <v-layout row wrap v-if="selectedItem">
-
+            {{ selectedItem.name }}
             <!-- Feat Name -->
             <v-flex xs12>
               <v-text-field
@@ -48,7 +48,7 @@
             </v-flex>
 
             <!-- Feat Description -->
-            <v-flex xs12>
+            <!-- <v-flex xs12>
               <v-text-field
                 label="Description"
                 type="text"
@@ -62,7 +62,7 @@
                 :error-messages="errors.collect('description')"
                 @input="handleInput('description', $event)"
               />
-            </v-flex>
+            </v-flex> -->
 
             <!-- Dialog Buttons -->
             <v-flex xs12>
@@ -79,12 +79,13 @@
 
                <v-btn
                 v-if="!browse && !newItem"
-                flat
-                icon
+                outline
+                color="warning"
                 :loading="loading"
                 @click="deleteItem()"
               >
                 <v-icon>delete</v-icon>
+                delete
               </v-btn>
             </v-flex>
 
@@ -132,6 +133,10 @@ export default {
         name: undefined,
         description: undefined
       },
+      defaultItem: {
+        name: undefined,
+        description: undefined
+      },
       loading: false,
       endpoint: 'feats'
     }
@@ -164,8 +169,9 @@ export default {
   watch: {
     showDialog (newValue, oldValue) {
       if (newValue) {
-        this.$validator.reset()
-        this.selectedItem = this.item
+        this.$set(this, 'selectedItem', this.item)
+        // this.$validator.reset()
+        // this.selectedItem = this.item
       }
     }
   },

@@ -1,44 +1,8 @@
 <template>
   <div v-if="filteredItems">
-    <search-bar
-      v-model="search"
-      :items="filteredItems"
-    />
 
-    <!-- Character List -->
-    <v-list
-      v-if="filteredItems.length > 0"
-      two-line
-      dense
-      class="elevation-1"
-    >
-      <!-- Traits List -->
-      <v-list-tile
-        v-for="(item, key) in filteredItems"
-        :key="key"
-        @click="handleShowDialog(item)"
-      >
-        <!-- Content -->
-        <v-list-tile-content>
-          <!-- Trait Name -->
-          <v-list-tile-title>
-            {{ item.name }}
-          </v-list-tile-title>
-
-          <!-- Character Details -->
-          <v-list-tile-sub-title>
-            {{ item.description }}
-          </v-list-tile-sub-title>
-        </v-list-tile-content>
-      </v-list-tile>
-    </v-list>
-
-    <feats-dialog
-      :show-dialog="showDialog"
-      :item="selectedItem"
-      :new-item="newItem"
-      @add-item="handleAddItem($event)"
-      @close="showDialog = false"
+    <feats-list
+      :items="items"
     />
 
   </div>
@@ -50,6 +14,7 @@
  * @desc A character's known feats
  */
 import character from '../../../mixins/character'
+import FeatsList from './FeatsList'
 import FeatsDialog from './FeatsDialog'
 import SearchBar from '../../inputs/SearchBar'
 
@@ -59,6 +24,7 @@ export default {
 
   // Components
   components: {
+    FeatsList,
     FeatsDialog,
     SearchBar
   },
@@ -157,9 +123,6 @@ export default {
         this.selectedItem = feature
         this.newItem = false
       }
-      console.log('show!s')
-      // this.$nextTick(() => {
-      // })
     }
   },
 
