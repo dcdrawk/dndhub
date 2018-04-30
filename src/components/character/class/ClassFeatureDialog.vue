@@ -104,7 +104,8 @@
                 :loading="loading"
                 @click="deleteItem()"
               >
-                <v-icon>delete</v-icon>delete
+                <v-icon>delete</v-icon>
+                delete
               </v-btn>
             </v-flex>
           </v-layout>

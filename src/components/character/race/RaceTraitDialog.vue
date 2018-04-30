@@ -75,7 +75,7 @@
                 :loading="loading"
                 @click="addItem()"
               >
-                Save
+                Add Race Trait
               </v-btn>
             </v-flex>
 
@@ -84,12 +84,13 @@
               v-if="item.custom"
             >
               <v-btn
-                flat
-                icon
+                outline
+                color="warning"
                 :loading="loading"
                 @click="deleteItem()"
               >
                 <v-icon>delete</v-icon>
+                delete
               </v-btn>
             </v-flex>
           </v-layout>

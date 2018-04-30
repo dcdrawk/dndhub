@@ -212,9 +212,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.class-features {
-  min-height: 100vh;
-}
 .subclass {
   opacity: 0.5;
 }
