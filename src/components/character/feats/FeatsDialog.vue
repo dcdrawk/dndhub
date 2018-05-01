@@ -77,12 +77,12 @@
               <v-btn
                 v-if="!browse && !newItem"
                 block
-                color="warning"
+                color="accent"
                 :disabled="!isFormValid"
                 :loading="loading"
                 @click="deleteItem()"
               >
-                Remove {{ newItem }}
+                Remove
               </v-btn>
             </v-flex>
 

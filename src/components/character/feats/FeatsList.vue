@@ -41,7 +41,7 @@
           <v-list-tile-action v-if="browse">
             <v-btn
               icon
-              color="accent"
+              color="secondary"
               @click.stop="addItem(item)"
             >
               <v-icon>add</v-icon>

@@ -138,7 +138,7 @@
                 :loading="loading"
                 @click="deleteItem()"
               >
-                Remove {{ newItem }}
+                Remove
               </v-btn>
             </v-flex>
 
