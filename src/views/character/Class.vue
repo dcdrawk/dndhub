@@ -8,6 +8,7 @@
       dark
       slider-color="yellow"
       class="page-tabs elevation-1"
+      grow
     >
       <v-tab
         v-for="(tab, index) in tabs"

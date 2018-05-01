@@ -90,7 +90,7 @@
                 :loading="loading"
                 @click="addItem()"
               >
-                Save
+                Add Class Feature
               </v-btn>
             </v-flex>
 
@@ -99,12 +99,13 @@
               v-if="item.custom"
             >
               <v-btn
-                flat
-                icon
+                outline
+                color="warning"
                 :loading="loading"
                 @click="deleteItem()"
               >
                 <v-icon>delete</v-icon>
+                delete
               </v-btn>
             </v-flex>
           </v-layout>
@@ -176,8 +177,10 @@ export default {
   watch: {
     showDialog (newValue, oldValue) {
       if (newValue) {
-        this.$validator.reset()
-        this.selectedItem = this.item
+        this.$set(this, 'selectedItem', this.item)
+        setTimeout(() => {
+          this.errors.clear()
+        }, 0)
       }
     }
   },

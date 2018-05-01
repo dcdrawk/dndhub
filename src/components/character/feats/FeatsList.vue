@@ -11,7 +11,7 @@
       No Items Found
     </p>
 
-    <!-- Armor List -->
+    <!-- Feats List -->
     <v-list
       v-if="filteredItems.length > 0"
       two-line
@@ -33,28 +33,15 @@
             </v-list-tile-title>
             <!-- AC -->
             <v-list-tile-sub-title>
-              AC: {{ item.ac }}
+              {{ item.description }}
             </v-list-tile-sub-title>
-          </v-list-tile-content>
-
-          <v-list-tile-content>
-            <!-- Trait Name -->
-            <v-list-tile-title class="right-text">
-              Type: {{ item.armorType }}
-            </v-list-tile-title>
-            <!-- Character Details -->
-            <v-list-tile-sub-title class="right-text">
-              Weight: {{ item.weight }}
-              <!-- Cost: {{ item.cost }} -->
-            </v-list-tile-sub-title>
-
           </v-list-tile-content>
 
           <!-- Feat Add -->
           <v-list-tile-action v-if="browse">
             <v-btn
               icon
-              color="primary"
+              color="secondary"
               @click.stop="addItem(item)"
             >
               <v-icon>add</v-icon>
@@ -68,7 +55,7 @@
       </template>
     </v-list>
 
-    <armor-dialog
+    <feats-dialog
       :browse="browse"
       :show-dialog="showDialog"
       :item="selectedItem"
@@ -81,20 +68,20 @@
 
 <script>
 /**
- * <armor-list></armor-list>
- * @desc A list of armor
+ * <feats-known></feats-known>
+ * @desc A character's known feats
  */
 import character from '../../../mixins/character'
-import ArmorDialog from './ArmorDialog'
+import FeatsDialog from './FeatsDialog'
 import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
-  name: 'armor-list',
+  name: 'feats-table',
 
   // Components
   components: {
-    ArmorDialog,
+    FeatsDialog,
     SearchBar
   },
 
@@ -106,27 +93,8 @@ export default {
   // Data
   data () {
     return {
-      endpoint: 'armor',
-      dialogEvent: 'new-armor',
-      tableHeaders: [
-        {
-          text: 'Name',
-          align: 'left',
-          value: 'name'
-        },
-        { text: 'AC',
-          value: 'ac',
-          align: 'right'
-        },
-        { text: 'test',
-          value: 'ac',
-          align: 'right'
-        },
-        { text: 'test',
-          value: 'ac',
-          align: 'right'
-        }
-      ],
+      endpoint: 'feats',
+      dialogEvent: 'new-feat',
       selectedItem: undefined,
       newItem: false,
       showDialog: false,
@@ -163,11 +131,11 @@ export default {
      * @param {Object} - item
      */
     addItem (item) {
-      console.log('armor known add item...')
+      console.log('feats known add item...')
       console.log(`${this.endpoint}/${this.characterId}`)
       this.$db.ref(`${this.endpoint}/${this.characterId}`)
         .push(item)
-      this.$bus.$emit('toast', `Added the ${item.name} Armor`)
+      this.$bus.$emit('toast', `Added the ${item.name} Feats`)
     },
 
     /**
@@ -200,7 +168,6 @@ export default {
     // Listen for events from the parent component
     this.$bus.$on(this.dialogEvent, () => {
       if (this.browse) return
-      // this.newItem = true
       this.handleShowDialog()
     })
   },

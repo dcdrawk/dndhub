@@ -1,44 +1,8 @@
 <template>
   <div v-if="filteredItems">
-    <search-bar
-      v-model="search"
-      :items="filteredItems"
-    />
 
-    <!-- Character List -->
-    <v-list
-      v-if="filteredItems.length > 0"
-      two-line
-      dense
-      class="elevation-1"
-    >
-      <!-- Traits List -->
-      <v-list-tile
-        v-for="(item, key) in filteredItems"
-        :key="key"
-        @click="handleShowDialog(item)"
-      >
-        <!-- Content -->
-        <v-list-tile-content>
-          <!-- Trait Name -->
-          <v-list-tile-title>
-            {{ item.name }}
-          </v-list-tile-title>
-
-          <!-- Character Details -->
-          <v-list-tile-sub-title>
-            {{ item.description }}
-          </v-list-tile-sub-title>
-        </v-list-tile-content>
-      </v-list-tile>
-    </v-list>
-
-    <feats-dialog
-      :show-dialog="showDialog"
-      :item="selectedItem"
-      :new-item="newItem"
-      @add-item="handleAddItem($event)"
-      @close="showDialog = false"
+    <feats-list
+      :items="items"
     />
 
   </div>
@@ -50,6 +14,7 @@
  * @desc A character's known feats
  */
 import character from '../../../mixins/character'
+import FeatsList from './FeatsList'
 import FeatsDialog from './FeatsDialog'
 import SearchBar from '../../inputs/SearchBar'
 
@@ -59,6 +24,7 @@ export default {
 
   // Components
   components: {
+    FeatsList,
     FeatsDialog,
     SearchBar
   },
@@ -121,45 +87,6 @@ export default {
           })
         this.items = items
       })
-    },
-
-    /**
-     * Adds the item to firebase
-     * @param {Object} - item
-     */
-    addItem (item) {
-      console.log('feats known add item...')
-      this.$db.ref(`${this.endpoint}/${this.characterId}`)
-        .push(item)
-      this.$bus.$emit('toast', `Added the ${item.name} Feat`)
-    },
-
-    /**
-     * Adds the item from the dialog
-     * @param {Object} - item
-     */
-    handleAddItem (item) {
-      console.log('known add item')
-      this.addItem(item)
-      this.showDialog = false
-    },
-
-    /**
-     * Handle Show Dialog
-     * Select the feature and show the dialog
-     * @param {Object} feature
-     */
-    handleShowDialog (feature) {
-      if (this.showDialog) {
-        // this.showDialog = false
-      } else {
-        this.showDialog = true
-        this.selectedItem = feature
-        this.newItem = false
-      }
-      console.log('show!s')
-      // this.$nextTick(() => {
-      // })
     }
   },
 
@@ -167,11 +94,11 @@ export default {
   created () {
     this.getItems()
     // Listen for events from the parent component
-    this.$bus.$on(this.dialogEvent, () => {
-      this.selectedItem = {...this.defaultItem}
-      this.newItem = true
-      this.showDialog = true
-    })
+    // this.$bus.$on(this.dialogEvent, () => {
+    //   this.selectedItem = {...this.defaultItem}
+    //   this.newItem = true
+    //   this.showDialog = true
+    // })
   }
 }
 </script>

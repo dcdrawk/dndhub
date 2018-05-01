@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Primary Class Card -->
-    <v-card flat class="mb-1">
+    <v-card flat>
       <v-card-text>
         <v-container grid-list-md>
           <v-layout row wrap>

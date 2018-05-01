@@ -1,15 +1,18 @@
 <template>
   <div class="class-features">
+    <search-bar
+      v-model="search"
+    />
     <!-- Character List -->
     <v-list
-      v-if="classFeatures"
+      v-if="filteredItems"
       two-line
       dense
       class="character-list elevation-1"
     >
       <!-- List Tile -->
       <v-list-tile
-        v-for="(item, key) in classFeaturesArray"
+        v-for="(item, key) in filteredItems"
         :key="key"
         @click="handleShowDialog(item)"
       >
@@ -46,6 +49,7 @@ import classes from '../../../mixins/game-data/classes'
 import character from '../../../mixins/character'
 import CustomSelect from '../../inputs/CustomSelect'
 import ClassFeatureDialog from './ClassFeatureDialog'
+import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
@@ -54,7 +58,8 @@ export default {
   // Components
   components: {
     CustomSelect,
-    ClassFeatureDialog
+    ClassFeatureDialog,
+    SearchBar
   },
 
   // Mixins
@@ -75,7 +80,8 @@ export default {
       classFeatures: undefined,
       selectedItem: undefined,
       showDialog: false,
-      hideFab: true
+      hideFab: true,
+      search: undefined
     }
   },
 
@@ -122,6 +128,15 @@ export default {
         defaultItems = this.getFeaturesData(this.primaryClass)
       }
       return defaultItems
+    },
+
+    filteredItems () {
+      const array = this.classFeaturesArray
+      return array.filter((item) => {
+        return this.search
+          ? item.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1
+          : true
+      })
     }
   },
 
@@ -197,9 +212,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.class-features {
-  min-height: 100vh;
-}
 .subclass {
   opacity: 0.5;
 }

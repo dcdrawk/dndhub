@@ -138,7 +138,7 @@
                 :loading="loading"
                 @click="deleteItem()"
               >
-                Remove {{ newItem }}
+                Remove
               </v-btn>
             </v-flex>
 
@@ -219,10 +219,10 @@ export default {
   watch: {
     showDialog (newValue, oldValue) {
       if (newValue) {
-        // this.$validator.reset()
-        this.selectedItem = this.item
-      } else {
-        this.$validator.reset()
+        this.$set(this, 'selectedItem', this.item)
+        setTimeout(() => {
+          this.errors.clear()
+        }, 0)
       }
     }
   },

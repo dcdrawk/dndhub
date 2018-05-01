@@ -31,6 +31,7 @@
       <v-card-text>
         <v-container class="pa-0">
           <v-layout row wrap v-if="selectedItem">
+            {{ selectedItem.name }}
             <!-- Feat Name -->
             <v-flex xs12>
               <v-text-field
@@ -47,19 +48,21 @@
             </v-flex>
 
             <!-- Feat Description -->
-            <v-flex xs12>
+            <!-- <v-flex xs12>
               <v-text-field
                 label="Description"
                 type="text"
                 rows="10"
+                required
                 multi-line
-                :readonly="browse"
+                :readonly="isReadOnly"
                 v-model="selectedItem.description"
+                v-validate="'required'"
                 data-vv-name="description"
                 :error-messages="errors.collect('description')"
                 @input="handleInput('description', $event)"
               />
-            </v-flex>
+            </v-flex> -->
 
             <!-- Dialog Buttons -->
             <v-flex xs12>
@@ -74,15 +77,15 @@
                 Add
               </v-btn>
 
-              <v-btn
+               <v-btn
                 v-if="!browse && !newItem"
-                block
-                color="accent"
-                :disabled="!isFormValid"
+                outline
+                color="warning"
                 :loading="loading"
                 @click="deleteItem()"
               >
-                Remove
+                <v-icon>delete</v-icon>
+                delete
               </v-btn>
             </v-flex>
 
@@ -98,7 +101,7 @@
 import character from '../../../mixins/character'
 import validation from '../../../mixins/validation'
 import CustomSelect from '../../inputs/CustomSelect'
-import debounce from 'debounce'
+// import debounce from 'debounce'
 
 export default {
   // Name
@@ -127,6 +130,10 @@ export default {
   data () {
     return {
       selectedItem: {
+        name: undefined,
+        description: undefined
+      },
+      defaultItem: {
         name: undefined,
         description: undefined
       },
@@ -162,9 +169,7 @@ export default {
   watch: {
     showDialog (newValue, oldValue) {
       if (newValue) {
-        for (let i of this.item) {
-          this.$set(this.selectedItem, i, this.item[i])
-        }
+        this.$set(this, 'selectedItem', this.item)
         setTimeout(() => {
           this.errors.clear()
         }, 0)
@@ -180,7 +185,7 @@ export default {
     deleteItem () {
       this.$db.ref(this.firebaseURL).remove()
       this.$emit('close')
-      this.$bus.$emit('toast', `${this.selectedItem.name} Removed`)
+      this.$bus.$emit('toast', 'Race Trait Removed')
     },
 
     /**
@@ -207,12 +212,12 @@ export default {
     handleDialog () {
       this.$emit('close')
     }
-  },
+  }
 
   // Mounted
-  mounted () {
-    this.updateClassFeature = debounce(this.updateClassFeature, 500)
-  }
+  // mounted () {
+  //   this.updateClassFeature = debounce(this.updateClassFeature, 500)
+  // }
 }
 </script>
 

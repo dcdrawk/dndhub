@@ -1,87 +1,104 @@
 <template>
   <div>
-    <v-card flat class="mb-1">
+    <v-card flat>
       <v-card-text>
+        <v-container grid-list-md>
+          <v-layout row wrap>
 
-      <v-container grid-list-md>
-        <v-layout row wrap>
-          <v-flex xs12>
-            <v-text-field
-              label="Proficiency Bonus"
-              type="text"
-              :value="proficiencyBonus"
-              persistent-hint
-              disabled
-            />
-          </v-flex>
-          <v-flex xs12>
-            <v-text-field
-              label="Armor Class"
-              type="number"
-              :value="character.armorClass"
-            />
+            <!-- Proficiency Bonus -->
+            <v-flex xs12>
+              <v-text-field
+                label="Proficiency Bonus"
+                type="text"
+                :value="proficiencyBonus"
+                persistent-hint
+                disabled
+                hint="Determined by level"
+                @input="updateCharacter('proficiencyBonus', $event)"
+              />
+            </v-flex>
 
-          </v-flex>
+            <!-- Armor Class -->
+            <v-flex xs12>
+              <v-text-field
+                label="Armor Class"
+                type="number"
+                :value="character.ac"
+                @input="updateCharacter('ac', $event)"
+              />
+            </v-flex>
 
-          <v-flex xs6>
-            <v-text-field
-              label="Initiative"
-              type="number"
-              :value="character.initiative"
-            />
-          </v-flex>
+            <!-- Initiative -->
+            <v-flex xs6>
+              <v-text-field
+                label="Initiative"
+                type="number"
+                :value="character.initiative"
+                persistent-hint
+                hint="Base = Dex Modifier"
+                @input="updateCharacter('initiative', $event)"
+              />
+            </v-flex>
 
-          <v-flex xs6>
-            <v-text-field
-              label="Speed"
-              type="number"
-              :value="character.speed"
-            />
-          </v-flex>
+            <!-- Speed -->
+            <v-flex xs6>
+              <v-text-field
+                label="Speed"
+                type="number"
+                :value="character.speed"
+                @input="updateCharacter('speed', $event)"
+              />
+            </v-flex>
 
-        </v-layout>
-        <!-- <v-divider/> -->
-        <!-- <h3>Health</h3> -->
-      </v-container>
+          </v-layout>
+        </v-container>
       </v-card-text>
     </v-card>
+
+    <v-divider/>
 
     <v-card>
       <v-card-text>
         <h3 class="pl-2">Health</h3>
         <v-container grid-list-md>
           <v-layout row wrap>
+
+            <!-- Current HP -->
             <v-flex xs6>
               <v-text-field
                 label="Current HP"
                 type="number"
-                :value="character.HpCurrent"
+                :value="character.HpCurrent || 0"
                 @input="updateCharacter('HpCurrent', $event)"
               />
             </v-flex>
+
+            <!-- Total HP -->
             <v-flex xs6>
               <v-text-field
                 label="Total HP"
                 type="number"
                 disabled
-                :value="totalHP"
+                :value="totalHP || 0"
               />
             </v-flex>
 
+            <!-- Max HP -->
             <v-flex xs6>
               <v-text-field
                 label="Max HP"
                 type="number"
-                :value="character.HpMax"
+                :value="character.HpMax || 0"
                 @input="updateCharacter('HpMax', $event)"
               />
             </v-flex>
 
+            <!-- Temp HP -->
             <v-flex xs6>
               <v-text-field
                 label="Temp HP"
                 type="number"
-                :value="character.HpTemp"
+                :value="character.HpTemp || 0"
                 @input="updateCharacter('HpTemp', $event)"
               />
             </v-flex>

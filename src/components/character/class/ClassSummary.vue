@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Primary Class Card -->
-    <v-card flat class="mb-1">
+    <v-card flat>
       <v-card-text>
         <v-container grid-list-md>
           <v-layout row wrap>
@@ -34,28 +34,39 @@
               />
             </v-flex>
 
-            <!-- Enable Multiclass Checkbox -->
+            <v-flex xs12 v-if="character.enableMulticlass">
+              <v-text-field
+                label="Class Level"
+                type="number"
+                :value="primaryClass.level"
+                @input="updateClass(primaryClassId, 'level', $event)"
+              />
+            </v-flex>
+
+            <!-- Enable Multiclass Switch -->
             <v-flex xs12 md6>
-              <v-checkbox
-                color="secondary"
+              <v-switch
+                color="primary"
                 label="Enable Multiclass"
+                :input-value="character.enableMulticlass"
                 :true-value="true"
                 :false-value="false"
-                :input-value="character.enableMulticlass"
                 @change="updateCharacter('enableMulticlass', $event)"
-              />
+              ></v-switch>
             </v-flex>
           </v-layout>
         </v-container>
       </v-card-text>
     </v-card>
 
+    <v-divider/>
+
     <!-- Enable Multiclass -->
     <v-card
       v-if="character.enableMulticlass"
       flat
     >
-      <v-card-title class="title">
+      <v-card-title class="title ml-1">
         Multiclass
       </v-card-title>
 
@@ -94,17 +105,25 @@
                 />
               </v-flex>
 
+              <v-flex xs12>
+                <v-text-field
+                  label="Class Level"
+                  type="number"
+                  :value="classObject.custom.level"
+                  @input="updateClass(key, 'level', $event)"
+                />
+              </v-flex>
+
               <!-- Multiclass Delete -->
-              <v-flex>
+              <v-flex class="pa-0">
                 <v-btn
-                  flat
-                  icon
+                  outline
+                  color="warning"
                   class="ma-0"
                   @click="removeClass(key)"
                 >
-                  <v-icon>
-                    delete
-                  </v-icon>
+                  <v-icon>delete</v-icon>
+                  delete
                 </v-btn>
               </v-flex>
             </v-layout>
@@ -115,7 +134,9 @@
 
       <!-- Add Multiclass -->
       <v-btn
-        flat
+        depressed
+        color="primary"
+        class="ml-3"
         @click="addMulticlass()"
       >
         Add Multiclass

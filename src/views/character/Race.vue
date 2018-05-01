@@ -1,6 +1,6 @@
 <template>
   <section>
-
+    <!-- Page Tabs -->
     <v-tabs
       v-if="character"
       v-model="activeTab"
@@ -8,6 +8,7 @@
       dark
       slider-color="yellow"
       class="page-tabs elevation-1"
+      grow
     >
       <v-tab
         v-for="(tab, index) in tabs"
@@ -51,13 +52,11 @@
 <script>
 /**
  * <race></race>
- * @desc A character's general / basic info
+ * @desc A character's race / race traits
  */
 import character from '../../mixins/character'
 import RaceSummary from '../../components/character/race/RaceSummary'
 import RaceTraits from '../../components/character/race/RaceTraits'
-import ClassFeatureDialog from '../../components/character/class/ClassFeatureDialog'
-import ClassProficiencies from '../../components/character/class/ClassProficiencies'
 
 export default {
   // Name
@@ -66,9 +65,7 @@ export default {
   // Components
   components: {
     RaceSummary,
-    RaceTraits,
-    ClassFeatureDialog,
-    ClassProficiencies
+    RaceTraits
   },
 
   // Mixins

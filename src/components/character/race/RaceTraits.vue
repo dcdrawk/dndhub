@@ -42,9 +42,9 @@
  */
 import races from '../../../mixins/game-data/races'
 import character from '../../../mixins/character'
-
 import CustomSelect from '../../inputs/CustomSelect'
 import RaceTraitDialog from './RaceTraitDialog'
+
 export default {
   // Name
   name: 'race-traits',
@@ -53,7 +53,6 @@ export default {
   components: {
     CustomSelect,
     RaceTraitDialog
-    // ClassFeatureDialog
   },
 
   // Mixins
@@ -218,7 +217,6 @@ export default {
     this.getRaceTraits()
     // Listen for events from the parent component
     this.$bus.$on('new-race-trait', () => {
-      // this.selectedItem = this.defaultFeature
       this.selectedItem = {...this.defaultItem}
       this.showDialog = true
     })
@@ -227,9 +225,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.class-features {
-  min-height: 100vh;
-}
 .source {
   opacity: 0.5;
 }

@@ -7,6 +7,7 @@
         hide-details
         placeholder="Search"
         prepend-icon="search"
+        color="accent"
         :value="value"
         @input="$emit('input', $event)"
       />
