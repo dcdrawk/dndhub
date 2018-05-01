@@ -30,22 +30,28 @@
             <!-- Name -->
             <v-list-tile-title>
               {{ item.name }}
+              <v-icon
+                v-if="item.proficient"
+                color="accent"
+                class="ml-2"
+              >
+                stars
+              </v-icon>
             </v-list-tile-title>
             <!-- AC -->
             <v-list-tile-sub-title>
-              AC: {{ item.ac }}
+              Dmg: {{ item.damage }}
             </v-list-tile-sub-title>
           </v-list-tile-content>
 
           <v-list-tile-content>
             <!-- Trait Name -->
             <v-list-tile-title class="right-text">
-              Type: {{ item.weaponsType }}
+              {{ item.weaponType }}
             </v-list-tile-title>
             <!-- Character Details -->
             <v-list-tile-sub-title class="right-text">
               Weight: {{ item.weight }}
-              <!-- Cost: {{ item.cost }} -->
             </v-list-tile-sub-title>
 
           </v-list-tile-content>
@@ -167,7 +173,7 @@ export default {
       console.log(`${this.endpoint}/${this.characterId}`)
       this.$db.ref(`${this.endpoint}/${this.characterId}`)
         .push(item)
-      this.$bus.$emit('toast', `Added the ${item.name} Weapons`)
+      this.$bus.$emit('toast', `Added ${item.name} to Weapons`)
     },
 
     /**
