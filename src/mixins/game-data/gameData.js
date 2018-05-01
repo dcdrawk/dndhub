@@ -15,7 +15,8 @@ export default {
         'backgrounds',
         'classFeatures',
         'feats',
-        'armor'
+        'armor',
+        'weapons'
       ],
       // Update the version number if data json is updated.
       // So we can store the json in LocalStorage
@@ -26,7 +27,8 @@ export default {
         backgrounds: 1,
         classFeatures: 1,
         feats: 1,
-        armor: 1
+        armor: 1,
+        weapons: 1
       }
     }
   },

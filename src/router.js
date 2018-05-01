@@ -22,6 +22,7 @@ import Race from './views/character/Race'
 import Stats from './views/character/Stats'
 import Feats from './views/character/Feats'
 import Armor from './views/character/Armor'
+import Weapons from './views/character/Weapons'
 
 Vue.use(Router)
 
@@ -86,6 +87,11 @@ export default new Router({
       path: '/character/armor',
       name: 'Armor',
       component: Armor
+    },
+    {
+      path: '/character/weapons',
+      name: 'Weapons',
+      component: Weapons
     }
   ]
 })
