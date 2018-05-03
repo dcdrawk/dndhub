@@ -60,7 +60,7 @@
           <v-list-tile-action v-if="browse">
             <v-btn
               icon
-              color="primary"
+              color="accent"
               @click.stop="addItem(item)"
             >
               <v-icon>add</v-icon>
@@ -219,7 +219,8 @@ export default {
 
 <style scoped lang="scss">
 .right-text {
-  color: rgba(0,0,0,.54);
+  // opacity: .54;
+  // color: rgba(0,0,0,.54);
   text-align: right;
 }
 </style>

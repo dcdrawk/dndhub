@@ -1,6 +1,6 @@
 <template>
   <v-card flat>
-    <v-card-text class="pl-3 pr-3 pt-0 pb-0 grey lighten-4">
+    <v-card-text class="pl-3 pr-3 pt-0 pb-0">
       <v-text-field
         class="pt-2 pb-2"
         clearable
@@ -32,5 +32,6 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+// .
 </style>

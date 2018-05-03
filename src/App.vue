@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app dark>
     <!-- Nav Drawer -->
     <the-nav-drawer
       :open="navDrawerOpen"

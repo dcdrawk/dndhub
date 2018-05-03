@@ -122,7 +122,7 @@
               <v-btn
                 v-if="browse || newItem"
                 block
-                color="secondary"
+                color="accent"
                 :disabled="!isFormValid"
                 :loading="loading"
                 @click="$emit('add-item', selectedItem)"

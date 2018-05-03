@@ -46,7 +46,7 @@
             <!-- Enable Multiclass Switch -->
             <v-flex xs12 md6>
               <v-switch
-                color="primary"
+                color="accent"
                 label="Enable Multiclass"
                 :input-value="character.enableMulticlass"
                 :true-value="true"
