@@ -10,26 +10,31 @@
       dense
       class="character-list elevation-1"
     >
-      <!-- List Tile -->
-      <v-list-tile
-        v-for="(item, key) in filteredItems"
-        :key="key"
-        @click="handleShowDialog(item)"
-      >
-        <!-- Content -->
-        <v-list-tile-content>
-          <!-- Character Name -->
-          <v-list-tile-title>
-            {{ item.name }}
-          </v-list-tile-title>
+      <template v-for="(item, index) in filteredItems">
+        <!-- List Tile -->
+        <v-list-tile
+          :key="index"
+          @click="handleShowDialog(item)"
+        >
+          <!-- Content -->
+          <v-list-tile-content>
+            <!-- Character Name -->
+            <v-list-tile-title>
+              {{ item.name }}
+            </v-list-tile-title>
 
-          <!-- Character Details -->
-          <v-list-tile-sub-title>
-            Level {{ item.level }}
-            <span class="subclass">{{ item.subclass || 'Custom' }} </span>
-          </v-list-tile-sub-title>
-        </v-list-tile-content>
-      </v-list-tile>
+            <!-- Character Details -->
+            <v-list-tile-sub-title>
+              Level {{ item.level }}
+              <span class="subclass">{{ item.subclass || 'Custom' }} </span>
+            </v-list-tile-sub-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-divider
+          v-if="index < filteredItems.length - 1"
+          :key="`${index}-divider`"
+        ></v-divider>
+      </template>
     </v-list>
 
     <class-feature-dialog

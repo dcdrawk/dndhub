@@ -11,7 +11,7 @@
       No Items Found
     </p>
 
-    <!-- Armor List -->
+    <!-- Weapons List -->
     <v-list
       v-if="filteredItems.length > 0"
       two-line
@@ -30,22 +30,28 @@
             <!-- Name -->
             <v-list-tile-title>
               {{ item.name }}
+              <v-icon
+                v-if="item.proficient"
+                color="accent"
+                class="ml-2"
+              >
+                stars
+              </v-icon>
             </v-list-tile-title>
             <!-- AC -->
             <v-list-tile-sub-title>
-              AC: {{ item.ac }}
+              Dmg: {{ item.damage }}
             </v-list-tile-sub-title>
           </v-list-tile-content>
 
           <v-list-tile-content>
             <!-- Trait Name -->
             <v-list-tile-title class="right-text">
-              Type: {{ item.armorType }}
+              {{ item.weaponType }}
             </v-list-tile-title>
             <!-- Character Details -->
             <v-list-tile-sub-title class="right-text">
               Weight: {{ item.weight }}
-              <!-- Cost: {{ item.cost }} -->
             </v-list-tile-sub-title>
 
           </v-list-tile-content>
@@ -68,7 +74,7 @@
       </template>
     </v-list>
 
-    <armor-dialog
+    <weapons-dialog
       :browse="browse"
       :show-dialog="showDialog"
       :item="selectedItem"
@@ -81,20 +87,20 @@
 
 <script>
 /**
- * <armor-list></armor-list>
- * @desc A list of armor
+ * <weapons-list></weapons-list>
+ * @desc A list of weapons
  */
 import character from '../../../mixins/character'
-import ArmorDialog from './ArmorDialog'
+import WeaponsDialog from './WeaponsDialog'
 import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
-  name: 'armor-list',
+  name: 'weapons-list',
 
   // Components
   components: {
-    ArmorDialog,
+    WeaponsDialog,
     SearchBar
   },
 
@@ -106,8 +112,8 @@ export default {
   // Data
   data () {
     return {
-      endpoint: 'armor',
-      dialogEvent: 'new-armor',
+      endpoint: 'weapons',
+      dialogEvent: 'new-weapons',
       tableHeaders: [
         {
           text: 'Name',
@@ -163,11 +169,11 @@ export default {
      * @param {Object} - item
      */
     addItem (item) {
-      console.log('armor known add item...')
+      console.log('weapons known add item...')
       console.log(`${this.endpoint}/${this.characterId}`)
       this.$db.ref(`${this.endpoint}/${this.characterId}`)
         .push(item)
-      this.$bus.$emit('toast', `Added the ${item.name} Armor`)
+      this.$bus.$emit('toast', `Added ${item.name} to Weapons`)
     },
 
     /**
@@ -213,8 +219,8 @@ export default {
 
 <style scoped lang="scss">
 .right-text {
+  // opacity: .54;
   // color: rgba(0,0,0,.54);
-  // opacity: .5;
   text-align: right;
 }
 </style>

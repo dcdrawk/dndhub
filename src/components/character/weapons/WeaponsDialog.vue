@@ -22,7 +22,7 @@
         <!-- Dialog Title -->
         <v-toolbar-title>
           <span v-if="newItem">New</span>
-           Armor
+           Weapons
         </v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
@@ -31,7 +31,7 @@
       <v-card-text>
         <v-container class="pa-0">
           <v-layout row wrap v-if="selectedItem">
-            <!-- Armor Name -->
+            <!-- Weapons Name -->
             <v-flex xs12>
               <v-text-field
                 label="Name"
@@ -47,13 +47,24 @@
             </v-flex>
 
             <v-flex xs12>
+              <v-switch
+                color="accent"
+                label="Profiecient"
+                :persistent-hint="selectedItem.proficient"
+                :hint="proficientHint"
+                :input-value="selectedItem.proficient"
+                :true-value="true"
+                :false-value="false"
+                @change="handleInput('proficient', $event)"
+              ></v-switch>
+            </v-flex>
+
+            <v-flex xs12>
               <v-text-field
-                label="Armor Class"
+                label="Damage"
                 type="text"
-                required
                 :readonly="browse"
-                v-model="selectedItem.ac"
-                v-validate="'required'"
+                v-model="selectedItem.damage"
                 data-vv-name="ac"
                 :error-messages="errors.collect('ac')"
                 @input="handleInput('ac', $event)"
@@ -62,11 +73,21 @@
 
             <v-flex xs12>
               <v-text-field
-                label="Armor Type"
+                label="Weapon Type"
                 type="text"
                 :readonly="browse"
-                v-model="selectedItem.armorType"
-                @input="handleInput('armorType', $event)"
+                v-model="selectedItem.weaponType"
+                @input="handleInput('weaponType', $event)"
+              />
+            </v-flex>
+
+            <v-flex xs12>
+              <v-text-field
+                label="Damage Type"
+                type="text"
+                :readonly="browse"
+                v-model="selectedItem.damageType"
+                @input="handleInput('damageType', $event)"
               />
             </v-flex>
 
@@ -102,7 +123,7 @@
               />
             </v-flex>
 
-            <!-- Armor Description -->
+            <!-- Weapons Description -->
             <v-flex xs12>
               <v-text-field
                 label="Description"
@@ -122,7 +143,7 @@
               <v-btn
                 v-if="browse || newItem"
                 block
-                color="accent"
+                color="secondary"
                 :disabled="!isFormValid"
                 :loading="loading"
                 @click="$emit('add-item', selectedItem)"
@@ -152,13 +173,14 @@
 
 <script>
 import character from '../../../mixins/character'
+import proficiencyBonus from '../../../mixins/proficiencyBonus'
 import validation from '../../../mixins/validation'
 import CustomSelect from '../../inputs/CustomSelect'
 import debounce from 'debounce'
 
 export default {
   // Name
-  name: 'armor-dialog',
+  name: 'weapons-dialog',
 
   // Components
   components: {
@@ -168,6 +190,7 @@ export default {
   // Mixins
   mixins: [
     character,
+    proficiencyBonus,
     validation
   ],
 
@@ -184,11 +207,11 @@ export default {
     return {
       selectedItem: {
         name: undefined,
-        ac: undefined,
+        proficient: false,
         description: undefined
       },
       loading: false,
-      endpoint: 'armor'
+      endpoint: 'weapons'
     }
   },
 
@@ -212,6 +235,10 @@ export default {
       } else {
         return true
       }
+    },
+    proficientHint () {
+      const bonus = this.proficiencyBonus || 0
+      return `Add Profiency Bonus to Attack Roll (+${bonus})`
     }
   },
 
@@ -242,6 +269,7 @@ export default {
      * Update Item
      */
     updateItem (field, value) {
+      this.$set(this.selectedItem, field, value)
       const update = {}
       update[field] = value
       this.$db.ref(this.firebaseURL).update(update)
@@ -253,7 +281,7 @@ export default {
     handleInput (field, value) {
       if (this.newItem) return
       this.updateItem(field, value)
-      console.log('handle dialog input')
+      console.log('handle dialog input', value)
     },
 
     /**
@@ -266,7 +294,7 @@ export default {
 
   // Mounted
   mounted () {
-    this.updateClassArmorure = debounce(this.updateClassArmorure, 500)
+    this.updateClassWeaponsure = debounce(this.updateClassWeaponsure, 500)
   }
 }
 </script>
