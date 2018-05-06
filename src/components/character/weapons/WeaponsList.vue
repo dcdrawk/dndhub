@@ -35,7 +35,7 @@
                 color="accent"
                 class="ml-2"
               >
-                stars
+                add_box
               </v-icon>
             </v-list-tile-title>
             <!-- AC -->

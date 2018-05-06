@@ -22,7 +22,7 @@
         <!-- Dialog Title -->
         <v-toolbar-title>
           <span v-if="newItem">New</span>
-           Weapons
+           Weapon - {{ selectedItem.name }}
         </v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
