@@ -9,6 +9,8 @@ import VeeValidate from 'vee-validate'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import colors from 'vuetify/es5/util/colors'
+import VueVirtualScroller from 'vue-virtual-scroller'
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 
 Vue.config.productionTip = false
 Vue.use(Vuetify, {
@@ -25,6 +27,7 @@ Vue.use(Vuetify, {
 Vue.use(VeeValidate)
 Vue.use(eventBus)
 Vue.use(firebase)
+Vue.use(VueVirtualScroller)
 
 new Vue({
   router,

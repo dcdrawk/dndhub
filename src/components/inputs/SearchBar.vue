@@ -9,7 +9,7 @@
         prepend-icon="search"
         color="accent"
         :value="value"
-        @input="$emit('input', $event)"
+        @input="handleInput"
       />
     </v-card-text>
     <v-divider/>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import debounce from 'debounce'
 /**
  * <component></component>
  * @desc description
@@ -28,6 +29,17 @@ export default {
   // Props
   props: {
     value: String
+  },
+
+  // Methods
+  methods: {
+    handleInput (event) {
+      this.$emit('input', event)
+    }
+  },
+
+  created () {
+    this.handleInput = debounce(this.handleInput, 500)
   }
 }
 </script>

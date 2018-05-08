@@ -1,7 +1,11 @@
 <template>
   <div>
 
-    <spells-list
+    <!-- <spells-list
+      browse
+      :items="items"
+    /> -->
+    <spells-list-virtual
       browse
       :items="items"
     />
@@ -16,6 +20,7 @@
  */
 import SpellsDialog from './SpellsDialog'
 import SpellsList from './SpellsList'
+import SpellsListVirtual from './SpellsListVirtual'
 import SearchBar from '../../inputs/SearchBar'
 
 export default {
@@ -26,6 +31,7 @@ export default {
   components: {
     SpellsDialog,
     SpellsList,
+    SpellsListVirtual,
     SearchBar
   },
 

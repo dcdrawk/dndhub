@@ -27,62 +27,70 @@
       dense
       class="elevation-1 spell-llist"
     >
+      <virtual-scroller class="scroller" :items="displayedItems" itemHeight="60">
+        <!-- <recycle-list
+          class="scroller"
+          :items="items"
+          :itemHeight="60"
+        > -->
+        <template slot-scope="props">
+          <!-- List Tile -->
+          <v-list-tile
+            class="list-tile"
+            :key="props.itemKey"
+            @click="handleShowDialog(props.item)"
+          >
+            <!-- Content -->
 
-      <template v-for="(item, index) in displayedItems">
-        <!-- List Tile -->
-        <v-list-tile
-          class="list-tile"
-          :key="item.title"
-          @click="handleShowDialog(item)"
-        >
-          <!-- Content -->
-          <v-list-tile-content>
-            <!-- Name -->
-            <v-list-tile-title>
-              {{ item.name }}
-              <v-icon
-                v-if="item.proficient"
+            <v-list-tile-content>
+              <!-- Name -->
+              <v-list-tile-title>
+                {{ props.item.name }}
+
+                <!-- <v-icon
+                  v-if="item.proficient"
+                  color="accent"
+                  class="ml-2"
+                >
+                  add_box
+                </v-icon> -->
+              </v-list-tile-title>
+              <v-list-tile-sub-title class="">
+                {{ props.item.class }}
+              </v-list-tile-sub-title>
+            </v-list-tile-content>
+
+            <v-list-tile-content>
+              <!-- Trait Name -->
+              <v-list-tile-title class="right-text">
+                {{ props.item.level }}
+              </v-list-tile-title>
+              <!-- Character Details -->
+              <v-list-tile-sub-title class="right-text">
+                {{ props.item.school }}
+              </v-list-tile-sub-title>
+
+            </v-list-tile-content>
+
+            <!-- Feat Add -->
+            <v-list-tile-action v-if="browse">
+              <v-btn
+                icon
                 color="accent"
-                class="ml-2"
+                @click.stop="addItem(item)"
               >
-                add_box
-              </v-icon>
-            </v-list-tile-title>
-            <!-- AC -->
-            <v-list-tile-sub-title>
-              Dmg: {{ item.damage }}
-            </v-list-tile-sub-title>
-          </v-list-tile-content>
+                <v-icon>add</v-icon>
+              </v-btn>
+            </v-list-tile-action>
+          </v-list-tile>
 
-          <v-list-tile-content>
-            <!-- Trait Name -->
-            <v-list-tile-title class="right-text">
-              {{ item.weaponType }}
-            </v-list-tile-title>
-            <!-- Character Details -->
-            <v-list-tile-sub-title class="right-text">
-              Weight: {{ item.weight }}
-            </v-list-tile-sub-title>
-
-          </v-list-tile-content>
-
-          <!-- Feat Add -->
-          <v-list-tile-action v-if="browse">
-            <v-btn
-              icon
-              color="accent"
-              @click.stop="addItem(item)"
-            >
-              <v-icon>add</v-icon>
-            </v-btn>
-          </v-list-tile-action>
-        </v-list-tile>
-
-        <v-divider
-          v-if="index < filteredItems.length - 1"
-          :key="`${index}-divider`"
-        ></v-divider>
-      </template>
+          <!-- <v-divider
+            v-if="index < filteredItems.displayedItems - 1"
+            :key="`${index}-divider`"
+          ></v-divider> -->
+        </template>
+        <!-- </recycle-list> -->
+      </virtual-scroller>
     </v-list>
 
     <!-- {{ paginatorLength }} -->
@@ -200,7 +208,7 @@ export default {
 
       // Pagination
       page: 1,
-      perPage: 400
+      perPage: 100
     }
   },
 
@@ -349,5 +357,24 @@ export default {
   &__button {
     max-width: 48px;
   }
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+::-webkit-scrollbar:vertical {
+    width: 12px;
+}
+::-webkit-scrollbar:horizontal {
+    height: 12px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    border: 2px solid #ffffff;
+}
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #ffffff;
 }
 </style>
