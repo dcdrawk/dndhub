@@ -1,12 +1,22 @@
 <template>
-  <div v-if="filteredItems">
+  <div class="spell-list-container" v-if="filteredItems">
     <search-bar
       v-model="search"
+      filter
+      @toggle-filter="showFilter = !showFilter"
     />
+
+    <spells-filters
+      v-if="showFilter"
+      :filter="filter"
+      @filter-level="filter.level = $event"
+      @filter-class="filter.class = $event"
+      @filter-school="filter.school = $event"
+    ></spells-filters>
 
     <p
       v-if="filteredItems.length === 0"
-      class="pt-3 text-xs-center"
+      class="pt-3 text-xs-center no-items"
     >
       No Items Found
     </p>
@@ -25,9 +35,9 @@
       v-if="filteredItems.length > 0"
       two-line
       dense
-      class="elevation-1 spell-llist"
+      class="elevation-1 spell-list"
     >
-      <virtual-scroller class="scroller" :items="displayedItems" itemHeight="60">
+      <virtual-scroller class="scroller" :items="displayedItems" itemHeight="61">
         <!-- <recycle-list
           class="scroller"
           :items="items"
@@ -84,63 +94,62 @@
             </v-list-tile-action>
           </v-list-tile>
 
-          <!-- <v-divider
-            v-if="index < filteredItems.displayedItems - 1"
-            :key="`${index}-divider`"
-          ></v-divider> -->
+          <v-divider></v-divider>
         </template>
         <!-- </recycle-list> -->
       </virtual-scroller>
     </v-list>
 
     <!-- {{ paginatorLength }} -->
-    <v-card
-      class="text-xs-right pagination flex justify-space-between elevation-3 darken-4"
-    >
-      <span class="pl-3">
-        Page {{ page }} / {{ paginatorLength }}
-      </span>
-      <span>
-        <v-btn
-          raised
-          color="primary"
-          icon
-          :disabled="disablePrev"
-          class="pagination__button"
-          @click="firstPage()"
-        >
-          <v-icon>first_page</v-icon>
-        </v-btn>
-        <v-btn
-          raised
-          color="primary"
-          icon
-          :disabled="disablePrev"
-          class="pagination__button"
-          @click="prevPage()"
-        >
-          <v-icon>chevron_left</v-icon>
-        </v-btn>
-        <v-btn
-          raised
-          color="primary"
-          icon
-          class="pagination__button"
-          @click="nextPage()"
-        >
-          <v-icon>chevron_right</v-icon>
-        </v-btn>
-        <v-btn
-          raised
-          color="primary"
-          icon
-          class="pagination__button"
-          @click="lastPage()"
-        >
-          <v-icon>last_page</v-icon>
-        </v-btn>
-      </span>
-    </v-card>
+    <div class="pagination">
+      <v-card
+        class="text-xs-right flex justify-space-between elevation-3 darken-4"
+      >
+        <span class="pl-3">
+          Page {{ page }} / {{ paginatorLength }}
+        </span>
+        <span>
+          <v-btn
+            raised
+            color="primary"
+            icon
+            :disabled="disablePrev"
+            class="pagination__button"
+            @click="firstPage()"
+          >
+            <v-icon>first_page</v-icon>
+          </v-btn>
+          <v-btn
+            raised
+            color="primary"
+            icon
+            :disabled="disablePrev"
+            class="pagination__button"
+            @click="prevPage()"
+          >
+            <v-icon>chevron_left</v-icon>
+          </v-btn>
+          <v-btn
+            raised
+            color="primary"
+            icon
+            class="pagination__button"
+            @click="nextPage()"
+          >
+            <v-icon>chevron_right</v-icon>
+          </v-btn>
+          <v-btn
+            raised
+            color="primary"
+            icon
+            class="pagination__button"
+            @click="lastPage()"
+          >
+            <v-icon>last_page</v-icon>
+          </v-btn>
+        </span>
+      </v-card>
+    </div>
 
     <spells-dialog
       :browse="browse"
@@ -161,6 +170,7 @@
 import character from '../../../mixins/character'
 import SpellsDialog from './SpellsDialog'
 import SearchBar from '../../inputs/SearchBar'
+import SpellsFilters from './SpellsFilters'
 
 export default {
   // Name
@@ -169,13 +179,20 @@ export default {
   // Components
   components: {
     SpellsDialog,
-    SearchBar
+    SearchBar,
+    SpellsFilters
   },
 
   // Mixins
   mixins: [
     character
   ],
+
+  // Props
+  props: {
+    items: Array,
+    browse: Boolean
+  },
 
   // Data
   data () {
@@ -201,6 +218,12 @@ export default {
           align: 'right'
         }
       ],
+      filter: {
+        level: undefined,
+        school: undefined,
+        class: undefined
+      },
+      showFilter: false,
       selectedItem: undefined,
       newItem: false,
       showDialog: false,
@@ -208,7 +231,7 @@ export default {
 
       // Pagination
       page: 1,
-      perPage: 100
+      perPage: 50
     }
   },
 
@@ -224,6 +247,18 @@ export default {
         if (a.name < b.name) return -1
         if (a.name > b.name) return 1
         return 0
+      }).filter((item) => {
+        return this.filter.class
+          ? item.class.indexOf(this.filter.class) > -1
+          : true
+      }).filter((item) => {
+        return this.filter.level
+          ? item.level.indexOf(this.filter.level) > -1
+          : true
+      }).filter((item) => {
+        return this.filter.school
+          ? item.school.indexOf(this.filter.school) > -1
+          : true
       })
     },
 
@@ -243,10 +278,13 @@ export default {
     }
   },
 
-  // Props
-  props: {
-    items: Array,
-    browse: Boolean
+  watch: {
+    paginatorLength (newVal, oldVal) {
+      // this.checkPage()
+      if (this.page > newVal) {
+        this.page = Math.max(newVal, 1)
+      }
+    }
   },
 
   // Methods
@@ -286,6 +324,16 @@ export default {
         this.newItem = typeof feature === 'undefined'
       }
     },
+
+    /**
+     * Check Page
+     * Checks if the current page is in range of paginatorLength
+     */
+    // checkPage () {
+    //   if (this.page > this.paginatorLength) {
+    //     this.page = this.paginatorLength
+    //   }
+    // },
 
     /**
      * Next Page
@@ -338,14 +386,18 @@ export default {
 
 <style scoped lang="scss">
 .right-text {
-  // opacity: .54;
-  // color: rgba(0,0,0,.54);
   text-align: right;
 }
-.spell-llist {
-  margin-bottom: 44px;
-  flex-grow: 1;
+.spell-list-container {
+  position: relative;
   min-height: 100vh;
+  margin-bottom: 44px;
+}
+.spell-list {
+  flex-grow: 1;
+}
+.no-items {
+  // min-height: 100vh;
 }
 .pagination {
   position: fixed;
@@ -353,28 +405,20 @@ export default {
   left: 0;
   // top: calc(100vh - 50px);
   width: 100%;
-  border-top: 1px solid #555;
+
   &__button {
     max-width: 48px;
   }
+  .card {
+    max-width: 1200px;
+    margin: auto;
+    border-top: 1px solid #555;
+  }
 }
+</style>
 
-::-webkit-scrollbar {
-    -webkit-appearance: none;
-}
-::-webkit-scrollbar:vertical {
-    width: 12px;
-}
-::-webkit-scrollbar:horizontal {
-    height: 12px;
-}
-::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, .5);
-    border-radius: 10px;
-    border: 2px solid #ffffff;
-}
-::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background-color: #ffffff;
+<style>
+.tab-transition .pagination {
+  display: none;
 }
 </style>

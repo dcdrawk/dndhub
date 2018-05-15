@@ -8,7 +8,7 @@
       dark
       fixed-tabs
       slider-color="yellow"
-      class="page-tabs elevation-1"
+      class="page-tabs"
     >
       <v-tab
         v-for="(tab, index) in tabs"

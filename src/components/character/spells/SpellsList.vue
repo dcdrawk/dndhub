@@ -86,8 +86,10 @@
     </v-list>
 
     <!-- {{ paginatorLength }} -->
+    <div class="pagination">
+
     <v-card
-      class="text-xs-right pagination flex justify-space-between elevation-3 darken-4"
+      class="text-xs-right flex justify-space-between elevation-3 darken-4"
     >
       <span class="pl-3">
         Page {{ page }} / {{ paginatorLength }}
@@ -133,6 +135,7 @@
         </v-btn>
       </span>
     </v-card>
+    </div>
 
     <spells-dialog
       :browse="browse"
