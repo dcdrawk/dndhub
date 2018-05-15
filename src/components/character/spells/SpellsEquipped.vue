@@ -1,6 +1,6 @@
 <template>
   <div v-if="filteredItems">
-    <spells-list
+    <spells-list-virtual
       :items="items"
       @select="handleShowDialog($event)"
     />
@@ -14,7 +14,7 @@
  */
 import character from '../../../mixins/character'
 import SpellsDialog from './SpellsDialog'
-import SpellsList from './SpellsList'
+import SpellsListVirtual from './SpellsListVirtual'
 import SearchBar from '../../inputs/SearchBar'
 
 export default {
@@ -24,7 +24,7 @@ export default {
   // Components
   components: {
     SpellsDialog,
-    SpellsList,
+    SpellsListVirtual,
     SearchBar
   },
 

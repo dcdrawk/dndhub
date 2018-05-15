@@ -7,7 +7,7 @@
     />
 
     <spells-filters
-      v-if="showFilter"
+      v-show="showFilter"
       :filter="filter"
       @filter-level="filter.level = $event"
       @filter-class="filter.class = $event"
@@ -174,7 +174,7 @@ import SpellsFilters from './SpellsFilters'
 
 export default {
   // Name
-  name: 'spells-list',
+  name: 'spells-list-virtual',
 
   // Components
   components: {
@@ -240,25 +240,25 @@ export default {
     filteredItems () {
       const array = this.items
       return array.filter((item) => {
-        return this.search
+        return this.search && item.name
           ? item.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1
           : true
+      }).filter((item) => {
+        if (!this.filter.class) return true
+        if (!item.class) return false
+        return item.class.indexOf(this.filter.class) > -1
+      }).filter((item) => {
+        if (!this.filter.level) return true
+        if (!item.level) return false
+        return item.level.indexOf(this.filter.level) > -1
+      }).filter((item) => {
+        if (!this.filter.school) return true
+        if (!item.school) return false
+        return item.school.indexOf(this.filter.school) > -1
       }).sort((a, b) => {
         if (a.name < b.name) return -1
         if (a.name > b.name) return 1
         return 0
-      }).filter((item) => {
-        return this.filter.class
-          ? item.class.indexOf(this.filter.class) > -1
-          : true
-      }).filter((item) => {
-        return this.filter.level
-          ? item.level.indexOf(this.filter.level) > -1
-          : true
-      }).filter((item) => {
-        return this.filter.school
-          ? item.school.indexOf(this.filter.school) > -1
-          : true
       })
     },
 
@@ -396,9 +396,7 @@ export default {
 .spell-list {
   flex-grow: 1;
 }
-.no-items {
-  // min-height: 100vh;
-}
+
 .pagination {
   position: fixed;
   bottom: 0;
