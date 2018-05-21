@@ -150,6 +150,7 @@
             raised
             color="primary"
             icon
+            :disabled="disableNext"
             class="pagination__button"
             @click="nextPage()"
           >
@@ -160,6 +161,7 @@
             color="primary"
             icon
             class="pagination__button"
+            :disabled="disableNext"
             @click="lastPage()"
           >
             <v-icon>last_page</v-icon>
@@ -292,6 +294,10 @@ export default {
 
     disablePrev () {
       return this.page === 1
+    },
+
+    disableNext () {
+      return this.page === this.paginatorLength
     }
   },
 

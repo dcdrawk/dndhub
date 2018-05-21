@@ -101,12 +101,12 @@ export default {
      * Adds the item to firebase
      * @param {Object} - item
      */
-    addItem (item) {
-      console.log('spells known add item...')
-      this.$db.ref(`${this.endpoint}/${this.characterId}`)
-        .push(item)
-      this.$bus.$emit('toast', `Added the ${item.name} Spells`)
-    },
+    // addItem (item) {
+    //   console.log('spells known add item...')
+    //   this.$db.ref(`${this.endpoint}/${this.characterId}`)
+    //     .push(item)
+    //   this.$bus.$emit('toast', `Added the ${item.name} Spells`)
+    // },
 
     /**
      * Adds the item from the dialog

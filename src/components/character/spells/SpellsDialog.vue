@@ -315,7 +315,10 @@ export default {
      * Handle Input
      */
     handleInput (field, value) {
-      if (this.newItem) return
+      if (this.newItem) {
+        this.$set(this.item, field, value)
+        return
+      }
       this.updateItem(field, value)
       console.log('handle dialog input', value)
     },
