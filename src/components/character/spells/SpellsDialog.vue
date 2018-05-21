@@ -22,7 +22,7 @@
         <!-- Dialog Title -->
         <v-toolbar-title>
           <span v-if="newItem">New</span>
-           Weapon - {{ selectedItem.name }}
+           Spell - {{ selectedItem.name }}
         </v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
@@ -47,83 +47,105 @@
             </v-flex>
 
             <v-flex xs12>
-              <v-switch
-                color="accent"
-                label="Profiecient"
-                :persistent-hint="selectedItem.proficient"
-                :hint="proficientHint"
-                :input-value="selectedItem.proficient"
-                :true-value="true"
-                :false-value="false"
-                @change="handleInput('proficient', $event)"
-              ></v-switch>
-            </v-flex>
-
-            <v-flex xs12>
               <v-text-field
-                label="Damage"
+                label="Casting Time"
                 type="text"
                 :readonly="browse"
-                v-model="selectedItem.damage"
-                data-vv-name="ac"
-                :error-messages="errors.collect('ac')"
-                @input="handleInput('ac', $event)"
+                v-model="selectedItem.casting_time"
+                @input="handleInput('casting_time', $event)"
               />
             </v-flex>
 
             <v-flex xs12>
               <v-text-field
-                label="Weapon Type"
+                label="Range"
                 type="text"
                 :readonly="browse"
-                v-model="selectedItem.weaponType"
-                @input="handleInput('weaponType', $event)"
+                v-model="selectedItem.range"
+                @input="handleInput('range', $event)"
               />
             </v-flex>
 
             <v-flex xs12>
               <v-text-field
-                label="Damage Type"
+                label="Duration"
                 type="text"
                 :readonly="browse"
-                v-model="selectedItem.damageType"
-                @input="handleInput('damageType', $event)"
+                v-model="selectedItem.duration"
+                @input="handleInput('duration', $event)"
               />
             </v-flex>
 
             <v-flex xs12>
               <v-text-field
-                label="Weight"
-                type="text"
-                :read-only="browse"
-                v-model="selectedItem.weight"
-                @input="handleInput('weight', $event)"
-              />
-            </v-flex>
-
-            <v-flex xs12>
-              <v-text-field
-                label="Cost"
+                label="Components"
                 type="text"
                 :readonly="browse"
-                v-model="selectedItem.cost"
-                @input="handleInput('cost', $event)"
+                v-model="selectedItem.components"
+                @input="handleInput('components', $event)"
               />
             </v-flex>
 
             <v-flex xs12>
               <v-select
-                label="Properties"
+                label="Level"
                 :readonly="browse"
-                :value="selectedItem.properties || []"
-                tags
-                chips
-                deletable-chips
-                @input="handleInput('properties', $event)"
-              />
+                :items="spellLevels"
+                v-model="selectedItem.level"
+                @input="handleInput('level', $event)"
+              ></v-select>
             </v-flex>
 
-            <!-- Spells Description -->
+            <v-flex xs12>
+              <v-select
+                label="School"
+                :readonly="browse"
+                :items="spellSchools"
+                v-model="selectedItem.school"
+                @input="handleInput('school', $event)"
+              ></v-select>
+            </v-flex>
+
+            <v-flex xs12>
+              <v-select
+                label="Class"
+                :readonly="browse"
+                color="accent"
+                :value="getClasses(selectedItem)"
+                :items="classes"
+                chips
+                multiple
+                item-value="name"
+                item-text="name"
+                dense
+                @input="handleInput('class', $event.join(', '))"
+              ></v-select>
+            </v-flex>
+
+            <v-flex xs12>
+              <v-switch
+                label="Ritual"
+                :disabled="browse"
+                color="accent"
+                :input-value="selectedItem.ritual"
+                :true-value="'1'"
+                :false-value="'0'"
+                @change="handleInput('ritual', $event)"
+              ></v-switch>
+            </v-flex>
+
+            <v-flex xs12>
+              <v-switch
+                label="Concentration"
+                :disabled="browse"
+                color="accent"
+                :input-value="selectedItem.concentration"
+                :true-value="'1'"
+                :false-value="'0'"
+                @change="handleInput('concentration', $event)"
+              ></v-switch>
+            </v-flex>
+
             <v-flex xs12>
               <v-text-field
                 label="Description"
@@ -131,10 +153,20 @@
                 rows="10"
                 multi-line
                 :readonly="browse"
-                v-model="selectedItem.description"
-                data-vv-name="description"
-                :error-messages="errors.collect('description')"
-                @input="handleInput('description', $event)"
+                v-model="selectedItem.desc"
+                @input="handleInput('desc', $event)"
+              />
+            </v-flex>
+
+            <v-flex xs12>
+              <v-text-field
+                label="At Higher Levels"
+                type="text"
+                rows="5"
+                multi-line
+                :readonly="browse"
+                v-model="selectedItem.higher_level"
+                @input="handleInput('higher_level', $event)"
               />
             </v-flex>
 
@@ -175,6 +207,8 @@
 import character from '../../../mixins/character'
 import proficiencyBonus from '../../../mixins/proficiencyBonus'
 import validation from '../../../mixins/validation'
+import spells from '../../../mixins/spells'
+import classes from '../../../mixins/game-data/classes'
 import CustomSelect from '../../inputs/CustomSelect'
 import debounce from 'debounce'
 
@@ -190,8 +224,10 @@ export default {
   // Mixins
   mixins: [
     character,
+    classes,
     proficiencyBonus,
-    validation
+    validation,
+    spells
   ],
 
   // Props
@@ -289,6 +325,12 @@ export default {
      */
     handleDialog () {
       this.$emit('close')
+    },
+
+    getClasses (item) {
+      return item.class
+        ? item.class.split(', ')
+        : []
     }
   },
 

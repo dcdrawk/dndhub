@@ -32,6 +32,7 @@
     <!-- Floating Action Button -->
     <v-fab-transition v-if="activeTab">
       <v-btn
+        class="spell-fab"
         v-if="tabs[activeTab].showFab"
         color="secondary"
         dark
@@ -83,7 +84,7 @@ export default {
         showFab: true,
         fabAction: () => {
           console.log('fab action')
-          this.$bus.$emit('new-spells')
+          this.$bus.$emit('new-spell')
         }
       }, {
         title: 'Browse',
@@ -99,8 +100,13 @@ export default {
 .page-tabs {
   max-width: 1200px;
   margin: auto;
+
   @media screen and (min-width: 1260px) {
     margin-top: 20px;
   }
+}
+
+.spell-fab {
+  bottom: 60px;
 }
 </style>

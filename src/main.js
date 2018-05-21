@@ -13,6 +13,7 @@ import VueVirtualScroller from 'vue-virtual-scroller'
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 
 Vue.config.productionTip = false
+
 Vue.use(Vuetify, {
   theme: {
     primary: colors.blueGrey.base,
@@ -24,6 +25,7 @@ Vue.use(Vuetify, {
     warning: colors.deepOrange.base
   }
 })
+
 Vue.use(VeeValidate)
 Vue.use(eventBus)
 Vue.use(firebase)

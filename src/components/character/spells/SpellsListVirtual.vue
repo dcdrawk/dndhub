@@ -57,13 +57,30 @@
               <v-list-tile-title>
                 {{ props.item.name }}
 
-                <!-- <v-icon
-                  v-if="item.proficient"
-                  color="accent"
-                  class="ml-2"
+                <!-- Ritual -->
+                <v-btn
+                  v-if="props.item.ritual == 1"
+                  class="spell-list__symbol pa-0 ma-0 ml-1"
+                  small
+                  outline
+                  round
+                  color="info"
                 >
-                  add_box
-                </v-icon> -->
+                  R
+                </v-btn>
+
+                <!-- Concentration -->
+                <v-btn
+                  v-if="props.item.concentration == 1"
+                  class="spell-list__symbol pa-0 ma-0 ml-1"
+                  small
+                  outline
+                  round
+                  color="secondary"
+                >
+                  C
+                </v-btn>
+
               </v-list-tile-title>
               <v-list-tile-sub-title class="">
                 {{ props.item.class }}
@@ -87,7 +104,7 @@
               <v-btn
                 icon
                 color="accent"
-                @click.stop="addItem(item)"
+                @click.stop="addItem(props.item)"
               >
                 <v-icon>add</v-icon>
               </v-btn>
@@ -198,7 +215,7 @@ export default {
   data () {
     return {
       endpoint: 'spells',
-      dialogEvent: 'new-spells',
+      dialogEvent: 'new-spell',
       tableHeaders: [
         {
           text: 'Name',
@@ -395,6 +412,11 @@ export default {
 }
 .spell-list {
   flex-grow: 1;
+  &__symbol {
+    top: -2px;
+    min-width: 32px;
+    height: 22px;
+  }
 }
 
 .pagination {
@@ -413,6 +435,10 @@ export default {
     border-top: 1px solid #555;
   }
 }
+
+// .spell-info {
+
+// }
 </style>
 
 <style>

@@ -37,7 +37,7 @@ export default {
   data () {
     return {
       endpoint: 'spells',
-      // dialogEvent: 'new-feat',
+      dialogEvent: 'new-spell',
       // tableHeaders: [
       //   {
       //     text: 'Name',
@@ -141,11 +141,11 @@ export default {
   created () {
     this.getItems()
     // // Listen for events from the parent component
-    // this.$bus.$on(this.dialogEvent, () => {
-    //   this.selectedItem = {...this.defaultItem}
-    //   this.newItem = true
-    //   this.showDialog = true
-    // })
+    this.$bus.$on(this.dialogEvent, () => {
+      this.selectedItem = {...this.defaultItem}
+      this.newItem = true
+      this.showDialog = true
+    })
   }
 }
 </script>
