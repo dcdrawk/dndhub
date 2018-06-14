@@ -21,15 +21,6 @@
       No Items Found
     </p>
 
-    <!-- <div class="text-xs-center">
-      <v-pagination
-        :length="paginatorLength"
-        :total-visible="6"
-        v-model="page"
-        color="secondary"
-      />
-    </div> -->
-
     <!-- Spells List -->
     <v-list
       v-if="filteredItems.length > 0"
@@ -38,11 +29,6 @@
       class="elevation-1 spell-list"
     >
       <virtual-scroller class="scroller" :items="displayedItems" itemHeight="61">
-        <!-- <recycle-list
-          class="scroller"
-          :items="items"
-          :itemHeight="60"
-        > -->
         <template slot-scope="props">
           <!-- List Tile -->
           <v-list-tile
@@ -87,16 +73,14 @@
               </v-list-tile-sub-title>
             </v-list-tile-content>
 
+            <!-- Spell Level / School -->
             <v-list-tile-content>
-              <!-- Trait Name -->
               <v-list-tile-title class="right-text">
                 {{ props.item.level }}
               </v-list-tile-title>
-              <!-- Character Details -->
               <v-list-tile-sub-title class="right-text">
                 {{ props.item.school }}
               </v-list-tile-sub-title>
-
             </v-list-tile-content>
 
             <!-- Feat Add -->
@@ -113,11 +97,9 @@
 
           <v-divider></v-divider>
         </template>
-        <!-- </recycle-list> -->
       </virtual-scroller>
     </v-list>
 
-    <!-- {{ paginatorLength }} -->
     <div class="pagination">
       <v-card
         class="text-xs-right flex justify-space-between elevation-3 darken-4"
@@ -183,8 +165,8 @@
 
 <script>
 /**
- * <spells-list></spells-list>
- * @desc A list of spells
+ * <spells-list-virtual></spells-list-virtual>
+ * @desc A list of spells using virtual list
  */
 import character from '../../../mixins/character'
 import SpellsDialog from './SpellsDialog'
@@ -303,7 +285,6 @@ export default {
 
   watch: {
     paginatorLength (newVal, oldVal) {
-      // this.checkPage()
       if (this.page > newVal) {
         this.page = Math.max(newVal, 1)
       }
@@ -317,9 +298,8 @@ export default {
      * @param {Object} - item
      */
     addItem (item) {
-      console.log('spells known add item...')
-      console.log(`${this.endpoint}/${this.characterId}`)
-      this.$db.ref(`${this.endpoint}/${this.characterId}`)
+      this.$db
+        .ref(`${this.endpoint}/${this.characterId}`)
         .push(item)
       this.$bus.$emit('toast', `Added ${item.name} to Spells`)
     },
@@ -347,16 +327,6 @@ export default {
         this.newItem = typeof feature === 'undefined'
       }
     },
-
-    /**
-     * Check Page
-     * Checks if the current page is in range of paginatorLength
-     */
-    // checkPage () {
-    //   if (this.page > this.paginatorLength) {
-    //     this.page = this.paginatorLength
-    //   }
-    // },
 
     /**
      * Next Page
@@ -396,7 +366,6 @@ export default {
     // Listen for events from the parent component
     this.$bus.$on(this.dialogEvent, () => {
       if (this.browse) return
-      // this.newItem = true
       this.handleShowDialog()
     })
   },
@@ -411,13 +380,16 @@ export default {
 .right-text {
   text-align: right;
 }
+
 .spell-list-container {
   position: relative;
   min-height: 100vh;
   margin-bottom: 44px;
 }
+
 .spell-list {
   flex-grow: 1;
+
   &__symbol {
     top: -2px;
     min-width: 32px;
@@ -429,22 +401,18 @@ export default {
   position: fixed;
   bottom: 0;
   left: 0;
-  // top: calc(100vh - 50px);
   width: 100%;
 
   &__button {
     max-width: 48px;
   }
+
   .card {
     max-width: 1200px;
     margin: auto;
     border-top: 1px solid #555;
   }
 }
-
-// .spell-info {
-
-// }
 </style>
 
 <style>

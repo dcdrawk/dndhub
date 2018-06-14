@@ -56,6 +56,7 @@
       <v-list-tile
         v-if="user && character"
         v-for="(item, index) in characterMenu"
+        active-class="secondary--text"
         :key="`character-menu-${index}`"
         :to="item.href"
       >

@@ -90,6 +90,10 @@ export default {
         title: 'Browse',
         component: 'spells-browse',
         showFab: false
+      }, {
+        title: 'Slots'
+        // component: 'spells-browse',
+        // showFab: false
       }]
     }
   }

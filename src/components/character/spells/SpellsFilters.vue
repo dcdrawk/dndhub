@@ -38,16 +38,6 @@
         ></v-select>
       </v-flex>
 
-      <!-- <v-flex xs6>
-        <v-select
-          :items="classes"
-          item-text="name"
-          label="Class"
-          dense
-          hide-details
-        ></v-select>
-      </v-flex> -->
-
     </v-layout>
   </v-container>
 </template>
@@ -57,12 +47,6 @@
 export default {
   // Name
   name: 'spell-filters',
-
-  // Components
-  components: {},
-
-  // Mixins
-  mixins: {},
 
   // Props
   props: {
@@ -105,20 +89,6 @@ export default {
   computed: {
     classes () {
       return this.$store.state.gameData.classes
-    }
-  },
-
-  // Watch
-  watch: {
-    watchProperty (newValue, oldValue) {
-      return newValue
-    }
-  },
-
-  // Methods
-  methods: {
-    myFunction () {
-      return 'something'
     }
   }
 }

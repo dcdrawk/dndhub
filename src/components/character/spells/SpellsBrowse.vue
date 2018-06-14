@@ -1,10 +1,6 @@
 <template>
   <div>
 
-    <!-- <spells-list
-      browse
-      :items="items"
-    /> -->
     <spells-list-virtual
       browse
       :items="items"
