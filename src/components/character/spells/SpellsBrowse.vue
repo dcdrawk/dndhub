@@ -14,10 +14,10 @@
  * <spells-browse></spells-browse>
  * @desc Browse and equip spells
  */
-import SpellsDialog from './SpellsDialog'
-import SpellsList from './SpellsList'
+// import SpellsDialog from './SpellsDialog'
+// import SpellsList from './SpellsList'
 import SpellsListVirtual from './SpellsListVirtual'
-import SearchBar from '../../inputs/SearchBar'
+// import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
@@ -25,10 +25,10 @@ export default {
 
   // Components
   components: {
-    SpellsDialog,
-    SpellsList,
-    SpellsListVirtual,
-    SearchBar
+    // SpellsDialog,
+    // SpellsList,
+    SpellsListVirtual
+    // SearchBar
   },
 
   // Data

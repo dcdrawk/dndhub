@@ -58,7 +58,7 @@
 import character from '../../mixins/character'
 import SpellsBrowse from '../../components/character/spells/SpellsBrowse'
 import SpellsEquipped from '../../components/character/spells/SpellsEquipped'
-import SpellsSlots from '../../components/character/spells/SpellsSlots'
+import SpellsCasting from '../../components/character/spells/SpellsCasting'
 
 export default {
   // Name
@@ -68,7 +68,7 @@ export default {
   components: {
     SpellsBrowse,
     SpellsEquipped,
-    SpellsSlots
+    SpellsCasting
   },
 
   // Mixins
@@ -93,8 +93,8 @@ export default {
         component: 'spells-browse',
         showFab: false
       }, {
-        title: 'Slots',
-        component: 'spells-slots'
+        title: 'Spell Casting',
+        component: 'spells-casting'
         // showFab: false
       }]
     }

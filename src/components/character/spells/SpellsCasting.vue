@@ -1,11 +1,13 @@
 <template>
-  <div>
-    Hello World
-    <!-- <spells-list-virtual
-      browse
-      :items="items"
-    /> -->
-  </div>
+  <v-container fluid>
+    <v-alert
+      :value="true"
+      color="secondary"
+      icon="help"
+    >
+      It appears {{ character.name }} does not have any spell slots yet. Maybe you should add some?
+    </v-alert>
+  </v-container>
 </template>
 
 <script>
@@ -17,6 +19,7 @@ import SpellsDialog from './SpellsDialog'
 import SpellsList from './SpellsList'
 import SpellsListVirtual from './SpellsListVirtual'
 import SearchBar from '../../inputs/SearchBar'
+import character from '../../../mixins/character'
 
 export default {
   // Name
@@ -29,6 +32,9 @@ export default {
     SpellsListVirtual,
     SearchBar
   },
+
+  // Mixins
+  mixins: [character],
 
   // Data
   data () {
