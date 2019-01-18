@@ -2,7 +2,7 @@
   <div class="d-flex">
     <!-- Select -->
     <v-select
-      bottom
+      menu-props="bottom"
       v-if="!custom && items || disabled"
       class="pb-0"
       :label="label"

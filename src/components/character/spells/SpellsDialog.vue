@@ -147,7 +147,7 @@
             </v-flex>
 
             <v-flex xs12>
-              <v-text-field
+              <v-textarea
                 label="Description"
                 type="text"
                 rows="10"
@@ -159,7 +159,7 @@
             </v-flex>
 
             <v-flex xs12>
-              <v-text-field
+              <v-textarea
                 label="At Higher Levels"
                 type="text"
                 rows="5"

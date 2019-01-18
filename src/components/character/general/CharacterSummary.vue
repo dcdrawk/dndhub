@@ -139,7 +139,7 @@
 
         <!-- Description -->
         <v-flex xs12>
-          <v-text-field
+          <v-textarea
             label="Description"
             type="text"
             v-model="character.description"
