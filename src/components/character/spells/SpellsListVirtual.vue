@@ -42,30 +42,19 @@
               <!-- Name -->
               <v-list-tile-title>
                 {{ props.item.name }}
-
-                <!-- Ritual -->
-                <v-btn
+                <span
                   v-if="props.item.ritual == 1"
-                  class="spell-list__symbol pa-0 ma-0 ml-1"
-                  small
-                  outline
-                  round
-                  color="info"
-                >
-                  R
-                </v-btn>
+                  class="spell-list__symbol cyan--text font-weight-bold"
+                >R</span>
 
                 <!-- Concentration -->
-                <v-btn
+                <span
                   v-if="props.item.concentration == 1"
-                  class="spell-list__symbol pa-0 ma-0 ml-1"
-                  small
-                  outline
-                  round
+                  class="spell-list__symbol orange--text font-weight-bold"
                   color="secondary"
                 >
                   C
-                </v-btn>
+                </span>
 
               </v-list-tile-title>
               <v-list-tile-sub-title class="">
@@ -391,9 +380,10 @@ export default {
   flex-grow: 1;
 
   &__symbol {
-    top: -2px;
-    min-width: 32px;
-    height: 22px;
+    margin-left: 10px;
+    // top: -2px;
+    // min-width: 32px;
+    // height: 22px;
   }
 }
 

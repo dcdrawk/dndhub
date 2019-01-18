@@ -56,6 +56,7 @@ export default {
 
 <style lang="scss">
 .filter-button {
+  max-width: 36px;
   min-width: 36px;
 }
 </style>
