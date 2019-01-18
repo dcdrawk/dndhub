@@ -8,6 +8,7 @@
       :items="SpellModifierOptions"
       item-text="text"
       item-value="value"
+      color="secondary"
       @input="updateCharacter('spellModifier', $event)"
     />
 
@@ -18,16 +19,19 @@
       readonly
       disabled
       :value="spellAttackText"
-      hint="Proficiency Bonus + Spell Modifier"
+      hint="Spell Modifier + Proficiency Bonus"
       persistent-hint
-      @input="updateCharacter('spellSave', $event)"
     />
 
     <v-text-field
+      class="mb-5"
       label="Spell Save"
-      type="number"
-      :value="character.spellSave"
-      @input="updateCharacter('spellSave', $event)"
+      type="text"
+      readonly
+      disabled
+      :value="spellSaveText"
+      hint="8 + Spell Modifier + Proficiency Bonus"
+      persistent-hint
     />
 
     <h2>
@@ -101,16 +105,33 @@ export default {
       return this.character.spellModifier
     },
 
+    spellAbilityModifier () {
+      if (!this.character) return
+      return this.getAbilityModifier(this.spellModifier)
+    },
+
     spellAttack () {
-      return this.getAbilityModifier(this.spellModifier) + this.proficiencyBonus
+      return this.spellAbilityModifier + this.proficiencyBonus
+    },
+
+    spellSave () {
+      return 8 + this.spellAbilityModifier + this.proficiencyBonus
     },
 
     spellAttackPrefix () {
       return this.spellAttack >= 0 ? '+' : '-'
     },
 
+    spellSavePrefix () {
+      return this.spellAttack >= 0 ? '+' : '-'
+    },
+
     spellAttackText () {
       return `${this.spellAttackPrefix}${this.spellAttack}`
+    },
+
+    spellSaveText () {
+      return `${this.spellSavePrefix}${this.spellSave}`
     }
   },
 
