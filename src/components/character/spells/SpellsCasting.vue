@@ -33,18 +33,62 @@
       hint="8 + Spell Modifier + Proficiency Bonus"
       persistent-hint
     />
+    <v-layout row>
+      <v-flex xs12>
+        <h2>
+          Spell Slots
+          <v-btn
+            class="ma-0"
+            fab
+            small
+            flat
+            @click="showSlotDialog = true"
+          >
+            <v-icon>
+              edit
+            </v-icon>
+          </v-btn>
+        </h2>
+      </v-flex>
+      <!-- <v-flex>
 
-    <h2>
-      Spell Slots
-    </h2>
+      </v-flex> -->
+
+    </v-layout>
+
+    <SpellsSlotsDialog
+      :show-dialog="showSlotDialog"
+      @close="showSlotDialog = false"
+    />
     <v-divider class="mt-1 mb-3"></v-divider>
     <v-alert
+      v-if="!characterHasSpellSlots"
       :value="true"
       color="secondary"
       icon="help"
     >
-      It appears {{ character.name }} does not have any spell slots yet. Maybe you should add some?
+      It appears {{ character.name }} does not have any spell slots yet.
     </v-alert>
+
+    <div
+      v-for="(slot, key, index) in characterSpellSlots"
+      :key="index"
+    >
+      <div v-if="slot && slot.length">
+        <h3>Level {{ key }}</h3>
+        <div d-flex>
+          <v-checkbox
+            class="d-inline-block mr-2"
+            v-for="(item, itemIndex) in slot"
+            :key="itemIndex"
+            :input-value="item"
+            :true-value="'1'"
+            :false-value="'0'"
+            @change="handleUpdateSpellSlot(key, itemIndex, $event)"
+          ></v-checkbox>
+        </div>
+      </div>
+    </div>
   </v-container>
 </template>
 
@@ -53,7 +97,7 @@
  * <spells-browse></spells-browse>
  * @desc Browse and equip spells
  */
-import SpellsDialog from './SpellsDialog'
+import SpellsSlotsDialog from './SpellsSlotsDialog'
 import SpellsList from './SpellsList'
 import SpellsListVirtual from './SpellsListVirtual'
 import SearchBar from '../../inputs/SearchBar'
@@ -67,7 +111,7 @@ export default {
 
   // Components
   components: {
-    SpellsDialog,
+    SpellsSlotsDialog,
     SpellsList,
     SpellsListVirtual,
     SearchBar
@@ -79,7 +123,7 @@ export default {
   // Data
   data () {
     return {
-      // endpoint: 'spells'
+      showSlotDialog: false
     }
   },
 
@@ -132,11 +176,31 @@ export default {
 
     spellSaveText () {
       return `${this.spellSavePrefix}${this.spellSave}`
+    },
+
+    characterSpellSlots () {
+      if (!this.character) return
+      return this.character.spellSlots
+    },
+
+    characterHasSpellSlots () {
+      if (!this.characterSpellSlots) return
+      for (let i in this.characterSpellSlots) {
+        if (this.characterSpellSlots[i].length) return true
+      }
     }
   },
 
   mounted () {
     this.getAbilityScores()
+  },
+
+  methods: {
+    handleUpdateSpellSlot (level, index, value) {
+      const slots = {...this.characterSpellSlots}
+      slots[level][index] = value
+      this.updateCharacter('spellSlots', slots)
+    }
   }
 }
 </script>

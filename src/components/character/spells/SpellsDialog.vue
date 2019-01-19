@@ -339,7 +339,7 @@ export default {
 
   // Mounted
   mounted () {
-    this.updateClassSpellsure = debounce(this.updateClassSpellsure, 500)
+    this.updateItem = debounce(this.updateItem, 500)
   }
 }
 </script>
