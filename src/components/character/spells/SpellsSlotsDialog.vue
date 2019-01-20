@@ -47,8 +47,6 @@
 <script>
 import character from '../../../mixins/character'
 import SpellsSlotInput from './SpellsSlotInput'
-import CustomSelect from '../../inputs/CustomSelect'
-// import debounce from 'debounce'
 
 export default {
   // Name
@@ -56,7 +54,6 @@ export default {
 
   // Components
   components: {
-    CustomSelect,
     SpellsSlotInput
   },
 
@@ -123,18 +120,6 @@ export default {
     }
   },
 
-  // Watch
-  watch: {
-    showDialog (newValue, oldValue) {
-      if (newValue) {
-        // this.$set(this, 'selectedItem', this.item)
-        // setTimeout(() => {
-        //   this.errors.clear()
-        // }, 0)
-      }
-    }
-  },
-
   // Methods
   methods: {
     /**
@@ -142,9 +127,8 @@ export default {
      */
     getNumberOfSpellSlots (level) {
       if (!this.characterSpellSlots) return
-      if (!this.characterSpellSlots[level]) return
+      if (!this.characterSpellSlots[level]) return 0
       return this.characterSpellSlots[level].length
-      // return 0
     },
 
     /**
@@ -171,10 +155,8 @@ export default {
      */
     handleAdd (level) {
       const slots = {...this.characterSpellSlots}
-      // console.log(level.toString())
-      // console.log(slots[level.toString()])
+      if (!slots[level]) slots[level] = []
       slots[level].push('0')
-      // console.dir(slots)
       this.updateCharacter('spellSlots', slots)
     },
 
@@ -183,10 +165,6 @@ export default {
      */
     handleSubtract (level) {
       const slots = {...this.characterSpellSlots}
-      // console.log(level.toString())
-      // console.log(slots[level.toString()])
-      // slots[level].length = value
-      // console.dir(slots)
       slots[level].pop()
       this.updateCharacter('spellSlots', slots)
     },
@@ -197,18 +175,11 @@ export default {
     handleDialog () {
       this.$emit('close')
     }
-
-    // getClasses (item) {
-    //   return item.class
-    //     ? item.class.split(', ')
-    //     : []
-    // }
   },
 
   // Mounted
   mounted () {
     this.initSpellSlots()
-    // this.updateItem = debounce(this.updateItem, 500)
   }
 }
 </script>

@@ -6,10 +6,10 @@
           <v-layout row wrap>
 
             <v-flex xs12 md6>
-              <v-select
+              <v-combobox
+                multiple
                 label="Armor"
                 :value="armor"
-                tags
                 chips
                 deletable-chips
                 @input="handleInput('armor', $event)"
@@ -17,10 +17,10 @@
             </v-flex>
 
             <v-flex xs12 md6>
-              <v-select
+              <v-combobox
+                multiple
                 label="Weapons"
                 :value="weapons"
-                tags
                 chips
                 deletable-chips
                 @input="handleInput('weapons', $event)"
@@ -28,10 +28,10 @@
             </v-flex>
 
             <v-flex xs12 md6>
-              <v-select
+              <v-combobo
                 label="Tools"
                 :value="tools"
-                tags
+                multiple
                 chips
                 deletable-chips
                 @input="handleInput('tools', $event)"
@@ -39,10 +39,10 @@
             </v-flex>
 
             <v-flex xs12 md6>
-              <v-select
+              <v-combobo
                 label="Languages"
                 :value="languages"
-                tags
+                multiple
                 chips
                 deletable-chips
                 @input="handleInput('languages', $event)"
@@ -50,10 +50,10 @@
             </v-flex>
 
             <v-flex xs12 md6>
-              <v-select
+              <v-combobo
                 label="Skills"
                 :value="skills"
-                tags
+                multiple
                 chips
                 deletable-chips
                 @input="handleInput('skills', $event)"
@@ -61,10 +61,10 @@
             </v-flex>
 
             <v-flex xs12 md6>
-              <v-select
+              <v-combobo
                 label="Other"
                 :value="other"
-                tags
+                multiple
                 chips
                 deletable-chips
                 @input="handleInput('other', $event)"

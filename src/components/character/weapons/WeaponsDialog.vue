@@ -112,11 +112,11 @@
             </v-flex>
 
             <v-flex xs12>
-              <v-select
+              <v-combobox
                 label="Properties"
                 :readonly="browse"
                 :value="selectedItem.properties || []"
-                tags
+                multiple
                 chips
                 deletable-chips
                 @input="handleInput('properties', $event)"
