@@ -48,7 +48,7 @@
 import character from '../../../mixins/character'
 import SpellsSlotInput from './SpellsSlotInput'
 import CustomSelect from '../../inputs/CustomSelect'
-import debounce from 'debounce'
+// import debounce from 'debounce'
 
 export default {
   // Name
