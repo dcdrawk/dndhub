@@ -30,7 +30,7 @@
         </v-flex>
 
         <v-flex xs12>
-          <v-text-field
+          <v-textarea
             label="Background Feature"
             type="text"
             v-model="character.backgroundFeature"
@@ -50,7 +50,7 @@
         </v-flex>
 
         <v-flex xs12>
-          <v-text-field
+          <v-textarea
             label="Personality"
             type="text"
             v-model="character.personality"
@@ -60,7 +60,7 @@
         </v-flex>
 
         <v-flex xs12>
-          <v-text-field
+          <v-textarea
             label="Ideals"
             type="text"
             v-model="character.ideals"
@@ -70,7 +70,7 @@
         </v-flex>
 
         <v-flex xs12>
-          <v-text-field
+          <v-textarea
             label="Bonds"
             type="text"
             v-model="character.bonds"
@@ -80,7 +80,7 @@
         </v-flex>
 
         <v-flex xs12>
-          <v-text-field
+          <v-textarea
             label="Flaws"
             type="text"
             v-model="character.flaws"
@@ -90,7 +90,7 @@
         </v-flex>
 
         <v-flex xs12>
-          <v-text-field
+          <v-textarea
             label="Backstory"
             type="text"
             v-model="character.backstory"
@@ -99,7 +99,7 @@
           />
         </v-flex>
         <v-flex xs12>
-          <v-text-field
+          <v-textarea
             label="Allies & Organizations"
             type="text"
             v-model="character.allies"

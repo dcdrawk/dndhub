@@ -28,7 +28,7 @@
           <v-flex xs12 class="pa-0">
             <v-divider class="ma-0 pa-0"></v-divider>
           </v-flex>
-          <v-flex xs6 class="pa-2 pl-3">
+          <v-flex xs6 class="pl-3 pr-0 pt-2">
             <span class="skill__name">
               {{ item.name.replace(/_/g, ' ') }}
             </span>
@@ -38,7 +38,7 @@
           </v-flex>
           <v-flex xs2 class="pt-0">
             <v-checkbox
-              class="skill__checkbox"
+              class="skill__checkbox mt-1"
               hide-details
               color="secondary"
               :input-value="characterSkills[item.name].proficient"
@@ -185,6 +185,7 @@ export default {
 //   text-transform: capitalize;
 // }
 .skill {
+  overflow: hidden;
   &:nth-child(even) {
     background-color: rgba(0, 0, 0, 0.05);
   }

@@ -131,8 +131,6 @@ export default {
      * @param {Object} - item
      */
     addItem (item) {
-      console.log('feats known add item...')
-      console.log(`${this.endpoint}/${this.characterId}`)
       this.$db.ref(`${this.endpoint}/${this.characterId}`)
         .push(item)
       this.$bus.$emit('toast', `Added the ${item.name} Feats`)
@@ -143,7 +141,6 @@ export default {
      * @param {Object} - item
      */
     handleAddItem (item) {
-      console.log('known add item')
       this.addItem(item)
       this.showDialog = false
     },
@@ -154,6 +151,7 @@ export default {
      * @param {Object} feature
      */
     handleShowDialog (feature) {
+      console.log(feature)
       if (this.showDialog) {
       } else {
         this.showDialog = true

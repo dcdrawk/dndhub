@@ -11,14 +11,24 @@
       No Items Found
     </p>
 
-    <!-- Weapons List -->
+    <!-- <div class="text-xs-center">
+      <v-pagination
+        :length="paginatorLength"
+        :total-visible="6"
+        v-model="page"
+        color="secondary"
+      />
+    </div> -->
+
+    <!-- Spells List -->
     <v-list
       v-if="filteredItems.length > 0"
       two-line
       dense
-      class="elevation-1"
+      class="elevation-1 spell-llist"
     >
-      <template v-for="(item, index) in filteredItems">
+
+      <template v-for="(item, index) in displayedItems">
         <!-- List Tile -->
         <v-list-tile
           class="list-tile"
@@ -33,9 +43,9 @@
               <v-icon
                 v-if="item.proficient"
                 color="accent"
-                class="ml-0"
+                class="ml-2"
               >
-                star
+                add_box
               </v-icon>
             </v-list-tile-title>
             <!-- AC -->
@@ -67,6 +77,7 @@
             </v-btn>
           </v-list-tile-action>
         </v-list-tile>
+
         <v-divider
           v-if="index < filteredItems.length - 1"
           :key="`${index}-divider`"
@@ -74,7 +85,59 @@
       </template>
     </v-list>
 
-    <weapons-dialog
+    <!-- {{ paginatorLength }} -->
+    <div class="pagination">
+
+    <v-card
+      class="text-xs-right flex justify-space-between elevation-3 darken-4"
+    >
+      <span class="pl-3">
+        Page {{ page }} / {{ paginatorLength }}
+      </span>
+      <span>
+        <v-btn
+          raised
+          color="primary"
+          icon
+          :disabled="disablePrev"
+          class="pagination__button"
+          @click="firstPage()"
+        >
+          <v-icon>first_page</v-icon>
+        </v-btn>
+        <v-btn
+          raised
+          color="primary"
+          icon
+          :disabled="disablePrev"
+          class="pagination__button"
+          @click="prevPage()"
+        >
+          <v-icon>chevron_left</v-icon>
+        </v-btn>
+        <v-btn
+          raised
+          color="primary"
+          icon
+          class="pagination__button"
+          @click="nextPage()"
+        >
+          <v-icon>chevron_right</v-icon>
+        </v-btn>
+        <v-btn
+          raised
+          color="primary"
+          icon
+          class="pagination__button"
+          @click="lastPage()"
+        >
+          <v-icon>last_page</v-icon>
+        </v-btn>
+      </span>
+    </v-card>
+    </div>
+
+    <spells-dialog
       :browse="browse"
       :show-dialog="showDialog"
       :item="selectedItem"
@@ -87,20 +150,20 @@
 
 <script>
 /**
- * <weapons-list></weapons-list>
- * @desc A list of weapons
+ * <spells-list></spells-list>
+ * @desc A list of spells
  */
 import character from '../../../mixins/character'
-import WeaponsDialog from './WeaponsDialog'
+import SpellsDialog from './SpellsDialog'
 import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
-  name: 'weapons-list',
+  name: 'spells-list',
 
   // Components
   components: {
-    WeaponsDialog,
+    SpellsDialog,
     SearchBar
   },
 
@@ -112,8 +175,8 @@ export default {
   // Data
   data () {
     return {
-      endpoint: 'weapons',
-      dialogEvent: 'new-weapons',
+      endpoint: 'spells',
+      dialogEvent: 'new-spells',
       tableHeaders: [
         {
           text: 'Name',
@@ -136,7 +199,11 @@ export default {
       selectedItem: undefined,
       newItem: false,
       showDialog: false,
-      search: undefined
+      search: undefined,
+
+      // Pagination
+      page: 1,
+      perPage: 400
     }
   },
 
@@ -153,6 +220,21 @@ export default {
         if (a.name > b.name) return 1
         return 0
       })
+    },
+
+    displayedItems () {
+      return this.filteredItems.slice(
+        (this.page - 1) * this.perPage,
+        this.page * this.perPage
+      )
+    },
+
+    paginatorLength () {
+      return Math.ceil(this.filteredItems.length / this.perPage)
+    },
+
+    disablePrev () {
+      return this.page === 1
     }
   },
 
@@ -169,11 +251,11 @@ export default {
      * @param {Object} - item
      */
     addItem (item) {
-      console.log('weapons known add item...')
+      console.log('spells known add item...')
       console.log(`${this.endpoint}/${this.characterId}`)
       this.$db.ref(`${this.endpoint}/${this.characterId}`)
         .push(item)
-      this.$bus.$emit('toast', `Added ${item.name} to Weapons`)
+      this.$bus.$emit('toast', `Added ${item.name} to Spells`)
     },
 
     /**
@@ -198,6 +280,38 @@ export default {
         this.selectedItem = feature || {}
         this.newItem = typeof feature === 'undefined'
       }
+    },
+
+    /**
+     * Next Page
+     * Go to the next page
+     */
+    nextPage () {
+      this.page++
+    },
+
+    /**
+     * Last Page
+     * Go to the next page
+     */
+    lastPage () {
+      this.page = this.paginatorLength
+    },
+
+    /**
+     * Last Page
+     * Go to the next page
+     */
+    firstPage () {
+      this.page = 1
+    },
+
+    /**
+     * Prev Page
+     * Go to the previous page
+     */
+    prevPage () {
+      this.page--
     }
   },
 
@@ -222,5 +336,21 @@ export default {
   // opacity: .54;
   // color: rgba(0,0,0,.54);
   text-align: right;
+}
+.spell-llist {
+  margin-bottom: 44px;
+  flex-grow: 1;
+  min-height: 100vh;
+}
+.pagination {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  // top: calc(100vh - 50px);
+  width: 100%;
+  border-top: 1px solid #555;
+  &__button {
+    max-width: 48px;
+  }
 }
 </style>

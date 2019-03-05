@@ -64,7 +64,7 @@
 
             <!-- Class Feature Description -->
             <v-flex xs12>
-              <v-text-field
+              <v-textarea
                 label="Description"
                 type="text"
                 rows="10"

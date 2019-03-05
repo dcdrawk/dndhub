@@ -2,73 +2,67 @@
   <v-container>
     <v-layout row wrap justify-center>
       <v-flex xs12 md6 lg4 xl2>
+
+        <!-- Title -->
+        <h3 class="title">
+          Welcome to DnDHub (Beta)
+        </h3>
+
+        <!-- Subheading -->
+        <p class="subheading">
+          Craft characters.<br>
+          Join friends.<br>
+          Start adventures.
+        </p>
+
+        <div v-if="!user">
+          <!-- Email field -->
+          <v-text-field
+            type="email"
+            label="Email"
+            v-model="email"
+          />
+
+          <!-- Password Field -->
+          <v-text-field
+            type="password"
+            label="Password"
+            v-model="password"
+            @keypress.enter="signIn()"
+          />
+
+          <!-- Error Message -->
+          <small
+            v-if="error"
+            class="error--text"
+          >
+            {{ error }}
+          </small>
+
+          <!-- Sign In Button -->
+          <v-btn
+            color="primary"
+            :loading="loading"
+            block
+            @click="signIn()"
+          >
+            Sign In
+          </v-btn>
+
+          <p class="text-xs-center mt-4">
+            Don't have an account yet? <router-link to="create-account">Create one</router-link>.
+          </p>
+        </div>
+
         <!-- Signed In As -->
         <v-alert
-          v-if="user"
+          v-else
           type="success"
           :value="true"
           class="mb-4"
         >
           Signed in as <strong>{{ user.email }}</strong>
         </v-alert>
-        <!-- Title -->
-        <h3 class="title">
-          Welcome to DnDHub
-        </h3>
-
-        <!-- Subheading -->
-        <p class="subheading">
-          Make characters<br>
-          Join friends<br>
-          Start adventures
-        </p>
-
-        <!-- Email field -->
-        <v-text-field
-          type="email"
-          label="Email"
-          v-model="email"
-        />
-
-        <!-- Password Field -->
-        <v-text-field
-          type="password"
-          label="Password"
-          v-model="password"
-          @keypress.enter="signIn()"
-        />
-
-        <!-- Error Message -->
-        <small
-          v-if="error"
-          class="error--text"
-        >
-          {{ error }}
-        </small>
-
-        <!-- Sign In Button -->
-        <v-btn
-          color="primary"
-          :loading="loading"
-          block
-          @click="signIn()"
-        >
-          Sign In
-        </v-btn>
-
-        <p class="text-xs-center mt-4">
-          Don't have an account yet? <router-link to="create-account">Create one</router-link>.
-        </p>
-
-        <!-- Create Account -->
-        <!-- <v-btn
-          flat
-          block
-          color="primary"
-          to="create-account"
-        >
-          Create Account
-        </v-btn> -->
       </v-flex>
       <v-flex xs12 class="actions">
       </v-flex>

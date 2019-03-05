@@ -91,11 +91,11 @@
             </v-flex>
 
             <v-flex xs12>
-              <v-select
+              <v-combobox
+                multiple
                 label="Properties"
                 :readonly="browse"
                 :value="selectedItem.properties || []"
-                tags
                 chips
                 deletable-chips
                 @input="handleInput('properties', $event)"
@@ -104,7 +104,7 @@
 
             <!-- Armor Description -->
             <v-flex xs12>
-              <v-text-field
+              <v-textarea
                 label="Description"
                 type="text"
                 rows="10"

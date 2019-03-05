@@ -2,6 +2,7 @@ const webpack = require('webpack')
 
 module.exports = {
   lintOnSave: true,
+
   chainWebpack: chainableConfig => {
     chainableConfig
       .plugin('env')
@@ -15,5 +16,11 @@ module.exports = {
           'MESSAGING_SENDER_ID'
         ]
       )
+  },
+
+  pwa: {
+    name: 'DnD Hub (Beta)',
+    themeColor: '#607D8B',
+    msTileColor: '#607D8B'
   }
 }
