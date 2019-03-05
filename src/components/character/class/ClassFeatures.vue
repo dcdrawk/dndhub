@@ -13,6 +13,7 @@
       <template v-for="(item, index) in filteredItems">
         <!-- List Tile -->
         <v-list-tile
+          :class="{ 'unobtained': +item.level > +character.level }"
           :key="index"
           @click="handleShowDialog(item)"
         >
@@ -221,5 +222,9 @@ export default {
 <style scoped lang="scss">
 .subclass {
   opacity: 0.5;
+}
+
+.unobtained {
+  opacity: 0.25;
 }
 </style>

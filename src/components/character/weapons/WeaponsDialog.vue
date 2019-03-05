@@ -46,7 +46,7 @@
               />
             </v-flex>
 
-            <v-flex xs12>
+            <v-flex xs12 class="mb-4">
               <v-switch
                 color="accent"
                 label="Profiecient"
@@ -65,9 +65,9 @@
                 type="text"
                 :readonly="browse"
                 v-model="selectedItem.damage"
-                data-vv-name="ac"
-                :error-messages="errors.collect('ac')"
-                @input="handleInput('ac', $event)"
+                data-vv-name="damage"
+                :error-messages="errors.collect('damage')"
+                @input="handleInput('damage', $event)"
               />
             </v-flex>
 

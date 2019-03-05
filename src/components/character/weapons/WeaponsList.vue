@@ -33,9 +33,9 @@
               <v-icon
                 v-if="item.proficient"
                 color="accent"
-                class="ml-2"
+                class="ml-0"
               >
-                add_box
+                star
               </v-icon>
             </v-list-tile-title>
             <!-- AC -->
