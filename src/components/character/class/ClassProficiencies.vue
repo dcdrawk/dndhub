@@ -28,7 +28,7 @@
             </v-flex>
 
             <v-flex xs12 md6>
-              <v-combobo
+              <v-combobox
                 label="Tools"
                 :value="tools"
                 multiple
@@ -39,7 +39,7 @@
             </v-flex>
 
             <v-flex xs12 md6>
-              <v-combobo
+              <v-combobox
                 label="Languages"
                 :value="languages"
                 multiple
@@ -50,7 +50,7 @@
             </v-flex>
 
             <v-flex xs12 md6>
-              <v-combobo
+              <v-combobox
                 label="Skills"
                 :value="skills"
                 multiple
@@ -61,7 +61,7 @@
             </v-flex>
 
             <v-flex xs12 md6>
-              <v-combobo
+              <v-combobox
                 label="Other"
                 :value="other"
                 multiple

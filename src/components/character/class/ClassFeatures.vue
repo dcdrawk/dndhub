@@ -113,6 +113,7 @@ export default {
     },
 
     classFeaturesArray () {
+      if (!this.classFeatures || !this.defaultClassFeatures) return
       const array = [...this.classFeatures, ...this.defaultClassFeatures]
       return array.sort((a, b) => {
         if (+a.level < +b.level) return -1
@@ -136,6 +137,7 @@ export default {
     },
 
     filteredItems () {
+      if (!this.classFeaturesArray) return
       const array = this.classFeaturesArray
       return array.filter((item) => {
         return this.search
