@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex">
+  <div class="custom-select">
     <!-- Select -->
     <v-select
       menu-props="bottom"
@@ -30,7 +30,8 @@
     <!-- Edit / Cancel Button -->
     <v-btn
       v-if="showAction && items"
-      icon class="mr-0 mt-3 edit-button"
+      icon
+      class="mr-0 mt-3 edit-button"
       :disabled="disabled"
       @click="customize()"
     >
@@ -89,8 +90,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.edit-button {
-  min-width: 36px;
-  flex: 0 1 auto;
+.custom-select {
+  display: flex;
 }
 </style>

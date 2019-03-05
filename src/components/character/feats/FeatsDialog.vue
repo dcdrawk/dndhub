@@ -53,6 +53,7 @@
                 type="text"
                 rows="10"
                 multi-line
+                auto-grow
                 :readonly="browse"
                 v-model="selectedItem.description"
                 data-vv-name="description"
@@ -162,12 +163,17 @@ export default {
   watch: {
     showDialog (newValue, oldValue) {
       if (newValue) {
-        for (let i of this.item) {
-          this.$set(this.selectedItem, i, this.item[i])
-        }
-        setTimeout(() => {
-          this.errors.clear()
-        }, 0)
+        console.log(newValue)
+        console.log(this.item)
+        this.$set(this, 'selectedItem', this.item)
+        // this.selectedItem = newValue
+        // this.$set(this.selectedItem, i, this.item[i])
+      //   for (let i of this.item) {
+      //     this.$set(this.selectedItem, i, this.item[i])
+      //   }
+      //   setTimeout(() => {
+      //     this.errors.clear()
+      //   }, 0)
       }
     }
   },
