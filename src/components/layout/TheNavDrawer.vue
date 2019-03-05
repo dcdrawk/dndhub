@@ -34,8 +34,6 @@
     </v-list>
       <v-divider class="mb-2"/>
     <v-list subheader>
-      <!-- <v-subheader>Selected Character</v-subheader> -->
-
       <!-- Character Menu -->
       <v-list-tile
         class="mb-2"
@@ -53,18 +51,19 @@
           </v-list-tile-content>
       </v-list-tile>
 
-      <v-list-tile
-        v-if="user && character"
-        v-for="(item, index) in characterMenu"
-        active-class="secondary--text"
-        :key="`character-menu-${index}`"
-        :to="item.href"
-      >
-        <v-list-tile-content>
-          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-          <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
-        </v-list-tile-content>
-      </v-list-tile>
+      <div v-if="user && character">
+        <v-list-tile
+          v-for="(item, index) in characterMenu"
+          active-class="secondary--text"
+          :key="`character-menu-${index}`"
+          :to="item.href"
+        >
+          <v-list-tile-content>
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </div>
       <v-divider
         v-if="user && character"
       />
@@ -162,9 +161,9 @@ export default {
         href: '/character/spells',
         active: false
       }, {
-        title: 'Equipment',
+        title: 'Inventory',
         icon: 'person',
-        href: '/character/equipment',
+        href: '/character/inventory',
         active: false
       }]
     }
