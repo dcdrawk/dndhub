@@ -2,7 +2,7 @@
   <div>
     <v-card flat class="mb-1">
       <v-card-text>
-        <v-container grid-list-md>
+        <v-container grid-list-md class="pa-0">
           <v-layout row wrap>
 
             <v-flex xs12 md6>

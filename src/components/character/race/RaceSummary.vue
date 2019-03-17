@@ -3,7 +3,7 @@
     <!-- Primary Class Card -->
     <v-card flat>
       <v-card-text>
-        <v-container grid-list-md>
+        <v-container grid-list-md class="pa-0">
           <v-layout row wrap>
             <!-- Primary Class Name -->
             <v-flex xs12 md6>
