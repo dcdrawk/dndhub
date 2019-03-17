@@ -173,7 +173,7 @@ export default {
       console.log(`${this.endpoint}/${this.characterId}`)
       this.$db.ref(`${this.endpoint}/${this.characterId}`)
         .push(item)
-      this.$bus.$emit('toast', `Added the ${item.name} Armor`)
+      this.$bus.$emit('toast', `Added ${item.name} to Treasure`)
     },
 
     /**
