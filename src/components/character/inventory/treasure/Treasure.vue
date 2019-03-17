@@ -1,6 +1,6 @@
 <template>
   <div v-if="filteredItems">
-    <armor-list
+    <TreasureList
       :items="items"
       @select="handleShowDialog($event)"
     />
@@ -12,19 +12,19 @@
  * <armor-known></armor-known>
  * @desc A character's known armor
  */
-import character from '../../../mixins/character'
-import ArmorDialog from './ArmorDialog'
-import ArmorList from './ArmorList'
-import SearchBar from '../../inputs/SearchBar'
+import character from '@/mixins/character'
+import TreasureDialog from './TreasureDialog'
+import TreasureList from './TreasureList'
+import SearchBar from '@/components/inputs/SearchBar'
 
 export default {
   // Name
-  name: 'armor-equipped',
+  name: 'treasure',
 
   // Components
   components: {
-    ArmorDialog,
-    ArmorList,
+    TreasureDialog,
+    TreasureList,
     SearchBar
   },
 
@@ -36,26 +36,9 @@ export default {
   // Data
   data () {
     return {
-      endpoint: 'armor',
-      // dialogEvent: 'new-feat',
-      // tableHeaders: [
-      //   {
-      //     text: 'Name',
-      //     align: 'left',
-      //     sortable: false,
-      //     value: 'name'
-      //   },
-      //   { text: 'AC', value: 'ac' }
-      // ],
-      // defaultItem: {
-      //   name: '',
-      //   description: ''
-      // },
-      // search: undefined,
+      endpoint: 'treasure',
       newItem: false,
       items: undefined
-      // selectedItem: undefined,
-      // showDialog: false
     }
   },
 
@@ -113,7 +96,7 @@ export default {
      * @param {Object} - item
      */
     handleAddItem (item) {
-      console.log('known add item')
+      // console.log('known add item')
       this.addItem(item)
       this.showDialog = false
     }

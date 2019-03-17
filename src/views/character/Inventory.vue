@@ -23,14 +23,14 @@
         v-for="(tabItem, index) in tabs"
         :key="index"
       >
-        <!-- <component
+        <component
           :is="tabItem.component"
-        /> -->
+        />
       </v-tab-item>
     </v-tabs>
 
     <!-- Floating Action Button -->
-    <v-fab-transition v-if="activeTab">
+    <v-fab-transition v-if="activeTab !== undefined">
       <v-btn
         class="spell-fab"
         v-if="tabs[activeTab].showFab"
@@ -55,8 +55,10 @@
  * <spells></spells>
  * @desc A character's spells, tabs for equipped and browsing
  */
-import character from '../../mixins/character'
-// import SpellsBrowse from '../../components/character/spells/SpellsBrowse'
+import character from '@/mixins/character'
+import Equipment from '../../components/character/inventory/equipment/Equipment'
+import Treasure from '../../components/character/inventory/treasure/Treasure'
+import Currency from '../../components/character/inventory/Currency'
 // import SpellsEquipped from '../../components/character/spells/SpellsEquipped'
 // import SpellsCasting from '../../components/character/spells/SpellsCasting'
 
@@ -66,6 +68,9 @@ export default {
 
   // Components
   components: {
+    Equipment,
+    Treasure,
+    Currency
     // SpellsBrowse,
     // SpellsEquipped,
     // SpellsCasting
@@ -82,20 +87,22 @@ export default {
       activeTab: undefined,
       tabs: [{
         title: 'Equipment',
-        component: 'spells-equipped',
+        component: 'Equipment',
         showFab: true,
         fabAction: () => {
-          console.log('fab action')
-          this.$bus.$emit('new-spell')
+          this.$bus.$emit('new-equipment')
         }
       }, {
         title: 'Treasure',
-        component: 'spells-browse',
-        showFab: false
+        component: 'Treasure',
+        showFab: true,
+        fabAction: () => {
+          this.$bus.$emit('new-treasure')
+        }
       }, {
         title: 'Currency',
-        component: 'spells-casting'
-        // showFab: false
+        component: 'Currency',
+        showFab: false
       }]
     }
   }
