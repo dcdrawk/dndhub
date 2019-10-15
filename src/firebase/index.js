@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Firebase from 'firebase'
-import VueFire from 'vuefire'
+import * as VueFire from 'vuefire'
 
 const firebaseConfig = {
   apiKey: process.env.API_KEY,

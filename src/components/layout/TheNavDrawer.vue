@@ -10,59 +10,59 @@
   >
     <!-- Nav Drawer List -->
     <v-list>
-      <v-list-tile>
-        <v-list-tile-content>
+      <v-list-item>
+        <v-list-item-content>
 
         <!-- Nav Drawer List Title -->
-        <v-list-tile-title class="title">
+        <v-list-item-title class="title">
           DnDHub
-        </v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
+        </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
 
       <!-- Default / User Menu -->
-      <v-list-tile
+      <v-list-item
         v-for="(item, index) in menu"
         :key="index"
         :to="item.href"
       >
-        <v-list-tile-content>
-          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-          <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
-        </v-list-tile-content>
-      </v-list-tile>
+        <v-list-item-content>
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <v-list-item-subtitle>{{ item.subtitle }}</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
     </v-list>
       <v-divider class="mb-2"/>
     <v-list subheader>
       <!-- Character Menu -->
-      <v-list-tile
+      <v-list-item
         class="mb-2"
         v-if="user && character"
       >
-        <v-list-tile-content>
+        <v-list-item-content>
 
           <!-- Nav Drawer List Title -->
-          <v-list-tile-sub-title>
+          <v-list-item-subtitle>
             Selected Character
-          </v-list-tile-sub-title>
-          <v-list-tile-title class="title">
+          </v-list-item-subtitle>
+          <v-list-item-title class="title">
             {{ character.name }}
-          </v-list-tile-title>
-          </v-list-tile-content>
-      </v-list-tile>
+          </v-list-item-title>
+          </v-list-item-content>
+      </v-list-item>
 
       <div v-if="user && character">
-        <v-list-tile
+        <v-list-item
           v-for="(item, index) in characterMenu"
           active-class="secondary--text"
           :key="`character-menu-${index}`"
           :to="item.href"
         >
-          <v-list-tile-content>
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-            <v-list-tile-sub-title>{{ item.subtitle }}</v-list-tile-sub-title>
-          </v-list-tile-content>
-        </v-list-tile>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-subtitle>{{ item.subtitle }}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
       </div>
       <v-divider
         v-if="user && character"

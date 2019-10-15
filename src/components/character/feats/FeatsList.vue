@@ -20,25 +20,25 @@
     >
       <template v-for="(item, index) in filteredItems">
         <!-- List Tile -->
-        <v-list-tile
+        <v-list-item
           class="list-tile"
           :key="item.title"
           @click="handleShowDialog(item)"
         >
           <!-- Content -->
-          <v-list-tile-content>
+          <v-list-item-content>
             <!-- Name -->
-            <v-list-tile-title>
+            <v-list-item-title>
               {{ item.name }}
-            </v-list-tile-title>
+            </v-list-item-title>
             <!-- AC -->
-            <v-list-tile-sub-title>
+            <v-list-item-subtitle>
               {{ item.description }}
-            </v-list-tile-sub-title>
-          </v-list-tile-content>
+            </v-list-item-subtitle>
+          </v-list-item-content>
 
           <!-- Feat Add -->
-          <v-list-tile-action v-if="browse">
+          <v-list-item-action v-if="browse">
             <v-btn
               icon
               color="secondary"
@@ -46,8 +46,8 @@
             >
               <v-icon>add</v-icon>
             </v-btn>
-          </v-list-tile-action>
-        </v-list-tile>
+          </v-list-item-action>
+        </v-list-item>
         <v-divider
           v-if="index < filteredItems.length - 1"
           :key="`${index}-divider`"

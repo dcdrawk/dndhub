@@ -31,16 +31,16 @@
       <virtual-scroller class="scroller" :items="displayedItems" itemHeight="61">
         <template slot-scope="props">
           <!-- List Tile -->
-          <v-list-tile
+          <v-list-item
             class="list-tile"
             :key="props.itemKey"
             @click="handleShowDialog(props.item)"
           >
             <!-- Content -->
 
-            <v-list-tile-content>
+            <v-list-item-content>
               <!-- Name -->
-              <v-list-tile-title>
+              <v-list-item-title>
                 {{ props.item.name }}
                 <span
                   v-if="props.item.ritual == 1"
@@ -56,24 +56,24 @@
                   C
                 </span>
 
-              </v-list-tile-title>
-              <v-list-tile-sub-title class="">
+              </v-list-item-title>
+              <v-list-item-subtitle class="">
                 {{ props.item.class }}
-              </v-list-tile-sub-title>
-            </v-list-tile-content>
+              </v-list-item-subtitle>
+            </v-list-item-content>
 
             <!-- Spell Level / School -->
-            <v-list-tile-content>
-              <v-list-tile-title class="right-text">
+            <v-list-item-content>
+              <v-list-item-title class="right-text">
                 {{ props.item.level }}
-              </v-list-tile-title>
-              <v-list-tile-sub-title class="right-text">
+              </v-list-item-title>
+              <v-list-item-subtitle class="right-text">
                 {{ props.item.school }}
-              </v-list-tile-sub-title>
-            </v-list-tile-content>
+              </v-list-item-subtitle>
+            </v-list-item-content>
 
             <!-- Feat Add -->
-            <v-list-tile-action v-if="browse">
+            <v-list-item-action v-if="browse">
               <v-btn
                 icon
                 color="accent"
@@ -81,8 +81,8 @@
               >
                 <v-icon>add</v-icon>
               </v-btn>
-            </v-list-tile-action>
-          </v-list-tile>
+            </v-list-item-action>
+          </v-list-item>
 
           <v-divider></v-divider>
         </template>

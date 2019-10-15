@@ -8,24 +8,24 @@
       class="character-list elevation-1"
     >
       <!-- Traits List -->
-      <v-list-tile
+      <v-list-item
         v-for="(item, key) in traits"
         :key="key"
         @click="handleShowDialog(item)"
       >
         <!-- Content -->
-        <v-list-tile-content>
+        <v-list-item-content>
           <!-- Trait Name -->
-          <v-list-tile-title>
+          <v-list-item-title>
             {{ item.name }}
-          </v-list-tile-title>
+          </v-list-item-title>
 
           <!-- Character Details -->
-          <v-list-tile-sub-title>
+          <v-list-item-subtitle>
             {{ item.source }}
-          </v-list-tile-sub-title>
-        </v-list-tile-content>
-      </v-list-tile>
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
     </v-list>
     <race-trait-dialog
       :show-dialog="showDialog"

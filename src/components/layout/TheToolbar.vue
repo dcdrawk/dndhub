@@ -1,6 +1,6 @@
 <template>
   <!-- Toolbar -->
-  <v-toolbar
+  <v-app-bar
     class="the-toolbar"
     app
     fixed
@@ -9,7 +9,7 @@
     scroll-off-screen
   >
     <!-- Toolbar Side Icon -->
-    <v-toolbar-side-icon
+    <v-app-bar-nav-icon
       @click="$emit('toggle')"
     />
 
@@ -31,16 +31,16 @@
       <!-- Menu List -->
       <v-list light>
         <!-- Sign Out -->
-        <v-list-tile
+        <v-list-item
           @click="signOut()"
         >
-          <v-list-tile-title>
+          <v-list-item-title>
             Sign Out
-          </v-list-tile-title>
-        </v-list-tile>
+          </v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-menu>
-  </v-toolbar>
+  </v-app-bar>
 </template>
 
 <script>

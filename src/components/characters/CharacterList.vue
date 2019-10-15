@@ -8,29 +8,29 @@
       class="character-list elevation-1"
     >
       <!-- List Tile -->
-      <v-list-tile
+      <v-list-item
         v-for="(item, key) in characters"
         :key="key"
         @click="selectCharacter(key)"
       >
         <!-- Checkbox -->
-        <v-list-tile-action>
+        <v-list-item-action>
           <v-checkbox
             color="secondary"
             true-value="testdd"
             :input-value="characterId === key"
           />
-        </v-list-tile-action>
+        </v-list-item-action>
 
         <!-- Content -->
-        <v-list-tile-content>
+        <v-list-item-content>
           <!-- Character Name -->
-          <v-list-tile-title>
+          <v-list-item-title>
             {{ item.name }}
-          </v-list-tile-title>
+          </v-list-item-title>
 
           <!-- Character Details -->
-          <v-list-tile-sub-title>
+          <v-list-item-subtitle>
             Level {{ item.level }} {{ item.race }}
             <span
               v-if="item.enableMulticlass"
@@ -45,10 +45,10 @@
             <span v-else-if="item.classes">
               {{ item.classes[Object.keys(item.classes)[0]].name }}
             </span>
-          </v-list-tile-sub-title>
-        </v-list-tile-content>
+          </v-list-item-subtitle>
+        </v-list-item-content>
 
-        <v-list-tile-action>
+        <v-list-item-action>
           <!-- List Menu -->
           <v-menu v-if="user" left :z-index="5">
             <!-- Menu Activator -->
@@ -59,28 +59,28 @@
             <!-- Menu List -->
             <v-list dense>
               <!-- Duplicate Character -->
-              <v-list-tile
+              <v-list-item
                 @click="duplicateCharacter(item)"
               >
-                <v-list-tile-title>
+                <v-list-item-title>
                   <v-icon class="mr-2">content_copy</v-icon>
                   Duplicate
-                </v-list-tile-title>
-              </v-list-tile>
+                </v-list-item-title>
+              </v-list-item>
 
               <!-- Delete -->
-              <v-list-tile
+              <v-list-item
                 @click="showDeleteDialog(item, key)"
               >
-                <v-list-tile-title>
+                <v-list-item-title>
                   <v-icon class="mr-2">delete</v-icon>
                   Delete
-                </v-list-tile-title>
-              </v-list-tile>
+                </v-list-item-title>
+              </v-list-item>
             </v-list>
           </v-menu>
-        </v-list-tile-action>
-      </v-list-tile>
+        </v-list-item-action>
+      </v-list-item>
     </v-list>
 
     <!-- Delete Character Dialog -->

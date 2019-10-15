@@ -12,25 +12,25 @@
     >
       <template v-for="(item, index) in filteredItems">
         <!-- List Tile -->
-        <v-list-tile
+        <v-list-item
           :class="{ 'unobtained': +item.level > +character.level }"
           :key="index"
           @click="handleShowDialog(item)"
         >
           <!-- Content -->
-          <v-list-tile-content>
+          <v-list-item-content>
             <!-- Character Name -->
-            <v-list-tile-title>
+            <v-list-item-title>
               {{ item.name }}
-            </v-list-tile-title>
+            </v-list-item-title>
 
             <!-- Character Details -->
-            <v-list-tile-sub-title>
+            <v-list-item-subtitle>
               Level {{ item.level }}
               <span class="subclass">{{ item.subclass || 'Custom' }} </span>
-            </v-list-tile-sub-title>
-          </v-list-tile-content>
-        </v-list-tile>
+            </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
         <v-divider
           v-if="index < filteredItems.length - 1"
           :key="`${index}-divider`"
