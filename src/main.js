@@ -5,29 +5,15 @@ import store from './store'
 import './registerServiceWorker'
 import eventBus from './eventBus'
 import firebase from './firebase'
-import * as VeeValidate from 'vee-validate'
-// import Vuetify from 'vuetify'
+import { ValidationProvider, ValidationObserver } from 'vee-validate'
+import '@/plugins/vee-validate'
 import vuetify from '@/plugins/vuetify'
-// import 'vuetify/dist/vuetify.min.css'
-// import colors from 'vuetify/es5/util/colors'
 import VueVirtualScroller from 'vue-virtual-scroller'
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 
 Vue.config.productionTip = false
-
-// Vue.use(Vuetify, {
-//   theme: {
-//     primary: colors.blueGrey.base,
-//     secondary: colors.blue.darken1,
-//     accent: colors.blue.accent2,
-//     error: colors.red.darken3,
-//     info: colors.cyan.accent3,
-//     success: colors.green.base,
-//     warning: colors.deepOrange.base
-//   }
-// })
-
-Vue.use(VeeValidate)
+Vue.component('ValidationProvider', ValidationProvider)
+Vue.component('ValidationObserver', ValidationObserver)
 Vue.use(eventBus)
 Vue.use(firebase)
 Vue.use(VueVirtualScroller)

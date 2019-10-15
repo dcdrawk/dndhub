@@ -1,4 +1,5 @@
 import CharacterCRUD from '../models/characterCRUD'
+
 export default {
   // Computed
   computed: {

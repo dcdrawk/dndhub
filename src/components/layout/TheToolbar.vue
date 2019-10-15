@@ -23,10 +23,12 @@
 
     <!-- Toolbar Menu (if a user is signed in)-->
     <v-menu v-if="user" attach light left>
-      <!-- Menu Activator -->
-      <v-btn color="primary" class="menu-toggle" dark icon slot="activator">
-        <v-icon>more_vert</v-icon>
-      </v-btn>
+      <template v-slot:activator="{ on }">
+        <!-- Menu Activator -->
+        <v-btn color="primary" class="menu-toggle" dark icon slot="activator">
+          <v-icon>more_vert</v-icon>
+        </v-btn>
+      </template>
 
       <!-- Menu List -->
       <v-list light>

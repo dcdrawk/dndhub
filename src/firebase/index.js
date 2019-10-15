@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Firebase from 'firebase'
+import Firebase from 'firebase/app'
 import * as VueFire from 'vuefire'
 
 const firebaseConfig = {

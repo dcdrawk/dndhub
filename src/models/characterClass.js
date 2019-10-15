@@ -1,4 +1,5 @@
-import Firebase from 'firebase'
+import Firebase from 'firebase/app'
+import 'firebase/auth'
 // import Vue from 'vue'
 // import Store from '../store'
 

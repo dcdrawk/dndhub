@@ -1,4 +1,6 @@
-import Firebase from 'firebase'
+import Firebase from 'firebase/app'
+import 'firebase/database'
+
 // import Vue from 'vue'
 import Store from '../store'
 import CharacterClass from './characterClass'

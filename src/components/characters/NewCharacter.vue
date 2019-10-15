@@ -2,14 +2,14 @@
   <v-dialog
     :value="showDialog"
     fullscreen
+    hide-overlay
     transition="dialog-bottom-transition"
-    :overlay="false"
     scrollable
     @input="handleInput($event)"
   >
-    <v-card tile>
+    <v-card>
       <!-- Dialog Toolbar -->
-      <v-toolbar card dark color="primary">
+      <v-toolbar dark short :max-height="56" color="primary">
         <!-- Close Button -->
         <v-btn
           icon
@@ -23,33 +23,33 @@
         <v-toolbar-title>
           Create New Character
         </v-toolbar-title>
-        <v-spacer></v-spacer>
       </v-toolbar>
       <v-card-text>
-        <v-container class="pa-0">
+        <ValidationObserver ref="observer" v-slot="{ invalid }">
+        <v-container class="pa-0 pt-4">
           <v-layout row wrap>
             <v-flex xs12>
-              <v-text-field
-                label="Character Name"
-                type="text"
-                required
-                v-model="character.name"
-                v-validate="'required'"
-                data-vv-name="name"
-                :error-messages="errors.collect('name')"
-              />
+              <ValidationProvider name="Character Name" rules="required" v-slot="{ errors }">
+                <v-text-field
+                  label="Character Name"
+                  type="text"
+                  required
+                  v-model="character.name"
+                  :error-messages="errors[0]"
+                />
+              </ValidationProvider>
             </v-flex>
 
             <v-flex xs6 class="pr-1">
-              <v-text-field
-                label="Level"
-                type="number"
-                required
-                v-model="character.level"
-                v-validate="'required'"
-                data-vv-name="level"
-                :error-messages="errors.collect('level')"
-              />
+              <ValidationProvider rules="required" v-slot="{ errors }">
+                <v-text-field
+                  label="Level"
+                  type="number"
+                  required
+                  v-model="character.level"
+                  :error-messages="errors[0]"
+                />
+              </ValidationProvider>
             </v-flex>
 
             <v-flex xs6 class="pl-1">
@@ -58,26 +58,23 @@
                 type="number"
                 required
                 v-model="character.experience"
-                v-validate="'required'"
-                data-vv-name="experience"
-                :error-messages="errors.collect('experience')"
               />
             </v-flex>
 
             <v-flex xs12 md6>
-              <custom-select
-                label="Race"
-                v-model="character.race"
-                :items="races"
-                item-text="name"
-                item-value="name"
-                :custom="character.custom.race"
-                required
-                v-validate="'required'"
-                data-vv-name="race"
-                :error-messages="errors.collect('race')"
-                @customize="handleCustomize('race')"
-              />
+              <ValidationProvider rules="required" v-slot="{ errors }">
+                <custom-select
+                  label="Race"
+                  v-model="character.race"
+                  :items="races"
+                  item-text="name"
+                  item-value="name"
+                  :custom="character.custom.race"
+                  required
+                  :error-messages="errors[0]"
+                  @customize="handleCustomize('race')"
+                />
+              </ValidationProvider>
             </v-flex>
 
             <v-flex xs12 md6>
@@ -94,19 +91,19 @@
             </v-flex>
 
             <v-flex xs12 md6>
-              <custom-select
-                label="Class"
-                v-model="characterClasses[0].name"
-                :items="classes"
-                item-text="name"
-                item-value="name"
-                :custom="characterClasses[0].custom.name"
-                v-validate="'required'"
-                data-vv-name="class"
-                :error-messages="errors.collect('class')"
-                @input="validateField('class')"
-                @customize="customizeClass('name')"
-              />
+              <ValidationProvider rules="required" v-slot="{ errors }">
+                <custom-select
+                  label="Class"
+                  v-model="characterClasses[0].name"
+                  :items="classes"
+                  item-text="name"
+                  item-value="name"
+                  :custom="characterClasses[0].custom.name"
+                  :error-messages="errors[0]"
+                  @input="validateField('class')"
+                  @customize="customizeClass('name')"
+                />
+              </ValidationProvider>
             </v-flex>
 
             <v-flex xs12 md6>
@@ -152,7 +149,7 @@
               <v-btn
                 block
                 color="secondary"
-                :disabled="!isFormValid"
+                :disabled="invalid"
                 :loading="loading"
                 @click="createCharacter()"
               >
@@ -161,6 +158,7 @@
             </v-flex>
           </v-layout>
         </v-container>
+        </ValidationObserver>
         <!-- test -->
       </v-card-text>
 
@@ -250,9 +248,10 @@ export default {
     },
 
     isFormValid () {
-      return Object.keys(this.fields).every(
-        key => this.fields[key].valid
-      )
+      return false
+      // return Object.keys(this.fields).every(
+      //   key => this.fields[key].valid
+      // )
     },
 
     user () {
@@ -298,7 +297,10 @@ export default {
      */
     async createCharacter () {
       try {
-        await this.validate()
+        // await this.validate()
+        const isValid = await this.$refs.observer.validate()
+        if (!isValid) return
+
         const characterValue = await CharacterCRUD.create(
           this.character, this.characterClasses
         )

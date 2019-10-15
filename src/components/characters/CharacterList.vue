@@ -51,10 +51,12 @@
         <v-list-item-action>
           <!-- List Menu -->
           <v-menu v-if="user" left :z-index="5">
-            <!-- Menu Activator -->
-            <v-btn class="menu-toggle" icon slot="activator">
-              <v-icon>more_vert</v-icon>
-            </v-btn>
+            <template v-slot:activator="{ on }">
+              <!-- Menu Activator -->
+              <v-btn class="menu-toggle" icon v-on="on">
+                <v-icon>more_vert</v-icon>
+              </v-btn>
+            </template>
 
             <!-- Menu List -->
             <v-list dense>
