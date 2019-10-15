@@ -17,7 +17,7 @@ const opts = {
       dark: {
         primary: colors.blueGrey.base,
         secondary: colors.blue.darken1,
-        accent: colors.blue.accent2,
+        accent: colors.amber.darken1,
         error: colors.red.darken3,
         info: colors.cyan.accent3,
         success: colors.green.base,

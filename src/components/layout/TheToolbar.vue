@@ -25,7 +25,7 @@
     <v-menu v-if="user" attach light left>
       <template v-slot:activator="{ on }">
         <!-- Menu Activator -->
-        <v-btn color="primary" class="menu-toggle" dark icon slot="activator">
+        <v-btn class="menu-toggle" dark icon v-on="on">
           <v-icon>more_vert</v-icon>
         </v-btn>
       </template>

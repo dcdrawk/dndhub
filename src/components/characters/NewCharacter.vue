@@ -41,7 +41,7 @@
             </v-flex>
 
             <v-flex xs6 class="pr-1">
-              <ValidationProvider rules="required" v-slot="{ errors }">
+              <ValidationProvider name="Level" rules="required" v-slot="{ errors }">
                 <v-text-field
                   label="Level"
                   type="number"
@@ -62,7 +62,7 @@
             </v-flex>
 
             <v-flex xs12 md6>
-              <ValidationProvider rules="required" v-slot="{ errors }">
+              <ValidationProvider name="Race" rules="required" v-slot="{ errors }">
                 <custom-select
                   label="Race"
                   v-model="character.race"
@@ -91,7 +91,7 @@
             </v-flex>
 
             <v-flex xs12 md6>
-              <ValidationProvider rules="required" v-slot="{ errors }">
+              <ValidationProvider name="Class"  rules="required" v-slot="{ errors }">
                 <custom-select
                   label="Class"
                   v-model="characterClasses[0].name"

@@ -3,11 +3,10 @@
   <v-tabs
     v-if="character"
     v-model="activeTab"
-    color="secondary"
-    dark
-    slider-color="yellow"
+    slider-color="accent"
     centered
     grow
+    background-color="secondary"
     class="page-tabs elevation-1"
   >
     <v-tab

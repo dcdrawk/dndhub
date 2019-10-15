@@ -6,44 +6,48 @@
           <v-layout row wrap>
             <v-flex xs12>
               <!-- Character Name -->
-              <v-text-field
-                label="Character Name"
-                type="text"
-                required
-                :value="character.name"
-                v-validate="'required'"
-                data-vv-name="name"
-                :error-messages="errors.collect('name')"
-                @input="updateCharacter('name', $event)"
-              />
+              <ValidationProvider name="Character Name" rules="required" v-slot="{ errors }">
+                <v-text-field
+                  label="Character Name"
+                  type="text"
+                  required
+                  :value="character.name"
+                  :error-messages="errors[0]"
+                  @input="updateCharacter('name', $event)"
+                />
+              </ValidationProvider>
             </v-flex>
 
             <!-- Character Level -->
             <v-flex xs6 class="pr-1">
-              <v-text-field
-                label="Level"
-                type="number"
-                required
-                :value="character.level"
-                v-validate="'required'"
-                data-vv-name="level"
-                :error-messages="errors.collect('level')"
-                @input="updateCharacter('level', $event)"
-              />
+              <ValidationProvider name="Level" rules="required" v-slot="{ errors }">
+                <v-text-field
+                  label="Level"
+                  type="number"
+                  required
+                  :value="character.level"
+                  v-validate="'required'"
+                  data-vv-name="level"
+                  :error-messages="errors[0]"
+                  @input="updateCharacter('level', $event)"
+                />
+              </ValidationProvider>
             </v-flex>
 
             <!-- Character Experience -->
             <v-flex xs6 class="pl-2">
-              <v-text-field
-                label="Experience"
-                type="number"
-                required
-                :value="character.experience"
-                v-validate="'required'"
-                data-vv-name="experience"
-                :error-messages="errors.collect('experience')"
-                @input="updateCharacter('experience', $event)"
-              />
+              <ValidationProvider name="Experience" rules="required" v-slot="{ errors }">
+                <v-text-field
+                  label="Experience"
+                  type="number"
+                  required
+                  :value="character.experience"
+                  v-validate="'required'"
+                  data-vv-name="experience"
+                  :error-messages="errors[0]"
+                  @input="updateCharacter('experience', $event)"
+                />
+              </ValidationProvider>
             </v-flex>
           </v-layout>
         </v-container>
@@ -67,7 +71,7 @@
             <v-flex xs6>
               <v-text-field
                 label="Gender"
-                type="number"
+                type="text"
                 :value="character.gender"
                 @input="updateCharacter('gender', $event)"
               />
@@ -77,7 +81,7 @@
             <v-flex xs6>
               <v-text-field
                 label="Size"
-                type="number"
+                type="text"
                 :value="character.size"
                 @input="updateCharacter('size', $event)"
               />
@@ -87,7 +91,7 @@
             <v-flex xs6>
               <v-text-field
                 label="Age"
-                type="number"
+                type="text"
                 :value="character.age"
                 @input="updateCharacter('age', $event)"
               />
@@ -107,7 +111,7 @@
             <v-flex xs6>
               <v-text-field
                 label="Weight"
-                type="number"
+                type="text"
                 :value="character.weight"
                 @input="updateCharacter('weight', $event)"
               />
