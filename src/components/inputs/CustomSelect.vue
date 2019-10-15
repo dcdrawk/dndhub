@@ -5,6 +5,8 @@
       menu-props="bottom"
       v-if="!custom && items || disabled"
       class="pb-0"
+      color="secondary"
+      item-color="white"
       :label="label"
       :items="items"
       :item-text="itemText"
@@ -20,6 +22,7 @@
       v-else
       ref="input"
       class="pb-0"
+      color="secondary"
       :readonly="disabled"
       :name="name"
       :label="label"

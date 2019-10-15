@@ -45,13 +45,13 @@
       </v-card-text>
     </v-card>
 
-        <!-- <v-divider/> -->
+    <v-divider/>
     <v-card flat>
       <v-card-text>
         <v-container grid-list-md class="pa-0">
           <v-layout row wrap>
             <v-flex xs12>
-              <h3>Personality Traits</h3>
+              <h2>Personality Traits</h2>
             </v-flex>
 
             <v-flex xs12>

@@ -11,6 +11,7 @@
                   label="Character Name"
                   type="text"
                   required
+                  color="secondary"
                   :value="character.name"
                   :error-messages="errors[0]"
                   @input="updateCharacter('name', $event)"
@@ -25,9 +26,8 @@
                   label="Level"
                   type="number"
                   required
+                  color="secondary"
                   :value="character.level"
-                  v-validate="'required'"
-                  data-vv-name="level"
                   :error-messages="errors[0]"
                   @input="updateCharacter('level', $event)"
                 />
@@ -41,9 +41,8 @@
                   label="Experience"
                   type="number"
                   required
+                  color="secondary"
                   :value="character.experience"
-                  v-validate="'required'"
-                  data-vv-name="experience"
                   :error-messages="errors[0]"
                   @input="updateCharacter('experience', $event)"
                 />
@@ -64,7 +63,7 @@
 
             <!-- Heading -->
             <v-flex xs12>
-              <h3>Appearance</h3>
+              <h2>Appearance</h2>
             </v-flex>
 
             <!-- Gender -->
@@ -72,6 +71,7 @@
               <v-text-field
                 label="Gender"
                 type="text"
+                color="secondary"
                 :value="character.gender"
                 @input="updateCharacter('gender', $event)"
               />
@@ -82,6 +82,7 @@
               <v-text-field
                 label="Size"
                 type="text"
+                color="secondary"
                 :value="character.size"
                 @input="updateCharacter('size', $event)"
               />
@@ -92,6 +93,7 @@
               <v-text-field
                 label="Age"
                 type="text"
+                color="secondary"
                 :value="character.age"
                 @input="updateCharacter('age', $event)"
               />
@@ -102,6 +104,7 @@
               <v-text-field
                 label="Height"
                 type="text"
+                color="secondary"
                 :value="character.height"
                 @input="updateCharacter('height', $event)"
               />
@@ -112,6 +115,7 @@
               <v-text-field
                 label="Weight"
                 type="text"
+                color="secondary"
                 :value="character.weight"
                 @input="updateCharacter('weight', $event)"
               />
@@ -122,6 +126,7 @@
               <v-text-field
                 label="Eyes"
                 type="text"
+                color="secondary"
                 :value="character.eyes"
                 @input="updateCharacter('eyes', $event)"
               />
@@ -132,6 +137,7 @@
               <v-text-field
                 label="Skin Color"
                 type="text"
+                color="secondary"
                 :value="character.skin"
                 @input="updateCharacter('skin', $event)"
               />
@@ -142,6 +148,7 @@
               <v-text-field
                 label="Hair"
                 type="text"
+                color="secondary"
                 :value="character.hair"
                 @input="updateCharacter('hair', $event)"
               />
@@ -152,6 +159,7 @@
               <v-textarea
                 label="Description"
                 type="text"
+                color="secondary"
                 v-model="character.description"
                 multi-line
                 @input="updateCharacter('description', $event)"
