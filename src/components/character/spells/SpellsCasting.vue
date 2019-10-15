@@ -197,7 +197,7 @@ export default {
 
   methods: {
     handleUpdateSpellSlot (level, index, value) {
-      const slots = {...this.characterSpellSlots}
+      const slots = { ...this.characterSpellSlots }
       slots[level][index] = value
       this.updateCharacter('spellSlots', slots)
     }

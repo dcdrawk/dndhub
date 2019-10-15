@@ -83,7 +83,7 @@ export default {
      * @desc make a copy of the user, make text fields editable
      */
     enableEditing () {
-      this.userCopy = {...this.user}
+      this.userCopy = { ...this.user }
       this.readonly = false
     },
 

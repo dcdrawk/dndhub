@@ -154,7 +154,7 @@ export default {
      * Handle Input
      */
     handleAdd (level) {
-      const slots = {...this.characterSpellSlots}
+      const slots = { ...this.characterSpellSlots }
       if (!slots[level]) slots[level] = []
       slots[level].push('0')
       this.updateCharacter('spellSlots', slots)
@@ -164,7 +164,7 @@ export default {
      * Handle Input
      */
     handleSubtract (level) {
-      const slots = {...this.characterSpellSlots}
+      const slots = { ...this.characterSpellSlots }
       slots[level].pop()
       this.updateCharacter('spellSlots', slots)
     },

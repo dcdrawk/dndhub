@@ -212,7 +212,7 @@ export default {
     this.getClassFeatures()
     // Listen for events from the parent component
     this.$bus.$on('new-class-feat', () => {
-      this.selectedItem = {...this.defaultItem}
+      this.selectedItem = { ...this.defaultItem }
       this.showDialog = true
     })
   }

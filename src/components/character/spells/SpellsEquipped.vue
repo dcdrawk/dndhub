@@ -142,7 +142,7 @@ export default {
     this.getItems()
     // // Listen for events from the parent component
     this.$bus.$on(this.dialogEvent, () => {
-      this.selectedItem = {...this.defaultItem}
+      this.selectedItem = { ...this.defaultItem }
       this.newItem = true
       this.showDialog = true
     })

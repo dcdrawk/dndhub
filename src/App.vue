@@ -69,6 +69,7 @@ export default {
     url(/icons/MaterialIcons-Regular.woff) format('woff'),
     url(/icons/MaterialIcons-Regular.ttf) format('truetype');
 }
+
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;

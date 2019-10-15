@@ -217,7 +217,7 @@ export default {
     this.getRaceTraits()
     // Listen for events from the parent component
     this.$bus.$on('new-race-trait', () => {
-      this.selectedItem = {...this.defaultItem}
+      this.selectedItem = { ...this.defaultItem }
       this.showDialog = true
     })
   }

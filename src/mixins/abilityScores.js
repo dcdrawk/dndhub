@@ -97,7 +97,7 @@ export default {
       this.$db.ref(
         `abilityScores/${this.characterId}/${score}`
       ).update(update)
-      const abilityScores = {...this.characterScores}
+      const abilityScores = { ...this.characterScores }
       abilityScores[score][field] = value
       this.$store.commit('update_character_field', {
         field: 'abilityScores',
@@ -115,7 +115,7 @@ export default {
       this.$db.ref(
         `savingThrows/${this.characterId}/${score}`
       ).update(update)
-      const savingThrows = {...this.characterSaves}
+      const savingThrows = { ...this.characterSaves }
       savingThrows[score][field] = value
       this.$store.commit('update_character_field', {
         field: 'savingThrows',

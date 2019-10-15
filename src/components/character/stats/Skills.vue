@@ -158,7 +158,7 @@ export default {
       this.$db.ref(
         `skills/${this.characterId}/${skill}`
       ).update(update)
-      const skills = {...this.characterSkills}
+      const skills = { ...this.characterSkills }
       skills[skill][field] = value
       this.$store.commit('update_character_field', {
         field: 'skills',
