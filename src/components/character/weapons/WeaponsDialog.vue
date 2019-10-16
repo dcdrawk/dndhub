@@ -175,7 +175,7 @@
 import character from '../../../mixins/character'
 import proficiencyBonus from '../../../mixins/proficiencyBonus'
 import validation from '../../../mixins/validation'
-import CustomSelect from '../../inputs/CustomSelect'
+// import CustomSelect from '../../inputs/CustomSelect'
 import debounce from 'debounce'
 
 export default {
@@ -184,7 +184,7 @@ export default {
 
   // Components
   components: {
-    CustomSelect
+    // CustomSelect
   },
 
   // Mixins

@@ -14,9 +14,9 @@
  * <armor-browse></armor-browse>
  * @desc Browse and equip armor
  */
-import ArmorDialog from './ArmorDialog'
+// import ArmorDialog from './ArmorDialog'
 import ArmorList from './ArmorList'
-import SearchBar from '../../inputs/SearchBar'
+// import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
@@ -24,9 +24,9 @@ export default {
 
   // Components
   components: {
-    ArmorDialog,
-    ArmorList,
-    SearchBar
+    // ArmorDialog,
+    ArmorList
+    // SearchBar
   },
 
   // Data

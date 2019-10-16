@@ -209,7 +209,7 @@ import proficiencyBonus from '../../../mixins/proficiencyBonus'
 import validation from '../../../mixins/validation'
 import spells from '../../../mixins/spells'
 import classes from '../../../mixins/game-data/classes'
-import CustomSelect from '../../inputs/CustomSelect'
+// import CustomSelect from '../../inputs/CustomSelect'
 import debounce from 'debounce'
 
 export default {
@@ -218,7 +218,7 @@ export default {
 
   // Components
   components: {
-    CustomSelect
+    // CustomSelect
   },
 
   // Mixins

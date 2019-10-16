@@ -13,9 +13,9 @@
  * @desc A character's known weapons
  */
 import character from '../../../mixins/character'
-import WeaponsDialog from './WeaponsDialog'
+// import WeaponsDialog from './WeaponsDialog'
 import WeaponsList from './WeaponsList'
-import SearchBar from '../../inputs/SearchBar'
+// import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
@@ -23,9 +23,9 @@ export default {
 
   // Components
   components: {
-    WeaponsDialog,
-    WeaponsList,
-    SearchBar
+    // WeaponsDialog,
+    WeaponsList
+    // SearchBar
   },
 
   // Mixins

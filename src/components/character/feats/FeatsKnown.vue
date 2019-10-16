@@ -15,8 +15,8 @@
  */
 import character from '../../../mixins/character'
 import FeatsList from './FeatsList'
-import FeatsDialog from './FeatsDialog'
-import SearchBar from '../../inputs/SearchBar'
+// import FeatsDialog from './FeatsDialog'
+// import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
@@ -24,9 +24,9 @@ export default {
 
   // Components
   components: {
-    FeatsList,
-    FeatsDialog,
-    SearchBar
+    FeatsList
+    // FeatsDialog,
+    // SearchBar
   },
 
   // Mixins

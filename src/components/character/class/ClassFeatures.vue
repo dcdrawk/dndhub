@@ -53,7 +53,7 @@
  */
 import classes from '../../../mixins/game-data/classes'
 import character from '../../../mixins/character'
-import CustomSelect from '../../inputs/CustomSelect'
+// import CustomSelect from '../../inputs/CustomSelect'
 import ClassFeatureDialog from './ClassFeatureDialog'
 import SearchBar from '../../inputs/SearchBar'
 
@@ -63,7 +63,7 @@ export default {
 
   // Components
   components: {
-    CustomSelect,
+    // CustomSelect,
     ClassFeatureDialog,
     SearchBar
   },

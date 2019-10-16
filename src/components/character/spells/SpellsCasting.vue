@@ -98,9 +98,9 @@
  * @desc Browse and equip spells
  */
 import SpellsSlotsDialog from './SpellsSlotsDialog'
-import SpellsList from './SpellsList'
-import SpellsListVirtual from './SpellsListVirtual'
-import SearchBar from '../../inputs/SearchBar'
+// import SpellsList from './SpellsList'
+// import SpellsListVirtual from './SpellsListVirtual'
+// import SearchBar from '../../inputs/SearchBar'
 import character from '../../../mixins/character'
 import abilityScores from '@/mixins/abilityScores'
 import proficiencyBonus from '@/mixins/proficiencyBonus'
@@ -111,10 +111,10 @@ export default {
 
   // Components
   components: {
-    SpellsSlotsDialog,
-    SpellsList,
-    SpellsListVirtual,
-    SearchBar
+    SpellsSlotsDialog
+    // SpellsList,
+    // SpellsListVirtual,
+    // SearchBar
   },
 
   // Mixins
@@ -188,6 +188,7 @@ export default {
       for (let i in this.characterSpellSlots) {
         if (this.characterSpellSlots[i].length) return true
       }
+      return undefined
     }
   },
 

@@ -42,7 +42,7 @@
  */
 import races from '../../../mixins/game-data/races'
 import character from '../../../mixins/character'
-import CustomSelect from '../../inputs/CustomSelect'
+// import CustomSelect from '../../inputs/CustomSelect'
 import RaceTraitDialog from './RaceTraitDialog'
 
 export default {
@@ -51,7 +51,7 @@ export default {
 
   // Components
   components: {
-    CustomSelect,
+    // CustomSelect,
     RaceTraitDialog
   },
 
@@ -97,6 +97,7 @@ export default {
           return this.races[i]
         }
       }
+      return undefined
     },
 
     subraceData () {
@@ -106,6 +107,7 @@ export default {
           return this.raceData.subraces[i]
         }
       }
+      return undefined
     },
 
     raceTraitsData () {

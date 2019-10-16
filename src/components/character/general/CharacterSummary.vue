@@ -179,7 +179,7 @@
  */
 import validation from '../../../mixins/validation'
 import character from '../../../mixins/character'
-import CustomSelect from '../../inputs/CustomSelect'
+// import CustomSelect from '../../inputs/CustomSelect'
 
 export default {
   // Name
@@ -187,7 +187,7 @@ export default {
 
   // Components
   components: {
-    CustomSelect
+    // CustomSelect
   },
 
   // Mixins

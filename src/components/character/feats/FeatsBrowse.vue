@@ -13,9 +13,9 @@
  * @desc A character's class features
  */
 import character from '../../../mixins/character'
-import FeatsDialog from './FeatsDialog'
+// import FeatsDialog from './FeatsDialog'
 import FeatsList from './FeatsList'
-import SearchBar from '../../inputs/SearchBar'
+// import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
@@ -23,9 +23,9 @@ export default {
 
   // Components
   components: {
-    FeatsDialog,
-    FeatsList,
-    SearchBar
+    // FeatsDialog,
+    FeatsList
+    // SearchBar
   },
 
   // Mixins

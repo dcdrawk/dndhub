@@ -13,9 +13,9 @@
  * @desc A character's known spells
  */
 import character from '../../../mixins/character'
-import SpellsDialog from './SpellsDialog'
+// import SpellsDialog from './SpellsDialog'
 import SpellsListVirtual from './SpellsListVirtual'
-import SearchBar from '../../inputs/SearchBar'
+// import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
@@ -23,9 +23,9 @@ export default {
 
   // Components
   components: {
-    SpellsDialog,
-    SpellsListVirtual,
-    SearchBar
+    // SpellsDialog,
+    SpellsListVirtual
+    // SearchBar
   },
 
   // Mixins

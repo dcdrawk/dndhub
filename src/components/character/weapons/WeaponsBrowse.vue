@@ -14,9 +14,9 @@
  * <weapons-browse></weapons-browse>
  * @desc Browse and equip weapons
  */
-import WeaponsDialog from './WeaponsDialog'
+// import WeaponsDialog from './WeaponsDialog'
 import WeaponsList from './WeaponsList'
-import SearchBar from '../../inputs/SearchBar'
+// import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
@@ -24,9 +24,9 @@ export default {
 
   // Components
   components: {
-    WeaponsDialog,
-    WeaponsList,
-    SearchBar
+    // WeaponsDialog,
+    WeaponsList
+    // SearchBar
   },
 
   // Data
