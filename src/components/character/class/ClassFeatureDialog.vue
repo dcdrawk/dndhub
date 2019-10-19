@@ -22,7 +22,7 @@
         <!-- Dialog Title -->
         <v-toolbar-title>
           <span v-if="item.new">New</span>
-           Class Feature
+          Class Feature
         </v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
@@ -31,56 +31,56 @@
       <v-card-text>
         <v-container class="pa-0">
           <v-layout row wrap>
-
             <!-- Class Feature Name -->
             <v-flex xs12>
-              <v-text-field
-                label="Name"
-                type="text"
-                required
-                :readonly="isReadOnly"
-                v-model="selectedItem.name"
-                v-validate="'required'"
-                data-vv-name="name"
-                :error-messages="errors.collect('name')"
-                @input="handleInput('name', $event)"
-              />
+              <ValidationProvider name="Name" rules="required" v-slot="{ errors }">
+                <v-text-field
+                  label="Name"
+                  type="text"
+                  required
+                  :readonly="isReadOnly"
+                  v-model="selectedItem.name"
+                  :error-messages="errors[0]"
+                  @input="handleInput('name', $event)"
+                />
+              </ValidationProvider>
             </v-flex>
 
             <!-- Class Feature Level -->
             <v-flex xs12>
-              <v-text-field
-                label="Level"
-                type="number"
-                required
-                :readonly="isReadOnly"
-                v-model="selectedItem.level"
-                v-validate="'required'"
-                data-vv-name="level"
-                :error-messages="errors.collect('level')"
-                @input="handleInput('level', $event)"
-              />
+              <ValidationProvider name="Level" rules="required" v-slot="{ errors }">
+                <v-text-field
+                  label="Level"
+                  type="number"
+                  required
+                  :readonly="isReadOnly"
+                  v-model="selectedItem.level"
+                  :error-messages="errors[0]"
+                  @input="handleInput('level', $event)"
+                />
+              </ValidationProvider>
             </v-flex>
 
             <!-- Class Feature Description -->
             <v-flex xs12>
-              <v-textarea
-                label="Description"
-                type="text"
-                rows="10"
-                required
-                multi-line
-                :readonly="isReadOnly"
-                v-model="selectedItem.description"
-                v-validate="'required'"
-                data-vv-name="description"
-                :error-messages="errors.collect('description')"
-                @input="handleInput('description', $event)"
-              />
+              <ValidationProvider name="Description" rules="required" v-slot="{ errors }">
+                <v-textarea
+                  label="Description"
+                  type="text"
+                  rows="10"
+                  required
+                  multi-line
+                  :readonly="isReadOnly"
+                  v-model="selectedItem.description"
+                  :error-messages="errors[0]"
+                  @input="handleInput('description', $event)"
+                />
+              </ValidationProvider>
             </v-flex>
 
             <!-- Save Button (new) -->
-            <v-flex xs12
+            <v-flex
+              xs12
               v-if="item.new"
             >
               <v-btn
@@ -111,7 +111,7 @@
           </v-layout>
         </v-container>
       </v-card-text>
-      <div style="flex: 1 1 auto;"/>
+      <div style="flex: 1 1 auto;" />
     </v-card>
   </v-dialog>
 </template>
@@ -123,7 +123,7 @@ import debounce from 'debounce'
 
 export default {
   // Name
-  name: 'class-feature-dialog',
+  name: 'ClassFeatureDialog',
 
   // Mixins
   mixins: [

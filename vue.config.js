@@ -1,8 +1,6 @@
 const webpack = require('webpack')
 
 module.exports = {
-  lintOnSave: true,
-
   chainWebpack: chainableConfig => {
     chainableConfig
       .plugin('env')

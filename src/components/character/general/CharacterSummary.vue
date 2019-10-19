@@ -53,7 +53,7 @@
       </v-card-text>
     </v-card>
 
-    <v-divider/>
+    <v-divider />
 
     <v-card flat>
       <v-card-text>

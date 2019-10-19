@@ -26,138 +26,138 @@
       </v-toolbar>
       <v-card-text>
         <ValidationObserver ref="observer" v-slot="{ invalid }">
-        <v-container class="pa-0 pt-4">
-          <v-layout row wrap>
-            <v-flex xs12>
-              <ValidationProvider name="Character Name" rules="required" v-slot="{ errors }">
-                <v-text-field
-                  label="Character Name"
-                  type="text"
-                  required
-                  v-model="character.name"
-                  :error-messages="errors[0]"
-                />
-              </ValidationProvider>
-            </v-flex>
+          <v-container class="pa-0 pt-4">
+            <v-layout row wrap>
+              <v-flex xs12>
+                <ValidationProvider name="Character Name" rules="required" v-slot="{ errors }">
+                  <v-text-field
+                    label="Character Name"
+                    type="text"
+                    required
+                    v-model="character.name"
+                    :error-messages="errors[0]"
+                  />
+                </ValidationProvider>
+              </v-flex>
 
-            <v-flex xs6 class="pr-1">
-              <ValidationProvider name="Level" rules="required" v-slot="{ errors }">
+              <v-flex xs6 class="pr-1">
+                <ValidationProvider name="Level" rules="required" v-slot="{ errors }">
+                  <v-text-field
+                    label="Level"
+                    type="number"
+                    required
+                    v-model="character.level"
+                    :error-messages="errors[0]"
+                  />
+                </ValidationProvider>
+              </v-flex>
+
+              <v-flex xs6 class="pl-1">
                 <v-text-field
-                  label="Level"
+                  label="Experience"
                   type="number"
                   required
-                  v-model="character.level"
-                  :error-messages="errors[0]"
+                  v-model="character.experience"
                 />
-              </ValidationProvider>
-            </v-flex>
+              </v-flex>
 
-            <v-flex xs6 class="pl-1">
-              <v-text-field
-                label="Experience"
-                type="number"
-                required
-                v-model="character.experience"
-              />
-            </v-flex>
+              <v-flex xs12 md6>
+                <ValidationProvider name="Race" rules="required" v-slot="{ errors }">
+                  <custom-select
+                    label="Race"
+                    v-model="character.race"
+                    :items="races"
+                    item-text="name"
+                    item-value="name"
+                    :custom="character.custom.race"
+                    required
+                    :error-messages="errors[0]"
+                    @customize="handleCustomize('race')"
+                  />
+                </ValidationProvider>
+              </v-flex>
 
-            <v-flex xs12 md6>
-              <ValidationProvider name="Race" rules="required" v-slot="{ errors }">
+              <v-flex xs12 md6>
                 <custom-select
-                  label="Race"
-                  v-model="character.race"
-                  :items="races"
+                  :disabled="!character.race"
+                  label="Subrace"
+                  v-model="character.subrace"
+                  :items="subraces"
                   item-text="name"
                   item-value="name"
-                  :custom="character.custom.race"
-                  required
-                  :error-messages="errors[0]"
-                  @customize="handleCustomize('race')"
+                  :custom="character.custom.subrace"
+                  @customize="handleCustomize('subrace')"
                 />
-              </ValidationProvider>
-            </v-flex>
+              </v-flex>
 
-            <v-flex xs12 md6>
-              <custom-select
-                :disabled="!character.race"
-                label="Subrace"
-                v-model="character.subrace"
-                :items="subraces"
-                item-text="name"
-                item-value="name"
-                :custom="character.custom.subrace"
-                @customize="handleCustomize('subrace')"
-              />
-            </v-flex>
+              <v-flex xs12 md6>
+                <ValidationProvider name="Class"  rules="required" v-slot="{ errors }">
+                  <custom-select
+                    label="Class"
+                    v-model="characterClasses[0].name"
+                    :items="classes"
+                    item-text="name"
+                    item-value="name"
+                    :custom="characterClasses[0].custom.name"
+                    :error-messages="errors[0]"
+                    @input="validateField('class')"
+                    @customize="customizeClass('name')"
+                  />
+                </ValidationProvider>
+              </v-flex>
 
-            <v-flex xs12 md6>
-              <ValidationProvider name="Class"  rules="required" v-slot="{ errors }">
+              <v-flex xs12 md6>
                 <custom-select
-                  label="Class"
-                  v-model="characterClasses[0].name"
-                  :items="classes"
+                  :disabled="!characterClasses[0].name"
+                  :label="getSubclassLabel() || 'Subclass'"
+                  v-model="characterClasses[0].subclass"
+                  :items="getSubclassOptions(characterClasses[0].name)"
+                  item-text="title"
+                  item-value="title"
+                  :custom="characterClasses[0].custom.subclass"
+                  @customize="customizeClass('subclass')"
+                />
+              </v-flex>
+
+              <v-flex xs12 md6>
+                <custom-select
+                  label="Alignment"
+                  :value="character.alignment"
+                  :items="alignments"
                   item-text="name"
                   item-value="name"
-                  :custom="characterClasses[0].custom.name"
-                  :error-messages="errors[0]"
-                  @input="validateField('class')"
-                  @customize="customizeClass('name')"
+                  :custom="character.custom.alignment"
+                  @input="character.alignment = $event"
+                  @customize="handleCustomize('alignment')"
                 />
-              </ValidationProvider>
-            </v-flex>
+              </v-flex>
 
-            <v-flex xs12 md6>
-              <custom-select
-                :disabled="!characterClasses[0].name"
-                :label="getSubclassLabel() || 'Subclass'"
-                v-model="characterClasses[0].subclass"
-                :items="getSubclassOptions(characterClasses[0].name)"
-                item-text="title"
-                item-value="title"
-                :custom="characterClasses[0].custom.subclass"
-                @customize="customizeClass('subclass')"
-              />
-            </v-flex>
+              <v-flex xs12 md6>
+                <custom-select
+                  label="Background"
+                  :value="character.background"
+                  :items="backgrounds"
+                  item-text="name"
+                  item-value="name"
+                  :custom="character.custom.background"
+                  @input="character.background = $event"
+                  @customize="handleCustomize('background')"
+                />
+              </v-flex>
 
-            <v-flex xs12 md6>
-              <custom-select
-                label="Alignment"
-                :value="character.alignment"
-                :items="alignments"
-                item-text="name"
-                item-value="name"
-                :custom="character.custom.alignment"
-                @input="character.alignment = $event"
-                @customize="handleCustomize('alignment')"
-              />
-            </v-flex>
-
-            <v-flex xs12 md6>
-              <custom-select
-                label="Background"
-                :value="character.background"
-                :items="backgrounds"
-                item-text="name"
-                item-value="name"
-                :custom="character.custom.background"
-                @input="character.background = $event"
-                @customize="handleCustomize('background')"
-              />
-            </v-flex>
-
-            <v-flex xs12>
-              <v-btn
-                block
-                color="secondary"
-                :disabled="invalid"
-                :loading="loading"
-                @click="createCharacter()"
-              >
-                Create
-              </v-btn>
-            </v-flex>
-          </v-layout>
-        </v-container>
+              <v-flex xs12>
+                <v-btn
+                  block
+                  color="secondary"
+                  :disabled="invalid"
+                  :loading="loading"
+                  @click="createCharacter()"
+                >
+                  Create
+                </v-btn>
+              </v-flex>
+            </v-layout>
+          </v-container>
         </ValidationObserver>
         <!-- test -->
       </v-card-text>
