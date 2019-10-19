@@ -76,7 +76,7 @@ import CustomSelect from '../../inputs/CustomSelect'
 
 export default {
   // Name
-  name: 'race-summary',
+  name: 'RaceSummary',
 
   // Components
   components: {

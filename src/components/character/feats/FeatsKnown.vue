@@ -1,10 +1,8 @@
 <template>
   <div v-if="filteredItems">
-
     <feats-list
       :items="items"
     />
-
   </div>
 </template>
 
@@ -20,7 +18,7 @@ import FeatsList from './FeatsList'
 
 export default {
   // Name
-  name: 'feats-known',
+  name: 'FeatsKnown',
 
   // Components
   components: {

@@ -47,7 +47,6 @@
               Weight: {{ item.weight }}
               <!-- Cost: {{ item.cost }} -->
             </v-list-item-subtitle>
-
           </v-list-item-content>
 
           <!-- Feat Add -->
@@ -90,7 +89,7 @@ import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
-  name: 'armor-list',
+  name: 'ArmorList',
 
   // Components
   components: {

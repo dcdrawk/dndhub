@@ -1,9 +1,8 @@
 <template>
   <v-layout row justify-center>
     <transition appear name="slide-y-reverse-transition" mode="out-in">
-
       <!-- Loading Spinner -->
-      <v-flex v-if="!user || loading" class="loading" xs12  key="loading">
+      <v-flex v-if="!user || loading" class="loading" xs12 key="loading">
         <v-progress-circular indeterminate color="secondary"></v-progress-circular>
       </v-flex>
 
@@ -40,7 +39,6 @@
       :show-dialog="newCharacterDialog"
       @close="newCharacterDialog = false"
     />
-
   </v-layout>
 </template>
 
@@ -50,7 +48,7 @@ import NewCharacter from '../../components/characters/NewCharacter'
 
 export default {
   // Name
-  name: 'characters',
+  name: 'Characters',
 
   // Components
   components: {

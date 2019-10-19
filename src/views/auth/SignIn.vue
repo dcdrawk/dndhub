@@ -2,7 +2,6 @@
   <v-container>
     <v-layout row wrap justify-center>
       <v-flex xs12 md6 lg4 xl2>
-
         <!-- Title -->
         <h3 class="title">
           Welcome to DnDHub (Beta)
@@ -50,7 +49,9 @@
           </v-btn>
 
           <p class="text-xs-center mt-4">
-            Don't have an account yet? <router-link to="create-account">Create one</router-link>.
+            Don't have an account yet? <router-link to="create-account">
+              Create one
+            </router-link>.
           </p>
         </div>
 
@@ -73,7 +74,7 @@
 <script>
 export default {
   // Name
-  name: 'sign-in',
+  name: 'SignIn',
 
   // Data
   data () {

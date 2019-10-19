@@ -4,7 +4,6 @@
       <v-card-text>
         <v-container grid-list-md class="pa-0">
           <v-layout row wrap>
-
             <v-flex xs12 md6>
               <v-combobox
                 multiple
@@ -85,7 +84,7 @@
 
 export default {
   // Name
-  name: 'class-proficiencies',
+  name: 'ClassProficiencies',
 
   // Computed
   computed: {

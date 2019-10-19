@@ -19,7 +19,7 @@
     </v-toolbar-title>
 
     <!-- Spacer -->
-    <v-spacer/>
+    <v-spacer />
 
     <!-- Toolbar Menu (if a user is signed in)-->
     <v-menu v-if="user" attach light left>
@@ -48,7 +48,7 @@
 <script>
 export default {
   // Name
-  name: 'the-toolbar',
+  name: 'TheToolbar',
 
   // Computed
   computed: {

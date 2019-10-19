@@ -1,7 +1,6 @@
 <template>
   <v-container grid-list-md text-xs-center>
-    <v-layout row >
-
+    <v-layout row>
       <v-flex xs4>
         <v-select
           label="Class"
@@ -37,7 +36,6 @@
           @input="$emit('filter-school', $event)"
         ></v-select>
       </v-flex>
-
     </v-layout>
   </v-container>
 </template>
@@ -46,7 +44,7 @@
 // import
 export default {
   // Name
-  name: 'spell-filters',
+  name: 'SpellFilters',
 
   // Props
   props: {

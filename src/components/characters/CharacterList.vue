@@ -1,6 +1,5 @@
 <template>
   <div class="character-list-container">
-
     <!-- Character List -->
     <v-list
       v-if="characters"
@@ -39,7 +38,7 @@
                 v-for="(classObj, key) in item.classes"
                 :key="key"
               >
-                {{classObj.name}}
+                {{ classObj.name }}
               </span>
             </span>
             <span v-else-if="item.classes">
@@ -65,7 +64,9 @@
                 @click="duplicateCharacter(item)"
               >
                 <v-list-item-title>
-                  <v-icon class="mr-2">content_copy</v-icon>
+                  <v-icon class="mr-2">
+                    content_copy
+                  </v-icon>
                   Duplicate
                 </v-list-item-title>
               </v-list-item>
@@ -75,7 +76,9 @@
                 @click="showDeleteDialog(item, key)"
               >
                 <v-list-item-title>
-                  <v-icon class="mr-2">delete</v-icon>
+                  <v-icon class="mr-2">
+                    delete
+                  </v-icon>
                   Delete
                 </v-list-item-title>
               </v-list-item>
@@ -92,10 +95,10 @@
     >
       <v-card>
         <v-card-title v-if="characterToDelete">
-          <span>Delete {{characterToDelete.name}}?</span>
+          <span>Delete {{ characterToDelete.name }}?</span>
         </v-card-title>
         <v-card-actions>
-          <v-spacer/>
+          <v-spacer />
           <v-btn
             flat
             @click.stop="deleteCharacterDialog = false"
@@ -112,7 +115,6 @@
           </v-btn>
         </v-card-actions>
       </v-card>
-
     </v-dialog>
   </div>
 </template>
@@ -122,7 +124,7 @@ import CharacterCRUD from '../../models/characterCRUD'
 
 export default {
   // Name
-  name: 'the-character-list',
+  name: 'TheCharacterList',
 
   // Props
   props: {

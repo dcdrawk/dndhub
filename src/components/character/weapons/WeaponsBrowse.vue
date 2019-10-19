@@ -1,11 +1,9 @@
 <template>
   <div>
-
     <weapons-list
       browse
       :items="items"
     />
-
   </div>
 </template>
 
@@ -20,7 +18,7 @@ import WeaponsList from './WeaponsList'
 
 export default {
   // Name
-  name: 'weapons-browse',
+  name: 'WeaponsBrowse',
 
   // Components
   components: {

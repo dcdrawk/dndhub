@@ -1,11 +1,9 @@
 <template>
   <div>
-
     <armor-list
       browse
       :items="items"
     />
-
   </div>
 </template>
 
@@ -20,7 +18,7 @@ import ArmorList from './ArmorList'
 
 export default {
   // Name
-  name: 'armor-browse',
+  name: 'ArmorBrowse',
 
   // Components
   components: {

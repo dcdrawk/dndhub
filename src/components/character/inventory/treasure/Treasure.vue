@@ -17,7 +17,7 @@ import TreasureList from './TreasureList'
 
 export default {
   // Name
-  name: 'treasure',
+  name: 'Treasure',
 
   // Components
   components: {

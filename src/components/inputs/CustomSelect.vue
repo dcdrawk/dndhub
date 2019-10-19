@@ -55,7 +55,7 @@
  */
 export default {
   // Name
-  name: 'custom-select',
+  name: 'CustomSelect',
 
   // Props
   props: {

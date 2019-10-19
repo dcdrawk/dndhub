@@ -18,7 +18,7 @@ import QuestsList from './QuestsList'
 
 export default {
   // Name
-  name: 'quests-browse',
+  name: 'QuestsBrowse',
 
   // Components
   components: {

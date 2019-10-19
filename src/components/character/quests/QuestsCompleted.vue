@@ -20,7 +20,7 @@ import QuestsList from './QuestsList'
 
 export default {
   // Name
-  name: 'quests-completed',
+  name: 'QuestsCompleted',
 
   // Components
   components: {

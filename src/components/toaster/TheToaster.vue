@@ -19,7 +19,7 @@
 <script>
 export default {
   // Name
-  name: 'the-toaster',
+  name: 'TheToaster',
 
   // Data
   data () {

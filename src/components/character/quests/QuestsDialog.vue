@@ -22,9 +22,9 @@
         <!-- Dialog Title -->
         <v-toolbar-title>
           <span v-if="newItem">New</span>
-           Quest
-           <span v-if="selectedItem.name">-</span>
-           {{ selectedItem.name }}
+          Quest
+          <span v-if="selectedItem.name">-</span>
+          {{ selectedItem.name }}
         </v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
@@ -139,11 +139,10 @@
                 Remove
               </v-btn>
             </v-flex>
-
           </v-layout>
         </v-container>
       </v-card-text>
-      <div style="flex: 1 1 auto;"/>
+      <div style="flex: 1 1 auto;" />
     </v-card>
   </v-dialog>
 </template>
@@ -156,7 +155,7 @@ import debounce from 'debounce'
 
 export default {
   // Name
-  name: 'quests-dialog',
+  name: 'QuestsDialog',
 
   // Components
   components: {},

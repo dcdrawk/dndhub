@@ -1,11 +1,9 @@
 <template>
   <div>
-
     <spells-list-virtual
       browse
       :items="items"
     />
-
   </div>
 </template>
 
@@ -21,7 +19,7 @@ import SpellsListVirtual from './SpellsListVirtual'
 
 export default {
   // Name
-  name: 'spells-browse',
+  name: 'SpellsBrowse',
 
   // Components
   components: {

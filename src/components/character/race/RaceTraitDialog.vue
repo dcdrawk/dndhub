@@ -22,7 +22,7 @@
         <!-- Dialog Title -->
         <v-toolbar-title>
           <span v-if="item.new">New</span>
-           Race Trait
+          Race Trait
         </v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
@@ -31,7 +31,6 @@
       <v-card-text>
         <v-container class="pa-0">
           <v-layout row wrap>
-
             <!-- Class Feature Name -->
             <v-flex xs12>
               <v-text-field
@@ -66,7 +65,7 @@
 
             <!-- Save Button (new) -->
             <v-flex xs12
-              v-if="item.new"
+                    v-if="item.new"
             >
               <v-btn
                 block
@@ -96,7 +95,7 @@
           </v-layout>
         </v-container>
       </v-card-text>
-      <div style="flex: 1 1 auto;"/>
+      <div style="flex: 1 1 auto;" />
     </v-card>
   </v-dialog>
 </template>
@@ -109,7 +108,7 @@ import debounce from 'debounce'
 
 export default {
   // Name
-  name: 'race-trait-dialog',
+  name: 'RaceTraitDialog',
 
   // Components
   components: {

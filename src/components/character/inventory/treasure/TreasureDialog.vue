@@ -129,7 +129,6 @@
                 Remove
               </v-btn>
             </v-flex>
-
           </v-layout>
         </v-container>
       </v-card-text>
@@ -146,7 +145,7 @@ import debounce from 'debounce'
 
 export default {
   // Name
-  name: 'treasure-dialog',
+  name: 'TreasureDialog',
 
   // Components
   components: {},

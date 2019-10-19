@@ -91,7 +91,7 @@
               </v-flex>
 
               <v-flex xs12 md6>
-                <ValidationProvider name="Class"  rules="required" v-slot="{ errors }">
+                <ValidationProvider name="Class" rules="required" v-slot="{ errors }">
                   <custom-select
                     label="Class"
                     v-model="characterClasses[0].name"
@@ -162,7 +162,7 @@
         <!-- test -->
       </v-card-text>
 
-      <div style="flex: 1 1 auto;"/>
+      <div style="flex: 1 1 auto;" />
     </v-card>
   </v-dialog>
 </template>
@@ -176,7 +176,7 @@ import CharacterCRUD from '../../models/characterCRUD'
 
 export default {
   // Name
-  name: 'new-character',
+  name: 'NewCharacter',
 
   // Components
   components: {

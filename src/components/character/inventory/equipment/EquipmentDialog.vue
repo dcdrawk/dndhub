@@ -22,7 +22,7 @@
         <!-- Dialog Title -->
         <v-toolbar-title>
           <span v-if="newItem">New</span>
-           Equipment
+          Equipment
         </v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
@@ -129,7 +129,6 @@
                 Remove
               </v-btn>
             </v-flex>
-
           </v-layout>
         </v-container>
       </v-card-text>
@@ -146,7 +145,7 @@ import debounce from 'debounce'
 
 export default {
   // Name
-  name: 'equipment-dialog',
+  name: 'EquipmentDialog',
 
   // Components
   components: {},

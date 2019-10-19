@@ -53,7 +53,6 @@
               Value: {{ item.value }}
               <!-- Cost: {{ item.cost }} -->
             </v-list-tile-sub-title>
-
           </v-list-tile-content>
 
           <!-- Feat Add -->
@@ -96,7 +95,7 @@ import SearchBar from '@/components/inputs/SearchBar'
 
 export default {
   // Name
-  name: 'equipment-list',
+  name: 'EquipmentList',
 
   // Components
   components: {

@@ -47,7 +47,7 @@ import RaceTraitDialog from './RaceTraitDialog'
 
 export default {
   // Name
-  name: 'race-traits',
+  name: 'RaceTraits',
 
   // Components
   components: {

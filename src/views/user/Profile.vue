@@ -2,7 +2,6 @@
   <v-container>
     <v-layout row wrap>
       <v-flex xs12 v-if="user">
-
         <!-- Signed In As -->
         <v-alert type="success" :value="true" class="signed-in-as">
           Signed in as <strong>{{ user.email }}</strong>
@@ -18,32 +17,31 @@
         />
 
         <div>
+          <!-- Edit Button -->
+          <v-btn
+            v-if="readonly"
+            flat
+            @click="enableEditing()"
+          >
+            Edit
+          </v-btn>
 
-        <!-- Edit Button -->
-        <v-btn
-          v-if="readonly"
-          flat
-          @click="enableEditing()"
-        >
-          Edit
-        </v-btn>
+          <!-- Cancel Button -->
+          <v-btn
+            v-if="!readonly"
+            @click="cancelEditing()"
+          >
+            Cancel
+          </v-btn>
 
-        <!-- Cancel Button -->
-        <v-btn
-          v-if="!readonly"
-          @click="cancelEditing()"
-        >
-          Cancel
-        </v-btn>
-
-        <!-- Save Button  -->
-        <v-btn
-          v-if="!readonly"
-          color="primary"
-          @click="updateUser()"
-        >
-          Save
-        </v-btn>
+          <!-- Save Button  -->
+          <v-btn
+            v-if="!readonly"
+            color="primary"
+            @click="updateUser()"
+          >
+            Save
+          </v-btn>
         </div>
       </v-flex>
     </v-layout>
@@ -55,7 +53,7 @@ import validation from '../../mixins/validation'
 
 export default {
   // Name
-  name: 'profile',
+  name: 'Profile',
 
   // Mixins
   mixins: [validation],

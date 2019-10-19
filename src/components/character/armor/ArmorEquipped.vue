@@ -19,7 +19,7 @@ import ArmorList from './ArmorList'
 
 export default {
   // Name
-  name: 'armor-equipped',
+  name: 'ArmorEquipped',
 
   // Components
   components: {

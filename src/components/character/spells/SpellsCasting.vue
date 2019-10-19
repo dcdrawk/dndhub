@@ -53,7 +53,6 @@
       <!-- <v-flex>
 
       </v-flex> -->
-
     </v-layout>
 
     <SpellsSlotsDialog
@@ -107,7 +106,7 @@ import proficiencyBonus from '@/mixins/proficiencyBonus'
 
 export default {
   // Name
-  name: 'spells-slots',
+  name: 'SpellsSlots',
 
   // Components
   components: {

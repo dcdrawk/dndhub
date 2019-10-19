@@ -60,7 +60,6 @@
         <!-- Appearance Container -->
         <v-container grid-list-md class="pa-0">
           <v-layout row wrap>
-
             <!-- Heading -->
             <v-flex xs12>
               <h2>Appearance</h2>
@@ -183,7 +182,7 @@ import character from '../../../mixins/character'
 
 export default {
   // Name
-  name: 'character-summary',
+  name: 'CharacterSummary',
 
   // Components
   components: {

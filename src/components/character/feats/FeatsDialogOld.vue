@@ -22,7 +22,7 @@
         <!-- Dialog Title -->
         <v-toolbar-title>
           <span v-if="newItem">New</span>
-           Feat
+          Feat
         </v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
@@ -77,7 +77,7 @@
                 Add
               </v-btn>
 
-               <v-btn
+              <v-btn
                 v-if="!browse && !newItem"
                 outline
                 color="warning"
@@ -88,11 +88,10 @@
                 delete
               </v-btn>
             </v-flex>
-
           </v-layout>
         </v-container>
       </v-card-text>
-      <div style="flex: 1 1 auto;"/>
+      <div style="flex: 1 1 auto;" />
     </v-card>
   </v-dialog>
 </template>
@@ -104,7 +103,7 @@ import validation from '../../../mixins/validation'
 
 export default {
   // Name
-  name: 'feats-dialog',
+  name: 'FeatsDialog',
 
   // Components
   components: {},

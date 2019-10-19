@@ -28,7 +28,7 @@
       dense
       class="elevation-1 spell-list"
     >
-      <virtual-scroller class="scroller" :items="displayedItems" itemHeight="61">
+      <virtual-scroller class="scroller" :items="displayedItems" item-height="61">
         <template slot-scope="props">
           <!-- List Tile -->
           <v-list-item
@@ -55,7 +55,6 @@
                 >
                   C
                 </span>
-
               </v-list-item-title>
               <v-list-item-subtitle class="">
                 {{ props.item.class }}
@@ -164,7 +163,7 @@ import SpellsFilters from './SpellsFilters'
 
 export default {
   // Name
-  name: 'spells-list-virtual',
+  name: 'SpellsListVirtual',
 
   // Components
   components: {

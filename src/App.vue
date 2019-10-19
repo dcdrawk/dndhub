@@ -15,7 +15,7 @@
     </v-content>
 
     <!-- Toaster -->
-    <the-toaster/>
+    <the-toaster />
   </v-app>
 </template>
 
@@ -28,7 +28,7 @@ import gameData from './mixins/game-data/gameData'
 
 export default {
   // Name
-  name: 'dnd-hub-app',
+  name: 'DndHubApp',
 
   // Components
   components: {

@@ -1,6 +1,5 @@
 <template>
   <section>
-
     <v-tabs
       v-if="character"
       v-model="activeTab"
@@ -45,7 +44,6 @@
         <v-icon>add</v-icon>
       </v-btn>
     </v-fab-transition>
-
   </section>
 </template>
 
@@ -60,7 +58,7 @@ import FeatsKnown from '../../components/character/feats/FeatsKnown'
 
 export default {
   // Name
-  name: 'feats',
+  name: 'Feats',
 
   // Components
   components: {

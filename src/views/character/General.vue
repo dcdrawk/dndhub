@@ -22,7 +22,7 @@
       v-for="(tabItem, index) in tabs"
       :key="index"
     >
-      <component :is="tabItem.component"/>
+      <component :is="tabItem.component" />
     </v-tab-item>
   </v-tabs>
 </template>
@@ -38,7 +38,7 @@ import Background from '../../components/character/general/Background'
 
 export default {
   // Name
-  name: 'general',
+  name: 'General',
 
   // Components
   components: {

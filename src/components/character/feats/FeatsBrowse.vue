@@ -19,7 +19,7 @@ import FeatsList from './FeatsList'
 
 export default {
   // Name
-  name: 'feats-browse',
+  name: 'FeatsBrowse',
 
   // Components
   components: {

@@ -12,11 +12,10 @@
     <v-list>
       <v-list-item>
         <v-list-item-content>
-
-        <!-- Nav Drawer List Title -->
-        <v-list-item-title class="title">
-          DnDHub
-        </v-list-item-title>
+          <!-- Nav Drawer List Title -->
+          <v-list-item-title class="title">
+            DnDHub
+          </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
@@ -32,7 +31,7 @@
         </v-list-item-content>
       </v-list-item>
     </v-list>
-      <v-divider class="mb-2"/>
+    <v-divider class="mb-2" />
     <v-list subheader>
       <!-- Character Menu -->
       <v-list-item
@@ -40,7 +39,6 @@
         v-if="user && character"
       >
         <v-list-item-content>
-
           <!-- Nav Drawer List Title -->
           <v-list-item-subtitle>
             Selected Character
@@ -48,7 +46,7 @@
           <v-list-item-title class="title">
             {{ character.name }}
           </v-list-item-title>
-          </v-list-item-content>
+        </v-list-item-content>
       </v-list-item>
 
       <div v-if="user && character">
@@ -74,7 +72,7 @@
 <script>
 export default {
   // Name
-  name: 'the-nav-drawer',
+  name: 'TheNavDrawer',
 
   // Props
   props: {

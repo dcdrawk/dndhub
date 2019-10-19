@@ -45,7 +45,6 @@
         <v-icon>add</v-icon>
       </v-btn>
     </v-fab-transition>
-
   </section>
 </template>
 
@@ -60,7 +59,7 @@ import RaceTraits from '../../components/character/race/RaceTraits'
 
 export default {
   // Name
-  name: 'race',
+  name: 'Race',
 
   // Components
   components: {

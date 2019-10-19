@@ -21,7 +21,7 @@
         <v-icon>filter_list</v-icon>
       </v-btn>
     </v-card-text>
-    <v-divider/>
+    <v-divider />
   </v-card>
 </template>
 
@@ -33,7 +33,7 @@ import debounce from 'debounce'
  */
 export default {
   // Name
-  name: 'search-bar',
+  name: 'SearchBar',
 
   // Props
   props: {

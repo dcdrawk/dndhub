@@ -65,11 +65,13 @@
       </v-card-text>
     </v-card>
 
-    <v-divider/>
+    <v-divider />
 
     <v-card class="stat-list" v-if="characterSaves">
       <v-card-text class="pa-0 pt-4">
-        <h3 class="pl-3 mb-2 pt-2">Saving Throws</h3>
+        <h3 class="pl-3 mb-2 pt-2">
+          Saving Throws
+        </h3>
         <v-container grid-list-sm class="pa-0">
           <v-layout row wrap class="stat-header mb-2">
             <v-flex xs6 class="pl-3">
@@ -148,7 +150,7 @@ import character from '../../../mixins/character'
 
 export default {
   // Name
-  name: 'ability-scores',
+  name: 'AbilityScores',
 
   // Mixins
   mixins: [

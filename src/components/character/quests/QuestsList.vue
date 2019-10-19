@@ -84,7 +84,7 @@ import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
-  name: 'quest-list',
+  name: 'QuestList',
 
   // Components
   components: {

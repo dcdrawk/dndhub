@@ -39,7 +39,7 @@
           />
         </v-container>
       </v-card-text>
-      <div style="flex: 1 1 auto;"/>
+      <div style="flex: 1 1 auto;" />
     </v-card>
   </v-dialog>
 </template>
@@ -50,7 +50,7 @@ import SpellsSlotInput from './SpellsSlotInput'
 
 export default {
   // Name
-  name: 'spells-slots-dialog',
+  name: 'SpellsSlotsDialog',
 
   // Components
   components: {

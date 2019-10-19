@@ -27,7 +27,6 @@
       dense
       class="elevation-1 spell-llist"
     >
-
       <template v-for="(item, index) in displayedItems">
         <!-- List Tile -->
         <v-list-item
@@ -63,7 +62,6 @@
             <v-list-item-subtitle class="right-text">
               Weight: {{ item.weight }}
             </v-list-item-subtitle>
-
           </v-list-item-content>
 
           <!-- Feat Add -->
@@ -87,54 +85,53 @@
 
     <!-- {{ paginatorLength }} -->
     <div class="pagination">
-
-    <v-card
-      class="text-xs-right flex justify-space-between elevation-3 darken-4"
-    >
-      <span class="pl-3">
-        Page {{ page }} / {{ paginatorLength }}
-      </span>
-      <span>
-        <v-btn
-          raised
-          color="primary"
-          icon
-          :disabled="disablePrev"
-          class="pagination__button"
-          @click="firstPage()"
-        >
-          <v-icon>first_page</v-icon>
-        </v-btn>
-        <v-btn
-          raised
-          color="primary"
-          icon
-          :disabled="disablePrev"
-          class="pagination__button"
-          @click="prevPage()"
-        >
-          <v-icon>chevron_left</v-icon>
-        </v-btn>
-        <v-btn
-          raised
-          color="primary"
-          icon
-          class="pagination__button"
-          @click="nextPage()"
-        >
-          <v-icon>chevron_right</v-icon>
-        </v-btn>
-        <v-btn
-          raised
-          color="primary"
-          icon
-          class="pagination__button"
-          @click="lastPage()"
-        >
-          <v-icon>last_page</v-icon>
-        </v-btn>
-      </span>
-    </v-card>
+      <v-card
+        class="text-xs-right flex justify-space-between elevation-3 darken-4"
+      >
+        <span class="pl-3">
+          Page {{ page }} / {{ paginatorLength }}
+        </span>
+        <span>
+          <v-btn
+            raised
+            color="primary"
+            icon
+            :disabled="disablePrev"
+            class="pagination__button"
+            @click="firstPage()"
+          >
+            <v-icon>first_page</v-icon>
+          </v-btn>
+          <v-btn
+            raised
+            color="primary"
+            icon
+            :disabled="disablePrev"
+            class="pagination__button"
+            @click="prevPage()"
+          >
+            <v-icon>chevron_left</v-icon>
+          </v-btn>
+          <v-btn
+            raised
+            color="primary"
+            icon
+            class="pagination__button"
+            @click="nextPage()"
+          >
+            <v-icon>chevron_right</v-icon>
+          </v-btn>
+          <v-btn
+            raised
+            color="primary"
+            icon
+            class="pagination__button"
+            @click="lastPage()"
+          >
+            <v-icon>last_page</v-icon>
+          </v-btn>
+        </span>
+      </v-card>
     </div>
 
     <spells-dialog
@@ -159,7 +156,7 @@ import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
-  name: 'spells-list',
+  name: 'SpellsList',
 
   // Components
   components: {

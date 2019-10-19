@@ -1,35 +1,35 @@
 <template>
   <!-- <v-content> -->
-    <!-- <v-container class="general" v-if="character"> -->
-      <v-tabs
-        v-if="character"
-        v-model="activeTab"
-        color="secondary"
-        dark
-        fixed-tabs
-        slider-color="yellow"
-        class="page-tabs elevation-1"
-      >
-        <v-tab
-          v-for="(tab, index) in tabs"
-          :key="index"
-          ripple
-        >
-          {{ tab.title }}
-        </v-tab>
+  <!-- <v-container class="general" v-if="character"> -->
+  <v-tabs
+    v-if="character"
+    v-model="activeTab"
+    color="secondary"
+    dark
+    fixed-tabs
+    slider-color="yellow"
+    class="page-tabs elevation-1"
+  >
+    <v-tab
+      v-for="(tab, index) in tabs"
+      :key="index"
+      ripple
+    >
+      {{ tab.title }}
+    </v-tab>
 
-        <!-- Tab Items (content) -->
-        <v-tab-item
-          v-for="(tabItem, index) in tabs"
-          :key="index"
-        >
-          <!-- <v-card flat>
+    <!-- Tab Items (content) -->
+    <v-tab-item
+      v-for="(tabItem, index) in tabs"
+      :key="index"
+    >
+      <!-- <v-card flat>
             <v-card-text> -->
-              <component :is="tabItem.component"/>
-            <!-- </v-card-text>
+      <component :is="tabItem.component" />
+      <!-- </v-card-text>
           </v-card> -->
-        </v-tab-item>
-      </v-tabs>
+    </v-tab-item>
+  </v-tabs>
 </template>
 
 <script>
@@ -44,7 +44,7 @@ import Skills from '../../components/character/stats/Skills'
 
 export default {
   // Name
-  name: 'stats',
+  name: 'Stats',
 
   // Components
   components: {

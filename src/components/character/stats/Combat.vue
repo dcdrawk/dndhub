@@ -4,7 +4,6 @@
       <v-card-text>
         <v-container grid-list-md class="pa-0">
           <v-layout row wrap>
-
             <!-- Proficiency Bonus -->
             <v-flex xs12>
               <v-text-field
@@ -49,20 +48,20 @@
                 @input="updateCharacter('speed', $event)"
               />
             </v-flex>
-
           </v-layout>
         </v-container>
       </v-card-text>
     </v-card>
 
-    <v-divider/>
+    <v-divider />
 
     <v-card>
-      <v-card-text >
-        <h3 class="pl-2">Health</h3>
+      <v-card-text>
+        <h3 class="pl-2">
+          Health
+        </h3>
         <v-container grid-list-md class="pa-0">
           <v-layout row wrap>
-
             <!-- Current HP -->
             <v-flex xs6>
               <v-text-field
@@ -122,7 +121,7 @@ import character from '../../../mixins/character'
 
 export default {
   // Name
-  name: 'combat',
+  name: 'Combat',
 
   // Components
   components: {

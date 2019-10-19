@@ -19,7 +19,7 @@ import SpellsListVirtual from './SpellsListVirtual'
 
 export default {
   // Name
-  name: 'spells-equipped',
+  name: 'SpellsEquipped',
 
   // Components
   components: {

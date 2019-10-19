@@ -17,7 +17,7 @@ import EquipmentList from './EquipmentList'
 
 export default {
   // Name
-  name: 'equipment',
+  name: 'Equipment',
 
   // Components
   components: {

@@ -2,7 +2,6 @@
   <v-container>
     <v-layout row wrap justify-center>
       <v-flex xs12 md6 lg2>
-
         <!-- Title -->
         <h3 class="title">
           Create a new DnDHub Account
@@ -49,7 +48,6 @@
             :error-messages="errors.collect('confirm_password')"
             v-model="confirmPassword"
           />
-
         </form>
 
         <!-- Error Message -->
@@ -77,7 +75,6 @@
             Sign In
           </router-link>
         </p>
-
       </v-flex>
       <v-flex xs12 class="actions">
       </v-flex>
@@ -89,7 +86,7 @@
 import validation from '../../mixins/validation'
 export default {
   // Name
-  name: 'sign-in',
+  name: 'SignIn',
 
   // Mixins
   mixins: [validation],

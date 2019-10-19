@@ -77,7 +77,7 @@ import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
-  name: 'feats-table',
+  name: 'FeatsTable',
 
   // Components
   components: {

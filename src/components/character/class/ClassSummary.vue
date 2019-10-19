@@ -59,7 +59,7 @@
       </v-card-text>
     </v-card>
 
-    <v-divider/>
+    <v-divider />
 
     <!-- Enable Multiclass -->
     <v-card
@@ -130,7 +130,7 @@
             </v-layout>
           </v-container>
         </v-card-text>
-        <v-divider/>
+        <v-divider />
       </div>
 
       <!-- Add Multiclass -->
@@ -157,7 +157,7 @@ import CustomSelect from '../../inputs/CustomSelect'
 
 export default {
   // Name
-  name: 'class-summary',
+  name: 'ClassSummary',
 
   // Components
   components: {

@@ -1,6 +1,5 @@
 <template>
   <section>
-
     <v-tabs
       v-if="character"
       v-model="activeTab"
@@ -45,7 +44,6 @@
         <v-icon>add</v-icon>
       </v-btn>
     </v-fab-transition>
-
   </section>
 </template>
 
@@ -61,7 +59,7 @@ import ClassProficiencies from '../../components/character/class/ClassProficienc
 
 export default {
   // Name
-  name: 'character-class',
+  name: 'CharacterClass',
 
   // Components
   components: {

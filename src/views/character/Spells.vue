@@ -1,6 +1,5 @@
 <template>
   <section>
-
     <v-tabs
       v-if="character"
       v-model="activeTab"
@@ -46,7 +45,6 @@
         <v-icon>add</v-icon>
       </v-btn>
     </v-fab-transition>
-
   </section>
 </template>
 
@@ -62,7 +60,7 @@ import SpellsCasting from '../../components/character/spells/SpellsCasting'
 
 export default {
   // Name
-  name: 'spells',
+  name: 'Spells',
 
   // Components
   components: {

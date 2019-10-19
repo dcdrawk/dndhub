@@ -59,7 +59,7 @@ import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
-  name: 'class-features',
+  name: 'ClassFeatures',
 
   // Components
   components: {

@@ -1,6 +1,5 @@
 <template>
   <section>
-
     <v-tabs
       v-if="character"
       v-model="activeTab"
@@ -45,7 +44,6 @@
         <v-icon>add</v-icon>
       </v-btn>
     </v-fab-transition>
-
   </section>
 </template>
 
@@ -60,7 +58,7 @@ import WeaponsEquipped from '../../components/character/weapons/WeaponsEquipped'
 
 export default {
   // Name
-  name: 'weapons',
+  name: 'Weapons',
 
   // Components
   components: {

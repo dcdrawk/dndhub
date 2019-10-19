@@ -4,7 +4,6 @@
       <v-card-text>
         <v-container grid-list-md class="pa-0">
           <v-layout row wrap>
-
             <v-flex xs12 md6>
               <custom-select
                 label="Alignment"
@@ -45,7 +44,7 @@
       </v-card-text>
     </v-card>
 
-    <v-divider/>
+    <v-divider />
     <v-card flat>
       <v-card-text>
         <v-container grid-list-md class="pa-0">
@@ -129,7 +128,7 @@ import character from '../../../mixins/character'
 import CustomSelect from '../../inputs/CustomSelect'
 export default {
   // Name
-  name: 'background',
+  name: 'Background',
 
   // Components
   components: {

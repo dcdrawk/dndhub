@@ -33,7 +33,7 @@
               {{ item.name.replace(/_/g, ' ') }}
             </span>
             <span class="score">
-              ({{ item.abilityScore.slice(0, 3)}})
+              ({{ item.abilityScore.slice(0, 3) }})
             </span>
           </v-flex>
           <v-flex xs2 class="pt-0">
@@ -82,7 +82,7 @@ import skills from '../../../mixins/skills'
 
 export default {
   // Name
-  name: 'skills',
+  name: 'Skills',
 
   // Mixins
   mixins: [

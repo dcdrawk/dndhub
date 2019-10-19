@@ -19,7 +19,7 @@ import WeaponsList from './WeaponsList'
 
 export default {
   // Name
-  name: 'weapons-equipped',
+  name: 'WeaponsEquipped',
 
   // Components
   components: {
