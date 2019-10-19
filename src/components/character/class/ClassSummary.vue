@@ -145,7 +145,7 @@
               <!-- Multiclass Delete -->
               <v-flex class="pa-0">
                 <v-btn
-                  outline
+                  outlined
                   color="warning"
                   class="ma-0"
                   @click="removeClass(key)"
@@ -164,7 +164,7 @@
       <v-btn
         depressed
         color="primary"
-        class="ml-3"
+        class="ma-5"
         @click="addMulticlass()"
       >
         Add Multiclass

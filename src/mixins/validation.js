@@ -6,22 +6,22 @@ export default {
      * @param {string} field - name of the input field
      * @returns {array} Array with first error
      */
-    getErrors (field) {
-      return this.errors.first(field)
-        ? [this.errors.first(field)]
-        : undefined
-    },
+    // getErrors (field) {
+    // return this.errors.first(field)
+    //   ? [this.errors.first(field)]
+    //   : undefined
+    // },
 
     /**
      * @function validateField
      * @desc wait for nextTick and validate a specific field
      * @param {string} field - name of the input field
      */
-    validateField (field) {
-      this.$nextTick(() => {
-        this.$validator.validate(field)
-      })
-    },
+    // validateField (field) {
+    //   this.$nextTick(() => {
+    //     this.$validator.validate(field)
+    //   })
+    // },
 
     /**
      * @function validate
@@ -29,7 +29,8 @@ export default {
      */
     async validate () {
       try {
-        const result = await this.$validator.validateAll()
+        // const result = await this.$validator.validateAll()
+        const result = this.$refs.observer.validate()
         if (result) {
           return true
         } else {

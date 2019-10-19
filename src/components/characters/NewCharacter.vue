@@ -142,7 +142,6 @@
                     item-value="name"
                     :custom="characterClasses[0].custom.name"
                     :error-messages="errors[0]"
-                    @input="validateField('class')"
                     @customize="customizeClass('name')"
                   />
                 </ValidationProvider>

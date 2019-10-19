@@ -14,7 +14,7 @@
         <!-- List Tile -->
         <v-list-item
           :key="index"
-          :class="{ 'unobtained': +item.level > +character.level }"
+          :class="{ 'unobtained': +item.level > +characterClassLevels[item.class] }"
           @click="handleShowDialog(item)"
         >
           <!-- Content -->
@@ -53,7 +53,6 @@
  */
 import classes from '../../../mixins/game-data/classes'
 import character from '../../../mixins/character'
-// import CustomSelect from '../../inputs/CustomSelect'
 import ClassFeatureDialog from './ClassFeatureDialog'
 import SearchBar from '../../inputs/SearchBar'
 
@@ -95,6 +94,14 @@ export default {
   computed: {
     user () {
       return this.$store.state.user
+    },
+
+    characterClassLevels () {
+      let classes = {}
+      Object.values(this.character.classes).forEach((classObj) => {
+        classes[classObj.name] = classObj.level
+      })
+      return classes
     },
 
     classFeaturesData () {
@@ -194,6 +201,7 @@ export default {
               ? classFeature.class
               : classFeature.subclass
             ability.subclass = subclass
+            ability.class = classFeature.class
             return ability
           })
           if (classFeature.subclass === 'default') {

@@ -90,7 +90,7 @@
 
               <v-btn
                 v-if="!browse && !newItem"
-                outline
+                outlined
                 color="warning"
                 :loading="loading"
                 @click="deleteItem()"

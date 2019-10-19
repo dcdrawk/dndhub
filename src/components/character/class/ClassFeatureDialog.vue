@@ -1,5 +1,6 @@
 <template>
   <v-dialog
+    v-if="item"
     :value="showDialog"
     fullscreen
     transition="dialog-bottom-transition"
@@ -10,8 +11,9 @@
     <v-card tile>
       <!-- Dialog Toolbar -->
       <v-toolbar
-        card
         dark
+        short
+        :max-height="56"
         color="primary"
       >
         <!-- Close Button -->
@@ -33,102 +35,107 @@
 
       <!-- Card Text -->
       <v-card-text>
-        <v-container class="pa-0">
-          <v-layout
-            row
-            wrap
-          >
-            <!-- Class Feature Name -->
-            <v-flex xs12>
-              <ValidationProvider
-                v-slot="{ errors }"
-                name="Name"
-                rules="required"
-              >
-                <v-text-field
-                  v-model="selectedItem.name"
-                  label="Name"
-                  type="text"
-                  required
-                  :readonly="isReadOnly"
-                  :error-messages="errors[0]"
-                  @input="handleInput('name', $event)"
-                />
-              </ValidationProvider>
-            </v-flex>
-
-            <!-- Class Feature Level -->
-            <v-flex xs12>
-              <ValidationProvider
-                v-slot="{ errors }"
-                name="Level"
-                rules="required"
-              >
-                <v-text-field
-                  v-model="selectedItem.level"
-                  label="Level"
-                  type="number"
-                  required
-                  :readonly="isReadOnly"
-                  :error-messages="errors[0]"
-                  @input="handleInput('level', $event)"
-                />
-              </ValidationProvider>
-            </v-flex>
-
-            <!-- Class Feature Description -->
-            <v-flex xs12>
-              <ValidationProvider
-                v-slot="{ errors }"
-                name="Description"
-                rules="required"
-              >
-                <v-textarea
-                  v-model="selectedItem.description"
-                  label="Description"
-                  type="text"
-                  rows="10"
-                  required
-                  multi-line
-                  :readonly="isReadOnly"
-                  :error-messages="errors[0]"
-                  @input="handleInput('description', $event)"
-                />
-              </ValidationProvider>
-            </v-flex>
-
-            <!-- Save Button (new) -->
-            <v-flex
-              v-if="item.new"
-              xs12
+        <ValidationObserver
+          ref="observer"
+          v-slot="{ invalid }"
+        >
+          <v-container class="pl-0 pr-0">
+            <v-layout
+              row
+              wrap
             >
-              <v-btn
-                block
-                color="secondary"
-                :disabled="!isFormValid"
-                :loading="loading"
-                @click="addItem()"
-              >
-                Add Class Feature
-              </v-btn>
-            </v-flex>
+              <!-- Class Feature Name -->
+              <v-flex xs12>
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  name="Name"
+                  rules="required"
+                >
+                  <v-text-field
+                    v-model="selectedItem.name"
+                    label="Name"
+                    type="text"
+                    required
+                    :readonly="isReadOnly"
+                    :error-messages="errors[0]"
+                    @input="handleInput('name', $event)"
+                  />
+                </ValidationProvider>
+              </v-flex>
 
-            <!-- Delete Button (custom) -->
-            <v-flex
-              v-if="item.custom"
-            >
-              <v-btn
-                outline
-                color="warning"
-                :loading="loading"
-                @click="deleteItem()"
+              <!-- Class Feature Level -->
+              <v-flex xs12>
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  name="Level"
+                  rules="required"
+                >
+                  <v-text-field
+                    v-model="selectedItem.level"
+                    label="Level"
+                    type="number"
+                    required
+                    :readonly="isReadOnly"
+                    :error-messages="errors[0]"
+                    @input="handleInput('level', $event)"
+                  />
+                </ValidationProvider>
+              </v-flex>
+
+              <!-- Class Feature Description -->
+              <v-flex xs12>
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  name="Description"
+                  rules="required"
+                >
+                  <v-textarea
+                    v-model="selectedItem.description"
+                    label="Description"
+                    type="text"
+                    rows="10"
+                    required
+                    multi-line
+                    :readonly="isReadOnly"
+                    :error-messages="errors[0]"
+                    @input="handleInput('description', $event)"
+                  />
+                </ValidationProvider>
+              </v-flex>
+
+              <!-- Save Button (new) -->
+              <v-flex
+                v-if="item.new"
+                xs12
               >
-                <v-icon>delete</v-icon>
-                delete
-              </v-btn>
-            </v-flex>
-          </v-layout>
-        </v-container>
+                <v-btn
+                  block
+                  color="secondary"
+                  :disabled="!isFormValid"
+                  :loading="loading"
+                  @click="addItem()"
+                >
+                  Add Class Feature
+                </v-btn>
+              </v-flex>
+
+              <!-- Delete Button (custom) -->
+              <v-flex
+                v-if="item.custom"
+              >
+                <v-btn
+                  outlined
+                  color="warning"
+                  :loading="loading"
+                  @click="deleteItem()"
+                >
+                  <v-icon>delete</v-icon>
+                  delete
+                </v-btn>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </ValidationObserver>
       </v-card-text>
       <div style="flex: 1 1 auto;" />
     </v-card>
@@ -200,9 +207,10 @@ export default {
     showDialog (newValue, oldValue) {
       if (newValue) {
         this.$set(this, 'selectedItem', this.item)
-        setTimeout(() => {
-          this.errors.clear()
-        }, 0)
+
+        requestAnimationFrame(() => {
+          this.$refs.observer.reset()
+        })
       }
     }
   },

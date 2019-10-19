@@ -94,7 +94,7 @@
               v-if="item.custom"
             >
               <v-btn
-                outline
+                outlined
                 color="warning"
                 :loading="loading"
                 @click="deleteItem()"
