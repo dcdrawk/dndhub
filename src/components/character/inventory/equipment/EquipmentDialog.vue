@@ -22,7 +22,7 @@
         <!-- Dialog Title -->
         <v-toolbar-title>
           <span v-if="newItem">New</span>
-           Armor
+           Equipment
         </v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
@@ -34,39 +34,27 @@
             <!-- Armor Name -->
             <v-flex xs12>
               <v-text-field
-                label="Name"
+                label="Name*"
                 type="text"
-                required
-                :readonly="browse"
-                v-model="selectedItem.name"
+                :value="selectedItem.name"
                 v-validate="'required'"
                 data-vv-name="name"
-                :error-messages="errors.collect('name')"
+                :error-messages="errors.first('name')"
                 @input="handleInput('name', $event)"
               />
             </v-flex>
 
             <v-flex xs12>
               <v-text-field
-                label="Armor Class"
-                type="text"
+                label="Quantity*"
+                type="number"
                 required
                 :readonly="browse"
-                v-model="selectedItem.ac"
+                v-model="selectedItem.quantity"
                 v-validate="'required'"
-                data-vv-name="ac"
-                :error-messages="errors.collect('ac')"
-                @input="handleInput('ac', $event)"
-              />
-            </v-flex>
-
-            <v-flex xs12>
-              <v-text-field
-                label="Armor Type"
-                type="text"
-                :readonly="browse"
-                v-model="selectedItem.armorType"
-                @input="handleInput('armorType', $event)"
+                data-vv-name="quantity"
+                :error-messages="errors.first('quantity')"
+                @input="handleInput('quantity', $event)"
               />
             </v-flex>
 
@@ -82,7 +70,7 @@
 
             <v-flex xs12>
               <v-text-field
-                label="Cost"
+                label="Value"
                 type="text"
                 :readonly="browse"
                 v-model="selectedItem.cost"
@@ -95,7 +83,7 @@
                 multiple
                 label="Properties"
                 :readonly="browse"
-                :value="selectedItem.properties || []"
+                v-model="selectedItem.properties"
                 chips
                 deletable-chips
                 @input="handleInput('properties', $event)"
@@ -123,7 +111,7 @@
                 v-if="browse || newItem"
                 block
                 color="accent"
-                :disabled="!isFormValid"
+                :disabled="newItem && !isFormValid"
                 :loading="loading"
                 @click="$emit('add-item', selectedItem)"
               >
@@ -145,24 +133,25 @@
           </v-layout>
         </v-container>
       </v-card-text>
-      <div style="flex: 1 1 auto;"/>
+
+      <!-- <div style="flex: 1 1 auto;"/> -->
     </v-card>
   </v-dialog>
 </template>
 
 <script>
-import character from '../../../mixins/character'
-import validation from '../../../mixins/validation'
-// import CustomSelect from '../../inputs/CustomSelect'
+import character from '@/mixins/character'
+import validation from '@/mixins/validation'
+import CustomSelect from '@/components/inputs/CustomSelect'
 import debounce from 'debounce'
 
 export default {
   // Name
-  name: 'armor-dialog',
+  name: 'equipment-dialog',
 
   // Components
   components: {
-    // CustomSelect
+    CustomSelect
   },
 
   // Mixins
@@ -185,10 +174,11 @@ export default {
       selectedItem: {
         name: undefined,
         ac: undefined,
-        description: undefined
+        description: undefined,
+        properties: []
       },
       loading: false,
-      endpoint: 'armor'
+      endpoint: 'equipment'
     }
   },
 
@@ -251,6 +241,7 @@ export default {
      * Handle Input
      */
     handleInput (field, value) {
+      this.selectedItem[field] = value
       if (this.newItem) return
       this.updateItem(field, value)
       console.log('handle dialog input')
@@ -266,7 +257,7 @@ export default {
 
   // Mounted
   mounted () {
-    this.updateItem = debounce(this.updateItem, 500)
+    this.updateClassArmorure = debounce(this.updateClassArmorure, 500)
   }
 }
 </script>

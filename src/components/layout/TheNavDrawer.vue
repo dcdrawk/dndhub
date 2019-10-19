@@ -165,6 +165,11 @@ export default {
         icon: 'person',
         href: '/character/inventory',
         active: false
+      }, {
+        title: 'Quest Log',
+        icon: 'person',
+        href: '/character/quests',
+        active: false
       }]
     }
   },

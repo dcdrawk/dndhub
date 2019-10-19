@@ -25,6 +25,7 @@ import Armor from './views/character/Armor'
 import Weapons from './views/character/Weapons'
 import Spells from './views/character/Spells'
 import Inventory from './views/character/Inventory'
+import Quests from './views/character/Quests'
 
 Vue.use(Router)
 
@@ -104,6 +105,11 @@ export default new Router({
       path: '/character/inventory',
       name: 'Inventory',
       component: Inventory
+    },
+    {
+      path: '/character/quests',
+      name: 'Quests',
+      component: Quests
     }
   ]
 })

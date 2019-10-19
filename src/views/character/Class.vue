@@ -30,7 +30,7 @@
     </v-tabs>
 
     <!-- Floating Action Button -->
-    <v-fab-transition v-if="activeTab">
+    <v-fab-transition v-if="activeTab !== undefined">
       <v-btn
         v-if="tabs[activeTab].showFab"
         color="secondary"

@@ -1,7 +1,9 @@
 <template>
   <div v-if="filteredItems">
-    <armor-list
+    <quests-list
       :items="items"
+      show-completed
+      :active="active"
       @select="handleShowDialog($event)"
     />
   </div>
@@ -9,22 +11,22 @@
 
 <script>
 /**
- * <armor-known></armor-known>
- * @desc A character's known armor
+ * <weapons-known></weapons-known>
+ * @desc A character's known weapons
  */
-import character from '../../../mixins/character'
-import ArmorDialog from './ArmorDialog'
-import ArmorList from './ArmorList'
-import SearchBar from '../../inputs/SearchBar'
+import character from '@/mixins/character'
+// import WeaponsDialog from './WeaponsDialog'
+import QuestsList from './QuestsList'
+import SearchBar from '@/components/inputs/SearchBar'
 
 export default {
   // Name
-  name: 'armor-equipped',
+  name: 'quests-completed',
 
   // Components
   components: {
-    ArmorDialog,
-    ArmorList,
+    // WeaponsDialog,
+    QuestsList,
     SearchBar
   },
 
@@ -33,29 +35,17 @@ export default {
     character
   ],
 
+  // Props
+  props: {
+    active: Boolean
+  },
+
   // Data
   data () {
     return {
-      endpoint: 'armor',
-      // dialogEvent: 'new-feat',
-      // tableHeaders: [
-      //   {
-      //     text: 'Name',
-      //     align: 'left',
-      //     sortable: false,
-      //     value: 'name'
-      //   },
-      //   { text: 'AC', value: 'ac' }
-      // ],
-      // defaultItem: {
-      //   name: '',
-      //   description: ''
-      // },
-      // search: undefined,
+      endpoint: 'quests',
       newItem: false,
       items: undefined
-      // selectedItem: undefined,
-      // showDialog: false
     }
   },
 
@@ -102,10 +92,10 @@ export default {
      * @param {Object} - item
      */
     addItem (item) {
-      console.log('armor known add item...')
+      console.log('weapons known add item...')
       this.$db.ref(`${this.endpoint}/${this.characterId}`)
         .push(item)
-      this.$bus.$emit('toast', `Added the ${item.name} Armor`)
+      this.$bus.$emit('toast', `Added the ${item.name} Weapons`)
     },
 
     /**

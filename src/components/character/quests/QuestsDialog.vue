@@ -22,7 +22,9 @@
         <!-- Dialog Title -->
         <v-toolbar-title>
           <span v-if="newItem">New</span>
-           Armor
+           Quest
+           <span v-if="selectedItem.name">-</span>
+           {{ selectedItem.name }}
         </v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
@@ -31,7 +33,7 @@
       <v-card-text>
         <v-container class="pa-0">
           <v-layout row wrap v-if="selectedItem">
-            <!-- Armor Name -->
+            <!-- Quest Name -->
             <v-flex xs12>
               <v-text-field
                 label="Name"
@@ -46,69 +48,30 @@
               />
             </v-flex>
 
+            <!-- Quest Description -->
             <v-flex xs12>
-              <v-text-field
-                label="Armor Class"
+              <v-textarea
+                label="Summary"
                 type="text"
-                required
+                rows="3"
+                multi-line
+                auto-grow
                 :readonly="browse"
-                v-model="selectedItem.ac"
-                v-validate="'required'"
-                data-vv-name="ac"
-                :error-messages="errors.collect('ac')"
-                @input="handleInput('ac', $event)"
+                v-model="selectedItem.summary"
+                data-vv-name="description"
+                :error-messages="errors.collect('description')"
+                @input="handleInput('summary', $event)"
               />
             </v-flex>
 
-            <v-flex xs12>
-              <v-text-field
-                label="Armor Type"
-                type="text"
-                :readonly="browse"
-                v-model="selectedItem.armorType"
-                @input="handleInput('armorType', $event)"
-              />
-            </v-flex>
-
-            <v-flex xs12>
-              <v-text-field
-                label="Weight"
-                type="text"
-                :read-only="browse"
-                v-model="selectedItem.weight"
-                @input="handleInput('weight', $event)"
-              />
-            </v-flex>
-
-            <v-flex xs12>
-              <v-text-field
-                label="Cost"
-                type="text"
-                :readonly="browse"
-                v-model="selectedItem.cost"
-                @input="handleInput('cost', $event)"
-              />
-            </v-flex>
-
-            <v-flex xs12>
-              <v-combobox
-                multiple
-                label="Properties"
-                :readonly="browse"
-                :value="selectedItem.properties || []"
-                chips
-                deletable-chips
-                @input="handleInput('properties', $event)"
-              />
-            </v-flex>
-
-            <!-- Armor Description -->
+            <!-- Weapons Description -->
             <v-flex xs12>
               <v-textarea
                 label="Description"
                 type="text"
-                rows="10"
+                rows="3"
                 multi-line
+                auto-grow
                 :readonly="browse"
                 v-model="selectedItem.description"
                 data-vv-name="description"
@@ -117,12 +80,47 @@
               />
             </v-flex>
 
+            <v-flex xs12>
+              <v-combobox
+                label="Characters"
+                :readonly="browse"
+                :value="selectedItem.properties || []"
+                multiple
+                chips
+                deletable-chips
+                @input="handleInput('properties', $event)"
+              />
+            </v-flex>
+
+            <v-flex xs12>
+              <v-combobox
+                label="Rewards"
+                :readonly="browse"
+                :value="selectedItem.rewards || []"
+                multiple
+                chips
+                deletable-chips
+                @input="handleInput('rewards', $event)"
+              />
+            </v-flex>
+
+            <v-flex xs12 class="mb-4">
+              <v-switch
+                color="accent"
+                label="Completed"
+                :input-value="selectedItem.completed"
+                :true-value="true"
+                :false-value="false"
+                @change="handleInput('completed', $event)"
+              ></v-switch>
+            </v-flex>
+
             <!-- Dialog Buttons -->
             <v-flex xs12>
               <v-btn
                 v-if="browse || newItem"
                 block
-                color="accent"
+                color="secondary"
                 :disabled="!isFormValid"
                 :loading="loading"
                 @click="$emit('add-item', selectedItem)"
@@ -152,22 +150,24 @@
 
 <script>
 import character from '../../../mixins/character'
+import proficiencyBonus from '../../../mixins/proficiencyBonus'
 import validation from '../../../mixins/validation'
-// import CustomSelect from '../../inputs/CustomSelect'
+import CustomSelect from '../../inputs/CustomSelect'
 import debounce from 'debounce'
 
 export default {
   // Name
-  name: 'armor-dialog',
+  name: 'quests-dialog',
 
   // Components
   components: {
-    // CustomSelect
+    CustomSelect
   },
 
   // Mixins
   mixins: [
     character,
+    proficiencyBonus,
     validation
   ],
 
@@ -184,11 +184,14 @@ export default {
     return {
       selectedItem: {
         name: undefined,
-        ac: undefined,
-        description: undefined
+        summary: undefined,
+        description: undefined,
+        characters: [],
+        rewards: [],
+        completed: false
       },
       loading: false,
-      endpoint: 'armor'
+      endpoint: 'quests'
     }
   },
 
@@ -213,6 +216,10 @@ export default {
         return true
       }
     }
+    // proficientHint () {
+    //   const bonus = this.proficiencyBonus || 0
+    //   return `Add Profiency Bonus to Attack Roll (+${bonus})`
+    // }
   },
 
   // Watch
@@ -242,6 +249,7 @@ export default {
      * Update Item
      */
     updateItem (field, value) {
+      this.$set(this.selectedItem, field, value)
       const update = {}
       update[field] = value
       this.$db.ref(this.firebaseURL).update(update)
@@ -253,7 +261,7 @@ export default {
     handleInput (field, value) {
       if (this.newItem) return
       this.updateItem(field, value)
-      console.log('handle dialog input')
+      console.log('handle dialog input', value)
     },
 
     /**
