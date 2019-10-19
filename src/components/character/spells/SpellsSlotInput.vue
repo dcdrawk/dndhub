@@ -49,8 +49,14 @@ export default {
 
   // Props
   props: {
-    label: String,
-    value: Number
+    label: {
+      type: String,
+      default: undefined
+    },
+    value: {
+      type: Number,
+      default: 0
+    }
   },
 
   // Data
@@ -62,11 +68,11 @@ export default {
   },
 
   // Computed
-  computed: {
-    computedProperty () {
-      return 'something'
-    }
-  },
+  // computed: {
+  //   computedProperty () {
+  //     return 'something'
+  //   }
+  // },
 
   // Watch
   watch: {

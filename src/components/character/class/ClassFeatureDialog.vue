@@ -7,7 +7,7 @@
     scrollable
     @input="handleInput($event)"
   >
-    <v-card tile v-if="item">
+    <v-card tile>
       <!-- Dialog Toolbar -->
       <v-toolbar card dark color="primary">
         <!-- Close Button -->
@@ -134,7 +134,10 @@ export default {
   // Props
   props: {
     showDialog: Boolean,
-    item: Object
+    item: {
+      type: Object,
+      default: () => {}
+    }
   },
 
   // Data

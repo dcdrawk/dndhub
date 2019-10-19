@@ -157,7 +157,10 @@ export default {
 
   // Props
   props: {
-    items: Array,
+    items: {
+      type: Array,
+      default: () => []
+    },
     browse: Boolean
   },
 

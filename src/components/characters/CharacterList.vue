@@ -35,8 +35,8 @@
               v-if="item.enableMulticlass"
             >
               <span
-                v-for="(classObj, key) in item.classes"
-                :key="key"
+                v-for="(classObj, classKey) in item.classes"
+                :key="classKey"
               >
                 {{ classObj.name }}
               </span>
@@ -128,7 +128,10 @@ export default {
 
   // Props
   props: {
-    characters: Object
+    characters: {
+      type: Object,
+      default: () => {}
+    }
   },
 
   // Data

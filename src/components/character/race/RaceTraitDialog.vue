@@ -124,7 +124,10 @@ export default {
   // Props
   props: {
     showDialog: Boolean,
-    item: Object
+    item: {
+      type: Object,
+      default: () => {}
+    }
   },
 
   // Data

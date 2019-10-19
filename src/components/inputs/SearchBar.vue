@@ -37,7 +37,10 @@ export default {
 
   // Props
   props: {
-    value: String,
+    value: {
+      type: String,
+      default: undefined
+    },
     filter: Boolean
   },
 

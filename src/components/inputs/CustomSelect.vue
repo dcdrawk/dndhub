@@ -59,15 +59,36 @@ export default {
 
   // Props
   props: {
-    items: Array,
-    itemText: String,
-    itemValue: String,
-    value: String,
+    items: {
+      type: Array,
+      default: () => []
+    },
+    itemText: {
+      type: String,
+      default: undefined
+    },
+    itemValue: {
+      type: String,
+      default: undefined
+    },
+    value: {
+      type: String,
+      default: undefined
+    },
     custom: Boolean,
-    label: String,
-    name: String,
+    label: {
+      type: String,
+      default: undefined
+    },
+    name: {
+      type: String,
+      default: undefined
+    },
     disabled: Boolean,
-    errorMessages: [Object, Array],
+    errorMessages: {
+      type: [Object, Array],
+      default: () => []
+    },
     showAction: {
       type: Boolean,
       default: true
