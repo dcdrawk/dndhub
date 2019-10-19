@@ -3,12 +3,14 @@
     <v-layout
       row
       wrap
-      justify-center>
+      justify-center
+    >
       <v-flex
         xs12
         md6
         lg4
-        xl2>
+        xl2
+      >
         <!-- Title -->
         <h3 class="title">
           Welcome to DnDHub (Beta)
@@ -74,7 +76,8 @@
       </v-flex>
       <v-flex
         xs12
-        class="actions" />
+        class="actions"
+      />
     </v-layout>
   </v-container>
 </template>

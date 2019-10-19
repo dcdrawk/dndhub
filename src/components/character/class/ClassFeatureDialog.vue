@@ -12,7 +12,8 @@
       <v-toolbar
         card
         dark
-        color="primary">
+        color="primary"
+      >
         <!-- Close Button -->
         <v-btn
           icon
@@ -35,13 +36,15 @@
         <v-container class="pa-0">
           <v-layout
             row
-            wrap>
+            wrap
+          >
             <!-- Class Feature Name -->
             <v-flex xs12>
               <ValidationProvider
                 v-slot="{ errors }"
                 name="Name"
-                rules="required">
+                rules="required"
+              >
                 <v-text-field
                   v-model="selectedItem.name"
                   label="Name"
@@ -59,7 +62,8 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 name="Level"
-                rules="required">
+                rules="required"
+              >
                 <v-text-field
                   v-model="selectedItem.level"
                   label="Level"
@@ -77,7 +81,8 @@
               <ValidationProvider
                 v-slot="{ errors }"
                 name="Description"
-                rules="required">
+                rules="required"
+              >
                 <v-textarea
                   v-model="selectedItem.description"
                   label="Description"

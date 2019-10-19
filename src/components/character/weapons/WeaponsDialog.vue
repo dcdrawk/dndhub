@@ -9,12 +9,14 @@
   >
     <v-card
       v-if="item"
-      tile>
+      tile
+    >
       <!-- Dialog Toolbar -->
       <v-toolbar
         card
         dark
-        color="primary">
+        color="primary"
+      >
         <!-- Close Button -->
         <v-btn
           icon
@@ -38,7 +40,8 @@
           <v-layout
             v-if="selectedItem"
             row
-            wrap>
+            wrap
+          >
             <!-- Weapons Name -->
             <v-flex xs12>
               <v-text-field
@@ -56,7 +59,8 @@
 
             <v-flex
               xs12
-              class="mb-4">
+              class="mb-4"
+            >
               <v-switch
                 color="accent"
                 label="Profiecient"

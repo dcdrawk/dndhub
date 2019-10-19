@@ -5,14 +5,17 @@
       <v-card-text>
         <v-container
           grid-list-md
-          class="pa-0">
+          class="pa-0"
+        >
           <v-layout
             row
-            wrap>
+            wrap
+          >
             <!-- Primary Class Name -->
             <v-flex
               xs12
-              md6>
+              md6
+            >
               <custom-select
                 label="Class"
                 :value="primaryClass.name"
@@ -28,7 +31,8 @@
             <!-- Primary Class Subclass -->
             <v-flex
               xs12
-              md6>
+              md6
+            >
               <custom-select
                 :disabled="!primaryClass.name"
                 :label="getSubclassLabel(primaryClass.name) || 'Subclass'"
@@ -44,7 +48,8 @@
 
             <v-flex
               v-if="character.enableMulticlass"
-              xs12>
+              xs12
+            >
               <v-text-field
                 label="Class Level"
                 type="number"
@@ -56,7 +61,8 @@
             <!-- Enable Multiclass Switch -->
             <v-flex
               xs12
-              md6>
+              md6
+            >
               <v-switch
                 color="accent"
                 label="Enable Multiclass"
@@ -91,11 +97,13 @@
           <v-container grid-list-md>
             <v-layout
               row
-              wrap>
+              wrap
+            >
               <!-- Multiclass Name-->
               <v-flex
                 xs12
-                md6>
+                md6
+              >
                 <custom-select
                   label="Class"
                   :value="classObject.name"
@@ -111,7 +119,8 @@
               <!-- Multiclass Subclass -->
               <v-flex
                 xs12
-                md6>
+                md6
+              >
                 <custom-select
                   :label="getSubclassLabel(classObject.name) || 'Subclass'"
                   :value="classObject.subclass"

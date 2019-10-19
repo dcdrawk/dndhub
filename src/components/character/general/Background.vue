@@ -2,17 +2,21 @@
   <div>
     <v-card
       flat
-      class="mb-1">
+      class="mb-1"
+    >
       <v-card-text>
         <v-container
           grid-list-md
-          class="pa-0">
+          class="pa-0"
+        >
           <v-layout
             row
-            wrap>
+            wrap
+          >
             <v-flex
               xs12
-              md6>
+              md6
+            >
               <custom-select
                 label="Alignment"
                 :value="character.alignment"
@@ -27,7 +31,8 @@
 
             <v-flex
               xs12
-              md6>
+              md6
+            >
               <custom-select
                 label="Background"
                 :value="character.background"
@@ -59,10 +64,12 @@
       <v-card-text>
         <v-container
           grid-list-md
-          class="pa-0">
+          class="pa-0"
+        >
           <v-layout
             row
-            wrap>
+            wrap
+          >
             <v-flex xs12>
               <h2>Personality Traits</h2>
             </v-flex>

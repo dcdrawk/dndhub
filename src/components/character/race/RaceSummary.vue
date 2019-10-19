@@ -5,14 +5,17 @@
       <v-card-text>
         <v-container
           grid-list-md
-          class="pa-0">
+          class="pa-0"
+        >
           <v-layout
             row
-            wrap>
+            wrap
+          >
             <!-- Primary Class Name -->
             <v-flex
               xs12
-              md6>
+              md6
+            >
               <custom-select
                 label="Race"
                 :value="character.race"
@@ -27,7 +30,8 @@
 
             <v-flex
               xs12
-              md6>
+              md6
+            >
               <custom-select
                 label="Subrace"
                 :value="character.subrace"
@@ -42,7 +46,8 @@
 
             <v-flex
               xs12
-              md6>
+              md6
+            >
               <v-text-field
                 label="Ability Score Increase (Race)"
                 type="text"
@@ -53,7 +58,8 @@
 
             <v-flex
               xs12
-              md6>
+              md6
+            >
               <v-text-field
                 label="Ability Score Increase (Subrace)"
                 type="text"
@@ -64,7 +70,8 @@
 
             <v-flex
               xs12
-              md6>
+              md6
+            >
               <v-text-field
                 label="Speed"
                 type="text"

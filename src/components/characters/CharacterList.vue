@@ -52,13 +52,15 @@
           <v-menu
             v-if="user"
             left
-            :z-index="5">
+            :z-index="5"
+          >
             <template v-slot:activator="{ on }">
               <!-- Menu Activator -->
               <v-btn
                 class="menu-toggle"
                 icon
-                v-on="on">
+                v-on="on"
+              >
                 <v-icon>more_vert</v-icon>
               </v-btn>
             </template>

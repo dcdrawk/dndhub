@@ -4,10 +4,12 @@
       <v-card-text>
         <v-container
           grid-list-md
-          class="pa-0">
+          class="pa-0"
+        >
           <v-layout
             row
-            wrap>
+            wrap
+          >
             <!-- Proficiency Bonus -->
             <v-flex xs12>
               <v-text-field
@@ -66,10 +68,12 @@
         </h3>
         <v-container
           grid-list-md
-          class="pa-0">
+          class="pa-0"
+        >
           <v-layout
             row
-            wrap>
+            wrap
+          >
             <!-- Current HP -->
             <v-flex xs6>
               <v-text-field

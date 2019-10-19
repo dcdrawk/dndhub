@@ -1,7 +1,8 @@
 <template>
   <v-container
     fluid
-    class="spell-casting">
+    class="spell-casting"
+  >
     <!-- {{ }} -->
     <v-select
       class="spell-casting__modifier"

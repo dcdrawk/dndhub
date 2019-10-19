@@ -2,20 +2,24 @@
   <div>
     <v-card
       flat
-      class="mb-1">
+      class="mb-1"
+    >
       <v-card-text>
         <v-container
           grid-list-md
-          class="pa-0">
+          class="pa-0"
+        >
           <v-layout
             row
-            wrap>
+            wrap
+          >
             <v-flex xs12>
               <!-- Character Name -->
               <ValidationProvider
                 v-slot="{ errors }"
                 name="Character Name"
-                rules="required">
+                rules="required"
+              >
                 <v-text-field
                   label="Character Name"
                   type="text"
@@ -31,11 +35,13 @@
             <!-- Character Level -->
             <v-flex
               xs6
-              class="pr-1">
+              class="pr-1"
+            >
               <ValidationProvider
                 v-slot="{ errors }"
                 name="Level"
-                rules="required">
+                rules="required"
+              >
                 <v-text-field
                   label="Level"
                   type="number"
@@ -51,11 +57,13 @@
             <!-- Character Experience -->
             <v-flex
               xs6
-              class="pl-2">
+              class="pl-2"
+            >
               <ValidationProvider
                 v-slot="{ errors }"
                 name="Experience"
-                rules="required">
+                rules="required"
+              >
                 <v-text-field
                   label="Experience"
                   type="number"
@@ -79,10 +87,12 @@
         <!-- Appearance Container -->
         <v-container
           grid-list-md
-          class="pa-0">
+          class="pa-0"
+        >
           <v-layout
             row
-            wrap>
+            wrap
+          >
             <!-- Heading -->
             <v-flex xs12>
               <h2>Appearance</h2>

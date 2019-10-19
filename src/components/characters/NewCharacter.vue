@@ -13,7 +13,8 @@
         dark
         short
         :max-height="56"
-        color="primary">
+        color="primary"
+      >
         <!-- Close Button -->
         <v-btn
           icon
@@ -31,16 +32,19 @@
       <v-card-text>
         <ValidationObserver
           ref="observer"
-          v-slot="{ invalid }">
+          v-slot="{ invalid }"
+        >
           <v-container class="pa-0 pt-4">
             <v-layout
               row
-              wrap>
+              wrap
+            >
               <v-flex xs12>
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="Character Name"
-                  rules="required">
+                  rules="required"
+                >
                   <v-text-field
                     v-model="character.name"
                     label="Character Name"
@@ -53,11 +57,13 @@
 
               <v-flex
                 xs6
-                class="pr-1">
+                class="pr-1"
+              >
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="Level"
-                  rules="required">
+                  rules="required"
+                >
                   <v-text-field
                     v-model="character.level"
                     label="Level"
@@ -70,7 +76,8 @@
 
               <v-flex
                 xs6
-                class="pl-1">
+                class="pl-1"
+              >
                 <v-text-field
                   v-model="character.experience"
                   label="Experience"
@@ -81,11 +88,13 @@
 
               <v-flex
                 xs12
-                md6>
+                md6
+              >
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="Race"
-                  rules="required">
+                  rules="required"
+                >
                   <custom-select
                     v-model="character.race"
                     label="Race"
@@ -102,7 +111,8 @@
 
               <v-flex
                 xs12
-                md6>
+                md6
+              >
                 <custom-select
                   v-model="character.subrace"
                   :disabled="!character.race"
@@ -117,11 +127,13 @@
 
               <v-flex
                 xs12
-                md6>
+                md6
+              >
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="Class"
-                  rules="required">
+                  rules="required"
+                >
                   <custom-select
                     v-model="characterClasses[0].name"
                     label="Class"
@@ -138,7 +150,8 @@
 
               <v-flex
                 xs12
-                md6>
+                md6
+              >
                 <custom-select
                   v-model="characterClasses[0].subclass"
                   :disabled="!characterClasses[0].name"
@@ -153,7 +166,8 @@
 
               <v-flex
                 xs12
-                md6>
+                md6
+              >
                 <custom-select
                   label="Alignment"
                   :value="character.alignment"
@@ -168,7 +182,8 @@
 
               <v-flex
                 xs12
-                md6>
+                md6
+              >
                 <custom-select
                   label="Background"
                   :value="character.background"

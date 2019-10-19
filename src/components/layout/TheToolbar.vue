@@ -26,14 +26,16 @@
       v-if="user"
       attach
       light
-      left>
+      left
+    >
       <template v-slot:activator="{ on }">
         <!-- Menu Activator -->
         <v-btn
           class="menu-toggle"
           dark
           icon
-          v-on="on">
+          v-on="on"
+        >
           <v-icon>more_vert</v-icon>
         </v-btn>
       </template>

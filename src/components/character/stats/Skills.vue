@@ -3,11 +3,13 @@
     <v-card-text class="pa-0">
       <v-container
         grid-list-sm
-        class="pa-0">
+        class="pa-0"
+      >
         <v-layout
           row
           wrap
-          class="mb-0 pa-2 pl-3">
+          class="mb-0 pa-2 pl-3"
+        >
           <v-flex xs6>
             <strong>Stat</strong>
           </v-flex>
@@ -32,12 +34,14 @@
         >
           <v-flex
             xs12
-            class="pa-0">
+            class="pa-0"
+          >
             <v-divider class="ma-0 pa-0" />
           </v-flex>
           <v-flex
             xs6
-            class="pl-3 pr-0 pt-2">
+            class="pl-3 pr-0 pt-2"
+          >
             <span class="skill__name">
               {{ item.name.replace(/_/g, ' ') }}
             </span>
@@ -47,7 +51,8 @@
           </v-flex>
           <v-flex
             xs2
-            class="pt-0">
+            class="pt-0"
+          >
             <v-checkbox
               class="skill__checkbox mt-1"
               hide-details
@@ -60,7 +65,8 @@
           </v-flex>
           <v-flex
             xs2
-            class="pt-0">
+            class="pt-0"
+          >
             <v-text-field
               type="number"
               class="pt-0"
@@ -71,7 +77,8 @@
           </v-flex>
           <v-flex
             xs2
-            class="pt-0 pr-3">
+            class="pt-0 pr-3"
+          >
             <v-text-field
               type="number"
               class="pt-0"

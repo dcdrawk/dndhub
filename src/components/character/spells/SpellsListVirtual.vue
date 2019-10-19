@@ -1,7 +1,8 @@
 <template>
   <div
     v-if="filteredItems"
-    class="spell-list-container">
+    class="spell-list-container"
+  >
     <search-bar
       v-model="search"
       filter
@@ -33,7 +34,8 @@
       <virtual-scroller
         class="scroller"
         :items="displayedItems"
-        item-height="61">
+        item-height="61"
+      >
         <template slot-scope="props">
           <!-- List Tile -->
           <v-list-item

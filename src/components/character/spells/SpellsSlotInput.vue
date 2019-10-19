@@ -2,10 +2,12 @@
   <div>
     <v-layout
       row
-      wrap>
+      wrap
+    >
       <v-flex
         xs8
-        class="pr-2">
+        class="pr-2"
+      >
         <v-text-field
           :label="label"
           type="number"

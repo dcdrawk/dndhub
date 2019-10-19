@@ -40,12 +40,14 @@
     >
       <v-icon
         v-if="!custom"
-        color="grey">
+        color="grey"
+      >
         edit
       </v-icon>
       <v-icon
         v-else
-        color="grey">
+        color="grey"
+      >
         close
       </v-icon>
     </v-btn>

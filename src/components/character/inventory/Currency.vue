@@ -2,14 +2,17 @@
   <!-- <div> -->
   <v-card
     flat
-    class="mb-1">
+    class="mb-1"
+  >
     <v-card-text>
       <v-container
         grid-list-md
-        class="pa-0">
+        class="pa-0"
+      >
         <v-layout
           row
-          wrap>
+          wrap
+        >
           <!-- Hair -->
           <v-flex xs12>
             <v-text-field

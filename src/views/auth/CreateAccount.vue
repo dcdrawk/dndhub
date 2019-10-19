@@ -3,11 +3,13 @@
     <v-layout
       row
       wrap
-      justify-center>
+      justify-center
+    >
       <v-flex
         xs12
         md6
-        lg2>
+        lg2
+      >
         <!-- Title -->
         <h3 class="title">
           Create a new DnDHub Account
@@ -84,7 +86,8 @@
       </v-flex>
       <v-flex
         xs12
-        class="actions" />
+        class="actions"
+      />
     </v-layout>
   </v-container>
 </template>

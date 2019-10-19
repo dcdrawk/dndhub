@@ -12,7 +12,8 @@
       <v-toolbar
         card
         dark
-        color="primary">
+        color="primary"
+      >
         <!-- Close Button -->
         <v-btn
           icon

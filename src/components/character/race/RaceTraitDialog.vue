@@ -9,12 +9,14 @@
   >
     <v-card
       v-if="item"
-      tile>
+      tile
+    >
       <!-- Dialog Toolbar -->
       <v-toolbar
         card
         dark
-        color="primary">
+        color="primary"
+      >
         <!-- Close Button -->
         <v-btn
           icon
@@ -37,7 +39,8 @@
         <v-container class="pa-0">
           <v-layout
             row
-            wrap>
+            wrap
+          >
             <!-- Class Feature Name -->
             <v-flex xs12>
               <v-text-field
