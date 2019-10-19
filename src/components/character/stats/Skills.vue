@@ -1,8 +1,13 @@
 <template>
   <v-card v-if="characterSkills && characterScores">
     <v-card-text class="pa-0">
-      <v-container grid-list-sm class="pa-0">
-        <v-layout row wrap class="mb-0 pa-2 pl-3">
+      <v-container
+        grid-list-sm
+        class="pa-0">
+        <v-layout
+          row
+          wrap
+          class="mb-0 pa-2 pl-3">
           <v-flex xs6>
             <strong>Stat</strong>
           </v-flex>
@@ -17,7 +22,7 @@
           </v-flex>
         </v-layout>
 
-        <v-divider></v-divider>
+        <v-divider />
 
         <v-layout
           v-for="(item, index) in skills"
@@ -25,10 +30,14 @@
           class="pa-0 pr-0 skill"
           wrap
         >
-          <v-flex xs12 class="pa-0">
-            <v-divider class="ma-0 pa-0"></v-divider>
+          <v-flex
+            xs12
+            class="pa-0">
+            <v-divider class="ma-0 pa-0" />
           </v-flex>
-          <v-flex xs6 class="pl-3 pr-0 pt-2">
+          <v-flex
+            xs6
+            class="pl-3 pr-0 pt-2">
             <span class="skill__name">
               {{ item.name.replace(/_/g, ' ') }}
             </span>
@@ -36,7 +45,9 @@
               ({{ item.abilityScore.slice(0, 3) }})
             </span>
           </v-flex>
-          <v-flex xs2 class="pt-0">
+          <v-flex
+            xs2
+            class="pt-0">
             <v-checkbox
               class="skill__checkbox mt-1"
               hide-details
@@ -47,7 +58,9 @@
               @change="updateSkill(item.name, 'proficient', $event)"
             />
           </v-flex>
-          <v-flex xs2 class="pt-0">
+          <v-flex
+            xs2
+            class="pt-0">
             <v-text-field
               type="number"
               class="pt-0"
@@ -56,7 +69,9 @@
               @input="updateSkill(item.name, 'bonus', $event)"
             />
           </v-flex>
-          <v-flex xs2 class="pt-0 pr-3">
+          <v-flex
+            xs2
+            class="pt-0 pr-3">
             <v-text-field
               type="number"
               class="pt-0"

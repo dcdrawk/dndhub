@@ -1,7 +1,11 @@
 <template>
   <div>
-    <v-layout row wrap>
-      <v-flex xs8 class="pr-2">
+    <v-layout
+      row
+      wrap>
+      <v-flex
+        xs8
+        class="pr-2">
         <v-text-field
           :label="label"
           type="number"
@@ -32,7 +36,7 @@
         </v-btn>
       </v-flex>
     </v-layout>
-    <v-divider class="mb-2"></v-divider>
+    <v-divider class="mb-2" />
   </div>
 </template>
 

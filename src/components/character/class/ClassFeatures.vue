@@ -13,8 +13,8 @@
       <template v-for="(item, index) in filteredItems">
         <!-- List Tile -->
         <v-list-item
-          :class="{ 'unobtained': +item.level > +character.level }"
           :key="index"
+          :class="{ 'unobtained': +item.level > +character.level }"
           @click="handleShowDialog(item)"
         >
           <!-- Content -->
@@ -34,7 +34,7 @@
         <v-divider
           v-if="index < filteredItems.length - 1"
           :key="`${index}-divider`"
-        ></v-divider>
+        />
       </template>
     </v-list>
 
@@ -148,6 +148,16 @@ export default {
     }
   },
 
+  // Created
+  created () {
+    this.getClassFeatures()
+    // Listen for events from the parent component
+    this.$bus.$on('new-class-feat', () => {
+      this.selectedItem = { ...this.defaultItem }
+      this.showDialog = true
+    })
+  },
+
   // Methods
   methods: {
     /**
@@ -205,16 +215,6 @@ export default {
       this.selectedItem = feature
       this.showDialog = true
     }
-  },
-
-  // Created
-  created () {
-    this.getClassFeatures()
-    // Listen for events from the parent component
-    this.$bus.$on('new-class-feat', () => {
-      this.selectedItem = { ...this.defaultItem }
-      this.showDialog = true
-    })
   }
 }
 </script>

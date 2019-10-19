@@ -1,5 +1,7 @@
 <template>
-  <v-container grid-list-md text-xs-center>
+  <v-container
+    grid-list-md
+    text-xs-center>
     <v-layout row>
       <v-flex xs4>
         <v-select
@@ -12,7 +14,7 @@
           clearable
           :value="filter.class"
           @input="$emit('filter-class', $event)"
-        ></v-select>
+        />
       </v-flex>
 
       <v-flex xs4>
@@ -23,7 +25,7 @@
           hide-details
           clearable
           @input="$emit('filter-level', $event)"
-        ></v-select>
+        />
       </v-flex>
 
       <v-flex xs4>
@@ -34,7 +36,7 @@
           hide-details
           clearable
           @input="$emit('filter-school', $event)"
-        ></v-select>
+        />
       </v-flex>
     </v-layout>
   </v-container>

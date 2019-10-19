@@ -7,9 +7,14 @@
     scrollable
     @input="handleDialog($event)"
   >
-    <v-card tile v-if="item">
+    <v-card
+      v-if="item"
+      tile>
       <!-- Dialog Toolbar -->
-      <v-toolbar card dark color="primary">
+      <v-toolbar
+        card
+        dark
+        color="primary">
         <!-- Close Button -->
         <v-btn
           icon
@@ -24,29 +29,34 @@
           <span v-if="newItem">New</span>
           Weapon - {{ selectedItem.name }}
         </v-toolbar-title>
-        <v-spacer></v-spacer>
+        <v-spacer />
       </v-toolbar>
 
       <!-- Card Text -->
       <v-card-text>
         <v-container class="pa-0">
-          <v-layout row wrap v-if="selectedItem">
+          <v-layout
+            v-if="selectedItem"
+            row
+            wrap>
             <!-- Weapons Name -->
             <v-flex xs12>
               <v-text-field
+                v-model="selectedItem.name"
+                v-validate="'required'"
                 label="Name"
                 type="text"
                 required
                 :readonly="browse"
-                v-model="selectedItem.name"
-                v-validate="'required'"
                 data-vv-name="name"
                 :error-messages="errors.collect('name')"
                 @input="handleInput('name', $event)"
               />
             </v-flex>
 
-            <v-flex xs12 class="mb-4">
+            <v-flex
+              xs12
+              class="mb-4">
               <v-switch
                 color="accent"
                 label="Profiecient"
@@ -56,15 +66,15 @@
                 :true-value="true"
                 :false-value="false"
                 @change="handleInput('proficient', $event)"
-              ></v-switch>
+              />
             </v-flex>
 
             <v-flex xs12>
               <v-text-field
+                v-model="selectedItem.damage"
                 label="Damage"
                 type="text"
                 :readonly="browse"
-                v-model="selectedItem.damage"
                 data-vv-name="damage"
                 :error-messages="errors.collect('damage')"
                 @input="handleInput('damage', $event)"
@@ -73,40 +83,40 @@
 
             <v-flex xs12>
               <v-text-field
+                v-model="selectedItem.weaponType"
                 label="Weapon Type"
                 type="text"
                 :readonly="browse"
-                v-model="selectedItem.weaponType"
                 @input="handleInput('weaponType', $event)"
               />
             </v-flex>
 
             <v-flex xs12>
               <v-text-field
+                v-model="selectedItem.damageType"
                 label="Damage Type"
                 type="text"
                 :readonly="browse"
-                v-model="selectedItem.damageType"
                 @input="handleInput('damageType', $event)"
               />
             </v-flex>
 
             <v-flex xs12>
               <v-text-field
+                v-model="selectedItem.weight"
                 label="Weight"
                 type="text"
                 :read-only="browse"
-                v-model="selectedItem.weight"
                 @input="handleInput('weight', $event)"
               />
             </v-flex>
 
             <v-flex xs12>
               <v-text-field
+                v-model="selectedItem.cost"
                 label="Cost"
                 type="text"
                 :readonly="browse"
-                v-model="selectedItem.cost"
                 @input="handleInput('cost', $event)"
               />
             </v-flex>
@@ -126,12 +136,12 @@
             <!-- Weapons Description -->
             <v-flex xs12>
               <v-textarea
+                v-model="selectedItem.description"
                 label="Description"
                 type="text"
                 rows="10"
                 multi-line
                 :readonly="browse"
-                v-model="selectedItem.description"
                 data-vv-name="description"
                 :error-messages="errors.collect('description')"
                 @input="handleInput('description', $event)"
@@ -256,6 +266,11 @@ export default {
     }
   },
 
+  // Mounted
+  mounted () {
+    this.updateClassWeaponsure = debounce(this.updateClassWeaponsure, 500)
+  },
+
   // Methods
   methods: {
     /**
@@ -292,11 +307,6 @@ export default {
     handleDialog () {
       this.$emit('close')
     }
-  },
-
-  // Mounted
-  mounted () {
-    this.updateClassWeaponsure = debounce(this.updateClassWeaponsure, 500)
   }
 }
 </script>

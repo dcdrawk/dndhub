@@ -2,8 +2,8 @@
   <div class="custom-select">
     <!-- Select -->
     <v-select
-      menu-props="bottom"
       v-if="!custom && items || disabled"
+      menu-props="bottom"
       class="pb-0"
       color="secondary"
       item-color="white"
@@ -15,7 +15,7 @@
       :disabled="disabled"
       :error-messages="errorMessages"
       @input="$emit('input', $event)"
-    ></v-select>
+    />
 
     <!-- Input Field -->
     <v-text-field
@@ -28,7 +28,7 @@
       :label="label"
       :value="value"
       @input="$emit('input', $event)"
-    ></v-text-field>
+    />
 
     <!-- Edit / Cancel Button -->
     <v-btn
@@ -38,10 +38,14 @@
       :disabled="disabled"
       @click="customize()"
     >
-      <v-icon v-if="!custom" color="grey">
+      <v-icon
+        v-if="!custom"
+        color="grey">
         edit
       </v-icon>
-      <v-icon v-else color="grey">
+      <v-icon
+        v-else
+        color="grey">
         close
       </v-icon>
     </v-btn>

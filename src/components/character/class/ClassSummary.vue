@@ -3,10 +3,16 @@
     <!-- Primary Class Card -->
     <v-card flat>
       <v-card-text>
-        <v-container grid-list-md class="pa-0">
-          <v-layout row wrap>
+        <v-container
+          grid-list-md
+          class="pa-0">
+          <v-layout
+            row
+            wrap>
             <!-- Primary Class Name -->
-            <v-flex xs12 md6>
+            <v-flex
+              xs12
+              md6>
               <custom-select
                 label="Class"
                 :value="primaryClass.name"
@@ -20,7 +26,9 @@
             </v-flex>
 
             <!-- Primary Class Subclass -->
-            <v-flex xs12 md6>
+            <v-flex
+              xs12
+              md6>
               <custom-select
                 :disabled="!primaryClass.name"
                 :label="getSubclassLabel(primaryClass.name) || 'Subclass'"
@@ -34,7 +42,9 @@
               />
             </v-flex>
 
-            <v-flex xs12 v-if="character.enableMulticlass">
+            <v-flex
+              v-if="character.enableMulticlass"
+              xs12>
               <v-text-field
                 label="Class Level"
                 type="number"
@@ -44,7 +54,9 @@
             </v-flex>
 
             <!-- Enable Multiclass Switch -->
-            <v-flex xs12 md6>
+            <v-flex
+              xs12
+              md6>
               <v-switch
                 color="accent"
                 label="Enable Multiclass"
@@ -52,7 +64,7 @@
                 :true-value="true"
                 :false-value="false"
                 @change="updateCharacter('enableMulticlass', $event)"
-              ></v-switch>
+              />
             </v-flex>
           </v-layout>
         </v-container>
@@ -77,9 +89,13 @@
       >
         <v-card-text>
           <v-container grid-list-md>
-            <v-layout row wrap>
+            <v-layout
+              row
+              wrap>
               <!-- Multiclass Name-->
-              <v-flex xs12 md6>
+              <v-flex
+                xs12
+                md6>
                 <custom-select
                   label="Class"
                   :value="classObject.name"
@@ -93,7 +109,9 @@
               </v-flex>
 
               <!-- Multiclass Subclass -->
-              <v-flex xs12 md6>
+              <v-flex
+                xs12
+                md6>
                 <custom-select
                   :label="getSubclassLabel(classObject.name) || 'Subclass'"
                   :value="classObject.subclass"

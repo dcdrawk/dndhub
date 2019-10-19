@@ -44,15 +44,15 @@ export default {
     filter: Boolean
   },
 
+  created () {
+    this.handleInput = debounce(this.handleInput, 500)
+  },
+
   // Methods
   methods: {
     handleInput (event) {
       this.$emit('input', event)
     }
-  },
-
-  created () {
-    this.handleInput = debounce(this.handleInput, 500)
   }
 }
 </script>

@@ -1,5 +1,7 @@
 <template>
-  <div class="spell-list-container" v-if="filteredItems">
+  <div
+    v-if="filteredItems"
+    class="spell-list-container">
     <search-bar
       v-model="search"
       filter
@@ -12,7 +14,7 @@
       @filter-level="filter.level = $event"
       @filter-class="filter.class = $event"
       @filter-school="filter.school = $event"
-    ></spells-filters>
+    />
 
     <p
       v-if="filteredItems.length === 0"
@@ -28,12 +30,15 @@
       dense
       class="elevation-1 spell-list"
     >
-      <virtual-scroller class="scroller" :items="displayedItems" item-height="61">
+      <virtual-scroller
+        class="scroller"
+        :items="displayedItems"
+        item-height="61">
         <template slot-scope="props">
           <!-- List Tile -->
           <v-list-item
-            class="list-tile"
             :key="props.itemKey"
+            class="list-tile"
             @click="handleShowDialog(props.item)"
           >
             <!-- Content -->
@@ -83,7 +88,7 @@
             </v-list-item-action>
           </v-list-item>
 
-          <v-divider></v-divider>
+          <v-divider />
         </template>
       </virtual-scroller>
     </v-list>
@@ -282,6 +287,19 @@ export default {
     }
   },
 
+  // Created
+  created () {
+    // Listen for events from the parent component
+    this.$bus.$on(this.dialogEvent, () => {
+      if (this.browse) return
+      this.handleShowDialog()
+    })
+  },
+
+  destroyed () {
+    this.$bus.$off(this.dialogEvent)
+  },
+
   // Methods
   methods: {
     /**
@@ -350,19 +368,6 @@ export default {
     prevPage () {
       this.page--
     }
-  },
-
-  // Created
-  created () {
-    // Listen for events from the parent component
-    this.$bus.$on(this.dialogEvent, () => {
-      if (this.browse) return
-      this.handleShowDialog()
-    })
-  },
-
-  destroyed () {
-    this.$bus.$off(this.dialogEvent)
   }
 }
 </script>

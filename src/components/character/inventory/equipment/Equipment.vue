@@ -55,6 +55,11 @@ export default {
     }
   },
 
+  // Created
+  created () {
+    this.getItems()
+  },
+
   // Methods
   methods: {
     /**
@@ -96,11 +101,6 @@ export default {
       this.addItem(item)
       this.showDialog = false
     }
-  },
-
-  // Created
-  created () {
-    this.getItems()
   }
 }
 </script>

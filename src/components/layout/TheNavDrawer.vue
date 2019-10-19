@@ -35,8 +35,8 @@
     <v-list subheader>
       <!-- Character Menu -->
       <v-list-item
-        class="mb-2"
         v-if="user && character"
+        class="mb-2"
       >
         <v-list-item-content>
           <!-- Nav Drawer List Title -->
@@ -52,8 +52,8 @@
       <div v-if="user && character">
         <v-list-item
           v-for="(item, index) in characterMenu"
-          active-class="secondary--text"
           :key="`character-menu-${index}`"
+          active-class="secondary--text"
           :to="item.href"
         >
           <v-list-item-content>

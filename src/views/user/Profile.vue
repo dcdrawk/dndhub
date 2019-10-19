@@ -1,9 +1,16 @@
 <template>
   <v-container>
-    <v-layout row wrap>
-      <v-flex xs12 v-if="user">
+    <v-layout
+      row
+      wrap>
+      <v-flex
+        v-if="user"
+        xs12>
         <!-- Signed In As -->
-        <v-alert type="success" :value="true" class="signed-in-as">
+        <v-alert
+          type="success"
+          :value="true"
+          class="signed-in-as">
           Signed in as <strong>{{ user.email }}</strong>
         </v-alert>
 

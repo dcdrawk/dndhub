@@ -11,7 +11,7 @@
       @toggle="navDrawerOpen = !navDrawerOpen"
     />
     <v-content fluid>
-      <router-view></router-view>
+      <router-view />
     </v-content>
 
     <!-- Toaster -->

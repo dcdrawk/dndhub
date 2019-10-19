@@ -9,7 +9,11 @@
   >
     <v-card>
       <!-- Dialog Toolbar -->
-      <v-toolbar dark short :max-height="56" color="primary">
+      <v-toolbar
+        dark
+        short
+        :max-height="56"
+        color="primary">
         <!-- Close Button -->
         <v-btn
           icon
@@ -25,47 +29,66 @@
         </v-toolbar-title>
       </v-toolbar>
       <v-card-text>
-        <ValidationObserver ref="observer" v-slot="{ invalid }">
+        <ValidationObserver
+          ref="observer"
+          v-slot="{ invalid }">
           <v-container class="pa-0 pt-4">
-            <v-layout row wrap>
+            <v-layout
+              row
+              wrap>
               <v-flex xs12>
-                <ValidationProvider name="Character Name" rules="required" v-slot="{ errors }">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  name="Character Name"
+                  rules="required">
                   <v-text-field
+                    v-model="character.name"
                     label="Character Name"
                     type="text"
                     required
-                    v-model="character.name"
                     :error-messages="errors[0]"
                   />
                 </ValidationProvider>
               </v-flex>
 
-              <v-flex xs6 class="pr-1">
-                <ValidationProvider name="Level" rules="required" v-slot="{ errors }">
+              <v-flex
+                xs6
+                class="pr-1">
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  name="Level"
+                  rules="required">
                   <v-text-field
+                    v-model="character.level"
                     label="Level"
                     type="number"
                     required
-                    v-model="character.level"
                     :error-messages="errors[0]"
                   />
                 </ValidationProvider>
               </v-flex>
 
-              <v-flex xs6 class="pl-1">
+              <v-flex
+                xs6
+                class="pl-1">
                 <v-text-field
+                  v-model="character.experience"
                   label="Experience"
                   type="number"
                   required
-                  v-model="character.experience"
                 />
               </v-flex>
 
-              <v-flex xs12 md6>
-                <ValidationProvider name="Race" rules="required" v-slot="{ errors }">
+              <v-flex
+                xs12
+                md6>
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  name="Race"
+                  rules="required">
                   <custom-select
-                    label="Race"
                     v-model="character.race"
+                    label="Race"
                     :items="races"
                     item-text="name"
                     item-value="name"
@@ -77,11 +100,13 @@
                 </ValidationProvider>
               </v-flex>
 
-              <v-flex xs12 md6>
+              <v-flex
+                xs12
+                md6>
                 <custom-select
+                  v-model="character.subrace"
                   :disabled="!character.race"
                   label="Subrace"
-                  v-model="character.subrace"
                   :items="subraces"
                   item-text="name"
                   item-value="name"
@@ -90,11 +115,16 @@
                 />
               </v-flex>
 
-              <v-flex xs12 md6>
-                <ValidationProvider name="Class" rules="required" v-slot="{ errors }">
+              <v-flex
+                xs12
+                md6>
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  name="Class"
+                  rules="required">
                   <custom-select
-                    label="Class"
                     v-model="characterClasses[0].name"
+                    label="Class"
                     :items="classes"
                     item-text="name"
                     item-value="name"
@@ -106,11 +136,13 @@
                 </ValidationProvider>
               </v-flex>
 
-              <v-flex xs12 md6>
+              <v-flex
+                xs12
+                md6>
                 <custom-select
+                  v-model="characterClasses[0].subclass"
                   :disabled="!characterClasses[0].name"
                   :label="getSubclassLabel() || 'Subclass'"
-                  v-model="characterClasses[0].subclass"
                   :items="getSubclassOptions(characterClasses[0].name)"
                   item-text="title"
                   item-value="title"
@@ -119,7 +151,9 @@
                 />
               </v-flex>
 
-              <v-flex xs12 md6>
+              <v-flex
+                xs12
+                md6>
                 <custom-select
                   label="Alignment"
                   :value="character.alignment"
@@ -132,7 +166,9 @@
                 />
               </v-flex>
 
-              <v-flex xs12 md6>
+              <v-flex
+                xs12
+                md6>
                 <custom-select
                   label="Background"
                   :value="character.background"

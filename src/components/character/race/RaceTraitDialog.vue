@@ -7,9 +7,14 @@
     scrollable
     @input="handleInput($event)"
   >
-    <v-card tile v-if="item">
+    <v-card
+      v-if="item"
+      tile>
       <!-- Dialog Toolbar -->
-      <v-toolbar card dark color="primary">
+      <v-toolbar
+        card
+        dark
+        color="primary">
         <!-- Close Button -->
         <v-btn
           icon
@@ -24,22 +29,24 @@
           <span v-if="item.new">New</span>
           Race Trait
         </v-toolbar-title>
-        <v-spacer></v-spacer>
+        <v-spacer />
       </v-toolbar>
 
       <!-- Card Text -->
       <v-card-text>
         <v-container class="pa-0">
-          <v-layout row wrap>
+          <v-layout
+            row
+            wrap>
             <!-- Class Feature Name -->
             <v-flex xs12>
               <v-text-field
+                v-model="selectedItem.name"
+                v-validate="'required'"
                 label="Name"
                 type="text"
                 required
                 :readonly="isReadOnly"
-                v-model="selectedItem.name"
-                v-validate="'required'"
                 data-vv-name="name"
                 :error-messages="errors.collect('name')"
                 @input="handleInput('name', $event)"
@@ -49,14 +56,14 @@
             <!-- Class Feature Description -->
             <v-flex xs12>
               <v-textarea
+                v-model="selectedItem.description"
+                v-validate="'required'"
                 label="Description"
                 type="text"
                 rows="10"
                 required
                 multi-line
                 :readonly="isReadOnly"
-                v-model="selectedItem.description"
-                v-validate="'required'"
                 data-vv-name="description"
                 :error-messages="errors.collect('description')"
                 @input="handleInput('description', $event)"
@@ -64,8 +71,9 @@
             </v-flex>
 
             <!-- Save Button (new) -->
-            <v-flex xs12
-                    v-if="item.new"
+            <v-flex
+              v-if="item.new"
+              xs12
             >
               <v-btn
                 block
@@ -176,6 +184,11 @@ export default {
     }
   },
 
+  // Mounted
+  mounted () {
+    this.updateClassFeature = debounce(this.updateClassFeature, 500)
+  },
+
   // Methods
   methods: {
     /**
@@ -224,11 +237,6 @@ export default {
       if (this.item.new) return
       this.updateItem(field, value)
     }
-  },
-
-  // Mounted
-  mounted () {
-    this.updateClassFeature = debounce(this.updateClassFeature, 500)
   }
 }
 </script>

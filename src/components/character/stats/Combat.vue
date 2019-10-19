@@ -2,8 +2,12 @@
   <div>
     <v-card flat>
       <v-card-text>
-        <v-container grid-list-md class="pa-0">
-          <v-layout row wrap>
+        <v-container
+          grid-list-md
+          class="pa-0">
+          <v-layout
+            row
+            wrap>
             <!-- Proficiency Bonus -->
             <v-flex xs12>
               <v-text-field
@@ -60,8 +64,12 @@
         <h3 class="pl-2">
           Health
         </h3>
-        <v-container grid-list-md class="pa-0">
-          <v-layout row wrap>
+        <v-container
+          grid-list-md
+          class="pa-0">
+          <v-layout
+            row
+            wrap>
             <!-- Current HP -->
             <v-flex xs6>
               <v-text-field

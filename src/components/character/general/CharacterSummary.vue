@@ -1,12 +1,21 @@
 <template>
   <div>
-    <v-card flat class="mb-1">
+    <v-card
+      flat
+      class="mb-1">
       <v-card-text>
-        <v-container grid-list-md class="pa-0">
-          <v-layout row wrap>
+        <v-container
+          grid-list-md
+          class="pa-0">
+          <v-layout
+            row
+            wrap>
             <v-flex xs12>
               <!-- Character Name -->
-              <ValidationProvider name="Character Name" rules="required" v-slot="{ errors }">
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="Character Name"
+                rules="required">
                 <v-text-field
                   label="Character Name"
                   type="text"
@@ -20,8 +29,13 @@
             </v-flex>
 
             <!-- Character Level -->
-            <v-flex xs6 class="pr-1">
-              <ValidationProvider name="Level" rules="required" v-slot="{ errors }">
+            <v-flex
+              xs6
+              class="pr-1">
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="Level"
+                rules="required">
                 <v-text-field
                   label="Level"
                   type="number"
@@ -35,8 +49,13 @@
             </v-flex>
 
             <!-- Character Experience -->
-            <v-flex xs6 class="pl-2">
-              <ValidationProvider name="Experience" rules="required" v-slot="{ errors }">
+            <v-flex
+              xs6
+              class="pl-2">
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="Experience"
+                rules="required">
                 <v-text-field
                   label="Experience"
                   type="number"
@@ -58,8 +77,12 @@
     <v-card flat>
       <v-card-text>
         <!-- Appearance Container -->
-        <v-container grid-list-md class="pa-0">
-          <v-layout row wrap>
+        <v-container
+          grid-list-md
+          class="pa-0">
+          <v-layout
+            row
+            wrap>
             <!-- Heading -->
             <v-flex xs12>
               <h2>Appearance</h2>
@@ -156,10 +179,10 @@
             <!-- Description -->
             <v-flex xs12>
               <v-textarea
+                v-model="character.description"
                 label="Description"
                 type="text"
                 color="secondary"
-                v-model="character.description"
                 multi-line
                 @input="updateCharacter('description', $event)"
               />

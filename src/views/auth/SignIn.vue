@@ -1,7 +1,14 @@
 <template>
   <v-container>
-    <v-layout row wrap justify-center>
-      <v-flex xs12 md6 lg4 xl2>
+    <v-layout
+      row
+      wrap
+      justify-center>
+      <v-flex
+        xs12
+        md6
+        lg4
+        xl2>
         <!-- Title -->
         <h3 class="title">
           Welcome to DnDHub (Beta)
@@ -17,16 +24,16 @@
         <div v-if="!user">
           <!-- Email field -->
           <v-text-field
+            v-model="email"
             type="email"
             label="Email"
-            v-model="email"
           />
 
           <!-- Password Field -->
           <v-text-field
+            v-model="password"
             type="password"
             label="Password"
-            v-model="password"
             @keypress.enter="signIn()"
           />
 
@@ -65,8 +72,9 @@
           Signed in as <strong>{{ user.email }}</strong>
         </v-alert>
       </v-flex>
-      <v-flex xs12 class="actions">
-      </v-flex>
+      <v-flex
+        xs12
+        class="actions" />
     </v-layout>
   </v-container>
 </template>

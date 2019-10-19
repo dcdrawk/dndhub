@@ -1,8 +1,8 @@
 <template>
   <v-snackbar
+    v-model="show"
     :timeout="3000"
     :bottom="true"
-    v-model="show"
   >
     {{ text }}
     <v-btn

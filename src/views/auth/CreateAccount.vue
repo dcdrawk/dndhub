@@ -1,7 +1,13 @@
 <template>
   <v-container>
-    <v-layout row wrap justify-center>
-      <v-flex xs12 md6 lg2>
+    <v-layout
+      row
+      wrap
+      justify-center>
+      <v-flex
+        xs12
+        md6
+        lg2>
         <!-- Title -->
         <h3 class="title">
           Create a new DnDHub Account
@@ -9,44 +15,44 @@
         <form>
           <!-- Email field -->
           <v-text-field
+            v-model="email"
+            v-validate="'required|email'"
             type="email"
             label="Email"
-            v-validate="'required|email'"
             data-vv-name="email"
             :error-messages="errors.collect('email')"
-            v-model="email"
           />
 
           <!-- Display Name -->
           <v-text-field
+            v-model="displayName"
+            v-validate="'required'"
             type="text"
             label="Display Name"
-            v-validate="'required'"
             data-vv-name="display_name"
             :error-messages="errors.collect('display_name')"
-            v-model="displayName"
           />
 
           <!-- Password Field -->
           <v-text-field
+            v-model="password"
+            v-validate="'required'"
             type="password"
             label="Password"
-            v-validate="'required'"
             data-vv-name="password"
             name="password"
             :error-messages="errors.collect('password')"
-            v-model="password"
           />
 
           <!-- Confirm Password -->
           <v-text-field
+            v-model="confirmPassword"
+            v-validate="'confirmed:password'"
             type="password"
             label="Confirm Password"
-            v-validate="'confirmed:password'"
             data-vv-name="confirm_password"
             name="confirm_password"
             :error-messages="errors.collect('confirm_password')"
-            v-model="confirmPassword"
           />
         </form>
 
@@ -76,8 +82,9 @@
           </router-link>
         </p>
       </v-flex>
-      <v-flex xs12 class="actions">
-      </v-flex>
+      <v-flex
+        xs12
+        class="actions" />
     </v-layout>
   </v-container>
 </template>

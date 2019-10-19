@@ -9,7 +9,10 @@
   >
     <v-card tile>
       <!-- Dialog Toolbar -->
-      <v-toolbar card dark color="primary">
+      <v-toolbar
+        card
+        dark
+        color="primary">
         <!-- Close Button -->
         <v-btn
           icon
@@ -23,7 +26,7 @@
         <v-toolbar-title>
           Edit Spell Slots
         </v-toolbar-title>
-        <v-spacer></v-spacer>
+        <v-spacer />
       </v-toolbar>
 
       <!-- Card Text -->
@@ -120,6 +123,11 @@ export default {
     }
   },
 
+  // Mounted
+  mounted () {
+    this.initSpellSlots()
+  },
+
   // Methods
   methods: {
     /**
@@ -175,11 +183,6 @@ export default {
     handleDialog () {
       this.$emit('close')
     }
-  },
-
-  // Mounted
-  mounted () {
-    this.initSpellSlots()
   }
 }
 </script>

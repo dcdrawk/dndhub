@@ -3,10 +3,16 @@
     <!-- Primary Class Card -->
     <v-card flat>
       <v-card-text>
-        <v-container grid-list-md class="pa-0">
-          <v-layout row wrap>
+        <v-container
+          grid-list-md
+          class="pa-0">
+          <v-layout
+            row
+            wrap>
             <!-- Primary Class Name -->
-            <v-flex xs12 md6>
+            <v-flex
+              xs12
+              md6>
               <custom-select
                 label="Race"
                 :value="character.race"
@@ -19,7 +25,9 @@
               />
             </v-flex>
 
-            <v-flex xs12 md6>
+            <v-flex
+              xs12
+              md6>
               <custom-select
                 label="Subrace"
                 :value="character.subrace"
@@ -32,7 +40,9 @@
               />
             </v-flex>
 
-            <v-flex xs12 md6>
+            <v-flex
+              xs12
+              md6>
               <v-text-field
                 label="Ability Score Increase (Race)"
                 type="text"
@@ -41,7 +51,9 @@
               />
             </v-flex>
 
-            <v-flex xs12 md6>
+            <v-flex
+              xs12
+              md6>
               <v-text-field
                 label="Ability Score Increase (Subrace)"
                 type="text"
@@ -50,7 +62,9 @@
               />
             </v-flex>
 
-            <v-flex xs12 md6>
+            <v-flex
+              xs12
+              md6>
               <v-text-field
                 label="Speed"
                 type="text"

@@ -1,10 +1,18 @@
 <template>
   <div>
-    <v-card flat class="mb-1">
+    <v-card
+      flat
+      class="mb-1">
       <v-card-text>
-        <v-container grid-list-md class="pa-0">
-          <v-layout row wrap>
-            <v-flex xs12 md6>
+        <v-container
+          grid-list-md
+          class="pa-0">
+          <v-layout
+            row
+            wrap>
+            <v-flex
+              xs12
+              md6>
               <v-combobox
                 multiple
                 label="Armor"
@@ -15,7 +23,9 @@
               />
             </v-flex>
 
-            <v-flex xs12 md6>
+            <v-flex
+              xs12
+              md6>
               <v-combobox
                 multiple
                 label="Weapons"
@@ -26,7 +36,9 @@
               />
             </v-flex>
 
-            <v-flex xs12 md6>
+            <v-flex
+              xs12
+              md6>
               <v-combobox
                 label="Tools"
                 :value="tools"
@@ -37,7 +49,9 @@
               />
             </v-flex>
 
-            <v-flex xs12 md6>
+            <v-flex
+              xs12
+              md6>
               <v-combobox
                 label="Languages"
                 :value="languages"
@@ -48,7 +62,9 @@
               />
             </v-flex>
 
-            <v-flex xs12 md6>
+            <v-flex
+              xs12
+              md6>
               <v-combobox
                 label="Skills"
                 :value="skills"
@@ -59,7 +75,9 @@
               />
             </v-flex>
 
-            <v-flex xs12 md6>
+            <v-flex
+              xs12
+              md6>
               <v-combobox
                 label="Other"
                 :value="other"

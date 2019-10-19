@@ -7,9 +7,14 @@
     scrollable
     @input="handleDialog($event)"
   >
-    <v-card tile v-if="item">
+    <v-card
+      v-if="item"
+      tile>
       <!-- Dialog Toolbar -->
-      <v-toolbar card dark color="primary">
+      <v-toolbar
+        card
+        dark
+        color="primary">
         <!-- Close Button -->
         <v-btn
           icon
@@ -24,22 +29,25 @@
           <span v-if="newItem">New</span>
           Feat
         </v-toolbar-title>
-        <v-spacer></v-spacer>
+        <v-spacer />
       </v-toolbar>
 
       <!-- Card Text -->
       <v-card-text>
         <v-container class="pa-0">
-          <v-layout row wrap v-if="selectedItem">
+          <v-layout
+            v-if="selectedItem"
+            row
+            wrap>
             <!-- Feat Name -->
             <v-flex xs12>
               <v-text-field
+                v-model="selectedItem.name"
+                v-validate="'required'"
                 label="Name"
                 type="text"
                 required
                 :readonly="browse"
-                v-model="selectedItem.name"
-                v-validate="'required'"
                 data-vv-name="name"
                 :error-messages="errors.collect('name')"
                 @input="handleInput('name', $event)"
@@ -49,13 +57,13 @@
             <!-- Feat Description -->
             <v-flex xs12>
               <v-textarea
+                v-model="selectedItem.description"
                 label="Description"
                 type="text"
                 rows="10"
                 multi-line
                 auto-grow
                 :readonly="browse"
-                v-model="selectedItem.description"
                 data-vv-name="description"
                 :error-messages="errors.collect('description')"
                 @input="handleInput('description', $event)"
@@ -180,6 +188,11 @@ export default {
     }
   },
 
+  // Mounted
+  mounted () {
+    this.updateClassFeature = debounce(this.updateClassFeature, 500)
+  },
+
   // Methods
   methods: {
     /**
@@ -215,11 +228,6 @@ export default {
     handleDialog () {
       this.$emit('close')
     }
-  },
-
-  // Mounted
-  mounted () {
-    this.updateClassFeature = debounce(this.updateClassFeature, 500)
   }
 }
 </script>

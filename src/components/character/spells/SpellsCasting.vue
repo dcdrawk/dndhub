@@ -1,5 +1,7 @@
 <template>
-  <v-container fluid class="spell-casting">
+  <v-container
+    fluid
+    class="spell-casting">
     <!-- {{ }} -->
     <v-select
       class="spell-casting__modifier"
@@ -59,7 +61,7 @@
       :show-dialog="showSlotDialog"
       @close="showSlotDialog = false"
     />
-    <v-divider class="mt-1 mb-3"></v-divider>
+    <v-divider class="mt-1 mb-3" />
     <v-alert
       v-if="!characterHasSpellSlots"
       :value="true"
@@ -77,14 +79,14 @@
         <h3>Level {{ key }}</h3>
         <div d-flex>
           <v-checkbox
-            class="d-inline-block mr-2"
             v-for="(item, itemIndex) in slot"
             :key="itemIndex"
+            class="d-inline-block mr-2"
             :input-value="item"
             :true-value="'1'"
             :false-value="'0'"
             @change="handleUpdateSpellSlot(key, itemIndex, $event)"
-          ></v-checkbox>
+          />
         </div>
       </div>
     </div>

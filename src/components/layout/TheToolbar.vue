@@ -22,10 +22,18 @@
     <v-spacer />
 
     <!-- Toolbar Menu (if a user is signed in)-->
-    <v-menu v-if="user" attach light left>
+    <v-menu
+      v-if="user"
+      attach
+      light
+      left>
       <template v-slot:activator="{ on }">
         <!-- Menu Activator -->
-        <v-btn class="menu-toggle" dark icon v-on="on">
+        <v-btn
+          class="menu-toggle"
+          dark
+          icon
+          v-on="on">
           <v-icon>more_vert</v-icon>
         </v-btn>
       </template>

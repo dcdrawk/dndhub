@@ -1,14 +1,30 @@
 <template>
-  <v-layout row justify-center>
-    <transition appear name="slide-y-reverse-transition" mode="out-in">
+  <v-layout
+    row
+    justify-center>
+    <transition
+      appear
+      name="slide-y-reverse-transition"
+      mode="out-in">
       <!-- Loading Spinner -->
-      <v-flex v-if="!user || loading" class="loading" xs12 key="loading">
-        <v-progress-circular indeterminate color="secondary"></v-progress-circular>
+      <v-flex
+        v-if="!user || loading"
+        key="loading"
+        class="loading"
+        xs12>
+        <v-progress-circular
+          indeterminate
+          color="secondary" />
       </v-flex>
 
-      <v-flex v-else xs12 md9>
+      <v-flex
+        v-else
+        xs12
+        md9>
         <!-- No Characters Message -->
-        <div class="no-characters-message" v-if="!characters">
+        <div
+          v-if="!characters"
+          class="no-characters-message">
           It looks like you don't have any characters yet.<br><br>
           To get started, tap the '+' in the bottom right
         </div>

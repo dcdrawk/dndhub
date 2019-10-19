@@ -7,9 +7,14 @@
     scrollable
     @input="handleDialog($event)"
   >
-    <v-card tile v-if="item">
+    <v-card
+      v-if="item"
+      tile>
       <!-- Dialog Toolbar -->
-      <v-toolbar card dark color="primary">
+      <v-toolbar
+        card
+        dark
+        color="primary">
         <!-- Close Button -->
         <v-btn
           icon
@@ -26,22 +31,25 @@
           <span v-if="selectedItem.name">-</span>
           {{ selectedItem.name }}
         </v-toolbar-title>
-        <v-spacer></v-spacer>
+        <v-spacer />
       </v-toolbar>
 
       <!-- Card Text -->
       <v-card-text>
         <v-container class="pa-0">
-          <v-layout row wrap v-if="selectedItem">
+          <v-layout
+            v-if="selectedItem"
+            row
+            wrap>
             <!-- Quest Name -->
             <v-flex xs12>
               <v-text-field
+                v-model="selectedItem.name"
+                v-validate="'required'"
                 label="Name"
                 type="text"
                 required
                 :readonly="browse"
-                v-model="selectedItem.name"
-                v-validate="'required'"
                 data-vv-name="name"
                 :error-messages="errors.collect('name')"
                 @input="handleInput('name', $event)"
@@ -51,13 +59,13 @@
             <!-- Quest Description -->
             <v-flex xs12>
               <v-textarea
+                v-model="selectedItem.summary"
                 label="Summary"
                 type="text"
                 rows="3"
                 multi-line
                 auto-grow
                 :readonly="browse"
-                v-model="selectedItem.summary"
                 data-vv-name="description"
                 :error-messages="errors.collect('description')"
                 @input="handleInput('summary', $event)"
@@ -67,13 +75,13 @@
             <!-- Weapons Description -->
             <v-flex xs12>
               <v-textarea
+                v-model="selectedItem.description"
                 label="Description"
                 type="text"
                 rows="3"
                 multi-line
                 auto-grow
                 :readonly="browse"
-                v-model="selectedItem.description"
                 data-vv-name="description"
                 :error-messages="errors.collect('description')"
                 @input="handleInput('description', $event)"
@@ -104,7 +112,9 @@
               />
             </v-flex>
 
-            <v-flex xs12 class="mb-4">
+            <v-flex
+              xs12
+              class="mb-4">
               <v-switch
                 color="accent"
                 label="Completed"
@@ -112,7 +122,7 @@
                 :true-value="true"
                 :false-value="false"
                 @change="handleInput('completed', $event)"
-              ></v-switch>
+              />
             </v-flex>
 
             <!-- Dialog Buttons -->
@@ -233,6 +243,11 @@ export default {
     }
   },
 
+  // Mounted
+  mounted () {
+    this.updateItem = debounce(this.updateItem, 500)
+  },
+
   // Methods
   methods: {
     /**
@@ -269,11 +284,6 @@ export default {
     handleDialog () {
       this.$emit('close')
     }
-  },
-
-  // Mounted
-  mounted () {
-    this.updateItem = debounce(this.updateItem, 500)
   }
 }
 </script>

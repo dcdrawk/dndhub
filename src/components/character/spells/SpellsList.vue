@@ -30,8 +30,8 @@
       <template v-for="(item, index) in displayedItems">
         <!-- List Tile -->
         <v-list-item
-          class="list-tile"
           :key="item.title"
+          class="list-tile"
           @click="handleShowDialog(item)"
         >
           <!-- Content -->
@@ -79,7 +79,7 @@
         <v-divider
           v-if="index < filteredItems.length - 1"
           :key="`${index}-divider`"
-        ></v-divider>
+        />
       </template>
     </v-list>
 
@@ -169,6 +169,15 @@ export default {
     character
   ],
 
+  // Props
+  props: {
+    items: {
+      type: Array,
+      default: () => []
+    },
+    browse: Boolean
+  },
+
   // Data
   data () {
     return {
@@ -235,13 +244,18 @@ export default {
     }
   },
 
-  // Props
-  props: {
-    items: {
-      type: Array,
-      default: () => []
-    },
-    browse: Boolean
+  // Created
+  created () {
+    // Listen for events from the parent component
+    this.$bus.$on(this.dialogEvent, () => {
+      if (this.browse) return
+      // this.newItem = true
+      this.handleShowDialog()
+    })
+  },
+
+  destroyed () {
+    this.$bus.$off(this.dialogEvent)
   },
 
   // Methods
@@ -313,20 +327,6 @@ export default {
     prevPage () {
       this.page--
     }
-  },
-
-  // Created
-  created () {
-    // Listen for events from the parent component
-    this.$bus.$on(this.dialogEvent, () => {
-      if (this.browse) return
-      // this.newItem = true
-      this.handleShowDialog()
-    })
-  },
-
-  destroyed () {
-    this.$bus.$off(this.dialogEvent)
   }
 }
 </script>

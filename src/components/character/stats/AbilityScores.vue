@@ -1,10 +1,19 @@
 <template>
   <div>
-    <v-card class="stat-list" v-if="characterScores">
+    <v-card
+      v-if="characterScores"
+      class="stat-list">
       <v-card-text class="pa-0">
-        <v-container grid-list-sm class="pa-0">
-          <v-layout row wrap class="stat-header pt-2 pb-2">
-            <v-flex xs6 class="pl-3">
+        <v-container
+          grid-list-sm
+          class="pa-0">
+          <v-layout
+            row
+            wrap
+            class="stat-header pt-2 pb-2">
+            <v-flex
+              xs6
+              class="pl-3">
               <strong>Stat</strong>
             </v-flex>
             <v-flex xs2>
@@ -24,11 +33,15 @@
             class="pa-0 stat"
             wrap
           >
-            <v-flex xs12 class="pa-0 ma-0">
-              <v-divider class="pa-0 ma-0"></v-divider>
+            <v-flex
+              xs12
+              class="pa-0 ma-0">
+              <v-divider class="pa-0 ma-0" />
             </v-flex>
 
-            <v-flex xs6 class="pl-3 pt-2 pb-2">
+            <v-flex
+              xs6
+              class="pl-3 pt-2 pb-2">
               <span class="stat__name">
                 {{ item }}
               </span>
@@ -67,14 +80,23 @@
 
     <v-divider />
 
-    <v-card class="stat-list" v-if="characterSaves">
+    <v-card
+      v-if="characterSaves"
+      class="stat-list">
       <v-card-text class="pa-0 pt-4">
         <h3 class="pl-3 mb-2 pt-2">
           Saving Throws
         </h3>
-        <v-container grid-list-sm class="pa-0">
-          <v-layout row wrap class="stat-header mb-2">
-            <v-flex xs6 class="pl-3">
+        <v-container
+          grid-list-sm
+          class="pa-0">
+          <v-layout
+            row
+            wrap
+            class="stat-header mb-2">
+            <v-flex
+              xs6
+              class="pl-3">
               <strong>Stat</strong>
             </v-flex>
             <v-flex xs2>
@@ -95,10 +117,14 @@
             row
             wrap
           >
-            <v-flex xs12 class="pa-0 ma-0">
-              <v-divider class="pa-0 ma-0"></v-divider>
+            <v-flex
+              xs12
+              class="pa-0 ma-0">
+              <v-divider class="pa-0 ma-0" />
             </v-flex>
-            <v-flex xs6 class="pl-3 pt-2 pb-2">
+            <v-flex
+              xs6
+              class="pl-3 pt-2 pb-2">
               <span class="stat__name">
                 {{ item }}
               </span>

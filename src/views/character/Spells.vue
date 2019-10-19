@@ -31,8 +31,8 @@
     <!-- Floating Action Button -->
     <v-fab-transition v-if="activeTab !== undefined">
       <v-btn
-        class="spell-fab"
         v-if="tabs[activeTab].showFab"
+        class="spell-fab"
         color="secondary"
         dark
         fab

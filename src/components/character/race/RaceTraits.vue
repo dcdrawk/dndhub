@@ -154,6 +154,16 @@ export default {
     }
   },
 
+  // Created
+  created () {
+    this.getRaceTraits()
+    // Listen for events from the parent component
+    this.$bus.$on('new-race-trait', () => {
+      this.selectedItem = { ...this.defaultItem }
+      this.showDialog = true
+    })
+  },
+
   // Methods
   methods: {
     /**
@@ -212,16 +222,6 @@ export default {
       this.selectedItem = feature
       this.showDialog = true
     }
-  },
-
-  // Created
-  created () {
-    this.getRaceTraits()
-    // Listen for events from the parent component
-    this.$bus.$on('new-race-trait', () => {
-      this.selectedItem = { ...this.defaultItem }
-      this.showDialog = true
-    })
   }
 }
 </script>

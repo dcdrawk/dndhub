@@ -7,9 +7,14 @@
     scrollable
     @input="handleDialog($event)"
   >
-    <v-card tile v-if="item">
+    <v-card
+      v-if="item"
+      tile>
       <!-- Dialog Toolbar -->
-      <v-toolbar card dark color="primary">
+      <v-toolbar
+        card
+        dark
+        color="primary">
         <!-- Close Button -->
         <v-btn
           icon
@@ -24,22 +29,25 @@
           <span v-if="newItem">New</span>
           Armor
         </v-toolbar-title>
-        <v-spacer></v-spacer>
+        <v-spacer />
       </v-toolbar>
 
       <!-- Card Text -->
       <v-card-text>
         <v-container class="pa-0">
-          <v-layout row wrap v-if="selectedItem">
+          <v-layout
+            v-if="selectedItem"
+            row
+            wrap>
             <!-- Armor Name -->
             <v-flex xs12>
               <v-text-field
+                v-model="selectedItem.name"
+                v-validate="'required'"
                 label="Name"
                 type="text"
                 required
                 :readonly="browse"
-                v-model="selectedItem.name"
-                v-validate="'required'"
                 data-vv-name="name"
                 :error-messages="errors.collect('name')"
                 @input="handleInput('name', $event)"
@@ -48,12 +56,12 @@
 
             <v-flex xs12>
               <v-text-field
+                v-model="selectedItem.ac"
+                v-validate="'required'"
                 label="Armor Class"
                 type="text"
                 required
                 :readonly="browse"
-                v-model="selectedItem.ac"
-                v-validate="'required'"
                 data-vv-name="ac"
                 :error-messages="errors.collect('ac')"
                 @input="handleInput('ac', $event)"
@@ -62,30 +70,30 @@
 
             <v-flex xs12>
               <v-text-field
+                v-model="selectedItem.armorType"
                 label="Armor Type"
                 type="text"
                 :readonly="browse"
-                v-model="selectedItem.armorType"
                 @input="handleInput('armorType', $event)"
               />
             </v-flex>
 
             <v-flex xs12>
               <v-text-field
+                v-model="selectedItem.weight"
                 label="Weight"
                 type="text"
                 :read-only="browse"
-                v-model="selectedItem.weight"
                 @input="handleInput('weight', $event)"
               />
             </v-flex>
 
             <v-flex xs12>
               <v-text-field
+                v-model="selectedItem.cost"
                 label="Cost"
                 type="text"
                 :readonly="browse"
-                v-model="selectedItem.cost"
                 @input="handleInput('cost', $event)"
               />
             </v-flex>
@@ -105,12 +113,12 @@
             <!-- Armor Description -->
             <v-flex xs12>
               <v-textarea
+                v-model="selectedItem.description"
                 label="Description"
                 type="text"
                 rows="10"
                 multi-line
                 :readonly="browse"
-                v-model="selectedItem.description"
                 data-vv-name="description"
                 :error-messages="errors.collect('description')"
                 @input="handleInput('description', $event)"
@@ -229,6 +237,11 @@ export default {
     }
   },
 
+  // Mounted
+  mounted () {
+    this.updateItem = debounce(this.updateItem, 500)
+  },
+
   // Methods
   methods: {
     /**
@@ -264,11 +277,6 @@ export default {
     handleDialog () {
       this.$emit('close')
     }
-  },
-
-  // Mounted
-  mounted () {
-    this.updateItem = debounce(this.updateItem, 500)
   }
 }
 </script>
