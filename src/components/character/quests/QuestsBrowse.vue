@@ -15,7 +15,6 @@
  */
 import character from '../../../mixins/character'
 import QuestsList from './QuestsList'
-import SearchBar from '../../inputs/SearchBar'
 
 export default {
   // Name
@@ -23,8 +22,7 @@ export default {
 
   // Components
   components: {
-    QuestsList,
-    SearchBar
+    QuestsList
   },
 
   // Mixins

@@ -17,7 +17,6 @@
 import character from '@/mixins/character'
 // import WeaponsDialog from './WeaponsDialog'
 import QuestsList from './QuestsList'
-import SearchBar from '@/components/inputs/SearchBar'
 
 export default {
   // Name
@@ -26,8 +25,7 @@ export default {
   // Components
   components: {
     // WeaponsDialog,
-    QuestsList,
-    SearchBar
+    QuestsList
   },
 
   // Mixins

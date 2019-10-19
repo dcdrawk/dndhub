@@ -13,9 +13,7 @@
  * @desc A character's known armor
  */
 import character from '@/mixins/character'
-import TreasureDialog from './TreasureDialog'
 import TreasureList from './TreasureList'
-import SearchBar from '@/components/inputs/SearchBar'
 
 export default {
   // Name
@@ -23,9 +21,7 @@ export default {
 
   // Components
   components: {
-    TreasureDialog,
-    TreasureList,
-    SearchBar
+    TreasureList
   },
 
   // Mixins

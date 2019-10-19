@@ -13,9 +13,7 @@
  * @desc A character's known armor
  */
 import character from '@/mixins/character'
-import EquipmentDialog from './EquipmentDialog'
 import EquipmentList from './EquipmentList'
-import SearchBar from '@/components/inputs/SearchBar'
 
 export default {
   // Name
@@ -23,9 +21,7 @@ export default {
 
   // Components
   components: {
-    EquipmentDialog,
-    EquipmentList,
-    SearchBar
+    EquipmentList
   },
 
   // Mixins

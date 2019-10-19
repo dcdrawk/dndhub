@@ -142,7 +142,6 @@
 <script>
 import character from '@/mixins/character'
 import validation from '@/mixins/validation'
-import CustomSelect from '@/components/inputs/CustomSelect'
 import debounce from 'debounce'
 
 export default {
@@ -150,9 +149,7 @@ export default {
   name: 'equipment-dialog',
 
   // Components
-  components: {
-    CustomSelect
-  },
+  components: {},
 
   // Mixins
   mixins: [
