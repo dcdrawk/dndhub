@@ -4,9 +4,9 @@
     <v-tabs
       v-if="character"
       v-model="activeTab"
-      color="secondary"
+      background-color="secondary"
       dark
-      slider-color="yellow"
+      slider-color="accent"
       class="page-tabs elevation-1"
       grow
     >

@@ -23,6 +23,14 @@ export default {
     //   })
     // },
 
+    $_validation_reset () {
+      if (!this.$refs.observer) {
+        console.warn('No Validation Observer!')
+        return
+      }
+      this.$refs.observer.reset()
+    },
+
     /**
      * @function validate
      * @desc validate all fields

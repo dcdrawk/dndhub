@@ -13,8 +13,8 @@
     >
       <!-- Dialog Toolbar -->
       <v-toolbar
-        card
         dark
+        max-height="56px"
         color="primary"
       >
         <!-- Close Button -->
@@ -36,41 +36,49 @@
 
       <!-- Card Text -->
       <v-card-text>
-        <v-container class="pa-0">
+        <v-container class="pl-0 pr-0">
           <v-layout
             row
             wrap
           >
             <!-- Class Feature Name -->
             <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.name"
-                v-validate="'required'"
-                label="Name"
-                type="text"
-                required
-                :readonly="isReadOnly"
-                data-vv-name="name"
-                :error-messages="errors.collect('name')"
-                @input="handleInput('name', $event)"
-              />
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="Name"
+                rules="required"
+              >
+                <v-text-field
+                  v-model="selectedItem.name"
+                  label="Name"
+                  type="text"
+                  required
+                  :readonly="isReadOnly"
+                  :error-messages="errors[0]"
+                  @input="handleInput('name', $event)"
+                />
+              </ValidationProvider>
             </v-flex>
 
             <!-- Class Feature Description -->
             <v-flex xs12>
-              <v-textarea
-                v-model="selectedItem.description"
-                v-validate="'required'"
-                label="Description"
-                type="text"
-                rows="10"
-                required
-                multi-line
-                :readonly="isReadOnly"
-                data-vv-name="description"
-                :error-messages="errors.collect('description')"
-                @input="handleInput('description', $event)"
-              />
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="Description"
+                rules="required"
+              >
+                <v-textarea
+                  v-model="selectedItem.description"
+                  label="Description"
+                  type="text"
+                  rows="10"
+                  required
+                  multi-line
+                  :readonly="isReadOnly"
+                  :error-messages="errors[0]"
+                  @input="handleInput('description', $event)"
+                />
+              </ValidationProvider>
             </v-flex>
 
             <!-- Save Button (new) -->
@@ -181,7 +189,7 @@ export default {
   watch: {
     showDialog (newValue, oldValue) {
       if (newValue) {
-        this.$validator.reset()
+        this.$_validation_reset()
         this.selectedItem = this.item
       }
     }
