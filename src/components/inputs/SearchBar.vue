@@ -7,7 +7,7 @@
         hide-details
         placeholder="Search"
         prepend-icon="search"
-        color="accent"
+        color="secondary"
         :value="value"
         @input="handleInput"
       />

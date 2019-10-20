@@ -7,11 +7,9 @@
   >
     <v-card
       v-if="item"
-      tile
     >
       <!-- Dialog Toolbar -->
       <v-toolbar
-        card
         dark
         color="primary"
       >
@@ -34,148 +32,153 @@
 
       <!-- Card Text -->
       <v-card-text>
-        <v-container class="pa-0">
-          <v-layout
-            v-if="selectedItem"
-            row
-            wrap
-          >
-            <!-- Weapons Name -->
-            <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.name"
-                v-validate="'required'"
-                label="Name"
-                type="text"
-                required
-                :readonly="browse"
-                data-vv-name="name"
-                :error-messages="errors.collect('name')"
-                @input="handleInput('name', $event)"
-              />
-            </v-flex>
-
-            <v-flex
-              xs12
-              class="mb-4"
+        <ValidationObserver
+          ref="observer"
+          v-slot="{ invalid }"
+        >
+          <v-container class="pa-0">
+            <v-layout
+              v-if="selectedItem"
+              row
+              wrap
             >
-              <v-switch
-                color="accent"
-                label="Profiecient"
-                :persistent-hint="selectedItem.proficient"
-                :hint="proficientHint"
-                :input-value="selectedItem.proficient"
-                :true-value="true"
-                :false-value="false"
-                @change="handleInput('proficient', $event)"
-              />
-            </v-flex>
+              <!-- Weapons Name -->
+              <v-flex xs12>
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  name="Name"
+                  rules="required"
+                >
+                  <v-text-field
+                    v-model="selectedItem.name"
+                    label="Name"
+                    type="text"
+                    required
+                    :readonly="browse"
+                    :error-messages="errors[0]"
+                    @input="handleInput('name', $event)"
+                  />
+                </ValidationProvider>
+              </v-flex>
 
-            <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.damage"
-                label="Damage"
-                type="text"
-                :readonly="browse"
-                data-vv-name="damage"
-                :error-messages="errors.collect('damage')"
-                @input="handleInput('damage', $event)"
-              />
-            </v-flex>
-
-            <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.weaponType"
-                label="Weapon Type"
-                type="text"
-                :readonly="browse"
-                @input="handleInput('weaponType', $event)"
-              />
-            </v-flex>
-
-            <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.damageType"
-                label="Damage Type"
-                type="text"
-                :readonly="browse"
-                @input="handleInput('damageType', $event)"
-              />
-            </v-flex>
-
-            <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.weight"
-                label="Weight"
-                type="text"
-                :read-only="browse"
-                @input="handleInput('weight', $event)"
-              />
-            </v-flex>
-
-            <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.cost"
-                label="Cost"
-                type="text"
-                :readonly="browse"
-                @input="handleInput('cost', $event)"
-              />
-            </v-flex>
-
-            <v-flex xs12>
-              <v-combobox
-                label="Properties"
-                :readonly="browse"
-                :value="selectedItem.properties || []"
-                multiple
-                chips
-                deletable-chips
-                @input="handleInput('properties', $event)"
-              />
-            </v-flex>
-
-            <!-- Weapons Description -->
-            <v-flex xs12>
-              <v-textarea
-                v-model="selectedItem.description"
-                label="Description"
-                type="text"
-                rows="10"
-                multi-line
-                :readonly="browse"
-                data-vv-name="description"
-                :error-messages="errors.collect('description')"
-                @input="handleInput('description', $event)"
-              />
-            </v-flex>
-
-            <!-- Dialog Buttons -->
-            <v-flex xs12>
-              <v-btn
-                v-if="browse || newItem"
-                block
-                color="secondary"
-                :disabled="!isFormValid"
-                :loading="loading"
-                @click="$emit('add-item', selectedItem)"
+              <v-flex
+                xs12
+                class="mb-4"
               >
-                Add
-              </v-btn>
+                <v-switch
+                  color="secondary"
+                  label="Profiecient"
+                  :persistent-hint="selectedItem.proficient"
+                  :hint="proficientHint"
+                  :input-value="selectedItem.proficient"
+                  :true-value="true"
+                  :false-value="false"
+                  @change="handleInput('proficient', $event)"
+                />
+              </v-flex>
 
-              <v-btn
-                v-if="!browse && !newItem"
-                block
-                color="warning"
-                :disabled="!isFormValid"
-                :loading="loading"
-                @click="deleteItem()"
-              >
-                Remove
-              </v-btn>
-            </v-flex>
-          </v-layout>
-        </v-container>
+              <v-flex xs12>
+                <v-text-field
+                  v-model="selectedItem.damage"
+                  label="Damage"
+                  type="text"
+                  :readonly="browse"
+                  @input="handleInput('damage', $event)"
+                />
+              </v-flex>
+
+              <v-flex xs12>
+                <v-text-field
+                  v-model="selectedItem.weaponType"
+                  label="Weapon Type"
+                  type="text"
+                  :readonly="browse"
+                  @input="handleInput('weaponType', $event)"
+                />
+              </v-flex>
+
+              <v-flex xs12>
+                <v-text-field
+                  v-model="selectedItem.damageType"
+                  label="Damage Type"
+                  type="text"
+                  :readonly="browse"
+                  @input="handleInput('damageType', $event)"
+                />
+              </v-flex>
+
+              <v-flex xs12>
+                <v-text-field
+                  v-model="selectedItem.weight"
+                  label="Weight"
+                  type="text"
+                  :read-only="browse"
+                  @input="handleInput('weight', $event)"
+                />
+              </v-flex>
+
+              <v-flex xs12>
+                <v-text-field
+                  v-model="selectedItem.cost"
+                  label="Cost"
+                  type="text"
+                  :readonly="browse"
+                  @input="handleInput('cost', $event)"
+                />
+              </v-flex>
+
+              <v-flex xs12>
+                <v-combobox
+                  label="Properties"
+                  :readonly="browse"
+                  :value="selectedItem.properties || []"
+                  multiple
+                  chips
+                  deletable-chips
+                  @input="handleInput('properties', $event)"
+                />
+              </v-flex>
+
+              <!-- Weapons Description -->
+              <v-flex xs12>
+                <v-textarea
+                  v-model="selectedItem.description"
+                  label="Description"
+                  type="text"
+                  rows="10"
+                  multi-line
+                  :readonly="browse"
+                  @input="handleInput('description', $event)"
+                />
+              </v-flex>
+
+              <!-- Dialog Buttons -->
+              <v-flex xs12>
+                <v-btn
+                  v-if="browse || newItem"
+                  block
+                  color="secondary"
+                  :disabled="invalid"
+                  :loading="loading"
+                  @click="$emit('add-item', selectedItem)"
+                >
+                  Add
+                </v-btn>
+
+                <v-btn
+                  v-if="!browse && !newItem"
+                  block
+                  color="warning"
+                  :disabled="invalid"
+                  :loading="loading"
+                  @click="deleteItem()"
+                >
+                  Remove
+                </v-btn>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </ValidationObserver>
       </v-card-text>
       <div style="flex: 1 1 auto;" />
     </v-card>
@@ -186,17 +189,11 @@
 import character from '../../../mixins/character'
 import proficiencyBonus from '../../../mixins/proficiencyBonus'
 import validation from '../../../mixins/validation'
-// import CustomSelect from '../../inputs/CustomSelect'
 import debounce from 'debounce'
 
 export default {
   // Name
   name: 'WeaponsDialog',
-
-  // Components
-  components: {
-    // CustomSelect
-  },
 
   // Mixins
   mixins: [
@@ -261,9 +258,7 @@ export default {
     showDialog (newValue, oldValue) {
       if (newValue) {
         this.$set(this, 'selectedItem', this.item)
-        setTimeout(() => {
-          this.errors.clear()
-        }, 0)
+        this.$_validation_reset()
       }
     }
   },

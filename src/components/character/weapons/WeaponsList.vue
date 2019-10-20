@@ -32,8 +32,9 @@
               {{ item.name }}
               <v-icon
                 v-if="item.proficient"
-                color="accent"
+                color="secondary"
                 class="ml-0"
+                small
               >
                 star
               </v-icon>
@@ -59,7 +60,7 @@
           <v-list-item-action v-if="browse">
             <v-btn
               icon
-              color="accent"
+              color="secondary"
               @click.stop="addItem(item)"
             >
               <v-icon>add</v-icon>
@@ -121,7 +122,7 @@ export default {
   data () {
     return {
       endpoint: 'weapons',
-      dialogEvent: 'new-weapons',
+      dialogEvent: 'new-weapon',
       tableHeaders: [
         {
           text: 'Name',
@@ -168,6 +169,7 @@ export default {
   created () {
     // Listen for events from the parent component
     this.$bus.$on(this.dialogEvent, () => {
+      console.log('event...')
       if (this.browse) return
       // this.newItem = true
       this.handleShowDialog()
@@ -221,8 +223,6 @@ export default {
 
 <style scoped lang="scss">
 .right-text {
-  // opacity: .54;
-  // color: rgba(0,0,0,.54);
   text-align: right;
 }
 </style>
