@@ -3,8 +3,6 @@
     :value="showDialog"
     fullscreen
     transition="dialog-bottom-transition"
-    :overlay="false"
-    scrollable
     @input="handleDialog($event)"
   >
     <v-card

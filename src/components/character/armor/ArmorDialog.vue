@@ -1,179 +1,183 @@
 <template>
-  <v-dialog
-    :value="showDialog"
-    fullscreen
-    transition="dialog-bottom-transition"
-    :overlay="false"
-    scrollable
-    @input="handleDialog($event)"
-  >
-    <v-card
-      v-if="item"
-      tile
+  <v-row>
+    <v-dialog
+      :value="showDialog"
+      fullscreen
+      transition="dialog-bottom-transition"
+      @input="handleDialog($event)"
     >
-      <!-- Dialog Toolbar -->
-      <v-toolbar
-        card
-        dark
-        color="primary"
+      <v-card
+        v-if="item"
       >
-        <!-- Close Button -->
-        <v-btn
-          icon
+        <v-toolbar
           dark
-          @click.native="$emit('close')"
+          color="primary"
         >
-          <v-icon>close</v-icon>
-        </v-btn>
-
-        <!-- Dialog Title -->
-        <v-toolbar-title>
-          <span v-if="newItem">New</span>
-          Armor
-        </v-toolbar-title>
-        <v-spacer />
-      </v-toolbar>
-
-      <!-- Card Text -->
-      <v-card-text>
-        <v-container class="pa-0">
-          <v-layout
-            v-if="selectedItem"
-            row
-            wrap
+          <v-btn
+            icon
+            dark
+            @click="$emit('close')"
           >
-            <!-- Armor Name -->
-            <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.name"
-                v-validate="'required'"
-                label="Name"
-                type="text"
-                required
-                :readonly="browse"
-                data-vv-name="name"
-                :error-messages="errors.collect('name')"
-                @input="handleInput('name', $event)"
-              />
-            </v-flex>
-
-            <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.ac"
-                v-validate="'required'"
-                label="Armor Class"
-                type="text"
-                required
-                :readonly="browse"
-                data-vv-name="ac"
-                :error-messages="errors.collect('ac')"
-                @input="handleInput('ac', $event)"
-              />
-            </v-flex>
-
-            <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.armorType"
-                label="Armor Type"
-                type="text"
-                :readonly="browse"
-                @input="handleInput('armorType', $event)"
-              />
-            </v-flex>
-
-            <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.weight"
-                label="Weight"
-                type="text"
-                :read-only="browse"
-                @input="handleInput('weight', $event)"
-              />
-            </v-flex>
-
-            <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.cost"
-                label="Cost"
-                type="text"
-                :readonly="browse"
-                @input="handleInput('cost', $event)"
-              />
-            </v-flex>
-
-            <v-flex xs12>
-              <v-combobox
-                multiple
-                label="Properties"
-                :readonly="browse"
-                :value="selectedItem.properties || []"
-                chips
-                deletable-chips
-                @input="handleInput('properties', $event)"
-              />
-            </v-flex>
-
-            <!-- Armor Description -->
-            <v-flex xs12>
-              <v-textarea
-                v-model="selectedItem.description"
-                label="Description"
-                type="text"
-                rows="10"
-                multi-line
-                :readonly="browse"
-                data-vv-name="description"
-                :error-messages="errors.collect('description')"
-                @input="handleInput('description', $event)"
-              />
-            </v-flex>
-
-            <!-- Dialog Buttons -->
-            <v-flex xs12>
-              <v-btn
-                v-if="browse || newItem"
-                block
-                color="accent"
-                :disabled="!isFormValid"
-                :loading="loading"
-                @click="$emit('add-item', selectedItem)"
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+          <v-toolbar-title>Armor - {{ item.name }}</v-toolbar-title>
+          <!-- <v-spacer />
+          <v-toolbar-items>
+            <v-btn
+              dark
+              text
+              @click="dialog = false"
+            >
+              Save
+            </v-btn>
+          </v-toolbar-items> -->
+        </v-toolbar>
+        <!-- Card Text -->
+        <v-card-text>
+          <ValidationObserver
+            ref="observer"
+            v-slot="{ invalid }"
+          >
+            <v-container class="pl-0 pr-0">
+              <v-layout
+                v-if="selectedItem"
+                row
+                wrap
               >
-                Add
-              </v-btn>
+                <!-- Armor Name -->
+                <v-flex xs12>
+                  <ValidationProvider
+                    v-slot="{ errors }"
+                    name="Name"
+                    rules="required"
+                  >
+                    <v-text-field
+                      v-model="selectedItem.name"
+                      label="Name"
+                      type="text"
+                      required
+                      :readonly="browse"
+                      :error-messages="errors[0]"
+                      @input="handleInput('name', $event)"
+                    />
+                  </ValidationProvider>
+                </v-flex>
 
-              <v-btn
-                v-if="!browse && !newItem"
-                block
-                color="warning"
-                :disabled="!isFormValid"
-                :loading="loading"
-                @click="deleteItem()"
-              >
-                Remove
-              </v-btn>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-card-text>
-      <div style="flex: 1 1 auto;" />
-    </v-card>
-  </v-dialog>
+                <v-flex xs12>
+                  <ValidationProvider
+                    v-slot="{ errors }"
+                    name="Armor Class"
+                    rules="required"
+                  >
+                    <v-text-field
+                      v-model="selectedItem.ac"
+                      label="Armor Class"
+                      type="text"
+                      required
+                      :readonly="browse"
+                      :error-messages="errors[0]"
+                      @input="handleInput('ac', $event)"
+                    />
+                  </ValidationProvider>
+                </v-flex>
+
+                <v-flex xs12>
+                  <v-text-field
+                    v-model="selectedItem.armorType"
+                    label="Armor Type"
+                    type="text"
+                    :readonly="browse"
+                    @input="handleInput('armorType', $event)"
+                  />
+                </v-flex>
+
+                <v-flex xs12>
+                  <v-text-field
+                    v-model="selectedItem.weight"
+                    label="Weight"
+                    type="text"
+                    :read-only="browse"
+                    @input="handleInput('weight', $event)"
+                  />
+                </v-flex>
+
+                <v-flex xs12>
+                  <v-text-field
+                    v-model="selectedItem.cost"
+                    label="Cost"
+                    type="text"
+                    :readonly="browse"
+                    @input="handleInput('cost', $event)"
+                  />
+                </v-flex>
+
+                <v-flex xs12>
+                  <v-combobox
+                    multiple
+                    label="Properties"
+                    :readonly="browse"
+                    :value="selectedItem.properties || []"
+                    chips
+                    deletable-chips
+                    @input="handleInput('properties', $event)"
+                  />
+                </v-flex>
+
+                <!-- Armor Description -->
+                <v-flex xs12>
+                  <v-textarea
+                    v-model="selectedItem.description"
+                    label="Description"
+                    type="text"
+                    rows="10"
+                    multi-line
+                    :readonly="browse"
+                    @input="handleInput('description', $event)"
+                  />
+                </v-flex>
+
+                <!-- Dialog Buttons -->
+                <v-flex xs12>
+                  <v-btn
+                    v-if="browse || newItem"
+                    block
+                    color="accent"
+                    :disabled="invalid"
+                    :loading="loading"
+                    @click="$emit('add-item', selectedItem)"
+                  >
+                    Add
+                  </v-btn>
+
+                  <v-btn
+                    v-if="!browse && !newItem"
+                    block
+                    color="warning"
+                    :disabled="invalid"
+                    :loading="loading"
+                    @click="deleteItem()"
+                  >
+                    Remove
+                  </v-btn>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </ValidationObserver>
+        </v-card-text>
+        <div style="flex: 1 1 auto;" />
+      </v-card>
+    </v-dialog>
+  </v-row>
 </template>
 
 <script>
 import character from '../../../mixins/character'
 import validation from '../../../mixins/validation'
-// import CustomSelect from '../../inputs/CustomSelect'
 import debounce from 'debounce'
 
 export default {
   // Name
   name: 'ArmorDialog',
-
-  // Components
-  components: {
-    // CustomSelect
-  },
 
   // Mixins
   mixins: [
@@ -233,9 +237,7 @@ export default {
     showDialog (newValue, oldValue) {
       if (newValue) {
         this.$set(this, 'selectedItem', this.item)
-        setTimeout(() => {
-          this.errors.clear()
-        }, 0)
+        this.$_validation_reset()
       }
     }
   },
