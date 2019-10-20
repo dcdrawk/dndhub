@@ -2,9 +2,13 @@
   <div>
     <v-card
       v-if="characterScores"
+      flat
       class="stat-list"
     >
-      <v-card-text class="pa-0">
+      <v-card-text class="pl-0 pr-0">
+        <h2 class="pl-3 mb-4 pt-2">
+          Ability Scores
+        </h2>
         <v-container
           grid-list-sm
           class="pa-0"
@@ -91,9 +95,9 @@
       class="stat-list"
     >
       <v-card-text class="pa-0 pt-4">
-        <h3 class="pl-3 mb-2 pt-2">
+        <h2 class="pl-3 mb-4 pt-2">
           Saving Throws
-        </h3>
+        </h2>
         <v-container
           grid-list-sm
           class="pa-0"

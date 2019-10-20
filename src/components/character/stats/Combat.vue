@@ -2,6 +2,9 @@
   <div>
     <v-card flat>
       <v-card-text>
+        <h2 class="pl-0 pb-4">
+          Combat Proficiencies
+        </h2>
         <v-container
           grid-list-md
           class="pa-0"
@@ -63,9 +66,9 @@
 
     <v-card>
       <v-card-text>
-        <h3 class="pl-2">
+        <h2 class="pl-0 pb-4">
           Health
-        </h3>
+        </h2>
         <v-container
           grid-list-md
           class="pa-0"
@@ -79,7 +82,7 @@
               <v-text-field
                 label="Current HP"
                 type="number"
-                :value="character.HpCurrent || 0"
+                :value="character.HpCurrent"
                 @input="updateCharacter('HpCurrent', $event)"
               />
             </v-flex>
@@ -99,7 +102,7 @@
               <v-text-field
                 label="Max HP"
                 type="number"
-                :value="character.HpMax || 0"
+                :value="character.HpMax"
                 @input="updateCharacter('HpMax', $event)"
               />
             </v-flex>
@@ -109,7 +112,7 @@
               <v-text-field
                 label="Temp HP"
                 type="number"
-                :value="character.HpTemp || 0"
+                :value="character.HpTemp"
                 @input="updateCharacter('HpTemp', $event)"
               />
             </v-flex>

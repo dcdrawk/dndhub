@@ -6,7 +6,7 @@
   >
     {{ text }}
     <v-btn
-      flat
+      text
       small
       color="blue"
       @click.native="closeToast()"

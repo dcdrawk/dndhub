@@ -13,8 +13,8 @@
     >
       <!-- Dialog Toolbar -->
       <v-toolbar
-        card
         dark
+        max-height="56px"
         color="primary"
       >
         <!-- Close Button -->
@@ -36,69 +36,76 @@
 
       <!-- Card Text -->
       <v-card-text>
-        <v-container class="pa-0">
-          <v-layout
-            v-if="selectedItem"
-            row
-            wrap
-          >
-            <!-- Feat Name -->
-            <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.name"
-                v-validate="'required'"
-                label="Name"
-                type="text"
-                required
-                :readonly="browse"
-                data-vv-name="name"
-                :error-messages="errors.collect('name')"
-                @input="handleInput('name', $event)"
-              />
-            </v-flex>
+        <ValidationObserver
+          ref="observer"
+          v-slot="{ invalid }"
+        >
+          <v-container class="pl-0 pr-0">
+            <v-layout
+              v-if="selectedItem"
+              row
+              wrap
+            >
+              <!-- Feat Name -->
+              <v-flex xs12>
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  name="Name"
+                  rules="required"
+                >
+                  <v-text-field
+                    v-model="selectedItem.name"
+                    label="Name"
+                    type="text"
+                    required
+                    :readonly="browse"
+                    :error-messages="errors[0]"
+                    @input="handleInput('name', $event)"
+                  />
+                </ValidationProvider>
+              </v-flex>
 
-            <!-- Feat Description -->
-            <v-flex xs12>
-              <v-textarea
-                v-model="selectedItem.description"
-                label="Description"
-                type="text"
-                rows="10"
-                multi-line
-                auto-grow
-                :readonly="browse"
-                data-vv-name="description"
-                :error-messages="errors.collect('description')"
-                @input="handleInput('description', $event)"
-              />
-            </v-flex>
+              <!-- Feat Description -->
+              <v-flex xs12>
+                <v-textarea
+                  v-model="selectedItem.description"
+                  label="Description"
+                  type="text"
+                  rows="10"
+                  multi-line
+                  auto-grow
+                  :readonly="browse"
+                  @input="handleInput('description', $event)"
+                />
+              </v-flex>
 
-            <!-- Dialog Buttons -->
-            <v-flex xs12>
-              <v-btn
-                v-if="browse || newItem"
-                block
-                color="secondary"
-                :disabled="!isFormValid"
-                :loading="loading"
-                @click="$emit('add-item', selectedItem)"
-              >
-                Add
-              </v-btn>
+              <!-- Dialog Buttons -->
+              <v-flex xs12>
+                <v-btn
+                  v-if="browse || newItem"
+                  block
+                  color="secondary"
+                  :disabled="invalid"
+                  :loading="loading"
+                  @click="$emit('add-item', selectedItem)"
+                >
+                  Add
+                </v-btn>
 
-              <v-btn
-                v-if="!browse && !newItem"
-                block
-                color="accent"
-                :disabled="!isFormValid"
-                :loading="loading"
-                @click="deleteItem()"
-              >
-                Remove
-              </v-btn>
-            </v-flex>
-          </v-layout>
-        </v-container>
+                <v-btn
+                  v-if="!browse && !newItem"
+                  block
+                  color="warning"
+                  :disabled="invalid"
+                  :loading="loading"
+                  @click="deleteItem()"
+                >
+                  Remove
+                </v-btn>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </ValidationObserver>
       </v-card-text>
       <div style="flex: 1 1 auto;" />
     </v-card>
@@ -108,17 +115,11 @@
 <script>
 import character from '../../../mixins/character'
 import validation from '../../../mixins/validation'
-// import CustomSelect from '../../inputs/CustomSelect'
 import debounce from 'debounce'
 
 export default {
   // Name
   name: 'FeatsDialog',
-
-  // Components
-  components: {
-    // CustomSelect
-  },
 
   // Mixins
   mixins: [
@@ -154,11 +155,6 @@ export default {
     characterId () {
       return this.$store.state.characterId
     },
-    isFormValid () {
-      return Object.keys(this.fields).every(
-        key => this.fields[key].valid
-      )
-    },
     firebaseURL () {
       if (!this.item) return
       return `${this.endpoint}/${this.characterId}/${this.item.id}`
@@ -176,17 +172,7 @@ export default {
   watch: {
     showDialog (newValue, oldValue) {
       if (newValue) {
-        console.log(newValue)
-        console.log(this.item)
         this.$set(this, 'selectedItem', this.item)
-        // this.selectedItem = newValue
-        // this.$set(this.selectedItem, i, this.item[i])
-      //   for (let i of this.item) {
-      //     this.$set(this.selectedItem, i, this.item[i])
-      //   }
-      //   setTimeout(() => {
-      //     this.errors.clear()
-      //   }, 0)
       }
     }
   },
