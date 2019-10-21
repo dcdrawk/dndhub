@@ -31,68 +31,72 @@
       dense
       class="elevation-1 spell-list"
     >
-      <virtual-scroller
+      <RecycleScroller
+        v-slot="{ item }"
         class="scroller"
         :items="displayedItems"
-        item-height="61"
+        :item-size="61"
+        key-field="name"
       >
-        <template slot-scope="props">
-          <!-- List Tile -->
-          <v-list-item
-            :key="props.itemKey"
-            class="list-tile"
-            @click="handleShowDialog(props.item)"
-          >
-            <!-- Content -->
+        <!-- <wrapper> -->
+        <!-- <template slot-scope="props"> -->
+        <!-- List Tile -->
+        <!-- :key="item" -->
+        <v-list-item
+          class="list-tile"
+          @click="handleShowDialog(item)"
+        >
+          <!-- Content -->
 
-            <v-list-item-content>
-              <!-- Name -->
-              <v-list-item-title>
-                {{ props.item.name }}
-                <span
-                  v-if="props.item.ritual == 1"
-                  class="spell-list__symbol cyan--text font-weight-bold"
-                >R</span>
+          <v-list-item-content>
+            <!-- Name -->
+            <v-list-item-title>
+              {{ item.name }}
+              <span
+                v-if="item.ritual == 1"
+                class="spell-list__symbol cyan--text font-weight-bold"
+              >R</span>
 
-                <!-- Concentration -->
-                <span
-                  v-if="props.item.concentration == 1"
-                  class="spell-list__symbol orange--text font-weight-bold"
-                  color="secondary"
-                >
-                  C
-                </span>
-              </v-list-item-title>
-              <v-list-item-subtitle class="">
-                {{ props.item.class }}
-              </v-list-item-subtitle>
-            </v-list-item-content>
-
-            <!-- Spell Level / School -->
-            <v-list-item-content>
-              <v-list-item-title class="right-text">
-                {{ props.item.level }}
-              </v-list-item-title>
-              <v-list-item-subtitle class="right-text">
-                {{ props.item.school }}
-              </v-list-item-subtitle>
-            </v-list-item-content>
-
-            <!-- Feat Add -->
-            <v-list-item-action v-if="browse">
-              <v-btn
-                icon
-                color="accent"
-                @click.stop="addItem(props.item)"
+              <!-- Concentration -->
+              <span
+                v-if="item.concentration == 1"
+                class="spell-list__symbol orange--text font-weight-bold"
+                color="secondary"
               >
-                <v-icon>add</v-icon>
-              </v-btn>
-            </v-list-item-action>
-          </v-list-item>
+                C
+              </span>
+            </v-list-item-title>
+            <v-list-item-subtitle class="">
+              {{ item.class }}
+            </v-list-item-subtitle>
+          </v-list-item-content>
 
-          <v-divider />
-        </template>
-      </virtual-scroller>
+          <!-- Spell Level / School -->
+          <v-list-item-content>
+            <v-list-item-title class="right-text">
+              {{ item.level }}
+            </v-list-item-title>
+            <v-list-item-subtitle class="right-text">
+              {{ item.school }}
+            </v-list-item-subtitle>
+          </v-list-item-content>
+
+          <!-- Feat Add -->
+          <v-list-item-action v-if="browse">
+            <v-btn
+              icon
+              color="secondary"
+              @click.stop="addItem(item)"
+            >
+              <v-icon>add</v-icon>
+            </v-btn>
+          </v-list-item-action>
+        </v-list-item>
+
+        <!-- <v-divider /> -->
+        <!-- </wrapper> -->
+        <!-- </template> -->
+      </RecycleScroller>
     </v-list>
 
     <div class="pagination">

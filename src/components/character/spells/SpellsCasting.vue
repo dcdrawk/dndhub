@@ -1,97 +1,100 @@
 <template>
-  <v-container
-    fluid
-    class="spell-casting"
-  >
-    <!-- {{ }} -->
-    <v-select
-      class="spell-casting__modifier"
-      label="Spell Modifier"
-      :value="character.spellModifier"
-      :items="SpellModifierOptions"
-      item-text="text"
-      item-value="value"
-      color="secondary"
-      @input="updateCharacter('spellModifier', $event)"
-    />
+  <v-card flat>
+    <v-card-text>
+      <h2 class="mb-4">
+        Spell Casting
+      </h2>
+      <!-- {{ }} -->
+      <v-select
+        class="spell-casting__modifier"
+        label="Spell Modifier"
+        :value="character.spellModifier"
+        :items="SpellModifierOptions"
+        item-text="text"
+        item-value="value"
+        color="secondary"
+        @input="updateCharacter('spellModifier', $event)"
+      />
 
-    <v-text-field
-      class="mb-3"
-      label="Spell Attack"
-      type="text"
-      readonly
-      disabled
-      :value="spellAttackText"
-      hint="Spell Modifier + Proficiency Bonus"
-      persistent-hint
-    />
+      <v-text-field
+        class="mb-3"
+        label="Spell Attack"
+        type="text"
+        readonly
+        disabled
+        :value="spellAttackText"
+        hint="Spell Modifier + Proficiency Bonus"
+        persistent-hint
+      />
 
-    <v-text-field
-      class="mb-5"
-      label="Spell Save"
-      type="text"
-      readonly
-      disabled
-      :value="spellSaveText"
-      hint="8 + Spell Modifier + Proficiency Bonus"
-      persistent-hint
-    />
-    <v-layout row>
-      <v-flex xs12>
-        <h2>
-          Spell Slots
-          <v-btn
-            class="ma-0"
-            fab
-            small
-            flat
-            @click="showSlotDialog = true"
-          >
-            <v-icon>
-              edit
-            </v-icon>
-          </v-btn>
-        </h2>
-      </v-flex>
-      <!-- <v-flex>
+      <v-text-field
+        class="mb-5"
+        label="Spell Save"
+        type="text"
+        readonly
+        disabled
+        :value="spellSaveText"
+        hint="8 + Spell Modifier + Proficiency Bonus"
+        persistent-hint
+      />
+    </v-card-text>
+    <v-divider />
+    <v-card-text>
+      <!-- <v-layout row> -->
+      <!-- <v-flex xs12> -->
+      <h2 class="mb-4">
+        Spell Slots
+        <v-btn
+          class="ma-0"
+          fab
+          text
+          small
+          @click="showSlotDialog = true"
+        >
+          <v-icon>
+            edit
+          </v-icon>
+        </v-btn>
+      </h2>
+      <!-- </v-flex>
+      </v-layout> -->
 
-      </v-flex> -->
-    </v-layout>
+      <SpellsSlotsDialog
+        :show-dialog="showSlotDialog"
+        @close="showSlotDialog = false"
+      />
+      <!-- <v-divider class="mt-1 mb-3" /> -->
+      <v-alert
+        v-if="!characterHasSpellSlots"
+        :value="true"
+        color="accent"
+        icon="help"
+      >
+        It appears {{ character.name }} does not have any spell slots yet.
+      </v-alert>
 
-    <SpellsSlotsDialog
-      :show-dialog="showSlotDialog"
-      @close="showSlotDialog = false"
-    />
-    <v-divider class="mt-1 mb-3" />
-    <v-alert
-      v-if="!characterHasSpellSlots"
-      :value="true"
-      color="secondary"
-      icon="help"
-    >
-      It appears {{ character.name }} does not have any spell slots yet.
-    </v-alert>
-
-    <div
-      v-for="(slot, key, index) in characterSpellSlots"
-      :key="index"
-    >
-      <div v-if="slot && slot.length">
-        <h3>Level {{ key }}</h3>
-        <div d-flex>
-          <v-checkbox
-            v-for="(item, itemIndex) in slot"
-            :key="itemIndex"
-            class="d-inline-block mr-2"
-            :input-value="item"
-            :true-value="'1'"
-            :false-value="'0'"
-            @change="handleUpdateSpellSlot(key, itemIndex, $event)"
-          />
+      <div
+        v-for="(slot, key, index) in characterSpellSlots"
+        :key="index"
+      >
+        <div v-if="slot && slot.length">
+          <h3>Level {{ key }}</h3>
+          <div d-flex>
+            <v-checkbox
+              v-for="(item, itemIndex) in slot"
+              :key="itemIndex"
+              class="d-inline-block mr-2"
+              :input-value="item"
+              :true-value="'1'"
+              :false-value="'0'"
+              color="secondary"
+              @change="handleUpdateSpellSlot(key, itemIndex, $event)"
+            />
+          </div>
         </div>
       </div>
-    </div>
-  </v-container>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>

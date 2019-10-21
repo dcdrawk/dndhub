@@ -8,7 +8,6 @@
     <v-card tile>
       <!-- Dialog Toolbar -->
       <v-toolbar
-        card
         dark
         color="primary"
       >
@@ -29,8 +28,8 @@
       </v-toolbar>
 
       <!-- Card Text -->
-      <v-card-text>
-        <v-container class="pa-0">
+      <v-card-text class="pl-0 pr-0">
+        <v-container class="pl-0 pr-0">
           <SpellsSlotInput
             v-for="(slot, index) in spellSlotFields"
             :key="index"
@@ -92,31 +91,31 @@ export default {
     spellSlotFields () {
       if (!this.characterSpellSlots) return
       return [{
-        text: 'Level 1',
+        text: 'Level 1 Slots',
         value: this.getNumberOfSpellSlots(1)
       }, {
-        text: 'Level 2',
+        text: 'Level 2 Slots',
         value: this.getNumberOfSpellSlots(2)
       }, {
-        text: 'Level 3',
+        text: 'Level 3 Slots',
         value: this.getNumberOfSpellSlots(3)
       }, {
-        text: 'Level 4',
+        text: 'Level 4 Slots',
         value: this.getNumberOfSpellSlots(4)
       }, {
-        text: 'Level 5',
+        text: 'Level 5 Slots',
         value: this.getNumberOfSpellSlots(5)
       }, {
-        text: 'Level 6',
+        text: 'Level 6 Slots',
         value: this.getNumberOfSpellSlots(6)
       }, {
-        text: 'Level 7',
+        text: 'Level 7 Slots',
         value: this.getNumberOfSpellSlots(7)
       }, {
-        text: 'Level 8',
+        text: 'Level 8 Slots',
         value: this.getNumberOfSpellSlots(8)
       }, {
-        text: 'Level 9',
+        text: 'Level 9 Slots',
         value: this.getNumberOfSpellSlots(9)
       }]
     }

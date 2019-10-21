@@ -34,177 +34,186 @@
 
       <!-- Card Text -->
       <v-card-text>
-        <v-container class="pa-0">
-          <v-layout
-            v-if="selectedItem"
-            row
-            wrap
-          >
-            <!-- Spells Name -->
-            <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.name"
-                v-validate="'required'"
-                label="Name"
-                type="text"
-                required
-                :readonly="browse"
-                data-vv-name="name"
-                :error-messages="errors.collect('name')"
-                @input="handleInput('name', $event)"
-              />
-            </v-flex>
+        <ValidationObserver
+          ref="observer"
+          v-slot="{ invalid }"
+        >
+          <v-container class="pl-0 pr-0">
+            <v-layout
+              v-if="selectedItem"
+              row
+              wrap
+            >
+              <!-- Spells Name -->
+              <v-flex xs12>
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  name="Name"
+                  rules="required"
+                >
+                  <v-text-field
+                    v-model="selectedItem.name"
+                    label="Name"
+                    type="text"
+                    required
+                    :readonly="browse"
+                    :error-messages="errors[0]"
+                    @input="handleInput('name', $event)"
+                  />
+                </ValidationProvider>
+              </v-flex>
 
-            <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.casting_time"
-                label="Casting Time"
-                type="text"
-                :readonly="browse"
-                @input="handleInput('casting_time', $event)"
-              />
-            </v-flex>
+              <v-flex xs12>
+                <v-text-field
+                  v-model="selectedItem.casting_time"
+                  label="Casting Time"
+                  type="text"
+                  :readonly="browse"
+                  @input="handleInput('casting_time', $event)"
+                />
+              </v-flex>
 
-            <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.range"
-                label="Range"
-                type="text"
-                :readonly="browse"
-                @input="handleInput('range', $event)"
-              />
-            </v-flex>
+              <v-flex xs12>
+                <v-text-field
+                  v-model="selectedItem.range"
+                  label="Range"
+                  type="text"
+                  :readonly="browse"
+                  @input="handleInput('range', $event)"
+                />
+              </v-flex>
 
-            <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.duration"
-                label="Duration"
-                type="text"
-                :readonly="browse"
-                @input="handleInput('duration', $event)"
-              />
-            </v-flex>
+              <v-flex xs12>
+                <v-text-field
+                  v-model="selectedItem.duration"
+                  label="Duration"
+                  type="text"
+                  :readonly="browse"
+                  @input="handleInput('duration', $event)"
+                />
+              </v-flex>
 
-            <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.components"
-                label="Components"
-                type="text"
-                :readonly="browse"
-                @input="handleInput('components', $event)"
-              />
-            </v-flex>
+              <v-flex xs12>
+                <v-text-field
+                  v-model="selectedItem.components"
+                  label="Components"
+                  type="text"
+                  :readonly="browse"
+                  @input="handleInput('components', $event)"
+                />
+              </v-flex>
 
-            <v-flex xs12>
-              <v-select
-                v-model="selectedItem.level"
-                label="Level"
-                :readonly="browse"
-                :items="spellLevels"
-                @input="handleInput('level', $event)"
-              />
-            </v-flex>
+              <v-flex xs12>
+                <v-select
+                  v-model="selectedItem.level"
+                  label="Level"
+                  :readonly="browse"
+                  :items="spellLevels"
+                  @input="handleInput('level', $event)"
+                />
+              </v-flex>
 
-            <v-flex xs12>
-              <v-select
-                v-model="selectedItem.school"
-                label="School"
-                :readonly="browse"
-                :items="spellSchools"
-                @input="handleInput('school', $event)"
-              />
-            </v-flex>
+              <v-flex xs12>
+                <v-select
+                  v-model="selectedItem.school"
+                  label="School"
+                  :readonly="browse"
+                  :items="spellSchools"
+                  @input="handleInput('school', $event)"
+                />
+              </v-flex>
 
-            <v-flex xs12>
-              <v-select
-                label="Class"
-                :readonly="browse"
-                color="accent"
-                :value="getClasses(selectedItem)"
-                :items="classes"
-                chips
-                multiple
-                item-value="name"
-                item-text="name"
-                dense
-                @input="handleInput('class', $event.join(', '))"
-              />
-            </v-flex>
+              <v-flex xs12>
+                <v-select
+                  label="Class"
+                  :readonly="browse"
+                  color="accent"
+                  :value="getClasses(selectedItem)"
+                  :items="classes"
+                  chips
+                  multiple
+                  item-value="name"
+                  item-text="name"
+                  dense
+                  @input="handleInput('class', $event.join(', '))"
+                />
+              </v-flex>
 
-            <v-flex xs12>
-              <v-switch
-                label="Ritual"
-                :disabled="browse"
-                color="accent"
-                :input-value="selectedItem.ritual"
-                :true-value="'1'"
-                :false-value="'0'"
-                @change="handleInput('ritual', $event)"
-              />
-            </v-flex>
+              <v-flex xs12>
+                <v-switch
+                  label="Ritual"
+                  :disabled="browse"
+                  color="accent"
+                  :input-value="selectedItem.ritual"
+                  :true-value="'1'"
+                  :false-value="'0'"
+                  @change="handleInput('ritual', $event)"
+                />
+              </v-flex>
 
-            <v-flex xs12>
-              <v-switch
-                label="Concentration"
-                :disabled="browse"
-                color="accent"
-                :input-value="selectedItem.concentration"
-                :true-value="'1'"
-                :false-value="'0'"
-                @change="handleInput('concentration', $event)"
-              />
-            </v-flex>
+              <v-flex xs12>
+                <v-switch
+                  label="Concentration"
+                  :disabled="browse"
+                  color="accent"
+                  :input-value="selectedItem.concentration"
+                  :true-value="'1'"
+                  :false-value="'0'"
+                  @change="handleInput('concentration', $event)"
+                />
+              </v-flex>
 
-            <v-flex xs12>
-              <v-textarea
-                v-model="selectedItem.desc"
-                label="Description"
-                type="text"
-                rows="10"
-                multi-line
-                :readonly="browse"
-                @input="handleInput('desc', $event)"
-              />
-            </v-flex>
+              <v-flex xs12>
+                <v-textarea
+                  v-model="selectedItem.desc"
+                  label="Description"
+                  type="text"
+                  rows="10"
+                  multi-line
+                  :readonly="browse"
+                  @input="handleInput('desc', $event)"
+                />
+              </v-flex>
 
-            <v-flex xs12>
-              <v-textarea
-                v-model="selectedItem.higher_level"
-                label="At Higher Levels"
-                type="text"
-                rows="5"
-                multi-line
-                :readonly="browse"
-                @input="handleInput('higher_level', $event)"
-              />
-            </v-flex>
+              <v-flex xs12>
+                <v-textarea
+                  v-model="selectedItem.higher_level"
+                  label="At Higher Levels"
+                  type="text"
+                  rows="5"
+                  multi-line
+                  :readonly="browse"
+                  @input="handleInput('higher_level', $event)"
+                />
+              </v-flex>
 
-            <!-- Dialog Buttons -->
-            <v-flex xs12>
-              <v-btn
-                v-if="browse || newItem"
-                block
-                color="secondary"
-                :disabled="!isFormValid"
-                :loading="loading"
-                @click="$emit('add-item', selectedItem)"
-              >
-                Add
-              </v-btn>
+              <!-- Dialog Buttons -->
+              <v-flex xs12>
+                <v-btn
+                  v-if="browse || newItem"
+                  block
+                  color="secondary"
+                  :disabled="invalid"
+                  :loading="loading"
+                  @click="$emit('add-item', selectedItem)"
+                >
+                  Add
+                </v-btn>
 
-              <v-btn
-                v-if="!browse && !newItem"
-                block
-                color="warning"
-                :disabled="!isFormValid"
-                :loading="loading"
-                @click="deleteItem()"
-              >
-                Remove
-              </v-btn>
-            </v-flex>
-          </v-layout>
-        </v-container>
+                <v-btn
+                  v-if="!browse && !newItem"
+                  block
+                  color="warning"
+                  :disabled="invalid"
+                  :loading="loading"
+                  @click="deleteItem()"
+                >
+                  Remove
+                </v-btn>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </ValidationObserver>
       </v-card-text>
       <div style="flex: 1 1 auto;" />
     </v-card>
@@ -267,11 +276,11 @@ export default {
     characterId () {
       return this.$store.state.characterId
     },
-    isFormValid () {
-      return Object.keys(this.fields).every(
-        key => this.fields[key].valid
-      )
-    },
+    // isFormValid () {
+    //   return Object.keys(this.fields).every(
+    //     key => this.fields[key].valid
+    //   )
+    // },
     firebaseURL () {
       if (!this.item) return
       return `${this.endpoint}/${this.characterId}/${this.item.id}`
@@ -294,9 +303,10 @@ export default {
     showDialog (newValue, oldValue) {
       if (newValue) {
         this.$set(this, 'selectedItem', this.item)
-        setTimeout(() => {
-          this.errors.clear()
-        }, 0)
+        this.$_validation_reset()
+        // setTimeout(() => {
+        //   this.errors.clear()
+        // }, 0)
       }
     }
   },

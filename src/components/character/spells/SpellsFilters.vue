@@ -14,6 +14,7 @@
           hide-details
           clearable
           :value="filter.class"
+          solo-inverted=""
           @input="$emit('filter-class', $event)"
         />
       </v-flex>
@@ -25,6 +26,7 @@
           dense
           hide-details
           clearable
+          solo-inverted=""
           @input="$emit('filter-level', $event)"
         />
       </v-flex>
@@ -36,6 +38,7 @@
           dense
           hide-details
           clearable
+          solo-inverted=""
           @input="$emit('filter-school', $event)"
         />
       </v-flex>

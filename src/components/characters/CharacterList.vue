@@ -108,7 +108,6 @@
         <v-card-actions>
           <v-spacer />
           <v-btn
-            flat
             @click.stop="deleteCharacterDialog = false"
           >
             Close

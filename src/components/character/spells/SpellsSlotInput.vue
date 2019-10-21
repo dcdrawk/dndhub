@@ -1,12 +1,14 @@
 <template>
   <div>
-    <v-layout
+    <v-row
       row
       wrap
+      class="pr-4 pl-4 pt-0 pb-0"
     >
-      <v-flex
+      <v-col
         xs8
-        class="pr-2"
+        cols="8"
+        class="pt-0 pb-0"
       >
         <v-text-field
           :label="label"
@@ -17,27 +19,32 @@
           readonly
           @input="$emit('input', $event)"
         />
-      </v-flex>
-      <v-flex xs2>
+      </v-col>
+      <v-col cols="2">
         <v-btn
           small
           fab
+          text
+          outlined
+          color="accent"
           @click="handleSubtract"
         >
           <v-icon>remove</v-icon>
         </v-btn>
-      </v-flex>
-      <v-flex xs2>
+      </v-col>
+      <v-col cols="2">
         <v-btn
           small
           fab
+          text
+          outlined
           color="secondary"
           @click="handleAdd"
         >
           <v-icon>add</v-icon>
         </v-btn>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
     <v-divider class="mb-2" />
   </div>
 </template>
@@ -46,12 +53,6 @@
 export default {
   // Name
   name: 'SpellsSlotInput',
-
-  // Components
-  components: {},
-
-  // Mixins
-  mixins: {},
 
   // Props
   props: {
@@ -73,13 +74,6 @@ export default {
     }
   },
 
-  // Computed
-  // computed: {
-  //   computedProperty () {
-  //     return 'something'
-  //   }
-  // },
-
   // Watch
   watch: {
     watchProperty (newValue, oldValue) {
@@ -89,15 +83,6 @@ export default {
 
   // Methods
   methods: {
-    // handleBlur () {
-    //   if (this.value < this.min) {
-    //     this.$emit('input', this.min)
-    //   }
-    //   if (this.value > this.max) {
-    //     this.$emit('input', this.max)
-    //   }
-    // },
-
     handleAdd () {
       const newValue = this.value + 1
       if (newValue > this.max) return

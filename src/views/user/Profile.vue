@@ -30,7 +30,7 @@
           <!-- Edit Button -->
           <v-btn
             v-if="readonly"
-            flat
+            text
             @click="enableEditing()"
           >
             Edit

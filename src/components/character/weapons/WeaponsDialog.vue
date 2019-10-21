@@ -36,7 +36,7 @@
           ref="observer"
           v-slot="{ invalid }"
         >
-          <v-container class="pa-0">
+          <v-container class="pl-0 pr-0">
             <v-layout
               v-if="selectedItem"
               row

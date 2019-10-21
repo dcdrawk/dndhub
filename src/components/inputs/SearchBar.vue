@@ -13,8 +13,7 @@
       />
       <v-btn
         v-if="filter"
-        class="filter-button"
-        flat
+        class="filter-button mt-2"
         icon
         @click="$emit('toggle-filter')"
       >
