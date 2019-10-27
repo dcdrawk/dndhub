@@ -11,7 +11,6 @@
     >
       <!-- Dialog Toolbar -->
       <v-toolbar
-        card
         dark
         color="primary"
       >
@@ -36,123 +35,128 @@
 
       <!-- Card Text -->
       <v-card-text>
-        <v-container class="pa-0">
-          <v-layout
-            v-if="selectedItem"
-            row
-            wrap
-          >
-            <!-- Quest Name -->
-            <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.name"
-                v-validate="'required'"
-                label="Name"
-                type="text"
-                required
-                :readonly="browse"
-                data-vv-name="name"
-                :error-messages="errors.collect('name')"
-                @input="handleInput('name', $event)"
-              />
-            </v-flex>
-
-            <!-- Quest Description -->
-            <v-flex xs12>
-              <v-textarea
-                v-model="selectedItem.summary"
-                label="Summary"
-                type="text"
-                rows="3"
-                multi-line
-                auto-grow
-                :readonly="browse"
-                data-vv-name="description"
-                :error-messages="errors.collect('description')"
-                @input="handleInput('summary', $event)"
-              />
-            </v-flex>
-
-            <!-- Weapons Description -->
-            <v-flex xs12>
-              <v-textarea
-                v-model="selectedItem.description"
-                label="Description"
-                type="text"
-                rows="3"
-                multi-line
-                auto-grow
-                :readonly="browse"
-                data-vv-name="description"
-                :error-messages="errors.collect('description')"
-                @input="handleInput('description', $event)"
-              />
-            </v-flex>
-
-            <v-flex xs12>
-              <v-combobox
-                label="Characters"
-                :readonly="browse"
-                :value="selectedItem.properties || []"
-                multiple
-                chips
-                deletable-chips
-                @input="handleInput('properties', $event)"
-              />
-            </v-flex>
-
-            <v-flex xs12>
-              <v-combobox
-                label="Rewards"
-                :readonly="browse"
-                :value="selectedItem.rewards || []"
-                multiple
-                chips
-                deletable-chips
-                @input="handleInput('rewards', $event)"
-              />
-            </v-flex>
-
-            <v-flex
-              xs12
-              class="mb-4"
+        <ValidationObserver
+          ref="observer"
+          v-slot="{ invalid }"
+        >
+          <v-container class="pl-0 pr-0">
+            <v-layout
+              v-if="selectedItem"
+              row
+              wrap
             >
-              <v-switch
-                color="accent"
-                label="Completed"
-                :input-value="selectedItem.completed"
-                :true-value="true"
-                :false-value="false"
-                @change="handleInput('completed', $event)"
-              />
-            </v-flex>
+              <!-- Quest Name -->
+              <v-flex xs12>
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  name="Name"
+                  rules="required"
+                >
+                  <v-text-field
+                    v-model="selectedItem.name"
+                    label="Name"
+                    type="text"
+                    required
+                    :readonly="browse"
+                    :error-messages="errors[0]"
+                    @input="handleInput('name', $event)"
+                  />
+                </ValidationProvider>
+              </v-flex>
 
-            <!-- Dialog Buttons -->
-            <v-flex xs12>
-              <v-btn
-                v-if="browse || newItem"
-                block
-                color="secondary"
-                :disabled="!isFormValid"
-                :loading="loading"
-                @click="$emit('add-item', selectedItem)"
-              >
-                Add
-              </v-btn>
+              <!-- Quest Description -->
+              <v-flex xs12>
+                <v-textarea
+                  v-model="selectedItem.summary"
+                  label="Summary"
+                  type="text"
+                  rows="3"
+                  multi-line
+                  auto-grow
+                  :readonly="browse"
+                  @input="handleInput('summary', $event)"
+                />
+              </v-flex>
 
-              <v-btn
-                v-if="!browse && !newItem"
-                block
-                color="warning"
-                :disabled="!isFormValid"
-                :loading="loading"
-                @click="deleteItem()"
+              <!-- Weapons Description -->
+              <v-flex xs12>
+                <v-textarea
+                  v-model="selectedItem.description"
+                  label="Description"
+                  type="text"
+                  rows="3"
+                  multi-line
+                  auto-grow
+                  :readonly="browse"
+                  @input="handleInput('description', $event)"
+                />
+              </v-flex>
+
+              <v-flex xs12>
+                <v-combobox
+                  label="Characters"
+                  :readonly="browse"
+                  :value="selectedItem.properties || []"
+                  multiple
+                  chips
+                  deletable-chips
+                  @input="handleInput('properties', $event)"
+                />
+              </v-flex>
+
+              <v-flex xs12>
+                <v-combobox
+                  label="Rewards"
+                  :readonly="browse"
+                  :value="selectedItem.rewards || []"
+                  multiple
+                  chips
+                  deletable-chips
+                  @input="handleInput('rewards', $event)"
+                />
+              </v-flex>
+
+              <v-flex
+                xs12
+                class="mb-4"
               >
-                Remove
-              </v-btn>
-            </v-flex>
-          </v-layout>
-        </v-container>
+                <v-switch
+                  color="success"
+                  label="Completed"
+                  :input-value="selectedItem.completed"
+                  :true-value="true"
+                  :false-value="false"
+                  @change="handleInput('completed', $event)"
+                />
+              </v-flex>
+
+              <!-- Dialog Buttons -->
+              <v-flex xs12>
+                <v-btn
+                  v-if="browse || newItem"
+                  block
+                  color="secondary"
+                  :disabled="invalid"
+                  :loading="loading"
+                  @click="$emit('add-item', selectedItem)"
+                >
+                  Add
+                </v-btn>
+
+                <v-btn
+                  v-if="!browse && !newItem"
+                  block
+                  color="warning"
+                  :disabled="invalid"
+                  :loading="loading"
+                  @click="deleteItem()"
+                >
+                  Remove
+                </v-btn>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </ValidationObserver>
       </v-card-text>
       <div style="flex: 1 1 auto;" />
     </v-card>
@@ -211,11 +215,11 @@ export default {
     characterId () {
       return this.$store.state.characterId
     },
-    isFormValid () {
-      return Object.keys(this.fields).every(
-        key => this.fields[key].valid
-      )
-    },
+    // invalid () {
+    //   return Object.keys(this.fields).every(
+    //     key => this.fields[key].valid
+    //   )
+    // },
     firebaseURL () {
       if (!this.item) return
       return `${this.endpoint}/${this.characterId}/${this.item.id}`
@@ -239,7 +243,7 @@ export default {
       if (newValue) {
         this.$set(this, 'selectedItem', this.item)
         setTimeout(() => {
-          this.errors.clear()
+          this.$_validation_reset()
         }, 0)
       }
     }

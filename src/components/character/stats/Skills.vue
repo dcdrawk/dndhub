@@ -27,7 +27,7 @@
         <v-divider />
 
         <v-layout
-          v-for="(item, index) in skills"
+          v-for="(item, index) in sortedSkills"
           :key="index"
           class="pa-0 pr-0 skill"
           wrap
@@ -122,6 +122,10 @@ export default {
     characterScores () {
       if (!this.character) return
       return this.$store.state.character.abilityScores
+    },
+    sortedSkills () {
+      let value = [ ...this.skills ]
+      return value.sort((a, b) => (a.name > b.name) ? 1 : -1)
     }
   },
 
