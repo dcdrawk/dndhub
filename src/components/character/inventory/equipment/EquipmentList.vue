@@ -11,7 +11,7 @@
       No Items Found
     </p>
 
-    <!-- Armor List -->
+    <!-- Equipment List -->
     <v-list
       v-if="filteredItems.length > 0"
       two-line
@@ -20,43 +20,41 @@
     >
       <template v-for="(item, index) in filteredItems">
         <!-- List Tile -->
-        <v-list-tile
+        <v-list-item
           :key="item.title"
           class="list-tile"
           @click="handleShowDialog(item)"
         >
           <!-- Content -->
-          <v-list-tile-content>
+          <v-list-item-content>
             <!-- Name -->
-            <v-list-tile-title>
+            <v-list-item-title>
               {{ item.name }}
-            </v-list-tile-title>
+            </v-list-item-title>
             <!-- AC -->
-            <v-list-tile-sub-title>
-              Quantity: {{ item.quantity }}
-            </v-list-tile-sub-title>
-          </v-list-tile-content>
+            <v-list-item-subtitle>
+              Quantity: {{ item.quantity || '-' }}
+            </v-list-item-subtitle>
+          </v-list-item-content>
 
-          <v-list-tile-content>
+          <v-list-item-content>
             <!-- Trait Name -->
-            <v-list-tile-title
-              v-if="item.value"
+            <v-list-item-subtitle
               class="right-text"
             >
-              Weight: {{ item.value }}
-            </v-list-tile-title>
+              Weight: {{ item.weight || '-' }}
+            </v-list-item-subtitle>
             <!-- Character Details -->
-            <v-list-tile-sub-title
-              v-if="item.value"
+            <v-list-item-subtitle
               class="right-text"
             >
-              Value: {{ item.value }}
+              Value: {{ item.value || '-' }}
               <!-- Cost: {{ item.cost }} -->
-            </v-list-tile-sub-title>
-          </v-list-tile-content>
+            </v-list-item-subtitle>
+          </v-list-item-content>
 
-          <!-- Feat Add -->
-          <v-list-tile-action v-if="browse">
+          <!-- Equipment Add -->
+          <v-list-item-action v-if="browse">
             <v-btn
               icon
               color="accent"
@@ -64,8 +62,8 @@
             >
               <v-icon>add</v-icon>
             </v-btn>
-          </v-list-tile-action>
-        </v-list-tile>
+          </v-list-item-action>
+        </v-list-item>
         <v-divider
           v-if="index < filteredItems.length - 1"
           :key="`${index}-divider`"
