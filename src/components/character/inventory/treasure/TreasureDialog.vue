@@ -11,7 +11,6 @@
     >
       <!-- Dialog Toolbar -->
       <v-toolbar
-        card
         dark
         color="primary"
       >
@@ -34,112 +33,115 @@
 
       <!-- Card Text -->
       <v-card-text>
-        <v-container class="pa-0">
-          <v-layout
-            v-if="selectedItem"
-            row
-            wrap
-          >
-            <!-- Armor Name -->
-            <v-flex xs12>
-              <v-text-field
-                v-validate="'required'"
-                label="Name*"
-                type="text"
-                :value="selectedItem.name"
-                data-vv-name="name"
-                :error-messages="errors.first('name')"
-                @input="handleInput('name', $event)"
-              />
-            </v-flex>
+        <ValidationObserver
+          ref="observer"
+          v-slot="{ invalid }"
+        >
+          <v-container class="pl-0 pr-0">
+            <v-layout
+              v-if="selectedItem"
+              row
+              wrap
+            >
+              <!-- Armor Name -->
+              <v-flex xs12>
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  name="Name"
+                  rules="required"
+                >
+                  <v-text-field
+                    label="Name*"
+                    type="text"
+                    :value="selectedItem.name"
+                    :error-messages="errors[0]"
+                    @input="handleInput('name', $event)"
+                  />
+                </ValidationProvider>
+              </v-flex>
 
-            <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.quantity"
-                v-validate="'required'"
-                label="Quantity*"
-                type="number"
-                required
-                :readonly="browse"
-                data-vv-name="quantity"
-                :error-messages="errors.first('quantity')"
-                @input="handleInput('quantity', $event)"
-              />
-            </v-flex>
+              <v-flex xs12>
+                <v-text-field
+                  v-model="selectedItem.quantity"
+                  label="Quantity"
+                  type="number"
+                  :readonly="browse"
+                  @input="handleInput('quantity', $event)"
+                />
+              </v-flex>
 
-            <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.weight"
-                label="Weight"
-                type="text"
-                :read-only="browse"
-                @input="handleInput('weight', $event)"
-              />
-            </v-flex>
+              <v-flex xs12>
+                <v-text-field
+                  v-model="selectedItem.weight"
+                  label="Weight"
+                  type="text"
+                  :read-only="browse"
+                  @input="handleInput('weight', $event)"
+                />
+              </v-flex>
 
-            <v-flex xs12>
-              <v-text-field
-                v-model="selectedItem.cost"
-                label="Value"
-                type="text"
-                :readonly="browse"
-                @input="handleInput('cost', $event)"
-              />
-            </v-flex>
+              <v-flex xs12>
+                <v-text-field
+                  v-model="selectedItem.value"
+                  label="Value"
+                  type="text"
+                  :readonly="browse"
+                  @input="handleInput('value', $event)"
+                />
+              </v-flex>
 
-            <v-flex xs12>
-              <v-combobox
-                v-model="selectedItem.properties"
-                multiple
-                label="Properties"
-                :readonly="browse"
-                chips
-                deletable-chips
-                @input="handleInput('properties', $event)"
-              />
-            </v-flex>
+              <v-flex xs12>
+                <v-combobox
+                  v-model="selectedItem.properties"
+                  multiple
+                  label="Properties"
+                  :readonly="browse"
+                  chips
+                  deletable-chips
+                  @input="handleInput('properties', $event)"
+                />
+              </v-flex>
 
-            <!-- Armor Description -->
-            <v-flex xs12>
-              <v-textarea
-                v-model="selectedItem.description"
-                label="Description"
-                type="text"
-                rows="10"
-                multi-line
-                :readonly="browse"
-                data-vv-name="description"
-                :error-messages="errors.collect('description')"
-                @input="handleInput('description', $event)"
-              />
-            </v-flex>
+              <!-- Armor Description -->
+              <v-flex xs12>
+                <v-textarea
+                  v-model="selectedItem.description"
+                  label="Description"
+                  type="text"
+                  rows="10"
+                  multi-line
+                  :readonly="browse"
+                  @input="handleInput('description', $event)"
+                />
+              </v-flex>
 
-            <!-- Dialog Buttons -->
-            <v-flex xs12>
-              <v-btn
-                v-if="browse || newItem"
-                block
-                color="accent"
-                :disabled="newItem && !isFormValid"
-                :loading="loading"
-                @click="$emit('add-item', selectedItem)"
-              >
-                Add
-              </v-btn>
+              <!-- Dialog Buttons -->
+              <v-flex xs12>
+                <v-btn
+                  v-if="browse || newItem"
+                  block
+                  color="accent"
+                  :disabled="newItem && invalid"
+                  :loading="loading"
+                  @click="$emit('add-item', selectedItem)"
+                >
+                  Add
+                </v-btn>
 
-              <v-btn
-                v-if="!browse && !newItem"
-                block
-                color="warning"
-                :disabled="!isFormValid"
-                :loading="loading"
-                @click="deleteItem()"
-              >
-                Remove
-              </v-btn>
-            </v-flex>
-          </v-layout>
-        </v-container>
+                <v-btn
+                  v-if="!browse && !newItem"
+                  block
+                  color="warning"
+                  :disabled="invalid"
+                  :loading="loading"
+                  @click="deleteItem()"
+                >
+                  Remove
+                </v-btn>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </ValidationObserver>
       </v-card-text>
 
       <!-- <div style="flex: 1 1 auto;"/> -->
@@ -195,11 +197,11 @@ export default {
     characterId () {
       return this.$store.state.characterId
     },
-    isFormValid () {
-      return Object.keys(this.fields).every(
-        key => this.fields[key].valid
-      )
-    },
+    // isFormValid () {
+    //   return Object.keys(this.fields).every(
+    //     key => this.fields[key].valid
+    //   )
+    // },
     firebaseURL () {
       if (!this.item) return
       return `${this.endpoint}/${this.characterId}/${this.item.id}`
@@ -219,7 +221,7 @@ export default {
       if (newValue) {
         this.$set(this, 'selectedItem', this.item)
         setTimeout(() => {
-          this.errors.clear()
+          this.$_validation_reset()
         }, 0)
       }
     }

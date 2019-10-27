@@ -82,11 +82,11 @@
 
               <v-flex xs12>
                 <v-text-field
-                  v-model="selectedItem.cost"
+                  v-model="selectedItem.value"
                   label="Value"
                   type="text"
                   :readonly="browse"
-                  @input="handleInput('cost', $event)"
+                  @input="handleInput('value', $event)"
                 />
               </v-flex>
 
@@ -197,11 +197,11 @@ export default {
     characterId () {
       return this.$store.state.characterId
     },
-    isFormValid () {
-      return Object.keys(this.fields).every(
-        key => this.fields[key].valid
-      )
-    },
+    // isFormValid () {
+    //   return Object.keys(this.fields).every(
+    //     key => this.fields[key].valid
+    //   )
+    // },
     firebaseURL () {
       if (!this.item) return
       return `${this.endpoint}/${this.characterId}/${this.item.id}`
