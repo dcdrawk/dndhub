@@ -10,6 +10,7 @@ import '@/plugins/vee-validate'
 import vuetify from '@/plugins/vuetify'
 import VueVirtualScroller from 'vue-virtual-scroller'
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
+import 'intersection-observer'
 
 Vue.config.productionTip = false
 Vue.component('ValidationProvider', ValidationProvider)

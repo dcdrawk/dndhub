@@ -21,6 +21,7 @@
       <v-tab-item
         v-for="(tabItem, index) in tabs"
         :key="index"
+        class="spells-tab"
       >
         <component
           :is="tabItem.component"
@@ -32,7 +33,7 @@
     <v-fab-transition v-if="activeTab !== undefined">
       <v-btn
         v-if="tabs[activeTab].showFab"
-        class="spell-fab"
+        class="spell-fab mb-8"
         color="secondary"
         dark
         fab
@@ -112,4 +113,8 @@ export default {
 .spell-fab {
   bottom: 60px;
 }
+
+// .spells-tab {
+//   max-height: 100vh;
+// }
 </style>

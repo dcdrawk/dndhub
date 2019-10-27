@@ -11,7 +11,6 @@
     >
       <!-- Dialog Toolbar -->
       <v-toolbar
-        card
         dark
         color="primary"
       >

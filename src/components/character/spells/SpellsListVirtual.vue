@@ -31,85 +31,100 @@
       dense
       class="elevation-1 spell-list"
     >
-      <RecycleScroller
+      <!-- <RecycleScroller
         v-slot="{ item }"
         class="scroller"
         :items="displayedItems"
-        :item-size="61"
+        :item-size="65"
+        key-field="name"
+      > -->
+      <DynamicScroller
+        class="scroller"
+        :items="displayedItems"
+        :min-item-size="65"
         key-field="name"
       >
         <!-- <wrapper> -->
         <!-- <template slot-scope="props"> -->
         <!-- List Tile -->
         <!-- :key="item" -->
-        <v-list-item
-          class="list-tile"
-          @click="handleShowDialog(item)"
-        >
-          <!-- Content -->
-
-          <v-list-item-content>
-            <!-- Name -->
-            <v-list-item-title>
-              {{ item.name }}
-              <span
-                v-if="item.ritual == 1"
-                class="spell-list__symbol cyan--text font-weight-bold"
-              >R</span>
-
-              <!-- Concentration -->
-              <span
-                v-if="item.concentration == 1"
-                class="spell-list__symbol orange--text font-weight-bold"
-                color="secondary"
-              >
-                C
-              </span>
-            </v-list-item-title>
-            <v-list-item-subtitle class="">
-              {{ item.class }}
-            </v-list-item-subtitle>
-          </v-list-item-content>
-
-          <!-- Spell Level / School -->
-          <v-list-item-content>
-            <v-list-item-title class="right-text">
-              {{ item.level }}
-            </v-list-item-title>
-            <v-list-item-subtitle class="right-text">
-              {{ item.school }}
-            </v-list-item-subtitle>
-          </v-list-item-content>
-
-          <!-- Feat Add -->
-          <v-list-item-action v-if="browse">
-            <v-btn
-              icon
-              color="secondary"
-              @click.stop="addItem(item)"
+        <template v-slot="{ item, index, active }">
+          <DynamicScrollerItem
+            :item="item"
+            :active="active"
+            :data-index="index"
+          >
+            <v-list-item
+              class="list-tile"
+              @click="handleShowDialog(item)"
             >
-              <v-icon>add</v-icon>
-            </v-btn>
-          </v-list-item-action>
-        </v-list-item>
+              <!-- Content -->
 
-        <!-- <v-divider /> -->
-        <!-- </wrapper> -->
-        <!-- </template> -->
-      </RecycleScroller>
+              <v-list-item-content>
+                <!-- Name -->
+                <v-list-item-title>
+                  {{ item.name }}
+                  <span
+                    v-if="item.ritual == 1"
+                    class="spell-list__symbol cyan--text font-weight-bold"
+                  >R</span>
+
+                  <!-- Concentration -->
+                  <span
+                    v-if="item.concentration == 1"
+                    class="spell-list__symbol orange--text font-weight-bold"
+                    color="secondary"
+                  >
+                    C
+                  </span>
+                </v-list-item-title>
+                <v-list-item-subtitle class="">
+                  {{ item.class }}
+                </v-list-item-subtitle>
+              </v-list-item-content>
+
+              <!-- Spell Level / School -->
+              <v-list-item-content>
+                <v-list-item-title class="right-text">
+                  {{ item.level }}
+                </v-list-item-title>
+                <v-list-item-subtitle class="right-text">
+                  {{ item.school }}
+                </v-list-item-subtitle>
+              </v-list-item-content>
+
+              <!-- Feat Add -->
+              <v-list-item-action v-if="browse">
+                <v-btn
+                  icon
+                  color="secondary"
+                  @click.stop="addItem(item)"
+                >
+                  <v-icon>add</v-icon>
+                </v-btn>
+              </v-list-item-action>
+            </v-list-item>
+
+            <v-divider />
+            <!-- </wrapper> -->
+            <!-- </template> -->
+          </DynamicScrollerItem>
+        </template>
+      </DynamicScroller>
     </v-list>
 
     <div class="pagination">
       <v-card
-        class="text-xs-right flex justify-space-between elevation-3 darken-4"
+        class="text-xs-right d-flex justify-space-between elevation-3 grey darken-2"
+        tile
       >
-        <span class="pl-3">
+        <span class="pl-3 pt-2 caption">
           Page {{ page }} / {{ paginatorLength }}
         </span>
         <span>
           <v-btn
             raised
-            color="primary"
+            color="accent"
             icon
             :disabled="disablePrev"
             class="pagination__button"
@@ -119,7 +134,7 @@
           </v-btn>
           <v-btn
             raised
-            color="primary"
+            color="accent"
             icon
             :disabled="disablePrev"
             class="pagination__button"
@@ -129,7 +144,7 @@
           </v-btn>
           <v-btn
             raised
-            color="primary"
+            color="accent"
             icon
             :disabled="disableNext"
             class="pagination__button"
@@ -139,7 +154,7 @@
           </v-btn>
           <v-btn
             raised
-            color="primary"
+            color="accent"
             icon
             class="pagination__button"
             :disabled="disableNext"
@@ -234,7 +249,8 @@ export default {
 
       // Pagination
       page: 1,
-      perPage: 50
+      enablePagination: true,
+      perPage: 100
     }
   },
 
@@ -266,6 +282,7 @@ export default {
     },
 
     displayedItems () {
+      if (!this.enablePagination) return this.filteredItems
       return this.filteredItems.slice(
         (this.page - 1) * this.perPage,
         this.page * this.perPage
@@ -419,7 +436,7 @@ export default {
 </style>
 
 <style>
-.tab-transition .pagination {
+/* .tab-transition .pagination {
   display: none;
-}
+} */
 </style>
