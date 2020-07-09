@@ -2,9 +2,9 @@
   <div>
     <v-card flat>
       <v-card-text>
-        <!-- <div class="pl-0 pb-4 text-h4">
+        <h2 class="pl-0 pb-4">
           Combat Proficiencies
-        </div> -->
+        </h2>
         <v-container
           grid-list-md
           class="pa-0"
@@ -22,6 +22,7 @@
                 persistent-hint
                 disabled
                 hint="Determined by level"
+                color="secondary"
                 @input="updateCharacter('proficiencyBonus', $event)"
               />
             </v-flex>
@@ -32,6 +33,7 @@
                 label="Armor Class"
                 type="number"
                 :value="character.ac"
+                color="secondary"
                 @input="updateCharacter('ac', $event)"
               />
             </v-flex>
@@ -44,6 +46,7 @@
                 :value="character.initiative"
                 persistent-hint
                 hint="Base = Dex Modifier"
+                color="secondary"
                 @input="updateCharacter('initiative', $event)"
               />
             </v-flex>
@@ -54,6 +57,7 @@
                 label="Speed"
                 type="number"
                 :value="character.speed"
+                color="secondary"
                 @input="updateCharacter('speed', $event)"
               />
             </v-flex>
@@ -83,6 +87,7 @@
                 label="Current HP"
                 type="number"
                 :value="character.HpCurrent"
+                color="secondary"
                 @input="updateCharacter('HpCurrent', $event)"
               />
             </v-flex>
@@ -93,6 +98,7 @@
                 label="Total HP"
                 type="number"
                 disabled
+                color="secondary"
                 :value="totalHP || 0"
               />
             </v-flex>
@@ -103,6 +109,7 @@
                 label="Max HP"
                 type="number"
                 :value="character.HpMax"
+                color="secondary"
                 @input="updateCharacter('HpMax', $event)"
               />
             </v-flex>
@@ -113,6 +120,7 @@
                 label="Temp HP"
                 type="number"
                 :value="character.HpTemp"
+                color="secondary"
                 @input="updateCharacter('HpTemp', $event)"
               />
             </v-flex>

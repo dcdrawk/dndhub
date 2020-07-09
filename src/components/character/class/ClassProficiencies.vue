@@ -23,6 +23,7 @@
                 :value="armor"
                 chips
                 deletable-chips
+                color="secondary"
                 @input="handleInput('armor', $event)"
               />
             </v-flex>
@@ -37,6 +38,7 @@
                 :value="weapons"
                 chips
                 deletable-chips
+                color="secondary"
                 @input="handleInput('weapons', $event)"
               />
             </v-flex>
@@ -51,6 +53,7 @@
                 multiple
                 chips
                 deletable-chips
+                color="secondary"
                 @input="handleInput('tools', $event)"
               />
             </v-flex>
@@ -65,6 +68,7 @@
                 multiple
                 chips
                 deletable-chips
+                color="secondary"
                 @input="handleInput('languages', $event)"
               />
             </v-flex>
@@ -79,6 +83,7 @@
                 multiple
                 chips
                 deletable-chips
+                color="secondary"
                 @input="handleInput('skills', $event)"
               />
             </v-flex>
@@ -93,6 +98,7 @@
                 multiple
                 chips
                 deletable-chips
+                color="secondary"
                 @input="handleInput('other', $event)"
               />
             </v-flex>

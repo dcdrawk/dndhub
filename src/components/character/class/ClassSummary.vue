@@ -54,6 +54,7 @@
                 label="Class Level"
                 type="number"
                 :value="primaryClass.level"
+                color="secondary"
                 @input="updateClass(primaryClassId, 'level', $event)"
               />
             </v-flex>
@@ -64,7 +65,7 @@
               md6
             >
               <v-switch
-                color="accent"
+                color="secondary"
                 label="Enable Multiclass"
                 :input-value="character.enableMulticlass"
                 :true-value="true"
@@ -94,10 +95,14 @@
         :key="index"
       >
         <v-card-text>
-          <v-container grid-list-md>
+          <v-container
+            grid-list-md
+            class="pa-0"
+          >
             <v-layout
               row
               wrap
+              class="px-0"
             >
               <!-- Multiclass Name-->
               <v-flex
@@ -143,11 +148,10 @@
               </v-flex>
 
               <!-- Multiclass Delete -->
-              <v-flex class="pa-0">
+              <v-flex class="">
                 <v-btn
                   outlined
                   color="warning"
-                  class="ma-0"
                   @click="removeClass(key)"
                 >
                   <v-icon>delete</v-icon>
@@ -155,20 +159,19 @@
                 </v-btn>
               </v-flex>
             </v-layout>
+
+            <v-divider class="my-4" />
+            <!-- Add Multiclass -->
+            <v-btn
+              color="primary"
+              @click="addMulticlass()"
+            >
+              Add Multiclass
+            </v-btn>
           </v-container>
         </v-card-text>
         <v-divider />
       </div>
-
-      <!-- Add Multiclass -->
-      <v-btn
-        depressed
-        color="primary"
-        class="ma-5"
-        @click="addMulticlass()"
-      >
-        Add Multiclass
-      </v-btn>
     </v-card>
   </div>
 </template>

@@ -56,6 +56,7 @@
                     required
                     :readonly="isReadOnly"
                     :error-messages="errors[0]"
+                    color="secondary"
                     @input="handleInput('name', $event)"
                   />
                 </ValidationProvider>
@@ -75,6 +76,7 @@
                     required
                     :readonly="isReadOnly"
                     :error-messages="errors[0]"
+                    color="secondary"
                     @input="handleInput('level', $event)"
                   />
                 </ValidationProvider>
@@ -96,6 +98,7 @@
                     multi-line
                     :readonly="isReadOnly"
                     :error-messages="errors[0]"
+                    color="secondary"
                     @input="handleInput('description', $event)"
                   />
                 </ValidationProvider>
@@ -109,7 +112,7 @@
                 <v-btn
                   block
                   color="secondary"
-                  :disabled="!isFormValid"
+                  :disabled="invalid"
                   :loading="loading"
                   @click="addItem()"
                 >
@@ -182,11 +185,11 @@ export default {
     characterId () {
       return this.$store.state.characterId
     },
-    isFormValid () {
-      return Object.keys(this.fields).every(
-        key => this.fields[key].valid
-      )
-    },
+    // isFormValid () {
+    //   return Object.keys(this.fields).every(
+    //     key => this.fields[key].valid
+    //   )
+    // },
     firebaseURL () {
       if (!this.item) return
       return `${this.endpoint}/${this.characterId}/${this.item.id}`
