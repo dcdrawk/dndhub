@@ -35,6 +35,25 @@ export default {
      * @function validate
      * @desc validate all fields
      */
+    async $_validation_validate () {
+      try {
+        // const result = await this.$validator.validateAll()
+        const result = this.$refs.observer.validate()
+        if (result) {
+          return true
+        } else {
+          console.warn('Validation failed')
+          // throw new Error('Validation failed')
+        }
+      } catch (error) {
+        console.warn(error)
+      }
+    },
+
+    /**
+     * @function validate
+     * @desc validate all fields
+     */
     async validate () {
       try {
         // const result = await this.$validator.validateAll()

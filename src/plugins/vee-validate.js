@@ -1,5 +1,5 @@
 import { extend } from 'vee-validate'
-import { required, email } from 'vee-validate/dist/rules'
+import { required, email, confirmed } from 'vee-validate/dist/rules'
 import en from 'vee-validate/dist/locale/en'
 
 // Add the required rule
@@ -12,3 +12,4 @@ extend('required',
 
 // Add the email rule
 extend('email', email)
+extend('confirmed', confirmed)

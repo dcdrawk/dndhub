@@ -1,15 +1,14 @@
 <template>
   <v-container>
-    <v-layout
-      row
+    <v-row
       wrap
-      justify-center
+      justify="center"
     >
-      <v-flex
-        xs12
-        md6
-        lg4
-        xl2
+      <v-col
+        xs="12"
+        md="6"
+        lg="4"
+        xl="2"
       >
         <!-- Title -->
         <h3 class="title">
@@ -17,13 +16,23 @@
         </h3>
 
         <!-- Subheading -->
-        <p class="subheading">
+        <p class="subheading text-center">
           Craft characters.<br>
           Join friends.<br>
           Start adventures.
         </p>
 
-        <div v-if="!user">
+        <!-- Signed In As -->
+        <v-alert
+          v-if="user"
+          type="success"
+          :value="true"
+          class="mb-4 text-center"
+        >
+          Signed in as <strong>{{ user.email }}</strong>
+        </v-alert>
+
+        <div>
           <!-- Email field -->
           <v-text-field
             v-model="email"
@@ -49,7 +58,7 @@
 
           <!-- Sign In Button -->
           <v-btn
-            color="primary"
+            color="secondary"
             :loading="loading"
             block
             @click="signIn()"
@@ -60,25 +69,15 @@
           <p class="text-xs-center mt-4">
             Don't have an account yet? <router-link to="create-account">
               Create one
-            </router-link>.
+            </router-link>
           </p>
         </div>
-
-        <!-- Signed In As -->
-        <v-alert
-          v-else
-          type="success"
-          :value="true"
-          class="mb-4"
-        >
-          Signed in as <strong>{{ user.email }}</strong>
-        </v-alert>
-      </v-flex>
-      <v-flex
+      </v-col>
+      <!-- <v-col
         xs12
         class="actions"
-      />
-    </v-layout>
+      /> -->
+    </v-row>
   </v-container>
 </template>
 

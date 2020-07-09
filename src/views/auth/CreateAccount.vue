@@ -14,49 +14,75 @@
         <h3 class="title">
           Create a new DnDHub Account
         </h3>
-        <form>
-          <!-- Email field -->
-          <v-text-field
-            v-model="email"
-            v-validate="'required|email'"
-            type="email"
-            label="Email"
-            data-vv-name="email"
-            :error-messages="errors.collect('email')"
-          />
+        <ValidationObserver
+          ref="observer"
+          v-slot="{ invalid }"
+        >
+          <form autocomplete="off">
+            <!-- Email field -->
+            <ValidationProvider
+              v-slot="{ errors }"
+              name="Email"
+              rules="required|email"
+            >
+              <v-text-field
+                id="whytho"
+                v-model="email"
+                type="email"
+                label="Email"
+                autocomplete="off"
+                name="dsadasasdadd"
+                :error-messages="errors[0]"
+              />
+            </ValidationProvider>
 
-          <!-- Display Name -->
-          <v-text-field
-            v-model="displayName"
-            v-validate="'required'"
-            type="text"
-            label="Display Name"
-            data-vv-name="display_name"
-            :error-messages="errors.collect('display_name')"
-          />
+            <!-- Display Name -->
+            <ValidationProvider
+              v-slot="{ errors }"
+              name="Display Name"
+              rules="required"
+            >
+              <v-text-field
+                v-model="displayName"
+                type="text"
+                label="Display Name"
+                :error-messages="errors[0]"
+              />
+            </ValidationProvider>
 
-          <!-- Password Field -->
-          <v-text-field
-            v-model="password"
-            v-validate="'required'"
-            type="password"
-            label="Password"
-            data-vv-name="password"
-            name="password"
-            :error-messages="errors.collect('password')"
-          />
+            <!-- Password Field -->
+            <ValidationProvider
+              v-slot="{ errors }"
+              name="Password"
+              rules="required"
+              vid="password"
+            >
+              <v-text-field
+                v-model="password"
+                type="password"
+                label="Password"
+                name="password"
+                autocomplete="new-password"
+                :error-messages="errors[0]"
+              />
+            </ValidationProvider>
 
-          <!-- Confirm Password -->
-          <v-text-field
-            v-model="confirmPassword"
-            v-validate="'confirmed:password'"
-            type="password"
-            label="Confirm Password"
-            data-vv-name="confirm_password"
-            name="confirm_password"
-            :error-messages="errors.collect('confirm_password')"
-          />
-        </form>
+            <!-- Confirm Password -->
+            <ValidationProvider
+              v-slot="{ errors }"
+              name="Confirm Password"
+              rules="confirmed:password"
+            >
+              <v-text-field
+                v-model="confirmPassword"
+                type="password"
+                label="Confirm Password"
+                name="confirm_password"
+                :error-messages="errors[0]"
+              />
+            </ValidationProvider>
+          </form>
+        </ValidationObserver>
 
         <!-- Error Message -->
         <small
@@ -68,7 +94,8 @@
 
         <!-- Sign In Button -->
         <v-btn
-          color="primary"
+          class="mt-4"
+          color="secondary"
           :loading="loading"
           block
           @click="createAccount()"
@@ -117,9 +144,9 @@ export default {
 
   // Methods
   methods: {
-    submit () {
-      this.$validator.validateAll()
-    },
+    // submit () {
+    //   // this.$validator.validateAll()
+    // },
     /**
      * Create Account
      * @desc create a new user in firebase
@@ -127,7 +154,8 @@ export default {
      */
     async createAccount () {
       try {
-        await this.validate()
+        // await this.validate()
+        await this.$_validation_validate()
         this.loading = true
         this.error = undefined
 
@@ -136,7 +164,8 @@ export default {
             this.email,
             this.password
           )
-        await data.updateProfile({
+        // console.log(data)
+        await data.user.updateProfile({
           displayName: this.displayName
         })
         this.$bus.$emit(
