@@ -7,93 +7,100 @@
       class="character-list elevation-1"
     >
       <!-- List Tile -->
-      <v-list-item
+
+      <template
         v-for="(item, key) in characters"
-        :key="key"
-        @click="selectCharacter(key)"
       >
-        <!-- Checkbox -->
-        <v-list-item-action>
-          <v-checkbox
-            color="secondary"
-            true-value="testdd"
-            :input-value="characterId === key"
-          />
-        </v-list-item-action>
+        <!-- {{ item.name }} -->
+        <v-list-item
+          :key="key"
+          @click="selectCharacter(key)"
+        >
+          <!-- Checkbox -->
+          <v-list-item-action>
+            <v-checkbox
+              color="secondary"
+              true-value="testdd"
+              :input-value="characterId === key"
+            />
+          </v-list-item-action>
 
-        <!-- Content -->
-        <v-list-item-content>
-          <!-- Character Name -->
-          <v-list-item-title>
-            {{ item.name }}
-          </v-list-item-title>
+          <!-- Content -->
+          <v-list-item-content>
+            <!-- Character Name -->
+            <v-list-item-title>
+              {{ item.name }}
+            </v-list-item-title>
 
-          <!-- Character Details -->
-          <v-list-item-subtitle>
-            Level {{ item.level }} {{ item.race }}
-            <span
-              v-if="item.enableMulticlass"
-            >
+            <!-- Character Details -->
+            <v-list-item-subtitle>
+              Level {{ item.level }} {{ item.race }}
               <span
-                v-for="(classObj, classKey) in item.classes"
-                :key="classKey"
+                v-if="item.enableMulticlass"
               >
-                {{ classObj.name }}
+                <span
+                  v-for="(classObj, classKey) in item.classes"
+                  :key="classKey"
+                >
+                  {{ classObj.name }}
+                </span>
               </span>
-            </span>
-            <span v-else-if="item.classes">
-              {{ item.classes[Object.keys(item.classes)[0]].name }}
-            </span>
-          </v-list-item-subtitle>
-        </v-list-item-content>
+              <span v-else-if="item.classes">
+                {{ item.classes[Object.keys(item.classes)[0]].name }}
+              </span>
+            </v-list-item-subtitle>
+          </v-list-item-content>
 
-        <v-list-item-action>
-          <!-- List Menu -->
-          <v-menu
-            v-if="user"
-            left
-            :z-index="5"
-          >
-            <template v-slot:activator="{ on }">
-              <!-- Menu Activator -->
-              <v-btn
-                class="menu-toggle"
-                icon
-                v-on="on"
-              >
-                <v-icon>more_vert</v-icon>
-              </v-btn>
-            </template>
+          <v-list-item-action>
+            <!-- List Menu -->
+            <v-menu
+              v-if="user"
+              left
+              :z-index="5"
+            >
+              <template v-slot:activator="{ on }">
+                <!-- Menu Activator -->
+                <v-btn
+                  class="menu-toggle"
+                  icon
+                  v-on="on"
+                >
+                  <v-icon>more_vert</v-icon>
+                </v-btn>
+              </template>
 
-            <!-- Menu List -->
-            <v-list dense>
-              <!-- Duplicate Character -->
-              <v-list-item
-                @click="duplicateCharacter(item)"
-              >
-                <v-list-item-title>
-                  <v-icon class="mr-2">
-                    content_copy
-                  </v-icon>
-                  Duplicate
-                </v-list-item-title>
-              </v-list-item>
+              <!-- Menu List -->
+              <v-list dense>
+                <!-- Duplicate Character -->
+                <v-list-item
+                  @click="duplicateCharacter(item)"
+                >
+                  <v-list-item-title>
+                    <v-icon class="mr-2">
+                      content_copy
+                    </v-icon>
+                    Duplicate
+                  </v-list-item-title>
+                </v-list-item>
 
-              <!-- Delete -->
-              <v-list-item
-                @click="showDeleteDialog(item, key)"
-              >
-                <v-list-item-title>
-                  <v-icon class="mr-2">
-                    delete
-                  </v-icon>
-                  Delete
-                </v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-        </v-list-item-action>
-      </v-list-item>
+                <!-- Delete -->
+                <v-list-item
+                  @click="showDeleteDialog(item, key)"
+                >
+                  <v-list-item-title>
+                    <v-icon class="mr-2">
+                      delete
+                    </v-icon>
+                    Delete
+                  </v-list-item-title>
+                  <v-divider inset />
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </v-list-item-action>
+        </v-list-item>
+        <v-divider :key="key + 'divider'" />
+      </template>
     </v-list>
 
     <!-- Delete Character Dialog -->

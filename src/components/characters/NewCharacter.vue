@@ -49,6 +49,7 @@
                     label="Character Name"
                     type="text"
                     required
+                    color="secondary"
                     :error-messages="errors[0]"
                   />
                 </ValidationProvider>
@@ -68,6 +69,7 @@
                     label="Level"
                     type="number"
                     required
+                    color="secondary"
                     :error-messages="errors[0]"
                   />
                 </ValidationProvider>
@@ -82,6 +84,7 @@
                   label="Experience"
                   type="number"
                   required
+                  color="secondary"
                 />
               </v-flex>
 

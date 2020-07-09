@@ -1,7 +1,7 @@
 <template>
-  <v-layout
-    row
+  <v-container
     justify-center
+    class="px-0"
   >
     <transition
       appear
@@ -9,22 +9,19 @@
       mode="out-in"
     >
       <!-- Loading Spinner -->
-      <v-flex
+      <div
         v-if="!user || loading"
         key="loading"
         class="loading"
-        xs12
       >
         <v-progress-circular
           indeterminate
           color="secondary"
         />
-      </v-flex>
+      </div>
 
-      <v-flex
+      <div
         v-else
-        xs12
-        md9
       >
         <!-- No Characters Message -->
         <div
@@ -39,7 +36,7 @@
         <character-list
           :characters="characters"
         />
-      </v-flex>
+      </div>
     </transition>
 
     <!-- Floating Action Button -->
@@ -61,7 +58,7 @@
       :show-dialog="newCharacterDialog"
       @close="newCharacterDialog = false"
     />
-  </v-layout>
+  </v-container>
 </template>
 
 <script>
