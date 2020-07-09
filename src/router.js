@@ -63,7 +63,7 @@ export default new Router({
      */
     {
       path: '/character/general',
-      name: 'Genral Info',
+      name: 'General Info',
       component: General
     },
     {

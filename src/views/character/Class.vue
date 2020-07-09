@@ -3,7 +3,7 @@
     <v-tabs
       v-if="character"
       v-model="activeTab"
-      background-color="secondary"
+      background-color="primary lighten-1"
       dark
       slider-color="accent"
       class="page-tabs elevation-1"

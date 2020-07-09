@@ -2,9 +2,9 @@
   <div>
     <v-card flat>
       <v-card-text>
-        <h2 class="pl-0 pb-4">
+        <!-- <div class="pl-0 pb-4 text-h4">
           Combat Proficiencies
-        </h2>
+        </div> -->
         <v-container
           grid-list-md
           class="pa-0"

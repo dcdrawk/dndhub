@@ -2,7 +2,7 @@
   <v-tabs
     v-if="character"
     v-model="activeTab"
-    background-color="secondary"
+    background-color="primary lighten-1"
     dark
     fixed-tabs
     slider-color="accent"

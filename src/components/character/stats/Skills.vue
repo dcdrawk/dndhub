@@ -20,7 +20,7 @@
             <strong>Bonus</strong>
           </v-flex>
           <v-flex xs2>
-            <strong>Mod.</strong>
+            <strong>Total</strong>
           </v-flex>
         </v-layout>
 
@@ -84,6 +84,7 @@
               class="pt-0"
               hide-details
               disabled
+              :prefix="getSkillPrefix(item)"
               :value="getSkillModifier(item)"
             />
           </v-flex>
@@ -197,10 +198,17 @@ export default {
      * @returns {Number} - ability score mod
      */
     getAbilityModifier (item) {
+      if (!this.characterScores[item]) {
+        console.log(item)
+      }
       const base = +this.characterScores[item].base || 0
       const bonus = +this.characterScores[item].bonus || 0
       const total = base + bonus
       return Math.floor((parseInt(total || 0, 0) / 2 - 5))
+    },
+
+    getSkillPrefix (item) {
+      return this.getSkillModifier(item) > 0 ? '+' : ''
     }
   }
 }
