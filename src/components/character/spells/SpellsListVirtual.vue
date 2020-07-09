@@ -118,7 +118,7 @@
         class="text-xs-right d-flex justify-space-between elevation-3 grey darken-2"
         tile
       >
-        <span class="pl-3 pt-2 caption">
+        <span class="pl-3 pt-2 text-caption">
           Page {{ page }} / {{ paginatorLength }}
         </span>
         <span>

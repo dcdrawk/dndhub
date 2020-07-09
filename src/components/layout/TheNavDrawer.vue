@@ -13,7 +13,7 @@
       <v-list-item>
         <v-list-item-content>
           <!-- Nav Drawer List Title -->
-          <v-list-item-title class="title">
+          <v-list-item-title class="text-h6">
             DnDHub
           </v-list-item-title>
         </v-list-item-content>
@@ -43,7 +43,7 @@
           <v-list-item-subtitle>
             Selected Character
           </v-list-item-subtitle>
-          <v-list-item-title class="title">
+          <v-list-item-title class="text-h6">
             {{ character.name }}
           </v-list-item-title>
         </v-list-item-content>

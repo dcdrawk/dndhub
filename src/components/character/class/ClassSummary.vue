@@ -85,7 +85,7 @@
       class="mt-1"
       flat
     >
-      <v-card-title class="title ml-1">
+      <v-card-title class="text-h6 ml-1">
         Multiclass
       </v-card-title>
 

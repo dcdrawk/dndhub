@@ -4,9 +4,9 @@
     v-if="character"
     v-model="activeTab"
     slider-color="accent"
+    background-color="primary lighten-1"
     centered
     grow
-    background-color="secondary"
     class="page-tabs elevation-1"
   >
     <v-tab

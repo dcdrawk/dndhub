@@ -11,7 +11,7 @@
         xl="2"
       >
         <!-- Title -->
-        <h3 class="title">
+        <h3 class="text-h6">
           Welcome to DnDHub (Beta)
         </h3>
 

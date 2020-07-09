@@ -10,9 +10,9 @@
     <the-toolbar
       @toggle="navDrawerOpen = !navDrawerOpen"
     />
-    <v-content fluid>
+    <v-main fluid>
       <router-view />
-    </v-content>
+    </v-main>
 
     <!-- Toaster -->
     <the-toaster />

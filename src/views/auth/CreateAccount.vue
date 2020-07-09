@@ -11,7 +11,7 @@
         lg2
       >
         <!-- Title -->
-        <h3 class="title">
+        <h3 class="text-h6">
           Create a new DnDHub Account
         </h3>
         <ValidationObserver
