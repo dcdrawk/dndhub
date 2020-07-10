@@ -11,9 +11,10 @@
         lg2
       >
         <!-- Title -->
-        <h3 class="text-h6">
+        <h3 class="text-h6 text-center mb-4">
           Create a new DnDHub Account
         </h3>
+
         <ValidationObserver
           ref="observer"
           v-slot="{ invalid }"
@@ -26,12 +27,13 @@
               rules="required|email"
             >
               <v-text-field
-                id="whytho"
                 v-model="email"
                 type="email"
                 label="Email"
                 autocomplete="off"
-                name="dsadasasdadd"
+                name="email"
+                outlined
+                color="secondary"
                 :error-messages="errors[0]"
               />
             </ValidationProvider>
@@ -46,6 +48,8 @@
                 v-model="displayName"
                 type="text"
                 label="Display Name"
+                outlined
+                color="secondary"
                 :error-messages="errors[0]"
               />
             </ValidationProvider>
@@ -63,6 +67,8 @@
                 label="Password"
                 name="password"
                 autocomplete="new-password"
+                outlined
+                color="secondary"
                 :error-messages="errors[0]"
               />
             </ValidationProvider>
@@ -78,6 +84,8 @@
                 type="password"
                 label="Confirm Password"
                 name="confirm_password"
+                outlined
+                color="secondary"
                 :error-messages="errors[0]"
               />
             </ValidationProvider>
@@ -106,7 +114,10 @@
         <!-- Sign In Link -->
         <p class="account-text">
           Already Have an account?
-          <router-link to="/">
+          <router-link
+            class="font-weight-medium secondary--text"
+            to="/"
+          >
             Sign In
           </router-link>
         </p>
