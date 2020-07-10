@@ -11,15 +11,13 @@
         xl="2"
       >
         <!-- Title -->
-        <h3 class="text-h6">
+        <h3 class="text-h6 text-center">
           Welcome to DnDHub (Beta)
         </h3>
 
         <!-- Subheading -->
         <p class="subheading text-center">
-          Craft characters.<br>
-          Join friends.<br>
-          Start adventures.
+          Craft characters, start adventures.
         </p>
 
         <!-- Signed In As -->
@@ -36,15 +34,20 @@
           <!-- Email field -->
           <v-text-field
             v-model="email"
+            color="secondary"
             type="email"
             label="Email"
+            name="email"
+            outlined
           />
 
           <!-- Password Field -->
           <v-text-field
             v-model="password"
+            color="secondary"
             type="password"
             label="Password"
+            outlined
             @keypress.enter="signIn()"
           />
 
@@ -67,7 +70,11 @@
           </v-btn>
 
           <p class="text-xs-center mt-4">
-            Don't have an account yet? <router-link to="create-account">
+            Don't have an account yet?
+            <router-link
+              class="font-weight-medium secondary--text"
+              to="create-account"
+            >
               Create one
             </router-link>
           </p>

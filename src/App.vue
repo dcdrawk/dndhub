@@ -113,4 +113,40 @@ export default {
     border-radius: 10px;
     background-color: red;
 }
+
+// @-webkit-keyframes autofill {
+//     0%,100% {
+//         color: #666;
+//         background: transparent;
+//     }
+// }
+
+// input:-webkit-autofill {
+//     -webkit-animation-delay: 1s; /* Safari support - any positive time runs instantly */
+//     -webkit-animation-name: autofill;
+//     -webkit-animation-fill-mode: both;
+// }
+
+// input:-internal-autofill-selected {
+//   -webkit-animation-delay: 1s; /* Safari support - any positive time runs instantly */
+//   -webkit-animation-name: autofill;
+//   -webkit-animation-fill-mode: both;
+//   background-color: red !important;
+//   background: red;
+// }
+
+/* Change autocomplete styles in WebKit */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: #fff;
+  box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
 </style>
