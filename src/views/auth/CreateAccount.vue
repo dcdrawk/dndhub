@@ -1,14 +1,14 @@
 <template>
   <v-container>
-    <v-layout
-      row
+    <v-row
       wrap
-      justify-center
+      justify="center"
     >
-      <v-flex
-        xs12
-        md6
-        lg2
+      <v-col
+        xs="12"
+        md="6"
+        lg="4"
+        xl="2"
       >
         <!-- Title -->
         <h3 class="text-h6 text-center mb-4">
@@ -121,12 +121,8 @@
             Sign In
           </router-link>
         </p>
-      </v-flex>
-      <v-flex
-        xs12
-        class="actions"
-      />
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 

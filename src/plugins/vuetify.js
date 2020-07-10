@@ -21,7 +21,7 @@ const opts = {
         error: colors.red.darken3,
         info: colors.cyan.accent3,
         success: colors.green.base,
-        warning: colors.deepOrange.base
+        warning: colors.orange.lighten1
       }
     }
   }

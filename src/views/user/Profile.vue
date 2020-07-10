@@ -1,10 +1,10 @@
 <template>
   <v-container>
-    <v-layout
+    <v-row
       row
       wrap
     >
-      <v-flex
+      <v-col
         v-if="user"
         xs12
       >
@@ -17,12 +17,18 @@
           Signed in as <strong>{{ user.email }}</strong>
         </v-alert>
 
+        <v-alert type="warning">
+          This Page is a Work-In-Progress.
+        </v-alert>
+
         <!-- Display Name Field -->
         <v-text-field
           label="Display Name"
           required
           :value="readonly ? user.displayName : userCopy.displayName"
           :readonly="readonly"
+          filled
+          color="secondary"
           @input="userCopy.displayName = $event"
         />
 
@@ -31,6 +37,7 @@
           <v-btn
             v-if="readonly"
             text
+            outlined
             @click="enableEditing()"
           >
             Edit
@@ -39,6 +46,9 @@
           <!-- Cancel Button -->
           <v-btn
             v-if="!readonly"
+            class="mr-2"
+            text
+            outlined
             @click="cancelEditing()"
           >
             Cancel
@@ -47,26 +57,26 @@
           <!-- Save Button  -->
           <v-btn
             v-if="!readonly"
-            color="primary"
+            color="secondary"
             @click="updateUser()"
           >
             Save
           </v-btn>
         </div>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script>
-import validation from '../../mixins/validation'
+// import validation from '../../mixins/validation'
 
 export default {
   // Name
   name: 'Profile',
 
   // Mixins
-  mixins: [validation],
+  // mixins: [validation],
 
   // Data
   data () {
@@ -109,12 +119,12 @@ export default {
      */
     async updateUser () {
       try {
-        await this.validate()
+        // await this.validate()
         this.loading = true
         await this.$firebase.auth().currentUser
           .updateProfile(this.userCopy)
         this.$store.commit('update_user', this.userCopy)
-        // this.$bus.$emit('toast', 'Profile updated.')
+        this.$bus.$emit('toast', 'Profile updated.')
         this.readonly = true
       } catch (error) {
         console.warn(error)
