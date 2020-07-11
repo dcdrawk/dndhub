@@ -38,83 +38,87 @@
           ref="observer"
           v-slot="{ invalid }"
         >
-          <v-container class="pl-0 pr-0">
-            <v-layout
-              row
-              wrap
-            >
-              <!-- Class Feature Name -->
-              <v-flex xs12>
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  name="Name"
-                  rules="required"
-                >
-                  <v-text-field
-                    v-model="selectedItem.name"
-                    label="Name"
-                    type="text"
-                    required
-                    :readonly="isReadOnly"
-                    :error-messages="errors[0]"
-                    @input="handleInput('name', $event)"
-                  />
-                </ValidationProvider>
-              </v-flex>
-
-              <!-- Class Feature Description -->
-              <v-flex xs12>
-                <ValidationProvider
-                  v-slot="{ errors }"
-                  name="Description"
-                  rules="required"
-                >
-                  <v-textarea
-                    v-model="selectedItem.description"
-                    label="Description"
-                    type="text"
-                    rows="10"
-                    required
-                    multi-line
-                    :readonly="isReadOnly"
-                    :error-messages="errors[0]"
-                    @input="handleInput('description', $event)"
-                  />
-                </ValidationProvider>
-              </v-flex>
-
-              <!-- Save Button (new) -->
-              <v-flex
-                v-if="item.new"
-                xs12
+          <v-row
+            wrap
+          >
+            <!-- Class Feature Name -->
+            <v-col cols="12">
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="Name"
+                rules="required"
               >
-                <v-btn
-                  block
+                <v-text-field
+                  v-model="selectedItem.name"
+                  label="Name"
+                  type="text"
+                  required
+                  filled
                   color="secondary"
-                  :disabled="!isFormValid"
-                  :loading="loading"
-                  @click="addItem()"
-                >
-                  Add Race Trait
-                </v-btn>
-              </v-flex>
+                  hide-details="auto"
+                  :readonly="isReadOnly"
+                  :error-messages="errors[0]"
+                  @input="handleInput('name', $event)"
+                />
+              </ValidationProvider>
+            </v-col>
 
-              <!-- Delete Button (custom) -->
-              <v-flex
-                v-if="item.custom"
+            <!-- Class Feature Description -->
+            <v-col cols="12">
+              <ValidationProvider
+                v-slot="{ errors }"
+                name="Description"
+                rules="required"
               >
-                <v-btn
-                  outlined
-                  color="warning"
-                  :loading="loading"
-                  @click="deleteItem()"
-                >
-                  <v-icon>delete</v-icon>
-                  delete
-                </v-btn>
-              </v-flex>
-            </v-layout>
-          </v-container>
+                <v-textarea
+                  v-model="selectedItem.description"
+                  label="Description"
+                  type="text"
+                  rows="10"
+                  required
+                  multi-line
+                  filled
+                  color="secondary"
+                  hide-details="auto"
+                  :readonly="isReadOnly"
+                  :error-messages="errors[0]"
+                  @input="handleInput('description', $event)"
+                />
+              </ValidationProvider>
+            </v-col>
+
+            <!-- Save Button (new) -->
+            <v-col
+              v-if="item.new"
+              cols="12"
+            >
+              <v-btn
+                block
+                color="secondary"
+                :disabled="invalid"
+                :loading="loading"
+                @click="addItem()"
+              >
+                Add Race Trait
+              </v-btn>
+            </v-col>
+
+            <!-- Delete Button (custom) -->
+            <v-col
+              v-if="item.custom"
+              cols="12"
+            >
+              <v-btn
+                outlined
+                color="warning"
+                :loading="loading"
+                @click="deleteItem()"
+              >
+                <v-icon>delete</v-icon>
+                delete
+              </v-btn>
+            </v-col>
+          </v-row>
         </ValidationObserver>
       </v-card-text>
       <div style="flex: 1 1 auto;" />
@@ -170,11 +174,11 @@ export default {
     characterId () {
       return this.$store.state.characterId
     },
-    isFormValid () {
-      return Object.keys(this.fields).every(
-        key => this.fields[key].valid
-      )
-    },
+    // isFormValid () {
+    //   return Object.keys(this.fields).every(
+    //     key => this.fields[key].valid
+    //   )
+    // },
     firebaseURL () {
       if (!this.item) return
       return `${this.endpoint}/${this.characterId}/${this.item.id}`

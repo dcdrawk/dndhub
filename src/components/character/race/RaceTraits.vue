@@ -7,25 +7,30 @@
       dense
       class="character-list elevation-1"
     >
-      <!-- Traits List -->
-      <v-list-item
-        v-for="(item, key) in traits"
-        :key="key"
-        @click="handleShowDialog(item)"
-      >
-        <!-- Content -->
-        <v-list-item-content>
-          <!-- Trait Name -->
-          <v-list-item-title>
-            {{ item.name }}
-          </v-list-item-title>
+      <template v-for="(item, index) in traits">
+        <!-- Traits List -->
+        <v-list-item
+          :key="index"
+          @click="handleShowDialog(item)"
+        >
+          <!-- Content -->
+          <v-list-item-content>
+            <!-- Trait Name -->
+            <v-list-item-title>
+              {{ item.name }}
+            </v-list-item-title>
 
-          <!-- Character Details -->
-          <v-list-item-subtitle>
-            {{ item.source }}
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
+            <!-- Character Details -->
+            <v-list-item-subtitle>
+              {{ item.source }}
+            </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider
+          v-if="index + 1 < traits.length"
+          :key="`${index}-divider`"
+        />
+      </template>
     </v-list>
     <race-trait-dialog
       :show-dialog="showDialog"
@@ -101,7 +106,7 @@ export default {
     },
 
     subraceData () {
-      if (!this.subrace) return
+      if (!this.subrace || !this.raceData) return
       for (let i in this.raceData.subraces) {
         if (this.raceData.subraces[i].name === this.subrace) {
           return this.raceData.subraces[i]
@@ -111,6 +116,7 @@ export default {
     },
 
     raceTraitsData () {
+      if (!this.raceData) return []
       return this.raceData.traits.map((item) => {
         item.source = this.race
         return item
