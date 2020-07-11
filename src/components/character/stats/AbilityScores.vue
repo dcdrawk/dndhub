@@ -204,6 +204,14 @@ export default {
     proficiencyBonus
   ],
 
+  // Data
+  data () {
+    return {
+      fetchedAbilityScores: false,
+      fetchedSavingThrows: false
+    }
+  },
+
   // Computed
   computed: {
     characterScores () {
@@ -221,9 +229,17 @@ export default {
     character: {
       immediate: true,
       handler (newVal, oldVal) {
+        console.log('watch character?', newVal)
         if (newVal) {
-          if (!this.characterScores) this.getAbilityScores()
-          if (!this.characterSaves) this.getSavingThrows()
+          if (!this.characterScores && !this.fetchedAbilityScores) {
+            this.fetchedAbilityScores = true
+            console.log('get ability scores?!?!??')
+            this.getAbilityScores()
+          }
+          if (!this.characterSaves && !this.fetchedSavingThrows) {
+            this.fetchedSavingThrows = true
+            this.getSavingThrows()
+          }
         }
       }
     }

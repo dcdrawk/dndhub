@@ -1,3 +1,6 @@
+import abilityScores from '@/models/stats/abilityScores'
+// import savingThrows from './stats/savingThrows'
+
 export default {
   data () {
     return {
@@ -34,9 +37,14 @@ export default {
         const snapshot = await this.$db.ref(
           `abilityScores/${this.characterId}`
         ).once('value')
+
+        if (!snapshot.val()) {
+          this.resetAbilityScores()
+        }
+
         this.$store.commit('update_character_field', {
           field: 'abilityScores',
-          value: snapshot.val()
+          value: snapshot.val() || abilityScores
         })
       } catch (error) {
         console.warn(error)
@@ -121,6 +129,12 @@ export default {
         field: 'savingThrows',
         value: savingThrows
       })
+    },
+
+    resetAbilityScores () {
+      this.$db.ref(
+        `abilityScores/${this.characterId}/`
+      ).set(abilityScores)
     }
   }
 }

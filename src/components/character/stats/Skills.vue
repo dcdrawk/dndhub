@@ -1,95 +1,108 @@
 <template>
   <v-card v-if="characterSkills && characterScores">
-    <v-card-text class="pa-0">
-      <v-container
-        grid-list-sm
-        class="pa-0"
+    <v-card-text class="px-1">
+      <div class="px-2">
+        <v-select
+          v-model="sortBy"
+          label="Sort By"
+          :items="soryByOptions"
+          prepend-inner-icon="mdi-sort"
+          color="secondary"
+          outlined
+          dense
+        />
+      </div>
+      <v-row
+        wrap
+        dense
+        class=""
       >
-        <v-layout
-          row
-          wrap
-          class="mb-0 pa-2 pl-3"
+        <v-col
+          cols="4"
+          class="pl-3"
         >
-          <v-flex xs6>
-            <strong>Stat</strong>
-          </v-flex>
-          <v-flex xs2>
-            <strong>Prof.</strong>
-          </v-flex>
-          <v-flex xs2>
-            <strong>Bonus</strong>
-          </v-flex>
-          <v-flex xs2>
-            <strong>Total</strong>
-          </v-flex>
-        </v-layout>
+          <strong>Stat</strong>
+        </v-col>
+        <v-col cols="2">
+          <strong>Prof.</strong>
+        </v-col>
+        <v-col cols="3">
+          <strong>Bonus</strong>
+        </v-col>
+        <v-col cols="3">
+          <strong>Total</strong>
+        </v-col>
+      </v-row>
 
-        <v-divider />
+      <!-- <v-divider /> -->
 
-        <v-layout
-          v-for="(item, index) in sortedSkills"
-          :key="index"
-          class="pa-0 pr-0 skill"
-          wrap
+      <v-row
+        v-for="(item, index) in sortedSkills"
+        :key="index"
+        class="skill align-center"
+        wrap
+        dense
+      >
+        <v-col
+          cols="12"
+          class="pa-0"
         >
-          <v-flex
-            xs12
-            class="pa-0"
-          >
-            <v-divider class="ma-0 pa-0" />
-          </v-flex>
-          <v-flex
-            xs6
-            class="pl-3 pr-0 pt-2"
-          >
-            <span class="skill__name">
-              {{ item.name.replace(/_/g, ' ') }}
-            </span>
-            <span class="score">
-              ({{ item.abilityScore.slice(0, 3) }})
-            </span>
-          </v-flex>
-          <v-flex
-            xs2
-            class="pt-0"
-          >
-            <v-checkbox
-              class="skill__checkbox mt-1"
-              hide-details
-              color="secondary"
-              :input-value="characterSkills[item.name].proficient"
-              :true-value="true"
-              :false-value="false"
-              @change="updateSkill(item.name, 'proficient', $event)"
-            />
-          </v-flex>
-          <v-flex
-            xs2
-            class="pt-0"
-          >
-            <v-text-field
-              type="number"
-              class="pt-0"
-              hide-details
-              :value="characterSkills[item.name].bonus"
-              @input="updateSkill(item.name, 'bonus', $event)"
-            />
-          </v-flex>
-          <v-flex
-            xs2
-            class="pt-0 pr-3"
-          >
-            <v-text-field
-              type="number"
-              class="pt-0"
-              hide-details
-              disabled
-              :prefix="getSkillPrefix(item)"
-              :value="getSkillModifier(item)"
-            />
-          </v-flex>
-        </v-layout>
-      </v-container>
+          <v-divider class="ma-0 pa-0" />
+        </v-col>
+        <v-col
+          cols="4"
+          class="pl-3 pr-0"
+        >
+          <span class="skill__name">
+            {{ item.name.replace(/_/g, ' ') }}
+          </span>
+          <div class="score caption">
+            ({{ item.abilityScore.slice(0, 3) }})
+          </div>
+        </v-col>
+        <v-col
+          cols="2"
+          class="pt-0 pb-2"
+        >
+          <v-checkbox
+            class="skill__checkbox mt-1"
+            hide-details
+            color="secondary"
+            :input-value="characterSkills[item.name].proficient"
+            :true-value="true"
+            :false-value="false"
+            @change="updateSkill(item.name, 'proficient', $event)"
+          />
+        </v-col>
+        <v-col
+          cols="3"
+          class="pl-0"
+        >
+          <v-text-field
+            type="number"
+            hide-details
+            filled
+            dense
+            :value="characterSkills[item.name].bonus"
+            @input="updateSkill(item.name, 'bonus', $event)"
+          />
+        </v-col>
+        <v-col
+          cols="3"
+          class="pl-0"
+        >
+          <v-text-field
+            type="number"
+            hide-details
+            disabled
+            outlined
+            dense
+            :prefix="getSkillPrefix(item)"
+            :value="getSkillModifier(item)"
+          />
+        </v-col>
+      </v-row>
+      <!-- </v-container> -->
     </v-card-text>
   </v-card>
 </template>
@@ -114,6 +127,20 @@ export default {
     proficiencyBonus
   ],
 
+  // Data
+  data () {
+    return {
+      sortBy: 'alhpa',
+      soryByOptions: [{
+        text: 'Alphabetical',
+        value: 'alhpa'
+      }, {
+        text: 'Ability Score',
+        value: 'ability'
+      }]
+    }
+  },
+
   // Computed
   computed: {
     characterSkills () {
@@ -126,7 +153,15 @@ export default {
     },
     sortedSkills () {
       let value = [ ...this.skills ]
-      return value.sort((a, b) => (a.name > b.name) ? 1 : -1)
+      switch (this.sortBy) {
+        case ('ability'):
+          return value
+            .sort((a, b) => (a.name > b.name) ? 1 : -1)
+            .sort((a, b) => (a.abilityScore > b.abilityScore) ? 1 : -1)
+        case ('alpha'):
+        default:
+          return value.sort((a, b) => (a.name > b.name) ? 1 : -1)
+      }
     }
   },
 
