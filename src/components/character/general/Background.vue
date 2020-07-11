@@ -9,13 +9,13 @@
           grid-list-md
           class="pa-0"
         >
-          <v-layout
+          <v-row
             row
             wrap
           >
-            <v-flex
-              xs12
-              md6
+            <v-col
+              cols="12"
+              md="6"
             >
               <custom-select
                 label="Alignment"
@@ -27,11 +27,11 @@
                 @input="updateCharacter('alignment', $event)"
                 @customize="customizeCharacter('alignment', !character.custom.alignment)"
               />
-            </v-flex>
+            </v-col>
 
-            <v-flex
-              xs12
-              md6
+            <v-col
+              cols="12"
+              md="6"
             >
               <custom-select
                 label="Background"
@@ -43,97 +43,111 @@
                 @input="updateCharacter('background', $event)"
                 @customize="customizeCharacter('background', !character.custom.background)"
               />
-            </v-flex>
+            </v-col>
 
-            <v-flex xs12>
+            <v-col
+              cols="12"
+            >
               <v-textarea
                 v-model="character.backgroundFeature"
                 label="Background Feature"
                 type="text"
                 multi-line
+                filled
+                hide-details
+                color="secondary"
                 @input="updateCharacter('backgroundFeature', $event)"
               />
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-card-text>
-    </v-card>
+            </v-col>
 
-    <v-divider />
-    <v-card flat>
-      <v-card-text>
-        <v-container
-          grid-list-md
-          class="pa-0"
-        >
-          <v-layout
-            row
-            wrap
-          >
-            <v-flex xs12>
-              <h2>Personality Traits</h2>
-            </v-flex>
-
-            <v-flex xs12>
-              <v-textarea
-                v-model="character.personality"
-                label="Personality"
-                type="text"
-                multi-line
-                @input="updateCharacter('personality', $event)"
-              />
-            </v-flex>
-
-            <v-flex xs12>
-              <v-textarea
-                v-model="character.ideals"
-                label="Ideals"
-                type="text"
-                multi-line
-                @input="updateCharacter('ideals', $event)"
-              />
-            </v-flex>
-
-            <v-flex xs12>
-              <v-textarea
-                v-model="character.bonds"
-                label="Bonds"
-                type="text"
-                multi-line
-                @input="updateCharacter('bonds', $event)"
-              />
-            </v-flex>
-
-            <v-flex xs12>
-              <v-textarea
-                v-model="character.flaws"
-                label="Flaws"
-                type="text"
-                multi-line
-                @input="updateCharacter('flaws', $event)"
-              />
-            </v-flex>
-
-            <v-flex xs12>
+            <v-col cols="12">
               <v-textarea
                 v-model="character.backstory"
                 label="Backstory"
                 type="text"
                 multi-line
+                filled
+                hide-details
+                color="secondary"
                 @input="updateCharacter('backstory', $event)"
               />
-            </v-flex>
-            <v-flex xs12>
+            </v-col>
+            <v-col cols="12">
               <v-textarea
                 v-model="character.allies"
                 label="Allies & Organizations"
                 type="text"
                 multi-line
+                filled
+                hide-details
+                color="secondary"
                 @input="updateCharacter('allies', $event)"
               />
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
         </v-container>
+      </v-card-text>
+    </v-card>
+
+    <v-divider />
+
+    <v-card flat>
+      <v-card-text>
+        <div class="text-h6">
+          Personality Traits
+        </div>
+        <v-row
+          wrap
+        >
+          <v-col cols="12">
+            <v-textarea
+              v-model="character.personality"
+              label="Personality"
+              type="text"
+              multi-line
+              filled
+              hide-details
+              @input="updateCharacter('personality', $event)"
+            />
+          </v-col>
+
+          <v-col cols="12">
+            <v-textarea
+              v-model="character.ideals"
+              label="Ideals"
+              type="text"
+              multi-line
+              filled
+              hide-details
+              @input="updateCharacter('ideals', $event)"
+            />
+          </v-col>
+
+          <v-col cols="12">
+            <v-textarea
+              v-model="character.bonds"
+              label="Bonds"
+              type="text"
+              multi-line
+              filled
+              hide-details
+              @input="updateCharacter('bonds', $event)"
+            />
+          </v-col>
+
+          <v-col cols="12">
+            <v-textarea
+              v-model="character.flaws"
+              label="Flaws"
+              type="text"
+              multi-line
+              filled
+              hide-details
+              @input="updateCharacter('flaws', $event)"
+            />
+          </v-col>
+        </v-row>
+        <!-- </v-container> -->
       </v-card-text>
     </v-card>
   </div>

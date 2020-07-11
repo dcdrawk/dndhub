@@ -8,6 +8,7 @@
       color="secondary"
       item-color="white"
       filled
+      hide-details="auto"
       :label="label"
       :items="items"
       :item-text="itemText"
@@ -25,6 +26,7 @@
       class="pb-0"
       color="secondary"
       filled
+      hide-details="auto"
       :readonly="disabled"
       :name="name"
       :label="label"
