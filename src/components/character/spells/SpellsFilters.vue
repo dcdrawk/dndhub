@@ -1,7 +1,6 @@
 <template>
   <v-container
     grid-list-md
-    text-xs-center
   >
     <v-layout row>
       <v-flex xs4>

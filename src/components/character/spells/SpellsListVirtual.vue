@@ -19,9 +19,9 @@
 
     <p
       v-if="filteredItems.length === 0"
-      class="pt-3 text-xs-center no-items"
+      class="py-3 text-center no-items"
     >
-      No Items Found
+      No Spells Found
     </p>
 
     <!-- Spells List -->

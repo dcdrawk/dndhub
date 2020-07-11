@@ -1,5 +1,5 @@
-import abilityScores from '@/models/stats/abilityScores'
-// import savingThrows from './stats/savingThrows'
+import defaultAbilityScores from '@/models/stats/abilityScores'
+import defaultSavingThrows from '@/models/stats/savingThrows'
 
 export default {
   data () {
@@ -44,7 +44,7 @@ export default {
 
         this.$store.commit('update_character_field', {
           field: 'abilityScores',
-          value: snapshot.val() || abilityScores
+          value: snapshot.val() || defaultAbilityScores
         })
       } catch (error) {
         console.warn(error)
@@ -60,9 +60,14 @@ export default {
         const snapshot = await this.$db.ref(
           `savingThrows/${this.characterId}`
         ).once('value')
+
+        if (!snapshot.val()) {
+          this.resetSavingThrows()
+        }
+
         this.$store.commit('update_character_field', {
           field: 'savingThrows',
-          value: snapshot.val()
+          value: snapshot.val() || defaultSavingThrows
         })
       } catch (error) {
         console.warn(error)
@@ -134,7 +139,13 @@ export default {
     resetAbilityScores () {
       this.$db.ref(
         `abilityScores/${this.characterId}/`
-      ).set(abilityScores)
+      ).set(defaultAbilityScores)
+    },
+
+    resetSavingThrows () {
+      this.$db.ref(
+        `savingThrows/${this.characterId}/`
+      ).set(defaultSavingThrows)
     }
   }
 }

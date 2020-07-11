@@ -6,7 +6,7 @@
 
     <p
       v-if="filteredItems.length === 0"
-      class="pt-3 text-xs-center"
+      class="py-3 text-center"
     >
       No Items Found
     </p>

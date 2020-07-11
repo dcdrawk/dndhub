@@ -69,7 +69,7 @@
             Sign In
           </v-btn>
 
-          <p class="text-xs-center mt-4">
+          <p class="mt-4">
             Don't have an account yet?
             <router-link
               class="font-weight-medium secondary--text"

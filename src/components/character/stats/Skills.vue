@@ -1,6 +1,9 @@
 <template>
-  <v-card v-if="characterSkills && characterScores">
-    <v-card-text class="px-1">
+  <v-card>
+    <v-card-text
+      v-if="characterSkills && characterScores"
+      class="px-1"
+    >
       <div class="px-2">
         <v-select
           v-model="sortBy"
@@ -33,8 +36,6 @@
           <strong>Total</strong>
         </v-col>
       </v-row>
-
-      <!-- <v-divider /> -->
 
       <v-row
         v-for="(item, index) in sortedSkills"
@@ -102,7 +103,13 @@
           />
         </v-col>
       </v-row>
-      <!-- </v-container> -->
+    </v-card-text>
+
+    <v-card-text
+      v-else
+      height="500"
+    >
+      Loading...
     </v-card-text>
   </v-card>
 </template>
@@ -115,6 +122,8 @@
 import proficiencyBonus from '../../../mixins/proficiencyBonus'
 import character from '../../../mixins/character'
 import skills from '../../../mixins/skills'
+import defaultSkills from '@/models/stats/skills'
+import abilityScores from '../../../mixins/abilityScores'
 
 export default {
   // Name
@@ -122,6 +131,7 @@ export default {
 
   // Mixins
   mixins: [
+    abilityScores,
     character,
     skills,
     proficiencyBonus
@@ -130,6 +140,8 @@ export default {
   // Data
   data () {
     return {
+      fetchedAbilityScores: false,
+      fetchedSkills: false,
       sortBy: 'alhpa',
       soryByOptions: [{
         text: 'Alphabetical',
@@ -171,7 +183,15 @@ export default {
       immediate: true,
       handler (newVal, oldVal) {
         if (newVal) {
-          if (!this.characterSkills) this.getSkills()
+          if (!this.characterScores && !this.fetchedAbilityScores) {
+            this.fetchedAbilityScores = true
+            this.getAbilityScores()
+          }
+
+          if (!this.characterSkills && !this.fetchedSkills) {
+            this.fetchedSkills = true
+            this.getSkills()
+          }
         }
       }
     }
@@ -188,9 +208,12 @@ export default {
         const snapshot = await this.$db.ref(
           `skills/${this.characterId}`
         ).once('value')
+        console.log('Get skillzzz')
+        console.log(snapshot.val())
+        console.log(defaultSkills)
         this.$store.commit('update_character_field', {
           field: 'skills',
-          value: snapshot.val()
+          value: snapshot.val() || defaultSkills
         })
       } catch (error) {
         console.warn(error)
