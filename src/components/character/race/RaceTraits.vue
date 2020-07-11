@@ -2,7 +2,7 @@
   <div class="class-features">
     <!-- Character List -->
     <v-list
-      v-if="traits"
+      v-if="traits.length"
       two-line
       dense
       class="character-list elevation-1"
@@ -32,6 +32,14 @@
         />
       </template>
     </v-list>
+
+    <v-alert
+      v-else
+      type="info"
+      class="ma-2"
+    >
+      No race traits found.
+    </v-alert>
     <race-trait-dialog
       :show-dialog="showDialog"
       :item="selectedItem"

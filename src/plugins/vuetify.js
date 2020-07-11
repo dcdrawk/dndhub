@@ -19,7 +19,7 @@ const opts = {
         secondary: colors.blue.base,
         accent: colors.amber.lighten2,
         error: colors.red.darken3,
-        info: colors.cyan.accent3,
+        info: colors.blue.lighten1,
         success: colors.green.base,
         warning: colors.orange.lighten1
       }
