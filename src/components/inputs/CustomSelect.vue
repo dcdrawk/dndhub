@@ -7,6 +7,7 @@
       class="pb-0"
       color="secondary"
       item-color="white"
+      filled
       :label="label"
       :items="items"
       :item-text="itemText"
@@ -23,6 +24,7 @@
       ref="input"
       class="pb-0"
       color="secondary"
+      filled
       :readonly="disabled"
       :name="name"
       :label="label"
@@ -34,7 +36,7 @@
     <v-btn
       v-if="showAction && items"
       icon
-      class="mr-0 mt-3 edit-button"
+      class="mr-0 ml-2 mt-3 edit-button"
       :disabled="disabled"
       @click="customize()"
     >

@@ -8,7 +8,7 @@
         xs="12"
         md="6"
         lg="4"
-        xl="2"
+        xl="3"
       >
         <!-- Title -->
         <h3 class="text-h6 text-center mb-4">

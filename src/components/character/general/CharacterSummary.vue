@@ -5,78 +5,76 @@
       class="mb-1"
     >
       <v-card-text>
-        <v-container
-          grid-list-md
-          class="pa-0"
+        <v-row
+          wrap
         >
-          <v-layout
-            row
-            wrap
+          <v-col cols="12">
+            <!-- Character Name -->
+            <ValidationProvider
+              v-slot="{ errors }"
+              name="Character Name"
+              rules="required"
+            >
+              <v-text-field
+                label="Character Name"
+                type="text"
+                required
+                color="secondary"
+                filled
+                :value="character.name"
+                :error-messages="errors[0]"
+                hide-details="auto"
+                @input="updateCharacter('name', $event)"
+              />
+            </ValidationProvider>
+          </v-col>
+
+          <!-- Character Level -->
+          <v-col
+            cols="6"
           >
-            <v-flex xs12>
-              <!-- Character Name -->
-              <ValidationProvider
-                v-slot="{ errors }"
-                name="Character Name"
-                rules="required"
-              >
-                <v-text-field
-                  label="Character Name"
-                  type="text"
-                  required
-                  color="secondary"
-                  :value="character.name"
-                  :error-messages="errors[0]"
-                  @input="updateCharacter('name', $event)"
-                />
-              </ValidationProvider>
-            </v-flex>
-
-            <!-- Character Level -->
-            <v-flex
-              xs6
-              class="pr-1"
+            <ValidationProvider
+              v-slot="{ errors }"
+              name="Level"
+              rules="required"
             >
-              <ValidationProvider
-                v-slot="{ errors }"
-                name="Level"
-                rules="required"
-              >
-                <v-text-field
-                  label="Level"
-                  type="number"
-                  required
-                  color="secondary"
-                  :value="character.level"
-                  :error-messages="errors[0]"
-                  @input="updateCharacter('level', $event)"
-                />
-              </ValidationProvider>
-            </v-flex>
+              <v-text-field
+                label="Level"
+                type="number"
+                required
+                color="secondary"
+                filled
+                :value="character.level"
+                :error-messages="errors[0]"
+                hide-details="auto"
+                @input="updateCharacter('level', $event)"
+              />
+            </ValidationProvider>
+          </v-col>
 
-            <!-- Character Experience -->
-            <v-flex
-              xs6
-              class="pl-2"
+          <!-- Character Experience -->
+          <v-col
+            cols="6"
+          >
+            <ValidationProvider
+              v-slot="{ errors }"
+              name="Experience"
+              rules="required"
             >
-              <ValidationProvider
-                v-slot="{ errors }"
-                name="Experience"
-                rules="required"
-              >
-                <v-text-field
-                  label="Experience"
-                  type="number"
-                  required
-                  color="secondary"
-                  :value="character.experience"
-                  :error-messages="errors[0]"
-                  @input="updateCharacter('experience', $event)"
-                />
-              </ValidationProvider>
-            </v-flex>
-          </v-layout>
-        </v-container>
+              <v-text-field
+                label="Experience"
+                type="number"
+                required
+                filled
+                color="secondary"
+                :value="character.experience"
+                :error-messages="errors[0]"
+                hide-details="auto"
+                @input="updateCharacter('experience', $event)"
+              />
+            </ValidationProvider>
+          </v-col>
+        </v-row>
       </v-card-text>
     </v-card>
 
@@ -84,121 +82,131 @@
 
     <v-card flat>
       <v-card-text>
+        <div class="text-h6">
+          Appearance
+        </div>
         <!-- Appearance Container -->
-        <v-container
-          grid-list-md
-          class="pa-0"
+        <v-row
+          wrap
         >
-          <v-layout
-            row
-            wrap
-          >
-            <!-- Heading -->
-            <v-flex xs12>
-              <h2>Appearance</h2>
-            </v-flex>
+          <!-- Gender -->
+          <v-col cols="6">
+            <v-text-field
+              label="Gender"
+              type="text"
+              color="secondary"
+              filled
+              hide-details="auto"
+              :value="character.gender"
+              @input="updateCharacter('gender', $event)"
+            />
+          </v-col>
 
-            <!-- Gender -->
-            <v-flex xs6>
-              <v-text-field
-                label="Gender"
-                type="text"
-                color="secondary"
-                :value="character.gender"
-                @input="updateCharacter('gender', $event)"
-              />
-            </v-flex>
+          <!-- Size -->
+          <v-col cols="6">
+            <v-text-field
+              label="Size"
+              type="text"
+              color="secondary"
+              filled
+              hide-details="auto"
+              :value="character.size"
+              @input="updateCharacter('size', $event)"
+            />
+          </v-col>
 
-            <!-- Size -->
-            <v-flex xs6>
-              <v-text-field
-                label="Size"
-                type="text"
-                color="secondary"
-                :value="character.size"
-                @input="updateCharacter('size', $event)"
-              />
-            </v-flex>
+          <!-- Age -->
+          <v-col cols="6">
+            <v-text-field
+              label="Age"
+              type="text"
+              color="secondary"
+              filled
+              hide-details="auto"
+              :value="character.age"
+              @input="updateCharacter('age', $event)"
+            />
+          </v-col>
 
-            <!-- Age -->
-            <v-flex xs6>
-              <v-text-field
-                label="Age"
-                type="text"
-                color="secondary"
-                :value="character.age"
-                @input="updateCharacter('age', $event)"
-              />
-            </v-flex>
+          <!-- Height -->
+          <v-col cols="6">
+            <v-text-field
+              label="Height"
+              type="text"
+              color="secondary"
+              filled
+              hide-details="auto"
+              :value="character.height"
+              @input="updateCharacter('height', $event)"
+            />
+          </v-col>
 
-            <!-- Height -->
-            <v-flex xs6>
-              <v-text-field
-                label="Height"
-                type="text"
-                color="secondary"
-                :value="character.height"
-                @input="updateCharacter('height', $event)"
-              />
-            </v-flex>
+          <!-- Weight -->
+          <v-col cols="6">
+            <v-text-field
+              label="Weight"
+              type="text"
+              color="secondary"
+              filled
+              hide-details="auto"
+              :value="character.weight"
+              @input="updateCharacter('weight', $event)"
+            />
+          </v-col>
 
-            <!-- Weight -->
-            <v-flex xs6>
-              <v-text-field
-                label="Weight"
-                type="text"
-                color="secondary"
-                :value="character.weight"
-                @input="updateCharacter('weight', $event)"
-              />
-            </v-flex>
+          <!-- Eyes -->
+          <v-col cols="6">
+            <v-text-field
+              label="Eyes"
+              type="text"
+              color="secondary"
+              filled
+              hide-details="auto"
+              :value="character.eyes"
+              @input="updateCharacter('eyes', $event)"
+            />
+          </v-col>
 
-            <!-- Eyes -->
-            <v-flex xs6>
-              <v-text-field
-                label="Eyes"
-                type="text"
-                color="secondary"
-                :value="character.eyes"
-                @input="updateCharacter('eyes', $event)"
-              />
-            </v-flex>
+          <!-- Skin -->
+          <v-col cols="6">
+            <v-text-field
+              label="Skin Color"
+              type="text"
+              color="secondary"
+              filled
+              hide-details="auto"
+              :value="character.skin"
+              @input="updateCharacter('skin', $event)"
+            />
+          </v-col>
 
-            <!-- Skin -->
-            <v-flex xs6>
-              <v-text-field
-                label="Skin Color"
-                type="text"
-                color="secondary"
-                :value="character.skin"
-                @input="updateCharacter('skin', $event)"
-              />
-            </v-flex>
+          <!-- Hair -->
+          <v-col cols="6">
+            <v-text-field
+              label="Hair"
+              type="text"
+              color="secondary"
+              filled
+              hide-details="auto"
+              :value="character.hair"
+              @input="updateCharacter('hair', $event)"
+            />
+          </v-col>
 
-            <!-- Hair -->
-            <v-flex xs6>
-              <v-text-field
-                label="Hair"
-                type="text"
-                color="secondary"
-                :value="character.hair"
-                @input="updateCharacter('hair', $event)"
-              />
-            </v-flex>
-
-            <!-- Description -->
-            <v-flex xs12>
-              <v-textarea
-                v-model="character.description"
-                label="Description"
-                type="text"
-                color="secondary"
-                multi-line
-                @input="updateCharacter('description', $event)"
-              />
-            </v-flex>
-          </v-layout>
-        </v-container>
+          <!-- Description -->
+          <v-col cols="12">
+            <v-textarea
+              v-model="character.description"
+              label="Description"
+              type="text"
+              color="secondary"
+              filled
+              hide-details="auto"
+              multi-line
+              @input="updateCharacter('description', $event)"
+            />
+          </v-col>
+        </v-row>
       </v-card-text>
     </v-card>
   </div>

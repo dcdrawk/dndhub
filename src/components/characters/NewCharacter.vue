@@ -34,11 +34,11 @@
           v-slot="{ invalid }"
         >
           <v-container class="pa-0 pt-4">
-            <v-layout
-              row
+            <v-row
               wrap
+              no-gutters
             >
-              <v-flex xs12>
+              <v-col cols="12">
                 <ValidationProvider
                   v-slot="{ errors }"
                   name="Character Name"
@@ -50,14 +50,16 @@
                     type="text"
                     required
                     color="secondary"
+                    :filled="filled"
+                    :outlined="outlined"
                     :error-messages="errors[0]"
                   />
                 </ValidationProvider>
-              </v-flex>
+              </v-col>
 
-              <v-flex
-                xs6
-                class="pr-1"
+              <v-col
+                cols="6"
+                class="pr-2"
               >
                 <ValidationProvider
                   v-slot="{ errors }"
@@ -70,14 +72,16 @@
                     type="number"
                     required
                     color="secondary"
+                    :filled="filled"
+                    :outlined="outlined"
                     :error-messages="errors[0]"
                   />
                 </ValidationProvider>
-              </v-flex>
+              </v-col>
 
-              <v-flex
-                xs6
-                class="pl-1"
+              <v-col
+                cols="6"
+                class="pl-2"
               >
                 <v-text-field
                   v-model="character.experience"
@@ -85,12 +89,14 @@
                   type="number"
                   required
                   color="secondary"
+                  :filled="filled"
+                  :outlined="outlined"
                 />
-              </v-flex>
+              </v-col>
 
-              <v-flex
-                xs12
-                md6
+              <v-col
+                cols="12"
+                md="6"
               >
                 <ValidationProvider
                   v-slot="{ errors }"
@@ -109,11 +115,11 @@
                     @customize="handleCustomize('race')"
                   />
                 </ValidationProvider>
-              </v-flex>
+              </v-col>
 
-              <v-flex
-                xs12
-                md6
+              <v-col
+                cols="12"
+                md="6"
               >
                 <custom-select
                   v-model="character.subrace"
@@ -125,11 +131,11 @@
                   :custom="character.custom.subrace"
                   @customize="handleCustomize('subrace')"
                 />
-              </v-flex>
+              </v-col>
 
-              <v-flex
-                xs12
-                md6
+              <v-col
+                cols="12"
+                md="6"
               >
                 <ValidationProvider
                   v-slot="{ errors }"
@@ -147,7 +153,7 @@
                     @customize="customizeClass('name')"
                   />
                 </ValidationProvider>
-              </v-flex>
+              </v-col>
 
               <v-flex
                 xs12
@@ -208,7 +214,7 @@
                   Create
                 </v-btn>
               </v-flex>
-            </v-layout>
+            </v-row>
           </v-container>
         </ValidationObserver>
         <!-- test -->
@@ -250,6 +256,8 @@ export default {
   // Data
   data () {
     return {
+      filled: true,
+      outlined: false,
       character: {
         name: undefined,
         experience: 0,
