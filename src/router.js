@@ -26,6 +26,7 @@ import Weapons from './views/character/Weapons'
 import Spells from './views/character/Spells'
 import Inventory from './views/character/Inventory'
 import Quests from './views/character/Quests'
+import Sandbox from './views/Sandbox'
 
 Vue.use(Router)
 
@@ -110,6 +111,13 @@ export default new Router({
       path: '/character/quests',
       name: 'Quests',
       component: Quests
+    },
+
+    /** Sandbox */
+    {
+      path: '/sandbox',
+      name: 'Sandbox',
+      component: Sandbox
     }
   ]
 })

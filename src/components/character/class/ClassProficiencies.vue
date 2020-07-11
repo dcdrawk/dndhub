@@ -5,105 +5,116 @@
       class="mb-1"
     >
       <v-card-text>
-        <v-container
+        <!-- <v-container
           grid-list-md
           class="pa-0"
+        > -->
+        <v-row
+          wrap
         >
-          <v-layout
-            row
-            wrap
+          <v-col
+            cols="12"
+            md="6"
           >
-            <v-flex
-              xs12
-              md6
-            >
-              <v-combobox
-                multiple
-                label="Armor"
-                :value="armor"
-                chips
-                deletable-chips
-                color="secondary"
-                @input="handleInput('armor', $event)"
-              />
-            </v-flex>
+            <v-combobox
+              multiple
+              label="Armor"
+              :value="armor"
+              chips
+              deletable-chips
+              color="secondary"
+              filled
+              hide-details
+              @input="handleInput('armor', $event)"
+            />
+          </v-col>
 
-            <v-flex
-              xs12
-              md6
-            >
-              <v-combobox
-                multiple
-                label="Weapons"
-                :value="weapons"
-                chips
-                deletable-chips
-                color="secondary"
-                @input="handleInput('weapons', $event)"
-              />
-            </v-flex>
+          <v-col
+            cols="12"
+            md="6"
+          >
+            <v-combobox
+              multiple
+              label="Weapons"
+              :value="weapons"
+              chips
+              deletable-chips
+              color="secondary"
+              filled
+              hide-details
+              @input="handleInput('weapons', $event)"
+            />
+          </v-col>
 
-            <v-flex
-              xs12
-              md6
-            >
-              <v-combobox
-                label="Tools"
-                :value="tools"
-                multiple
-                chips
-                deletable-chips
-                color="secondary"
-                @input="handleInput('tools', $event)"
-              />
-            </v-flex>
+          <v-col
+            cols="12"
+            md="6"
+          >
+            <v-combobox
+              label="Tools"
+              :value="tools"
+              multiple
+              chips
+              deletable-chips
+              color="secondary"
+              filled
+              hide-details
+              @input="handleInput('tools', $event)"
+            />
+          </v-col>
 
-            <v-flex
-              xs12
-              md6
-            >
-              <v-combobox
-                label="Languages"
-                :value="languages"
-                multiple
-                chips
-                deletable-chips
-                color="secondary"
-                @input="handleInput('languages', $event)"
-              />
-            </v-flex>
+          <v-col
+            cols="12"
+            md="6"
+          >
+            <v-combobox
+              label="Languages"
+              :value="languages"
+              multiple
+              chips
+              deletable-chips
+              color="secondary"
+              filled
+              hide-details
+              @input="handleInput('languages', $event)"
+            />
+          </v-col>
 
-            <v-flex
-              xs12
-              md6
-            >
-              <v-combobox
-                label="Skills"
-                :value="skills"
-                multiple
-                chips
-                deletable-chips
-                color="secondary"
-                @input="handleInput('skills', $event)"
-              />
-            </v-flex>
+          <v-col
+            cols="12"
+            md="6"
+          >
+            <v-combobox
+              label="Skills"
+              :value="skills"
+              multiple
+              chips
+              deletable-chips
+              color="secondary"
+              filled
+              hide-details
+              @input="handleInput('skills', $event)"
+            />
+          </v-col>
 
-            <v-flex
-              xs12
-              md6
-            >
-              <v-combobox
-                label="Other"
-                :value="other"
-                multiple
-                chips
-                deletable-chips
-                color="secondary"
-                @input="handleInput('other', $event)"
-              />
-            </v-flex>
-          </v-layout>
-        </v-container>
+          <v-col
+            cols="12"
+            md="6"
+          >
+            <v-combobox
+              label="Other"
+              :value="other"
+              multiple
+              chips
+              deletable-chips
+              color="secondary"
+              filled
+              hide-details
+              @input="handleInput('other', $event)"
+            />
+          </v-col>
+        </v-row>
+        <!-- </v-container> -->
       </v-card-text>
     </v-card>
   </div>
