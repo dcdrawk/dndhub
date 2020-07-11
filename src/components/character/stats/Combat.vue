@@ -2,67 +2,75 @@
   <div>
     <v-card flat>
       <v-card-text>
-        <h2 class="pl-0 pb-4">
+        <div class="text-h6 mb-2">
           Combat Proficiencies
-        </h2>
-        <v-container
+        </div>
+        <!-- <v-container
           grid-list-md
           class="pa-0"
+        > -->
+        <v-row
+          wrap
         >
-          <v-layout
-            row
-            wrap
+          <!-- Proficiency Bonus -->
+          <v-col
+            cols="12"
+            class="pb-0"
           >
-            <!-- Proficiency Bonus -->
-            <v-flex xs12>
-              <v-text-field
-                label="Proficiency Bonus"
-                type="text"
-                :value="proficiencyBonus"
-                persistent-hint
-                disabled
-                hint="Determined by level"
-                color="secondary"
-                @input="updateCharacter('proficiencyBonus', $event)"
-              />
-            </v-flex>
+            <v-text-field
+              label="Proficiency Bonus"
+              type="text"
+              :value="proficiencyBonus"
+              persistent-hint
+              disabled
+              filled
+              hint="Determined by level"
+              hide-details="auto"
+              color="secondary"
+              @input="updateCharacter('proficiencyBonus', $event)"
+            />
+          </v-col>
 
-            <!-- Armor Class -->
-            <v-flex xs12>
-              <v-text-field
-                label="Armor Class"
-                type="number"
-                :value="character.ac"
-                color="secondary"
-                @input="updateCharacter('ac', $event)"
-              />
-            </v-flex>
+          <!-- Armor Class -->
+          <v-col cols="12">
+            <v-text-field
+              label="Armor Class"
+              type="number"
+              :value="character.ac"
+              color="secondary"
+              hide-details
+              filled
+              @input="updateCharacter('ac', $event)"
+            />
+          </v-col>
 
-            <!-- Initiative -->
-            <v-flex xs6>
-              <v-text-field
-                label="Initiative"
-                type="number"
-                :value="character.initiative"
-                persistent-hint
-                hint="Base = Dex Modifier"
-                color="secondary"
-                @input="updateCharacter('initiative', $event)"
-              />
-            </v-flex>
+          <!-- Initiative -->
+          <v-col cols="6">
+            <v-text-field
+              label="Initiative"
+              type="number"
+              :value="character.initiative"
+              persistent-hint
+              hint="Base = Dex Modifier"
+              color="secondary"
+              filled
+              @input="updateCharacter('initiative', $event)"
+            />
+          </v-col>
 
-            <!-- Speed -->
-            <v-flex xs6>
-              <v-text-field
-                label="Speed"
-                type="number"
-                :value="character.speed"
-                color="secondary"
-                @input="updateCharacter('speed', $event)"
-              />
-            </v-flex>
-          </v-layout>
-        </v-container>
+          <!-- Speed -->
+          <v-col cols="6">
+            <v-text-field
+              label="Speed"
+              type="number"
+              :value="character.speed"
+              color="secondary"
+              filled
+              @input="updateCharacter('speed', $event)"
+            />
+          </v-col>
+        </v-row>
+        <!-- </v-container> -->
       </v-card-text>
     </v-card>
 
@@ -70,62 +78,70 @@
 
     <v-card>
       <v-card-text>
-        <h2 class="pl-0 pb-4">
+        <div class="text-h6 mb-4">
           Health
-        </h2>
-        <v-container
+        </div>
+        <!-- <v-container
           grid-list-md
           class="pa-0"
+        > -->
+        <v-row
+          row
+          wrap
         >
-          <v-layout
-            row
-            wrap
-          >
-            <!-- Current HP -->
-            <v-flex xs6>
-              <v-text-field
-                label="Current HP"
-                type="number"
-                :value="character.HpCurrent"
-                color="secondary"
-                @input="updateCharacter('HpCurrent', $event)"
-              />
-            </v-flex>
+          <!-- Current HP -->
+          <v-col cols="6">
+            <v-text-field
+              label="Current HP"
+              type="number"
+              :value="character.HpCurrent"
+              color="secondary"
+              filled
+              hide-details
+              @input="updateCharacter('HpCurrent', $event)"
+            />
+          </v-col>
 
-            <!-- Total HP -->
-            <v-flex xs6>
-              <v-text-field
-                label="Total HP"
-                type="number"
-                disabled
-                color="secondary"
-                :value="totalHP || 0"
-              />
-            </v-flex>
+          <!-- Total HP -->
+          <v-col cols="6">
+            <v-text-field
+              label="Total HP"
+              type="number"
+              disabled
+              color="secondary"
+              filled
+              hide-details
+              :value="totalHP || 0"
+            />
+          </v-col>
 
-            <!-- Max HP -->
-            <v-flex xs6>
-              <v-text-field
-                label="Max HP"
-                type="number"
-                :value="character.HpMax"
-                color="secondary"
-                @input="updateCharacter('HpMax', $event)"
-              />
-            </v-flex>
+          <!-- Max HP -->
+          <v-col cols="6">
+            <v-text-field
+              label="Max HP"
+              type="number"
+              :value="character.HpMax"
+              color="secondary"
+              filled
+              hide-details
+              @input="updateCharacter('HpMax', $event)"
+            />
+          </v-col>
 
-            <!-- Temp HP -->
-            <v-flex xs6>
-              <v-text-field
-                label="Temp HP"
-                type="number"
-                :value="character.HpTemp"
-                color="secondary"
-                @input="updateCharacter('HpTemp', $event)"
-              />
-            </v-flex>
-          </v-layout>
-        </v-container>
+          <!-- Temp HP -->
+          <v-col cols="6">
+            <v-text-field
+              label="Temp HP"
+              type="number"
+              :value="character.HpTemp"
+              color="secondary"
+              filled
+              hide-details
+              @input="updateCharacter('HpTemp', $event)"
+            />
+          </v-col>
+        </v-row>
+        <!-- </v-container> -->
       </v-card-text>
     </v-card>
   </div>
