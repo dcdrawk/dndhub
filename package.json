@@ -34,7 +34,7 @@
     "@vue/test-utils": "^1.0.0-beta.15",
     "babel-core": "^7.0.0-0",
     "babel-jest": "^22.4.3",
-    "node-sass": "^4.9.0",
+    "node-sass": "^7.0.0",
     "sass-loader": "^6.0.7",
     "vue-template-compiler": "^2.5.22"
   },
